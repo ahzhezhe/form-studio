@@ -1,7 +1,8 @@
 import shortUUID from 'short-uuid';
-import { ChoiceConfig, Config, GroupConfig, QuestionConfig } from './Configs';
+import { Config } from './Configs';
+import { fromGroupInitConfig, toGroupConfig } from './Converters';
 import { eventEmitter } from './EventEmitter';
-import { InitConfig, GroupInitConfig, QuestionInitConfig, managebleItemSorter, ChoiceInitConfig } from './InitConfigs';
+import { InitConfig } from './InitConfigs';
 import { Choice, Group, Question } from './Objects';
 import { ChoiceTemplate, GroupTemplate, QuestionTemplate, Template } from './Templates';
 import { Answers, ChoiceValue, Validator } from './Types';
@@ -58,42 +59,8 @@ export class FormEngine {
   }
 
   static fromConfig(config: InitConfig, validators?: Record<string, Validator>) {
-    const groups = this.fromGroupInitConfig(config);
+    const groups = fromGroupInitConfig(config);
     return new FormEngine(groups, validators || {});
-  }
-
-  private static fromGroupInitConfig(groups: GroupInitConfig[]): Group[] {
-    return groups.sort(managebleItemSorter).map((group): Group => ({
-      id: group.id || shortUUID.generate(),
-      order: group.order,
-      disabled: !!group.disabled,
-      uiConfig: group.uiConfig || {},
-      groups: group.groups ? this.fromGroupInitConfig(group.groups) : [],
-      questions: group.questions ? this.fromQuestionInitConfig(group.questions) : []
-    }));
-  }
-
-  private static fromQuestionInitConfig(questions: QuestionInitConfig[]): Question[] {
-    return questions.sort(managebleItemSorter).map((question): Question => ({
-      id: question.id || shortUUID.generate(),
-      order: question.order,
-      disabled: !!question.disabled,
-      uiConfig: question.uiConfig || {},
-      type: question.type,
-      choices: question.type !== 'input' ? this.fromChoiceInitConfig(question.choices!) : undefined,
-      validatorKey: question.validatorKey,
-      validationConfig: question.validationConfig || {}
-    }));
-  }
-
-  private static fromChoiceInitConfig(choices: ChoiceInitConfig[]): Choice[] {
-    return choices.sort(managebleItemSorter).map((choice): Choice => ({
-      id: choice.id || shortUUID.generate(),
-      order: choice.order,
-      disabled: !!choice.disabled,
-      uiConfig: choice.uiConfig || {},
-      value: choice.value
-    }));
   }
 
   toTemplate(): Template {
@@ -131,14 +98,6 @@ export class FormEngine {
       value: choice.value,
       selected: !!this.choiceSelectedMap.get(choice.id)
     }));
-  }
-
-  private findGroup(groupId: string) {
-    const group = this.groupMap.get(groupId);
-    if (!group) {
-      throw new Error('Group is not found.');
-    }
-    return group;
   }
 
   private findQuestion(questionId: string) {
@@ -411,41 +370,7 @@ export class FormEngine {
   }
 
   exportConfig(): Config {
-    return this.toGroupConfig(this.groups);
-  }
-
-  private toGroupConfig(groups: Group[]): GroupConfig[] {
-    return groups.map((group): GroupConfig => ({
-      id: group.id,
-      order: group.order,
-      disabled: group.disabled,
-      uiConfig: group.uiConfig || {},
-      groups: this.toGroupConfig(group.groups),
-      questions: this.toQuestionConfig(group.questions)
-    }));
-  }
-
-  private toQuestionConfig(questions: Question[]): QuestionConfig[] {
-    return questions.map((question): QuestionConfig => ({
-      id: question.id,
-      order: question.order,
-      disabled: question.disabled,
-      uiConfig: question.uiConfig || {},
-      type: question.type,
-      choices: question.type !== 'input' ? this.toChoiceConfig(question.choices!) : undefined,
-      validatorKey: question.validatorKey,
-      validationConfig: question.validationConfig
-    }));
-  }
-
-  private toChoiceConfig(choices: Choice[]): ChoiceConfig[] {
-    return choices.map((choice): ChoiceConfig => ({
-      id: choice.id,
-      order: choice.order,
-      disabled: choice.disabled,
-      uiConfig: choice.uiConfig,
-      value: choice.value
-    }));
+    return toGroupConfig(this.groups);
   }
 
   exportAnswers(): Answers {
@@ -460,7 +385,7 @@ export class FormEngine {
     return answes;
   }
 
-  getTemplateId() {
+  private getTemplateId() {
     return this.templateId;
   }
 

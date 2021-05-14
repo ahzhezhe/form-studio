@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import { useEffect, useState } from 'react';
 import { eventEmitter } from './EventEmitter';
 import { FormEngine } from './FormEngine';
@@ -7,9 +8,9 @@ export const useTemplate = (form: FormEngine): [Template, () => void] => {
   const [template, setTemplate] = useState<Template>(form.toTemplate());
 
   useEffect(() => {
-    eventEmitter.addListener(form.getTemplateId(), refreshTemplate);
+    eventEmitter.addListener(form['getTemplateId'](), refreshTemplate);
     return () => {
-      eventEmitter.removeListener(form.getTemplateId(), refreshTemplate);
+      eventEmitter.removeListener(form['getTemplateId'](), refreshTemplate);
     };
   }, []);
 

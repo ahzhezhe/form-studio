@@ -7,3 +7,8 @@ export type ChoiceValue = string | number;
 export type Validator = (value: any, validationConfig: CustomConfig) => void | Promise<void>;
 
 export type Answers = Record<string, any>;
+
+export interface ChoiceOnChange {
+  disable?: string[];
+  enable?: string[];
+}
