@@ -4,7 +4,7 @@ import { eventEmitter } from './EventEmitter';
 import { InitConfig, GroupInitConfig, QuestionInitConfig, managebleItemSorter, ChoiceInitConfig } from './InitConfigs';
 import { Choice, Group, Question } from './Objects';
 import { ChoiceTemplate, GroupTemplate, QuestionTemplate, Template } from './Templates';
-import { Answers, Validator } from './Types';
+import { Answers, ChoiceValue, Validator } from './Types';
 
 export class FormEngine {
 
@@ -80,9 +80,9 @@ export class FormEngine {
       disabled: !!question.disabled,
       uiConfig: question.uiConfig || {},
       type: question.type,
-      inputType: question.type === 'input' ? question.inputType : undefined,
       choices: question.type !== 'input' ? this.fromChoiceInitConfig(question.choices!) : undefined,
-      validation: question.validation || {}
+      validatorKey: question.validatorKey,
+      validationConfig: question.validationConfig || {}
     }));
   }
 
@@ -116,7 +116,6 @@ export class FormEngine {
       disabled: this.isQuestionDisabled(question),
       uiConfig: question.uiConfig,
       type: question.type,
-      inputType: question.type === 'input' ? question.inputType : undefined,
       inputValue: question.type === 'input' ? this.questionInputValueMap.get(question.id) : undefined,
       choices: question.type !== 'input' ? this.toChoiceTemplate(question.choices!) : undefined,
       answer: this.isQuestionDisabled(question) ? undefined : this.questionAnswerMap.get(question.id),
@@ -137,7 +136,7 @@ export class FormEngine {
   private findGroup(groupId: string) {
     const group = this.groupMap.get(groupId);
     if (!group) {
-      throw new Error('Croup is not found.');
+      throw new Error('Group is not found.');
     }
     return group;
   }
@@ -161,9 +160,13 @@ export class FormEngine {
   setInputValue(questionId: string, value: any) {
     const question = this.findQuestion(questionId);
 
+    if (this.isQuestionDisabled(question)) {
+      return;
+    }
+
     try {
       this.questionInputValueMap.set(questionId, value);
-      this.validateInput(question, value);
+      this.validateQuestion(question, value);
       this.questionAnswerMap.set(questionId, value);
       this.questionErrorMap.delete(questionId);
     } catch (err) {
@@ -177,9 +180,13 @@ export class FormEngine {
   async setInputValuePromise(questionId: string, value: any) {
     const question = this.findQuestion(questionId);
 
+    if (this.isQuestionDisabled(question)) {
+      return;
+    }
+
     try {
       this.questionInputValueMap.set(questionId, value);
-      await this.validateInputPromise(question, value);
+      await this.validateQuestionPromise(question, value);
       this.questionAnswerMap.set(questionId, value);
       this.questionErrorMap.delete(questionId);
     } catch (err) {
@@ -191,8 +198,17 @@ export class FormEngine {
   }
 
   selectChoice(choiceId: string, selected: boolean) {
-    const choice = this.findChoice(choiceId);
     const question = this.choiceQuestionMap.get(choiceId)!;
+    this.internalSelectChoice(question, choiceId, selected, true);
+  }
+
+  async selectChoicePromise(choiceId: string, selected: boolean) {
+    const question = this.choiceQuestionMap.get(choiceId)!;
+    await this.internalSelectChoicePromise(question, choiceId, selected, true);
+  }
+
+  private internalSelectChoice(question: Question, choiceId: string, selected: boolean, validateAndRefresh: boolean) {
+    const choice = this.findChoice(choiceId);
 
     if (this.isChoiceDisabled(choice)) {
       return;
@@ -204,9 +220,13 @@ export class FormEngine {
 
     this.choiceSelectedMap.set(choiceId, selected);
 
+    if (!validateAndRefresh) {
+      return;
+    }
+
     try {
-      this.validateChoiceQuestion(question);
       const answer = this.getQuestionAnswer(question);
+      this.validateQuestion(question, answer);
       this.questionAnswerMap.set(question.id, answer);
       this.questionErrorMap.delete(question.id);
     } catch (err) {
@@ -217,18 +237,86 @@ export class FormEngine {
     this.refreshTemplate();
   }
 
-  setChoice(questionId: string, value: string) {
-    const question = this.findQuestion(questionId);
-    question.choices!.forEach(choice => {
-      this.selectChoice(choice.id, choice.value === value);
-    });
+  private async internalSelectChoicePromise(question: Question, choiceId: string, selected: boolean, validateAndRefresh: boolean) {
+    const choice = this.findChoice(choiceId);
+
+    if (this.isChoiceDisabled(choice)) {
+      return;
+    }
+
+    if (question.type === 'singleChoice' && selected) {
+      question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
+    }
+
+    this.choiceSelectedMap.set(choiceId, selected);
+
+    if (!validateAndRefresh) {
+      return;
+    }
+
+    try {
+      const answer = this.getQuestionAnswer(question);
+      await this.validateQuestionPromise(question, answer);
+      this.questionAnswerMap.set(question.id, answer);
+      this.questionErrorMap.delete(question.id);
+    } catch (err) {
+      this.questionAnswerMap.delete(question.id);
+      this.questionErrorMap.set(question.id, err.message);
+    }
+
+    this.refreshTemplate();
   }
 
-  setChoices(questionId: string, values: string[]) {
+  setChoice(questionId: string, value: ChoiceValue) {
     const question = this.findQuestion(questionId);
-    question.choices!.forEach(choice => {
-      this.selectChoice(choice.id, values.includes(choice.value));
-    });
+
+    if (this.isQuestionDisabled(question)) {
+      return;
+    }
+
+    for (let i = 0; i < question.choices!.length; i++) {
+      const choice = question.choices![i];
+      this.internalSelectChoice(question, choice.id, choice.value === value, i === question.choices!.length - 1);
+    }
+  }
+
+  async setChoicePromise(questionId: string, value: ChoiceValue) {
+    const question = this.findQuestion(questionId);
+
+    if (this.isQuestionDisabled(question)) {
+      return;
+    }
+
+    for (let i = 0; i < question.choices!.length; i++) {
+      const choice = question.choices![i];
+      await this.internalSelectChoicePromise(question, choice.id, choice.value === value, i === question.choices!.length - 1);
+    }
+  }
+
+  setChoices(questionId: string, values: ChoiceValue[]) {
+    const question = this.findQuestion(questionId);
+
+    if (this.isQuestionDisabled(question)) {
+      return;
+    }
+
+    for (let i = 0; i < question.choices!.length; i++) {
+      const choice = question.choices![i];
+      this.internalSelectChoice(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
+    }
+  }
+
+  async setChoicesPromise(questionId: string, values: ChoiceValue[]) {
+    const question = this.findQuestion(questionId);
+
+    if (this.isQuestionDisabled(question)) {
+      return;
+    }
+
+    for (let i = 0; i < question.choices!.length; i++) {
+      const choice = question.choices![i];
+      await this.internalSelectChoicePromise(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
+    }
   }
 
   private getQuestionAnswer(question: Question) {
@@ -245,42 +333,26 @@ export class FormEngine {
     }
   }
 
-  private validateInput(question: Question, value: any) {
-    const validator = this.validators[question.inputType!];
-    if (validator) {
-      validator(value, question.validation || {});
-    }
-  }
-
-  private async validateInputPromise(question: Question, value: any) {
-    const validator = this.validators[question.inputType!];
-    if (validator) {
-      await validator(value, question.validation || {});
-    }
-  }
-
-  private validateChoiceQuestion(question: Question) {
-    const { type, validation } = question;
-
-    if (type === 'singleChoice') {
-      const answer = this.getQuestionAnswer(question);
-      if (!answer) {
-        throw new Error('You must select an option.');
-      }
+  private validateQuestion(question: Question, value: any) {
+    if (!question.validatorKey) {
       return;
     }
-
-    if (type === 'multiChoice') {
-      const answer = this.getQuestionAnswer(question);
-
-      const { min, max } = validation || {};
-      if (!!min && answer.length < min) {
-        throw new Error(`You must select no less than ${min} options.`);
-      }
-      if (!!max && answer.length > max) {
-        throw new Error(`You must select no more than ${max} options.`);
-      }
+    const validator = this.validators[question.validatorKey];
+    if (!validator) {
+      return;
     }
+    validator(value, question.validationConfig || {});
+  }
+
+  private async validateQuestionPromise(question: Question, value: any) {
+    if (!question.validatorKey) {
+      return;
+    }
+    const validator = this.validators[question.validatorKey];
+    if (!validator) {
+      return;
+    }
+    await validator(value, question.validationConfig || {});
   }
 
   private isGroupDisabled(group: Group): boolean {
@@ -346,9 +418,9 @@ export class FormEngine {
       disabled: question.disabled,
       uiConfig: question.uiConfig || {},
       type: question.type,
-      inputType: question.type === 'input' ? question.inputType : undefined,
       choices: question.type !== 'input' ? this.toChoiceConfig(question.choices!) : undefined,
-      validation: question.validation
+      validatorKey: question.validatorKey,
+      validationConfig: question.validationConfig
     }));
   }
 

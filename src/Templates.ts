@@ -1,9 +1,9 @@
-import { ConfigType, QuestionType } from './Types';
+import { ChoiceValue, CustomConfig, QuestionType } from './Types';
 
 export interface ManagebleItemTemplate {
   id: string;
   disabled: boolean;
-  uiConfig: ConfigType;
+  uiConfig: CustomConfig;
 }
 
 export interface GroupTemplate extends ManagebleItemTemplate {
@@ -13,7 +13,6 @@ export interface GroupTemplate extends ManagebleItemTemplate {
 
 export interface QuestionTemplate extends ManagebleItemTemplate {
   type: QuestionType;
-  inputType: string | undefined;
   inputValue: any | undefined;
   choices: ChoiceTemplate[] | undefined;
   answer: any | undefined;
@@ -21,7 +20,7 @@ export interface QuestionTemplate extends ManagebleItemTemplate {
 }
 
 export interface ChoiceTemplate extends ManagebleItemTemplate {
-  value: string;
+  value: ChoiceValue;
   selected: boolean;
 }
 

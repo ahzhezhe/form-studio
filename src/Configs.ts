@@ -1,10 +1,10 @@
-import { ConfigType, QuestionType } from './Types';
+import { ChoiceValue, CustomConfig, QuestionType } from './Types';
 
 export interface ManagebleItemConfig {
   id: string;
   order: number | undefined;
   disabled: boolean;
-  uiConfig: ConfigType;
+  uiConfig: CustomConfig;
 }
 
 export interface GroupConfig extends ManagebleItemConfig {
@@ -14,13 +14,13 @@ export interface GroupConfig extends ManagebleItemConfig {
 
 export interface QuestionConfig extends ManagebleItemConfig {
   type: QuestionType;
-  inputType?: string;
-  choices?: ChoiceConfig[];
-  validation: ConfigType;
+  choices: ChoiceConfig[] | undefined;
+  validatorKey: string | undefined;
+  validationConfig: CustomConfig;
 }
 
 export interface ChoiceConfig extends ManagebleItemConfig {
-  value: string;
+  value: ChoiceValue;
 }
 
 export type Config = GroupConfig[];
