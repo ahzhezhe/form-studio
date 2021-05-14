@@ -3,7 +3,7 @@ import { ConfigType, QuestionType } from './Types';
 export interface ManagebleItemTemplate {
   id: string;
   disabled: boolean;
-  uiConfig: ConfigType | undefined;
+  uiConfig: ConfigType;
 }
 
 export interface GroupTemplate extends ManagebleItemTemplate {

@@ -1,35 +1,22 @@
 import { ConfigType, QuestionType } from './Types';
 
-export const managebleItemSorter = (a: ManagebleItemConfig, b: ManagebleItemConfig) => {
-  if (!!!a.order && !!!b.order) {
-    return 0;
-  }
-  if (!!!b.order) {
-    return -1;
-  }
-  if (!!!a.order) {
-    return 1;
-  }
-  return a.order - b.order;
-};
-
 export interface ManagebleItemConfig {
-  id?: string;
-  order?: number;
-  disabled?: boolean;
-  uiConfig?: ConfigType;
+  id: string;
+  order: number | undefined;
+  disabled: boolean;
+  uiConfig: ConfigType;
 }
 
 export interface GroupConfig extends ManagebleItemConfig {
-  groups?: GroupConfig[];
-  questions?: QuestionConfig[];
+  groups: GroupConfig[];
+  questions: QuestionConfig[];
 }
 
 export interface QuestionConfig extends ManagebleItemConfig {
   type: QuestionType;
   inputType?: string;
   choices?: ChoiceConfig[];
-  validation?: ConfigType;
+  validation: ConfigType;
 }
 
 export interface ChoiceConfig extends ManagebleItemConfig {

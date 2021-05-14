@@ -2,8 +2,9 @@ import { ConfigType, QuestionType } from './Types';
 
 export interface ManagebleItem {
   id: string;
+  order: number | undefined;
   disabled: boolean;
-  uiConfig: ConfigType | undefined;
+  uiConfig: ConfigType;
 }
 
 export interface Group extends ManagebleItem {
@@ -15,7 +16,7 @@ export interface Question extends ManagebleItem {
   type: QuestionType;
   inputType: string | undefined;
   choices: Choice[] | undefined;
-  validation: ConfigType | undefined;
+  validation: ConfigType;
 }
 
 export interface Choice extends ManagebleItem {

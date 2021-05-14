@@ -1,16 +1,23 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
+    "module": "esnext",
     "outDir": "dist",
     "declaration": true,
     "esModuleInterop": true,
+    "strictBindCallApply": true,
     "strict": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "sourceMap": true
   },
   "include": [
-    "src/**/*.ts"
+    "src"
   ]
 }
