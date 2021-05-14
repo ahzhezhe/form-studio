@@ -3,7 +3,6 @@ import { ConfigType, QuestionType } from './Types';
 export interface ManagebleItemTemplate {
   id: string;
   disabled: boolean;
-  optional: boolean;
   uiConfig: ConfigType | undefined;
 }
 
@@ -14,22 +13,16 @@ export interface GroupTemplate extends ManagebleItemTemplate {
 
 export interface QuestionTemplate extends ManagebleItemTemplate {
   type: QuestionType;
-  input?: InputTemplate;
-  choices?: ChoiceTemplate[];
+  inputType: string | undefined;
+  inputValue: any | undefined;
+  choices: ChoiceTemplate[] | undefined;
   answer: any | undefined;
-  error: string | undefined;
-}
-
-export interface InputTemplate extends ManagebleItemTemplate {
-  type: string;
-  value: any | undefined;
   error: string | undefined;
 }
 
 export interface ChoiceTemplate extends ManagebleItemTemplate {
   value: string;
   selected: boolean;
-  error: string | undefined;
 }
 
 export type Template = GroupTemplate[];

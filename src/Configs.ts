@@ -17,7 +17,6 @@ export interface ManagebleItemConfig {
   id?: string;
   order?: number;
   disabled?: boolean;
-  optional?: boolean;
   uiConfig?: ConfigType;
 }
 
@@ -28,13 +27,8 @@ export interface GroupConfig extends ManagebleItemConfig {
 
 export interface QuestionConfig extends ManagebleItemConfig {
   type: QuestionType;
-  input?: InputConfig;
+  inputType?: string;
   choices?: ChoiceConfig[];
-  validation?: ConfigType;
-}
-
-export interface InputConfig extends ManagebleItemConfig {
-  type: string;
   validation?: ConfigType;
 }
 
