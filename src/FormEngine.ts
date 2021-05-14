@@ -396,6 +396,20 @@ export class FormEngine {
     }
   }
 
+  async importAnswersPromise(answers: Answers) {
+    for (const entry of this.questionMap.entries()) {
+      const [questionId, question] = entry;
+      const answer = answers[questionId];
+      if (question.type === 'input') {
+        await this.setInputValuePromise(questionId, answer);
+      } else if (question.type === 'singleChoice') {
+        await this.setChoicePromise(questionId, answer);
+      } else if (question.type === 'multiChoice') {
+        await this.setChoicesPromise(questionId, answer);
+      }
+    }
+  }
+
   exportConfig(): Config {
     return this.toGroupConfig(this.groups);
   }
@@ -434,21 +448,7 @@ export class FormEngine {
     }));
   }
 
-  async importAnswersPromise(answers: Answers) {
-    for (const entry of this.questionMap.entries()) {
-      const [questionId, question] = entry;
-      const answer = answers[questionId];
-      if (question.type === 'input') {
-        await this.setInputValuePromise(questionId, answer);
-      } else if (question.type === 'singleChoice') {
-        this.setChoice(questionId, answer);
-      } else if (question.type === 'multiChoice') {
-        this.setChoices(questionId, answer);
-      }
-    }
-  }
-
-  exportAnswer(): Answers {
+  exportAnswers(): Answers {
     const answes: Answers = {};
 
     for (const entry of this.questionMap.entries()) {
