@@ -6,8 +6,6 @@ import { GroupTemplate, QuestionTemplate, ChoiceTemplate, Template } from './Tem
 import { CustomConfig, QuestionType, ChoiceValue, Validator, Answers, ChoiceOnChange } from './Types';
 import { useTemplate } from './useTemplate';
 
-export default FormEngine;
-
 export {
   GroupConfig, QuestionConfig, ChoiceConfig, Config,
   GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfig,
@@ -15,3 +13,5 @@ export {
   CustomConfig, QuestionType, ChoiceValue, Validator, Answers, ChoiceOnChange,
   useTemplate
 };
+
+export default FormEngine;

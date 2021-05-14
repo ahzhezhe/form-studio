@@ -159,69 +159,13 @@ export class FormEngine {
   selectChoice(choiceId: string, selected: boolean) {
     const question = this.choiceQuestionMap.get(choiceId)!;
     this.internalSelectChoice(question, choiceId, selected, true);
+
+    this.refreshTemplate();
   }
 
   async selectChoicePromise(choiceId: string, selected: boolean) {
     const question = this.choiceQuestionMap.get(choiceId)!;
     await this.internalSelectChoicePromise(question, choiceId, selected, true);
-  }
-
-  private internalSelectChoice(question: Question, choiceId: string, selected: boolean, validateAndRefresh: boolean) {
-    const choice = this.findChoice(choiceId);
-
-    if (this.isChoiceDisabled(choice)) {
-      return;
-    }
-
-    if (question.type === 'singleChoice' && selected) {
-      question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
-    }
-
-    this.choiceSelectedMap.set(choiceId, selected);
-
-    if (!validateAndRefresh) {
-      return;
-    }
-
-    try {
-      const answer = this.getQuestionAnswer(question);
-      this.validateQuestion(question, answer);
-      this.questionAnswerMap.set(question.id, answer);
-      this.questionErrorMap.delete(question.id);
-    } catch (err) {
-      this.questionAnswerMap.delete(question.id);
-      this.questionErrorMap.set(question.id, err.message);
-    }
-
-    this.refreshTemplate();
-  }
-
-  private async internalSelectChoicePromise(question: Question, choiceId: string, selected: boolean, validateAndRefresh: boolean) {
-    const choice = this.findChoice(choiceId);
-
-    if (this.isChoiceDisabled(choice)) {
-      return;
-    }
-
-    if (question.type === 'singleChoice' && selected) {
-      question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
-    }
-
-    this.choiceSelectedMap.set(choiceId, selected);
-
-    if (!validateAndRefresh) {
-      return;
-    }
-
-    try {
-      const answer = this.getQuestionAnswer(question);
-      await this.validateQuestionPromise(question, answer);
-      this.questionAnswerMap.set(question.id, answer);
-      this.questionErrorMap.delete(question.id);
-    } catch (err) {
-      this.questionAnswerMap.delete(question.id);
-      this.questionErrorMap.set(question.id, err.message);
-    }
 
     this.refreshTemplate();
   }
@@ -237,6 +181,8 @@ export class FormEngine {
       const choice = question.choices![i];
       this.internalSelectChoice(question, choice.id, choice.value === value, i === question.choices!.length - 1);
     }
+
+    this.refreshTemplate();
   }
 
   async setChoicePromise(questionId: string, value: ChoiceValue) {
@@ -250,6 +196,8 @@ export class FormEngine {
       const choice = question.choices![i];
       await this.internalSelectChoicePromise(question, choice.id, choice.value === value, i === question.choices!.length - 1);
     }
+
+    this.refreshTemplate();
   }
 
   setChoices(questionId: string, values: ChoiceValue[]) {
@@ -263,6 +211,8 @@ export class FormEngine {
       const choice = question.choices![i];
       this.internalSelectChoice(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
     }
+
+    this.refreshTemplate();
   }
 
   async setChoicesPromise(questionId: string, values: ChoiceValue[]) {
@@ -276,19 +226,116 @@ export class FormEngine {
       const choice = question.choices![i];
       await this.internalSelectChoicePromise(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
     }
+
+    this.refreshTemplate();
   }
 
-  private getQuestionAnswer(question: Question) {
+  private internalSelectChoice(question: Question, choiceId: string, selected: boolean, validate: boolean) {
+    const choice = this.findChoice(choiceId);
+
+    if (question.type === 'singleChoice' && selected) {
+      question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
+    }
+
+    this.choiceSelectedMap.set(choiceId, selected);
+
+    this.setDisabled(choice, selected);
+
+    if (!validate) {
+      return;
+    }
+
+    try {
+      const answer = this.getQuestionValue(question);
+      this.validateQuestion(question, answer);
+      this.questionAnswerMap.set(question.id, answer);
+      this.questionErrorMap.delete(question.id);
+    } catch (err) {
+      this.questionAnswerMap.delete(question.id);
+      this.questionErrorMap.set(question.id, err.message);
+    }
+  }
+
+  private async internalSelectChoicePromise(question: Question, choiceId: string, selected: boolean, validate: boolean) {
+    const choice = this.findChoice(choiceId);
+
+    if (this.isChoiceDisabled(choice)) {
+      return;
+    }
+
+    if (question.type === 'singleChoice' && selected) {
+      question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
+    }
+
+    this.choiceSelectedMap.set(choiceId, selected);
+
+    this.setDisabled(choice, selected);
+
+    if (!validate) {
+      return;
+    }
+
+    try {
+      const answer = this.getQuestionValue(question);
+      await this.validateQuestionPromise(question, answer);
+      this.questionAnswerMap.set(question.id, answer);
+      this.questionErrorMap.delete(question.id);
+    } catch (err) {
+      this.questionAnswerMap.delete(question.id);
+      this.questionErrorMap.set(question.id, err.message);
+    }
+  }
+
+  private setDisabled(choice: Choice, selected: boolean) {
+    let disablings = choice.onChange.disable || [];
+    let enablings = choice.onChange.enable || [];
+    if (!selected) {
+      enablings = choice.onChange.disable || [];
+      disablings = choice.onChange.enable || [];
+    }
+
+    disablings.forEach(id => {
+      const group = this.groupMap.get(id);
+      const question = this.questionMap.get(id);
+      const choice = this.choiceMap.get(id);
+      if (group) {
+        group.disabled = true;
+      }
+      if (question) {
+        question.disabled = true;
+      }
+      if (choice) {
+        choice.disabled = true;
+      }
+    });
+
+    enablings.forEach(id => {
+      const group = this.groupMap.get(id);
+      const question = this.questionMap.get(id);
+      const choice = this.choiceMap.get(id);
+      if (group) {
+        group.disabled = false;
+      }
+      if (question) {
+        question.disabled = false;
+      }
+      if (choice) {
+        choice.disabled = false;
+      }
+    });
+  }
+
+  private getQuestionValue(question: Question) {
     if (question.type === 'input') {
       return this.questionInputValueMap.get(question.id)!;
     }
 
     if (question.type === 'singleChoice') {
-      return question.choices!.find(choice => this.choiceSelectedMap.get(choice.id))?.value;
+      return question.choices!.find(choice => !choice.disabled && this.choiceSelectedMap.get(choice.id))?.value;
     }
 
     if (question.type === 'multiChoice') {
-      return question.choices!.filter(choice => this.choiceSelectedMap.get(choice.id)).map(choice => choice.value);
+      return question.choices!.filter(choice => !choice.disabled && this.choiceSelectedMap.get(choice.id)).map(choice => choice.value);
     }
   }
 
@@ -341,48 +388,86 @@ export class FormEngine {
     return this.isQuestionDisabled(question);
   }
 
-  importAnswers(answers: Answers) {
+  exportConfig(): Config {
+    return toGroupConfig(this.groups);
+  }
+
+  importAnswers(answers: Answers, retainCurrentValue?: boolean) {
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
-      const answer = answers[questionId];
+      let answer = answers[questionId];
+
+      if (answer === undefined && retainCurrentValue) {
+        answer = this.getQuestionValue(question);
+      }
+
       if (question.type === 'input') {
         this.setInputValue(questionId, answer);
       } else if (question.type === 'singleChoice') {
         this.setChoice(questionId, answer);
       } else if (question.type === 'multiChoice') {
-        this.setChoices(questionId, answer);
+        this.setChoices(questionId, answer || []);
       }
     }
   }
 
-  async importAnswersPromise(answers: Answers) {
+  async importAnswersPromise(answers: Answers, retainCurrentValue?: boolean) {
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
-      const answer = answers[questionId];
+      let answer = answers[questionId];
+
+      if (answer === undefined && retainCurrentValue) {
+        answer = this.getQuestionValue(question);
+      }
+
       if (question.type === 'input') {
         await this.setInputValuePromise(questionId, answer);
       } else if (question.type === 'singleChoice') {
         await this.setChoicePromise(questionId, answer);
       } else if (question.type === 'multiChoice') {
-        await this.setChoicesPromise(questionId, answer);
+        await this.setChoicesPromise(questionId, answer || []);
       }
     }
-  }
-
-  exportConfig(): Config {
-    return toGroupConfig(this.groups);
   }
 
   exportAnswers(): Answers {
     const answes: Answers = {};
 
     for (const entry of this.questionMap.entries()) {
-      const [questionId] = entry;
-      const answer = this.questionAnswerMap.get(questionId);
-      answes[questionId] = answer;
+      const [questionId, question] = entry;
+      if (!this.isQuestionDisabled(question)) {
+        const answer = this.questionAnswerMap.get(questionId);
+        answes[questionId] = answer;
+      }
     }
 
     return answes;
+  }
+
+  validate() {
+    const answers = this.exportAnswers();
+    this.importAnswers(answers, true);
+    return this.isClean();
+  }
+
+  async validatePromise() {
+    const answers = this.exportAnswers();
+    await this.importAnswersPromise(answers, true);
+    return this.isClean();
+  }
+
+  isClean() {
+    for (const entry of this.questionErrorMap.entries()) {
+      const [questionId, error] = entry;
+      const question = this.findQuestion(questionId);
+      if (this.isQuestionDisabled(question)) {
+        continue;
+      }
+      if (error) {
+        return false;
+      }
+    }
+    return true;
   }
 
   private getTemplateId() {
