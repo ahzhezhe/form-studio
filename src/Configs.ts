@@ -14,8 +14,8 @@ export interface GroupConfig extends ManagebleItemConfig {
 
 export interface QuestionConfig extends ManagebleItemConfig {
   type: QuestionType;
-  choices: ChoiceConfig[] | undefined;
-  validatorKey: string | undefined;
+  choices: ChoiceConfig[];
+  validator: string | undefined;
   validation: CustomConfig;
 }
 
@@ -24,4 +24,7 @@ export interface ChoiceConfig extends ManagebleItemConfig {
   onSelected: ChoiceOnSelected;
 }
 
+/**
+ * Form configs.
+ */
 export type Configs = GroupConfig[];

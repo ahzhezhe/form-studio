@@ -1,5 +1,5 @@
 import { ChoiceConfig, GroupConfig, QuestionConfig } from './Configs';
-import { Choice, Group, Question } from './FormEngineObjects';
+import { Choice, Group, Question } from './FormObjects';
 import { ChoiceInitConfig, GroupInitConfig, ManagebleItemInitConfig, QuestionInitConfig } from './InitConfigs';
 
 const managebleItemSorter = (a: ManagebleItemInitConfig, b: ManagebleItemInitConfig) => {
@@ -37,8 +37,8 @@ export const fromQuestionInitConfigs = (
     disabled: !!question.disabled,
     ui: question.ui || {},
     type: question.type,
-    choices: question.type !== 'input' ? fromChoiceInitConfigs(id, question.choices!) : undefined,
-    validatorKey: question.validatorKey,
+    choices: question.type !== 'input' ? fromChoiceInitConfigs(id, question.choices!) : [],
+    validator: question.validator,
     validation: question.validation || {}
   };
 });
@@ -71,8 +71,8 @@ export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => qu
   disabled: question.disabled,
   ui: question.ui || {},
   type: question.type,
-  choices: question.type !== 'input' ? toChoiceConfigs(question.choices!) : undefined,
-  validatorKey: question.validatorKey,
+  choices: question.type !== 'input' ? toChoiceConfigs(question.choices!) : [],
+  validator: question.validator,
   validation: question.validation
 }));
 

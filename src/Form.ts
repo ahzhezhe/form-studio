@@ -2,12 +2,12 @@ import shortUUID from 'short-uuid';
 import { Configs } from './Configs';
 import { fromGroupInitConfigs, toGroupConfigs } from './Converters';
 import { eventEmitter } from './EventEmitter';
-import { Choice, Group, Question } from './FormEngineObjects';
+import { Choice, Group, Question } from './FormObjects';
 import { InitConfigs } from './InitConfigs';
 import { ChoiceRenderInstruction, GroupRenderInstruction, QuestionRenderInstruction, RenderInstructions } from './RenderInstructions';
 import { Answers, ChoiceValue, Errors, FormRefreshedHook, Validator } from './Types';
 
-export class FormEngine {
+export class Form {
 
   private formId: string;
   private formRefreshedHook?: FormRefreshedHook;
@@ -48,7 +48,7 @@ export class FormEngine {
       this.questionMap.set(question.id!, question);
       this.questionGroupMap.set(question.id!, group);
       if (question.type !== 'input') {
-        this.constructChoiceMap(question, question.choices!);
+        this.constructChoiceMap(question, question.choices);
       }
     });
   }
@@ -61,20 +61,20 @@ export class FormEngine {
   }
 
   /**
-   * Initiate a form engine with a config.
+   * Initiate a form with a config.
    *
    * @param configs configs
-   * @param validators validators
+   * @param validators validators, object keys are validator name, values are validation functions
    * @param formRefreshedHook function to be invoked when form is refreshed
-   * @returns form engine
+   * @returns form object
    */
   static fromConfigs(configs: InitConfigs, validators?: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
     const groups = fromGroupInitConfigs(undefined, configs);
-    return new FormEngine(groups, validators || {}, formRefreshedHook);
+    return new Form(groups, validators || {}, formRefreshedHook);
   }
 
   /**
-   * Get a set of instructions to be used to render frontend UI.
+   * Get a set of instructions to be used for rendering frontend UI.
    *
    * @returns render instructions
    */
@@ -98,7 +98,7 @@ export class FormEngine {
       disabled: this.isQuestionDisabled(question),
       ui: question.ui,
       type: question.type,
-      choices: question.type !== 'input' ? this.toChoiceRenderInstruction(question.choices!) : undefined,
+      choices: question.type !== 'input' ? this.toChoiceRenderInstruction(question.choices) : [],
       unvalidatedAnswer: this.questionUnvalidatedAnswerMap.get(question.id),
       validatedAnswer: this.isQuestionDisabled(question) ? undefined : this.questionValidatedAnswerMap.get(question.id),
       error: this.questionErrorMap.get(question.id)
@@ -139,6 +139,9 @@ export class FormEngine {
     return choice;
   }
 
+  /**
+   * Clear answers of the entire form.
+   */
   clear() {
     for (const group of this.groups) {
       this.internalClearGroup(group);
@@ -147,14 +150,23 @@ export class FormEngine {
     this.refreshForm();
   }
 
-  async clearPromise() {
+  /**
+   * Clear answers of the entire form asynchronously.
+   * Use this if any of the validations is asynchronous.
+   */
+  async clearAsync() {
     for (const group of this.groups) {
-      await this.internalClearGroupPromise(group);
+      await this.internalClearGroupAsync(group);
     }
 
     this.refreshForm();
   }
 
+  /**
+   * Clear answers of the entire group.
+   *
+   * @param groupId group id
+   */
   clearGroup(groupId: string) {
     const group = this.findGroup(groupId);
     this.internalClearGroup(group);
@@ -162,13 +174,24 @@ export class FormEngine {
     this.refreshForm();
   }
 
-  async clearGroupPromise(groupId: string) {
+  /**
+   * Clear answers of the entire group asynchronously.
+   * Use this if any of the validations is asynchronous.
+   *
+   * @param groupId group id
+   */
+  async clearGroupAsync(groupId: string) {
     const group = this.findGroup(groupId);
-    await this.internalClearGroupPromise(group);
+    await this.internalClearGroupAsync(group);
 
     this.refreshForm();
   }
 
+  /**
+   * Clear answer of a question.
+   *
+   * @param questionId question id
+   */
   clearAnswer(questionId: string) {
     const question = this.findQuestion(questionId);
     this.internalClearAnswer(question);
@@ -176,9 +199,15 @@ export class FormEngine {
     this.refreshForm();
   }
 
-  async clearAnswerPromise(questionId: string) {
+  /**
+   * Clear answer of a question asynchronously.
+   * Use this if validation of the question is asynchronous.
+   *
+   * @param questionId question id
+   */
+  async clearAnswerAsync(questionId: string) {
     const question = this.findQuestion(questionId);
-    await this.internalClearAnswerPromise(question);
+    await this.internalClearAnswerAsync(question);
 
     this.refreshForm();
   }
@@ -192,18 +221,18 @@ export class FormEngine {
     }
   }
 
-  private async internalClearGroupPromise(group: Group) {
+  private async internalClearGroupAsync(group: Group) {
     for (const subGroup of group.groups) {
-      await this.internalClearGroupPromise(subGroup);
+      await this.internalClearGroupAsync(subGroup);
     }
     for (const question of group.questions) {
-      await this.internalClearAnswerPromise(question);
+      await this.internalClearAnswerAsync(question);
     }
   }
 
   private internalClearAnswer(question: Question) {
     if (question.type === 'input') {
-      this.setInputValue(question.id, undefined);
+      this.setInput(question.id, undefined);
     } else if (question.type === 'single') {
       this.setChoice(question.id, undefined as any);
     } else if (question.type === 'multiple') {
@@ -211,17 +240,23 @@ export class FormEngine {
     }
   }
 
-  private async internalClearAnswerPromise(question: Question) {
+  private async internalClearAnswerAsync(question: Question) {
     if (question.type === 'input') {
-      await this.setInputValuePromise(question.id, undefined);
+      await this.setInputAsync(question.id, undefined);
     } else if (question.type === 'single') {
-      await this.setChoicePromise(question.id, undefined as any);
+      await this.setChoiceAsync(question.id, undefined as any);
     } else if (question.type === 'multiple') {
-      await this.setChoicesPromise(question.id, []);
+      await this.setChoicesAsync(question.id, []);
     }
   }
 
-  setInputValue(questionId: string, value: any) {
+  /**
+   * Set value of the question with `input` as type.
+   *
+   * @param questionId question id
+   * @param value value
+   */
+  setInput(questionId: string, value: any) {
     const question = this.findQuestion(questionId);
 
     try {
@@ -237,12 +272,19 @@ export class FormEngine {
     this.refreshForm();
   }
 
-  async setInputValuePromise(questionId: string, value: any) {
+  /**
+   * Set value of the question with `input` as type asynchronously.
+   * Use this if validation of the question is asynchronous.
+   *
+   * @param questionId question id
+   * @param value value
+   */
+  async setInputAsync(questionId: string, value: any) {
     const question = this.findQuestion(questionId);
 
     try {
       this.questionUnvalidatedAnswerMap.set(questionId, value);
-      await this.validateQuestionPromise(question, value);
+      await this.validateQuestionAsync(question, value);
       this.questionValidatedAnswerMap.set(questionId, value);
       this.questionErrorMap.delete(questionId);
     } catch (err) {
@@ -253,6 +295,12 @@ export class FormEngine {
     this.refreshForm();
   }
 
+  /**
+   * Mark a choice as selected/unselected.
+   *
+   * @param choiceId choice id
+   * @param selected selected/unselected
+   */
   selectChoice(choiceId: string, selected: boolean) {
     const question = this.choiceQuestionMap.get(choiceId)!;
     this.internalSelectChoice(question, choiceId, selected, true);
@@ -260,52 +308,85 @@ export class FormEngine {
     this.refreshForm();
   }
 
-  async selectChoicePromise(choiceId: string, selected: boolean) {
+  /**
+   * Mark a choice as selected/unselected asynchronously.
+   * Use this if validation of the question is asynchronous.
+   *
+   * @param choiceId choice id
+   * @param selected selected/unselected
+   */
+  async selectChoiceAsync(choiceId: string, selected: boolean) {
     const question = this.choiceQuestionMap.get(choiceId)!;
-    await this.internalSelectChoicePromise(question, choiceId, selected, true);
+    await this.internalSelectChoiceAsync(question, choiceId, selected, true);
 
     this.refreshForm();
   }
 
+  /**
+   * Set value of the question with `single` as type.
+   *
+   * @param questionId question id
+   * @param value choice's value
+   */
   setChoice(questionId: string, value: ChoiceValue) {
     const question = this.findQuestion(questionId);
 
-    for (let i = 0; i < question.choices!.length; i++) {
-      const choice = question.choices![i];
-      this.internalSelectChoice(question, choice.id, choice.value === value, i === question.choices!.length - 1);
+    for (let i = 0; i < question.choices.length; i++) {
+      const choice = question.choices[i];
+      this.internalSelectChoice(question, choice.id, choice.value === value, i === question.choices.length - 1);
     }
 
     this.refreshForm();
   }
 
-  async setChoicePromise(questionId: string, value: ChoiceValue) {
+  /**
+   * Set value of the question with `single` as type asynchronously.
+   * Use this if validation of the question is asynchronous.
+   *
+   * @param questionId question id
+   * @param value choice's value
+   */
+  async setChoiceAsync(questionId: string, value: ChoiceValue) {
     const question = this.findQuestion(questionId);
 
-    for (let i = 0; i < question.choices!.length; i++) {
-      const choice = question.choices![i];
-      await this.internalSelectChoicePromise(question, choice.id, choice.value === value, i === question.choices!.length - 1);
+    for (let i = 0; i < question.choices.length; i++) {
+      const choice = question.choices[i];
+      await this.internalSelectChoiceAsync(question, choice.id, choice.value === value, i === question.choices.length - 1);
     }
 
     this.refreshForm();
   }
 
+  /**
+   * Set values of the question with `multiple` as type.
+   *
+   * @param questionId question id
+   * @param values choices' values
+   */
   setChoices(questionId: string, values: ChoiceValue[]) {
     const question = this.findQuestion(questionId);
 
-    for (let i = 0; i < question.choices!.length; i++) {
-      const choice = question.choices![i];
-      this.internalSelectChoice(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
+    for (let i = 0; i < question.choices.length; i++) {
+      const choice = question.choices[i];
+      this.internalSelectChoice(question, choice.id, values.includes(choice.value), i === question.choices.length - 1);
     }
 
     this.refreshForm();
   }
 
-  async setChoicesPromise(questionId: string, values: ChoiceValue[]) {
+  /**
+   * Set values of the question with `multiple` as type asynchronously.
+   * Use this if validation of the question is asynchronous.
+   *
+   * @param questionId question id
+   * @param values choices' values
+   */
+  async setChoicesAsync(questionId: string, values: ChoiceValue[]) {
     const question = this.findQuestion(questionId);
 
-    for (let i = 0; i < question.choices!.length; i++) {
-      const choice = question.choices![i];
-      await this.internalSelectChoicePromise(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
+    for (let i = 0; i < question.choices.length; i++) {
+      const choice = question.choices[i];
+      await this.internalSelectChoiceAsync(question, choice.id, values.includes(choice.value), i === question.choices.length - 1);
     }
 
     this.refreshForm();
@@ -315,7 +396,7 @@ export class FormEngine {
     const choice = this.findChoice(choiceId);
 
     if (question.type === 'single' && selected) {
-      question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
+      question.choices.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
     }
 
     this.choiceSelectedMap.set(choiceId, selected);
@@ -338,11 +419,11 @@ export class FormEngine {
     }
   }
 
-  private async internalSelectChoicePromise(question: Question, choiceId: string, selected: boolean, validate: boolean) {
+  private async internalSelectChoiceAsync(question: Question, choiceId: string, selected: boolean, validate: boolean) {
     const choice = this.findChoice(choiceId);
 
     if (question.type === 'single' && selected) {
-      question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
+      question.choices.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
     }
 
     this.choiceSelectedMap.set(choiceId, selected);
@@ -356,7 +437,7 @@ export class FormEngine {
     try {
       const answer = this.getQuestionValue(question);
       this.questionUnvalidatedAnswerMap.set(question.id, answer);
-      await this.validateQuestionPromise(question, answer);
+      await this.validateQuestionAsync(question, answer);
       this.questionValidatedAnswerMap.set(question.id, answer);
       this.questionErrorMap.delete(question.id);
     } catch (err) {
@@ -406,13 +487,13 @@ export class FormEngine {
 
   private setGroupDisabled(group: Group, disabled: boolean) {
     group.disabled = disabled;
-    group.groups?.forEach(subGroup => this.setGroupDisabled(subGroup, disabled));
-    group.questions?.forEach(question => this.setQuestionDisabled(question, disabled));
+    group.groups.forEach(subGroup => this.setGroupDisabled(subGroup, disabled));
+    group.questions.forEach(question => this.setQuestionDisabled(question, disabled));
   }
 
   private setQuestionDisabled(question: Question, disabled: boolean) {
     question.disabled = disabled;
-    question.choices?.forEach(choice => this.setChoiceDisabled(choice, disabled));
+    question.choices.forEach(choice => this.setChoiceDisabled(choice, disabled));
   }
 
   private setChoiceDisabled(choice: Choice, disabled: boolean) {
@@ -432,30 +513,30 @@ export class FormEngine {
     }
 
     if (question.type === 'single') {
-      return question.choices!.find(choice => !choice.disabled && this.choiceSelectedMap.get(choice.id))?.value;
+      return question.choices.find(choice => !choice.disabled && this.choiceSelectedMap.get(choice.id))?.value;
     }
 
     if (question.type === 'multiple') {
-      return question.choices!.filter(choice => !choice.disabled && this.choiceSelectedMap.get(choice.id)).map(choice => choice.value);
+      return question.choices.filter(choice => !choice.disabled && this.choiceSelectedMap.get(choice.id)).map(choice => choice.value);
     }
   }
 
   private validateQuestion(question: Question, value: any) {
-    if (!question.validatorKey) {
+    if (!question.validator) {
       return;
     }
-    const validator = this.validators[question.validatorKey];
+    const validator = this.validators[question.validator];
     if (!validator) {
       return;
     }
     validator(value, question.validation || {});
   }
 
-  private async validateQuestionPromise(question: Question, value: any) {
-    if (!question.validatorKey) {
+  private async validateQuestionAsync(question: Question, value: any) {
+    if (!question.validator) {
       return;
     }
-    const validator = this.validators[question.validatorKey];
+    const validator = this.validators[question.validator];
     if (!validator) {
       return;
     }
@@ -489,16 +570,33 @@ export class FormEngine {
     return this.isQuestionDisabled(question);
   }
 
+  /**
+   * Get sanitized configs of this form.
+   * You can persist it and use it with `fromConfigs` method to reinitiate the form later.
+   *
+   * @returns configs
+   */
   getConfigs(): Configs {
     return toGroupConfigs(this.groups);
   }
 
+  /**
+   * Import answers to the form.
+   *
+   * @param answers answers
+   */
   importAnswers(answers: Answers) {
     this.internalImportAnswers(answers, false);
   }
 
-  async importAnswersPromise(answers: Answers) {
-    await this.internalImportAnswersPromise(answers, false);
+  /**
+   * Import answers to the form asynchronously.
+   * Use this if any of the validations is asynchronous.
+   *
+   * @param answers answers
+   */
+  async importAnswersAsync(answers: Answers) {
+    await this.internalImportAnswersAsync(answers, false);
   }
 
   private internalImportAnswers(answers: Answers, retainCurrentValue: boolean) {
@@ -511,7 +609,7 @@ export class FormEngine {
       }
 
       if (question.type === 'input') {
-        this.setInputValue(questionId, answer);
+        this.setInput(questionId, answer);
       } else if (question.type === 'single') {
         this.setChoice(questionId, answer);
       } else if (question.type === 'multiple') {
@@ -520,7 +618,7 @@ export class FormEngine {
     }
   }
 
-  private async internalImportAnswersPromise(answers: Answers, retainCurrentValue: boolean) {
+  private async internalImportAnswersAsync(answers: Answers, retainCurrentValue: boolean) {
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
       let answer = answers[questionId];
@@ -530,15 +628,21 @@ export class FormEngine {
       }
 
       if (question.type === 'input') {
-        await this.setInputValuePromise(questionId, answer);
+        await this.setInputAsync(questionId, answer);
       } else if (question.type === 'single') {
-        await this.setChoicePromise(questionId, answer);
+        await this.setChoiceAsync(questionId, answer);
       } else if (question.type === 'multiple') {
-        await this.setChoicesPromise(questionId, answer || []);
+        await this.setChoicesAsync(questionId, answer || []);
       }
     }
   }
 
+  /**
+   * Get unvalidated answers.
+   * You can persist it and use it with `importAnswers` method to restore the answers later.
+   *
+   * @returns unvalidated answers, object keys are question ids, values are answers
+   */
   getUnvalidatedAnswers(): Answers {
     const answes: Answers = {};
 
@@ -553,6 +657,13 @@ export class FormEngine {
     return answes;
   }
 
+  /**
+   * Get validated answers.
+   * If a question is disabled or it's answer is not valid, it's answer will be set to `undefined`.
+   * You can persist it and use it with `importAnswers` method to restore the answers later.
+   *
+   * @returns validated answers, object keys are question ids, values are answers
+   */
   getValidatedAnswers(): Answers {
     const answes: Answers = {};
 
@@ -569,6 +680,14 @@ export class FormEngine {
     return answes;
   }
 
+  /**
+   * Get error messages.
+   *
+   * Questions which didn't go through validation will not have error messages, even if their answers are currently invalid.
+   * You can use `validate` method to validate all answers in the form.
+   *
+   * @returns errors, object keys are question ids, values are error message
+   */
   getErrors(): Errors {
     const errors: Errors = {};
 
@@ -585,18 +704,37 @@ export class FormEngine {
     return errors;
   }
 
+  /**
+   * Validate the entire form.
+   *
+   * @returns whether form is clean
+   */
   validate() {
     const answers = this.getValidatedAnswers();
     this.internalImportAnswers(answers, true);
     return this.isClean();
   }
 
-  async validatePromise() {
+  /**
+   * Validate the entire form asynchronously.
+   * Use this if any of the validations is asynchronous.
+   *
+   * @returns whether form is clean
+   */
+  async validateAsync() {
     const answers = this.getValidatedAnswers();
-    await this.internalImportAnswersPromise(answers, true);
+    await this.internalImportAnswersAsync(answers, true);
     return this.isClean();
   }
 
+  /**
+   * Check whether form is clean.
+   *
+   * Form will always be clean if it didn't go through any validation, even if there are invalid answers in the form.
+   * You can use `validate` method to validate all answers in the form.
+   *
+   * @returns whether form is clean
+   */
   isClean() {
     for (const entry of this.questionErrorMap.entries()) {
       const [questionId, error] = entry;

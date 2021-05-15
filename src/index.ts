@@ -1,6 +1,6 @@
 /* eslint-disable import/no-default-export */
 import { GroupConfig, QuestionConfig, ChoiceConfig, Configs } from './Configs';
-import { FormEngine } from './FormEngine';
+import { Form } from './Form';
 import { GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfigs } from './InitConfigs';
 import { GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstructions } from './RenderInstructions';
 import { CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormRefreshedHook } from './Types';
@@ -14,4 +14,4 @@ export {
   useRenderInstructions
 };
 
-export default FormEngine;
+export default Form;

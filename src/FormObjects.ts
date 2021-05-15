@@ -14,8 +14,8 @@ export interface Group extends ManagebleItem {
 
 export interface Question extends ManagebleItem {
   type: QuestionType;
-  choices: Choice[] | undefined;
-  validatorKey: string | undefined;
+  choices: Choice[];
+  validator: string | undefined;
   validation: CustomConfig;
 }
 
