@@ -14,3 +14,5 @@ export type Validator = (value: any, validationConfig: CustomConfig) => void | P
 export type Answers = Record<string, any>;
 
 export type Errors = Record<string, string>;
+
+export type FormRefreshedHook = () => void | Promise<void>;

@@ -2,16 +2,16 @@
 import { GroupConfig, QuestionConfig, ChoiceConfig, Config } from './Configs';
 import { FormEngine } from './FormEngine';
 import { GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfig } from './InitConfigs';
-import { GroupTemplate, QuestionTemplate, ChoiceTemplate, Template } from './Templates';
-import { CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors } from './Types';
-import { useTemplate } from './useTemplate';
+import { GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstruction } from './RenderInstructions';
+import { CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormRefreshedHook } from './Types';
+import { useRenderInstruction } from './useRenderInstruction';
 
 export {
   GroupConfig, QuestionConfig, ChoiceConfig, Config,
   GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfig,
-  GroupTemplate, QuestionTemplate, ChoiceTemplate, Template,
-  CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors,
-  useTemplate
+  GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstruction,
+  CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormRefreshedHook,
+  useRenderInstruction
 };
 
 export default FormEngine;

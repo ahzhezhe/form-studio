@@ -4,12 +4,13 @@ import { fromGroupInitConfig, toGroupConfig } from './Converters';
 import { eventEmitter } from './EventEmitter';
 import { InitConfig } from './InitConfigs';
 import { Choice, Group, Question } from './Objects';
-import { ChoiceTemplate, GroupTemplate, QuestionTemplate, Template } from './Templates';
-import { Answers, ChoiceValue, Errors, Validator } from './Types';
+import { ChoiceRenderInstruction, GroupRenderInstruction, QuestionRenderInstruction, RenderInstruction } from './RenderInstructions';
+import { Answers, ChoiceValue, Errors, FormRefreshedHook, Validator } from './Types';
 
 export class FormEngine {
 
-  private templateId: string;
+  private formId: string;
+  private formRefreshedHook?: FormRefreshedHook;
   private validators: Record<string, Validator>;
   private groups: Group[];
   private groupMap = new Map<string, Group>();
@@ -23,10 +24,11 @@ export class FormEngine {
   private questionAnswerMap = new Map<string, any>();
   private questionErrorMap = new Map<string, string>();
 
-  private constructor(groups: Group[], validators: Record<string, Validator>) {
-    this.templateId = shortUUID.generate();
+  private constructor(groups: Group[], validators: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
+    this.formId = shortUUID.generate();
     this.groups = groups;
     this.validators = validators;
+    this.formRefreshedHook = formRefreshedHook;
     this.constructGroupMap(undefined, this.groups);
   }
 
@@ -58,40 +60,40 @@ export class FormEngine {
     });
   }
 
-  static fromConfig(config: InitConfig, validators?: Record<string, Validator>) {
+  static fromConfig(config: InitConfig, validators?: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
     const groups = fromGroupInitConfig(undefined, config);
-    return new FormEngine(groups, validators || {});
+    return new FormEngine(groups, validators || {}, formRefreshedHook);
   }
 
-  toTemplate(): Template {
-    return this.toGroupTemplate(this.groups);
+  toRenderInstruction(): RenderInstruction {
+    return this.toGroupRenderInstruction(this.groups);
   }
 
-  private toGroupTemplate(groups: Group[]): GroupTemplate[] {
-    return groups.map((group): GroupTemplate => ({
+  private toGroupRenderInstruction(groups: Group[]): GroupRenderInstruction[] {
+    return groups.map((group): GroupRenderInstruction => ({
       id: group.id,
       disabled: this.isGroupDisabled(group),
       uiConfig: group.uiConfig,
-      groups: this.toGroupTemplate(group.groups),
-      questions: this.toQuestionTemplate(group.questions)
+      groups: this.toGroupRenderInstruction(group.groups),
+      questions: this.toQuestionRenderInstruction(group.questions)
     }));
   }
 
-  private toQuestionTemplate(questions: Question[]): QuestionTemplate[] {
-    return questions.map((question): QuestionTemplate => ({
+  private toQuestionRenderInstruction(questions: Question[]): QuestionRenderInstruction[] {
+    return questions.map((question): QuestionRenderInstruction => ({
       id: question.id,
       disabled: this.isQuestionDisabled(question),
       uiConfig: question.uiConfig,
       type: question.type,
       inputValue: question.type === 'input' ? this.questionInputValueMap.get(question.id) : undefined,
-      choices: question.type !== 'input' ? this.toChoiceTemplate(question.choices!) : undefined,
+      choices: question.type !== 'input' ? this.toChoiceRenderInstruction(question.choices!) : undefined,
       answer: this.isQuestionDisabled(question) ? undefined : this.questionAnswerMap.get(question.id),
       error: this.questionErrorMap.get(question.id)
     }));
   }
 
-  private toChoiceTemplate(choices: Choice[]): ChoiceTemplate[] {
-    return choices.map((choice): ChoiceTemplate => ({
+  private toChoiceRenderInstruction(choices: Choice[]): ChoiceRenderInstruction[] {
+    return choices.map((choice): ChoiceRenderInstruction => ({
       id: choice.id,
       disabled: this.isChoiceDisabled(choice),
       uiConfig: choice.uiConfig,
@@ -133,7 +135,7 @@ export class FormEngine {
       this.questionErrorMap.set(questionId, err.message);
     }
 
-    this.refreshTemplate();
+    this.refreshForm();
   }
 
   async setInputValuePromise(questionId: string, value: any) {
@@ -153,21 +155,21 @@ export class FormEngine {
       this.questionErrorMap.set(questionId, err.message);
     }
 
-    this.refreshTemplate();
+    this.refreshForm();
   }
 
   selectChoice(choiceId: string, selected: boolean) {
     const question = this.choiceQuestionMap.get(choiceId)!;
     this.internalSelectChoice(question, choiceId, selected, true);
 
-    this.refreshTemplate();
+    this.refreshForm();
   }
 
   async selectChoicePromise(choiceId: string, selected: boolean) {
     const question = this.choiceQuestionMap.get(choiceId)!;
     await this.internalSelectChoicePromise(question, choiceId, selected, true);
 
-    this.refreshTemplate();
+    this.refreshForm();
   }
 
   setChoice(questionId: string, value: ChoiceValue) {
@@ -182,7 +184,7 @@ export class FormEngine {
       this.internalSelectChoice(question, choice.id, choice.value === value, i === question.choices!.length - 1);
     }
 
-    this.refreshTemplate();
+    this.refreshForm();
   }
 
   async setChoicePromise(questionId: string, value: ChoiceValue) {
@@ -197,7 +199,7 @@ export class FormEngine {
       await this.internalSelectChoicePromise(question, choice.id, choice.value === value, i === question.choices!.length - 1);
     }
 
-    this.refreshTemplate();
+    this.refreshForm();
   }
 
   setChoices(questionId: string, values: ChoiceValue[]) {
@@ -212,7 +214,7 @@ export class FormEngine {
       this.internalSelectChoice(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
     }
 
-    this.refreshTemplate();
+    this.refreshForm();
   }
 
   async setChoicesPromise(questionId: string, values: ChoiceValue[]) {
@@ -227,7 +229,7 @@ export class FormEngine {
       await this.internalSelectChoicePromise(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
     }
 
-    this.refreshTemplate();
+    this.refreshForm();
   }
 
   private internalSelectChoice(question: Question, choiceId: string, selected: boolean, validate: boolean) {
@@ -518,12 +520,15 @@ export class FormEngine {
     return true;
   }
 
-  private getTemplateId() {
-    return this.templateId;
+  private getFormId() {
+    return this.formId;
   }
 
-  private refreshTemplate() {
-    eventEmitter.emit(this.templateId);
+  private refreshForm() {
+    eventEmitter.emit(this.formId);
+    if (this.formRefreshedHook) {
+      this.formRefreshedHook();
+    }
   }
 
 }
