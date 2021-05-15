@@ -102,6 +102,14 @@ export class FormEngine {
     }));
   }
 
+  private findGroup(groupId: string) {
+    const group = this.groupMap.get(groupId);
+    if (!group) {
+      throw new Error('Group is not found.');
+    }
+    return group;
+  }
+
   private findQuestion(questionId: string) {
     const question = this.questionMap.get(questionId);
     if (!question) {
@@ -118,12 +126,90 @@ export class FormEngine {
     return choice;
   }
 
+  clear() {
+    for (const group of this.groups) {
+      this.internalClearGroup(group);
+    }
+
+    this.refreshForm();
+  }
+
+  async clearPromise() {
+    for (const group of this.groups) {
+      await this.internalClearGroupPromise(group);
+    }
+
+    this.refreshForm();
+  }
+
+  clearGroup(groupId: string) {
+    const group = this.findGroup(groupId);
+    this.internalClearGroup(group);
+
+    this.refreshForm();
+  }
+
+  async clearGroupPromise(groupId: string) {
+    const group = this.findGroup(groupId);
+    await this.internalClearGroupPromise(group);
+
+    this.refreshForm();
+  }
+
+  clearAnswer(questionId: string) {
+    const question = this.findQuestion(questionId);
+    this.internalClearAnswer(question);
+
+    this.refreshForm();
+  }
+
+  async clearAnswerPromise(questionId: string) {
+    const question = this.findQuestion(questionId);
+    await this.internalClearAnswerPromise(question);
+
+    this.refreshForm();
+  }
+
+  private internalClearGroup(group: Group) {
+    for (const subGroup of group.groups) {
+      this.internalClearGroup(subGroup);
+    }
+    for (const question of group.questions) {
+      this.internalClearAnswer(question);
+    }
+  }
+
+  private async internalClearGroupPromise(group: Group) {
+    for (const subGroup of group.groups) {
+      await this.internalClearGroupPromise(subGroup);
+    }
+    for (const question of group.questions) {
+      await this.internalClearAnswerPromise(question);
+    }
+  }
+
+  private internalClearAnswer(question: Question) {
+    if (question.type === 'input') {
+      this.setInputValue(question.id, undefined);
+    } else if (question.type === 'single') {
+      this.setChoice(question.id, undefined as any);
+    } else if (question.type === 'multiple') {
+      this.setChoices(question.id, []);
+    }
+  }
+
+  private async internalClearAnswerPromise(question: Question) {
+    if (question.type === 'input') {
+      await this.setInputValuePromise(question.id, undefined);
+    } else if (question.type === 'single') {
+      await this.setChoicePromise(question.id, undefined as any);
+    } else if (question.type === 'multiple') {
+      await this.setChoicesPromise(question.id, []);
+    }
+  }
+
   setInputValue(questionId: string, value: any) {
     const question = this.findQuestion(questionId);
-
-    if (this.isQuestionDisabled(question)) {
-      return;
-    }
 
     try {
       this.questionUnvalidatedAnswerMap.set(questionId, value);
@@ -140,10 +226,6 @@ export class FormEngine {
 
   async setInputValuePromise(questionId: string, value: any) {
     const question = this.findQuestion(questionId);
-
-    if (this.isQuestionDisabled(question)) {
-      return;
-    }
 
     try {
       this.questionUnvalidatedAnswerMap.set(questionId, value);
@@ -175,10 +257,6 @@ export class FormEngine {
   setChoice(questionId: string, value: ChoiceValue) {
     const question = this.findQuestion(questionId);
 
-    if (this.isQuestionDisabled(question)) {
-      return;
-    }
-
     for (let i = 0; i < question.choices!.length; i++) {
       const choice = question.choices![i];
       this.internalSelectChoice(question, choice.id, choice.value === value, i === question.choices!.length - 1);
@@ -189,10 +267,6 @@ export class FormEngine {
 
   async setChoicePromise(questionId: string, value: ChoiceValue) {
     const question = this.findQuestion(questionId);
-
-    if (this.isQuestionDisabled(question)) {
-      return;
-    }
 
     for (let i = 0; i < question.choices!.length; i++) {
       const choice = question.choices![i];
@@ -205,10 +279,6 @@ export class FormEngine {
   setChoices(questionId: string, values: ChoiceValue[]) {
     const question = this.findQuestion(questionId);
 
-    if (this.isQuestionDisabled(question)) {
-      return;
-    }
-
     for (let i = 0; i < question.choices!.length; i++) {
       const choice = question.choices![i];
       this.internalSelectChoice(question, choice.id, values.includes(choice.value), i === question.choices!.length - 1);
@@ -219,10 +289,6 @@ export class FormEngine {
 
   async setChoicesPromise(questionId: string, values: ChoiceValue[]) {
     const question = this.findQuestion(questionId);
-
-    if (this.isQuestionDisabled(question)) {
-      return;
-    }
 
     for (let i = 0; i < question.choices!.length; i++) {
       const choice = question.choices![i];
@@ -261,10 +327,6 @@ export class FormEngine {
 
   private async internalSelectChoicePromise(question: Question, choiceId: string, selected: boolean, validate: boolean) {
     const choice = this.findChoice(choiceId);
-
-    if (this.isChoiceDisabled(choice)) {
-      return;
-    }
 
     if (question.type === 'single' && selected) {
       question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
@@ -542,6 +604,7 @@ export class FormEngine {
 
   private refreshForm() {
     eventEmitter.emit(this.formId);
+
     if (this.formRefreshedHook) {
       this.formRefreshedHook();
     }
