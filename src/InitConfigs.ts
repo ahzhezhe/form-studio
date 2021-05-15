@@ -4,7 +4,7 @@ export interface ManagebleItemInitConfig {
   id?: string;
   order?: number;
   disabled?: boolean;
-  uiConfig?: CustomConfig;
+  ui?: CustomConfig;
 }
 
 export interface GroupInitConfig extends ManagebleItemInitConfig {
@@ -16,7 +16,7 @@ export interface QuestionInitConfig extends ManagebleItemInitConfig {
   type: QuestionType;
   choices?: ChoiceInitConfig[];
   validatorKey?: string;
-  validationConfig?: CustomConfig;
+  validation?: CustomConfig;
 }
 
 export interface ChoiceInitConfig extends ManagebleItemInitConfig {

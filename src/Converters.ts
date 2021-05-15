@@ -22,7 +22,7 @@ export const fromGroupInitConfigs = (
     id,
     order: group.order,
     disabled: !!group.disabled,
-    uiConfig: group.uiConfig || {},
+    ui: group.ui || {},
     groups: group.groups ? fromGroupInitConfigs(id, group.groups) : [],
     questions: group.questions ? fromQuestionInitConfigs(id, group.questions) : []
   };
@@ -35,11 +35,11 @@ export const fromQuestionInitConfigs = (
     id,
     order: question.order,
     disabled: !!question.disabled,
-    uiConfig: question.uiConfig || {},
+    ui: question.ui || {},
     type: question.type,
     choices: question.type !== 'input' ? fromChoiceInitConfigs(id, question.choices!) : undefined,
     validatorKey: question.validatorKey,
-    validationConfig: question.validationConfig || {}
+    validation: question.validation || {}
   };
 });
 
@@ -50,7 +50,7 @@ export const fromChoiceInitConfigs = (
     id,
     order: choice.order,
     disabled: !!choice.disabled,
-    uiConfig: choice.uiConfig || {},
+    ui: choice.ui || {},
     value: choice.value || id,
     onSelected: choice.onSelected || {}
   };
@@ -60,7 +60,7 @@ export const toGroupConfigs = (groups: Group[]): GroupConfig[] => groups.map(gro
   id: group.id,
   order: group.order,
   disabled: group.disabled,
-  uiConfig: group.uiConfig || {},
+  ui: group.ui || {},
   groups: toGroupConfigs(group.groups),
   questions: toQuestionConfigs(group.questions)
 }));
@@ -69,18 +69,18 @@ export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => qu
   id: question.id,
   order: question.order,
   disabled: question.disabled,
-  uiConfig: question.uiConfig || {},
+  ui: question.ui || {},
   type: question.type,
   choices: question.type !== 'input' ? toChoiceConfigs(question.choices!) : undefined,
   validatorKey: question.validatorKey,
-  validationConfig: question.validationConfig
+  validation: question.validation
 }));
 
 export const toChoiceConfigs = (choices: Choice[]): ChoiceConfig[] => choices.map(choice => ({
   id: choice.id,
   order: choice.order,
   disabled: choice.disabled,
-  uiConfig: choice.uiConfig,
+  ui: choice.ui,
   value: choice.value,
   onSelected: choice.onSelected
 }));

@@ -9,7 +9,7 @@ export interface ChoiceOnSelected {
   enable?: string[];
 }
 
-export type Validator = (value: any, validationConfig: CustomConfig) => void | Promise<void>;
+export type Validator = (value: any, validation: CustomConfig) => void | Promise<void>;
 
 export type Answers = Record<string, any>;
 

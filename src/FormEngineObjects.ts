@@ -4,7 +4,7 @@ export interface ManagebleItem {
   id: string;
   order: number | undefined;
   disabled: boolean;
-  uiConfig: CustomConfig;
+  ui: CustomConfig;
 }
 
 export interface Group extends ManagebleItem {
@@ -16,7 +16,7 @@ export interface Question extends ManagebleItem {
   type: QuestionType;
   choices: Choice[] | undefined;
   validatorKey: string | undefined;
-  validationConfig: CustomConfig;
+  validation: CustomConfig;
 }
 
 export interface Choice extends ManagebleItem {

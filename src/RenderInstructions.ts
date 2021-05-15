@@ -3,7 +3,7 @@ import { ChoiceValue, CustomConfig, QuestionType } from './Types';
 export interface ManagebleItemRenderInstruction {
   id: string;
   disabled: boolean;
-  uiConfig: CustomConfig;
+  ui: CustomConfig;
 }
 
 export interface GroupRenderInstruction extends ManagebleItemRenderInstruction {

@@ -86,7 +86,7 @@ export class FormEngine {
     return groups.map((group): GroupRenderInstruction => ({
       id: group.id,
       disabled: this.isGroupDisabled(group),
-      uiConfig: group.uiConfig,
+      ui: group.ui,
       groups: this.toGroupRenderInstruction(group.groups),
       questions: this.toQuestionRenderInstruction(group.questions)
     }));
@@ -96,7 +96,7 @@ export class FormEngine {
     return questions.map((question): QuestionRenderInstruction => ({
       id: question.id,
       disabled: this.isQuestionDisabled(question),
-      uiConfig: question.uiConfig,
+      ui: question.ui,
       type: question.type,
       choices: question.type !== 'input' ? this.toChoiceRenderInstruction(question.choices!) : undefined,
       unvalidatedAnswer: this.questionUnvalidatedAnswerMap.get(question.id),
@@ -109,7 +109,7 @@ export class FormEngine {
     return choices.map((choice): ChoiceRenderInstruction => ({
       id: choice.id,
       disabled: this.isChoiceDisabled(choice),
-      uiConfig: choice.uiConfig,
+      ui: choice.ui,
       value: choice.value,
       selected: !!this.choiceSelectedMap.get(choice.id)
     }));
@@ -448,7 +448,7 @@ export class FormEngine {
     if (!validator) {
       return;
     }
-    validator(value, question.validationConfig || {});
+    validator(value, question.validation || {});
   }
 
   private async validateQuestionPromise(question: Question, value: any) {
@@ -459,7 +459,7 @@ export class FormEngine {
     if (!validator) {
       return;
     }
-    await validator(value, question.validationConfig || {});
+    await validator(value, question.validation || {});
   }
 
   private isGroupDisabled(group: Group): boolean {
