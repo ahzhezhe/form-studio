@@ -168,10 +168,12 @@ export class Form {
 
   /**
    * Clear answers of the entire form.
+   *
+   * @param skipValidations skip validations
    */
-  clear() {
+  clear(skipValidations = false) {
     for (const group of this.groups) {
-      this.clearGroup(group.id);
+      this.clearGroup(group.id, skipValidations);
     }
 
     this.refreshForm();
@@ -181,15 +183,16 @@ export class Form {
    * Clear answers of the entire group.
    *
    * @param groupId group id
+   * @param skipValidations skip validations
    */
-  clearGroup(groupId: string) {
+  clearGroup(groupId: string, skipValidations = false) {
     const group = this.findGroup(groupId);
 
     for (const subGroup of group.groups) {
-      this.clearGroup(subGroup.id);
+      this.clearGroup(subGroup.id, skipValidations);
     }
     for (const question of group.questions) {
-      this.clearAnswer(question.id);
+      this.clearAnswer(question.id, skipValidations);
     }
 
     this.refreshForm();
@@ -199,27 +202,28 @@ export class Form {
    * Clear answer of a question.
    *
    * @param questionId question id
+   * @param skipValidation skip validation
    */
-  clearAnswer(questionId: string) {
+  clearAnswer(questionId: string, skipValidation = false) {
     const question = this.findQuestion(questionId);
 
     if (question.type === 'input') {
-      this.setInput(question.id, undefined);
+      this.setInput(question.id, undefined, skipValidation);
     } else if (question.type === 'single') {
-      this.setChoice(question.id, undefined as any);
+      this.setChoice(question.id, undefined as any, skipValidation);
     } else if (question.type === 'multiple') {
-      this.setChoices(question.id, []);
+      this.setChoices(question.id, [], skipValidation);
     }
 
     this.refreshForm();
   }
 
-  private setUnvalidatedAnswerAndValidate(question: Question, answer: any) {
+  private setUnvalidatedAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
     this.questionUnvalidatedAnswerMap.set(question.id, answer);
 
     if (question.type === 'single') {
-      const choice = question.choices.find(choice => choice.value === answer)!;
-      if (this.isChoiceDisabled(choice)) {
+      const choice = question.choices.find(choice => choice.value === answer);
+      if (choice && this.isChoiceDisabled(choice)) {
         answer = undefined;
       }
     } else if (question.type === 'multiple') {
@@ -230,11 +234,13 @@ export class Form {
 
     this.questionUnvalidatedAnswerMap.set(question.id, answer);
 
-    if (!question.validator) {
+    if (skipValidation) {
+      this.questionErrorMap.delete(question.id);
       this.refreshForm();
       return;
     }
-    const validator = this.validators[question.validator];
+
+    const validator = question.validator ? this.validators[question.validator] : undefined;
     if (!validator) {
       this.refreshForm();
       return;
@@ -283,14 +289,15 @@ export class Form {
    *
    * @param questionId question id
    * @param value value
+   * @param skipValidation skip validation
    */
-  setInput(questionId: string, value: any) {
+  setInput(questionId: string, value: any, skipValidation = false) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'input') {
       throw new Error('Question type is not input.');
     }
 
-    this.setUnvalidatedAnswerAndValidate(question, value);
+    this.setUnvalidatedAnswerAndValidate(question, value, skipValidation);
   }
 
   /**
@@ -298,15 +305,16 @@ export class Form {
    *
    * @param questionId question id
    * @param value choice's value
+   * @param skipValidation skip validation
    */
-  setChoice(questionId: string, value: ChoiceValue) {
+  setChoice(questionId: string, value: ChoiceValue, skipValidation = false) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'single') {
       throw new Error('Question type is not single.');
     }
 
     const choice = question.choices.find(choice => choice.value === value);
-    this.setUnvalidatedAnswerAndValidate(question, choice?.value);
+    this.setUnvalidatedAnswerAndValidate(question, choice?.value, skipValidation);
   }
 
   /**
@@ -314,15 +322,16 @@ export class Form {
    *
    * @param questionId question id
    * @param values choices' values
+   * @param skipValidation skip validation
    */
-  setChoices(questionId: string, values: ChoiceValue[]) {
+  setChoices(questionId: string, values: ChoiceValue[], skipValidation = false) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'multiple') {
       throw new Error('Question type is not multiple.');
     }
 
     const choices = question.choices.filter(choice => values.includes(choice.value));
-    this.setUnvalidatedAnswerAndValidate(question, choices.map(choice => choice.value));
+    this.setUnvalidatedAnswerAndValidate(question, choices.map(choice => choice.value), skipValidation);
   }
 
   private isChoiceSelected(choice: Choice) {
@@ -483,18 +492,19 @@ export class Form {
    * Import answers to the form.
    *
    * @param answers answers
+   * @skipValidations skip validations
    */
-  importAnswers(answers: Answers) {
+  importAnswers(answers: Answers, skipValidations = false) {
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
       const answer = answers[questionId];
 
       if (question.type === 'input') {
-        this.setInput(questionId, answer);
+        this.setInput(questionId, answer, skipValidations);
       } else if (question.type === 'single') {
-        this.setChoice(questionId, answer);
+        this.setChoice(questionId, answer, skipValidations);
       } else if (question.type === 'multiple') {
-        this.setChoices(questionId, answer || []);
+        this.setChoices(questionId, answer || [], skipValidations);
       }
     }
   }
