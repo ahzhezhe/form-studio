@@ -63,13 +63,13 @@ export class FormEngine {
   /**
    * Initiate a form engine with a config.
    *
-   * @param config config
+   * @param configs configs
    * @param validators validators
    * @param formRefreshedHook function to be invoked when form is refreshed
    * @returns form engine
    */
-  static fromConfigs(config: InitConfigs, validators?: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
-    const groups = fromGroupInitConfigs(undefined, config);
+  static fromConfigs(configs: InitConfigs, validators?: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
+    const groups = fromGroupInitConfigs(undefined, configs);
     return new FormEngine(groups, validators || {}, formRefreshedHook);
   }
 
