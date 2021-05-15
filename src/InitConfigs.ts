@@ -20,7 +20,7 @@ export interface QuestionInitConfig extends ManagebleItemInitConfig {
 }
 
 export interface ChoiceInitConfig extends ManagebleItemInitConfig {
-  value: ChoiceValue;
+  value?: ChoiceValue;
   onChange?: ChoiceOnChange;
 }
 

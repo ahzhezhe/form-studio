@@ -51,7 +51,7 @@ export const fromChoiceInitConfig = (
     order: choice.order,
     disabled: !!choice.disabled,
     uiConfig: choice.uiConfig || {},
-    value: choice.value,
+    value: choice.value || id,
     onChange: choice.onChange || {}
   };
 });
