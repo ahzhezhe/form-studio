@@ -414,11 +414,11 @@ export class FormEngine {
     return toGroupConfig(this.groups);
   }
 
-  importAnswer(answers: Answers) {
+  importAnswers(answers: Answers) {
     this.internalImportAnswers(answers, false);
   }
 
-  async importAnswerPromise(answers: Answers) {
+  async importAnswersPromise(answers: Answers) {
     await this.internalImportAnswersPromise(answers, false);
   }
 
