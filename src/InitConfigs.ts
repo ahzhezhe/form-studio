@@ -24,4 +24,4 @@ export interface ChoiceInitConfig extends ManagebleItemInitConfig {
   onSelected?: ChoiceOnSelected;
 }
 
-export type InitConfig = GroupInitConfig[];
+export type InitConfigs = GroupInitConfig[];

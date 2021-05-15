@@ -1,10 +1,10 @@
 import shortUUID from 'short-uuid';
-import { Config } from './Configs';
-import { fromGroupInitConfig, toGroupConfig } from './Converters';
+import { Configs } from './Configs';
+import { fromGroupInitConfigs, toGroupConfigs } from './Converters';
 import { eventEmitter } from './EventEmitter';
-import { InitConfig } from './InitConfigs';
-import { Choice, Group, Question } from './Objects';
-import { ChoiceRenderInstruction, GroupRenderInstruction, QuestionRenderInstruction, RenderInstruction } from './RenderInstructions';
+import { Choice, Group, Question } from './FormEngineObjects';
+import { InitConfigs } from './InitConfigs';
+import { ChoiceRenderInstruction, GroupRenderInstruction, QuestionRenderInstruction, RenderInstructions } from './RenderInstructions';
 import { Answers, ChoiceValue, Errors, FormRefreshedHook, Validator } from './Types';
 
 export class FormEngine {
@@ -60,12 +60,25 @@ export class FormEngine {
     });
   }
 
-  static fromConfig(config: InitConfig, validators?: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
-    const groups = fromGroupInitConfig(undefined, config);
+  /**
+   * Initiate a form engine with a config.
+   *
+   * @param config config
+   * @param validators validators
+   * @param formRefreshedHook function to be invoked when form is refreshed
+   * @returns form engine
+   */
+  static fromConfigs(config: InitConfigs, validators?: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
+    const groups = fromGroupInitConfigs(undefined, config);
     return new FormEngine(groups, validators || {}, formRefreshedHook);
   }
 
-  getRenderInstruction(): RenderInstruction {
+  /**
+   * Get a set of instructions to be used to render frontend UI.
+   *
+   * @returns render instructions
+   */
+  getRenderInstructions(): RenderInstructions {
     return this.toGroupRenderInstruction(this.groups);
   }
 
@@ -476,8 +489,8 @@ export class FormEngine {
     return this.isQuestionDisabled(question);
   }
 
-  getConfig(): Config {
-    return toGroupConfig(this.groups);
+  getConfigs(): Configs {
+    return toGroupConfigs(this.groups);
   }
 
   importAnswers(answers: Answers) {

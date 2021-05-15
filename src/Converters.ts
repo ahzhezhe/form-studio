@@ -1,6 +1,6 @@
 import { ChoiceConfig, GroupConfig, QuestionConfig } from './Configs';
+import { Choice, Group, Question } from './FormEngineObjects';
 import { ChoiceInitConfig, GroupInitConfig, ManagebleItemInitConfig, QuestionInitConfig } from './InitConfigs';
-import { Choice, Group, Question } from './Objects';
 
 const managebleItemSorter = (a: ManagebleItemInitConfig, b: ManagebleItemInitConfig) => {
   if (!!!a.order && !!!b.order) {
@@ -15,7 +15,7 @@ const managebleItemSorter = (a: ManagebleItemInitConfig, b: ManagebleItemInitCon
   return a.order - b.order;
 };
 
-export const fromGroupInitConfig = (
+export const fromGroupInitConfigs = (
   parentGroupId: string | undefined, groups: GroupInitConfig[]): Group[] => groups.sort(managebleItemSorter).map((group, i) => {
   const id = group.id || (parentGroupId ? `${parentGroupId}_g${i}` : `g${i}`);
   return {
@@ -23,12 +23,12 @@ export const fromGroupInitConfig = (
     order: group.order,
     disabled: !!group.disabled,
     uiConfig: group.uiConfig || {},
-    groups: group.groups ? fromGroupInitConfig(id, group.groups) : [],
-    questions: group.questions ? fromQuestionInitConfig(id, group.questions) : []
+    groups: group.groups ? fromGroupInitConfigs(id, group.groups) : [],
+    questions: group.questions ? fromQuestionInitConfigs(id, group.questions) : []
   };
 });
 
-export const fromQuestionInitConfig = (
+export const fromQuestionInitConfigs = (
   groupId: string, questions: QuestionInitConfig[]): Question[] => questions.sort(managebleItemSorter).map((question, i) => {
   const id = question.id || (groupId ? `${groupId}_q${i}` : `q${i}`);
   return {
@@ -37,13 +37,13 @@ export const fromQuestionInitConfig = (
     disabled: !!question.disabled,
     uiConfig: question.uiConfig || {},
     type: question.type,
-    choices: question.type !== 'input' ? fromChoiceInitConfig(id, question.choices!) : undefined,
+    choices: question.type !== 'input' ? fromChoiceInitConfigs(id, question.choices!) : undefined,
     validatorKey: question.validatorKey,
     validationConfig: question.validationConfig || {}
   };
 });
 
-export const fromChoiceInitConfig = (
+export const fromChoiceInitConfigs = (
   questionId: string, choices: ChoiceInitConfig[]): Choice[] => choices.sort(managebleItemSorter).map((choice, i) => {
   const id = choice.id || (questionId ? `${questionId}_c${i}` : `c${i}`);
   return {
@@ -56,27 +56,27 @@ export const fromChoiceInitConfig = (
   };
 });
 
-export const toGroupConfig = (groups: Group[]): GroupConfig[] => groups.map(group => ({
+export const toGroupConfigs = (groups: Group[]): GroupConfig[] => groups.map(group => ({
   id: group.id,
   order: group.order,
   disabled: group.disabled,
   uiConfig: group.uiConfig || {},
-  groups: toGroupConfig(group.groups),
-  questions: toQuestionConfig(group.questions)
+  groups: toGroupConfigs(group.groups),
+  questions: toQuestionConfigs(group.questions)
 }));
 
-export const toQuestionConfig = (questions: Question[]): QuestionConfig[] => questions.map(question => ({
+export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => questions.map(question => ({
   id: question.id,
   order: question.order,
   disabled: question.disabled,
   uiConfig: question.uiConfig || {},
   type: question.type,
-  choices: question.type !== 'input' ? toChoiceConfig(question.choices!) : undefined,
+  choices: question.type !== 'input' ? toChoiceConfigs(question.choices!) : undefined,
   validatorKey: question.validatorKey,
   validationConfig: question.validationConfig
 }));
 
-export const toChoiceConfig = (choices: Choice[]): ChoiceConfig[] => choices.map(choice => ({
+export const toChoiceConfigs = (choices: Choice[]): ChoiceConfig[] => choices.map(choice => ({
   id: choice.id,
   order: choice.order,
   disabled: choice.disabled,

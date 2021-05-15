@@ -24,4 +24,4 @@ export interface ChoiceRenderInstruction extends ManagebleItemRenderInstruction 
   selected: boolean;
 }
 
-export type RenderInstruction = GroupRenderInstruction[];
+export type RenderInstructions = GroupRenderInstruction[];

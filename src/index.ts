@@ -1,17 +1,17 @@
 /* eslint-disable import/no-default-export */
-import { GroupConfig, QuestionConfig, ChoiceConfig, Config } from './Configs';
+import { GroupConfig, QuestionConfig, ChoiceConfig, Configs } from './Configs';
 import { FormEngine } from './FormEngine';
-import { GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfig } from './InitConfigs';
-import { GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstruction } from './RenderInstructions';
+import { GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfigs } from './InitConfigs';
+import { GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstructions } from './RenderInstructions';
 import { CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormRefreshedHook } from './Types';
-import { useRenderInstruction } from './useRenderInstruction';
+import { useRenderInstructions } from './useRenderInstructions';
 
 export {
-  GroupConfig, QuestionConfig, ChoiceConfig, Config,
-  GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfig,
-  GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstruction,
+  GroupConfig, QuestionConfig, ChoiceConfig, Configs,
+  GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfigs,
+  GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstructions,
   CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormRefreshedHook,
-  useRenderInstruction
+  useRenderInstructions
 };
 
 export default FormEngine;
