@@ -21,7 +21,7 @@ export const fromGroupInitConfigs = (
   return {
     id,
     order: group.order,
-    disabled: !!group.disabled,
+    defaultDisabled: !!group.defaultDisabled,
     ui: group.ui || {},
     groups: group.groups ? fromGroupInitConfigs(id, group.groups) : [],
     questions: group.questions ? fromQuestionInitConfigs(id, group.questions) : []
@@ -34,7 +34,7 @@ export const fromQuestionInitConfigs = (
   return {
     id,
     order: question.order,
-    disabled: !!question.disabled,
+    defaultDisabled: !!question.defaultDisabled,
     ui: question.ui || {},
     type: question.type,
     choices: question.type !== 'input' ? fromChoiceInitConfigs(id, question.choices!) : [],
@@ -49,7 +49,7 @@ export const fromChoiceInitConfigs = (
   return {
     id,
     order: choice.order,
-    disabled: !!choice.disabled,
+    defaultDisabled: !!choice.defaultDisabled,
     ui: choice.ui || {},
     value: choice.value || id,
     onSelected: choice.onSelected || {}
@@ -59,7 +59,7 @@ export const fromChoiceInitConfigs = (
 export const toGroupConfigs = (groups: Group[]): GroupConfig[] => groups.map(group => ({
   id: group.id,
   order: group.order,
-  disabled: group.disabled,
+  defaultDisabled: group.defaultDisabled,
   ui: group.ui || {},
   groups: toGroupConfigs(group.groups),
   questions: toQuestionConfigs(group.questions)
@@ -68,7 +68,7 @@ export const toGroupConfigs = (groups: Group[]): GroupConfig[] => groups.map(gro
 export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => questions.map(question => ({
   id: question.id,
   order: question.order,
-  disabled: question.disabled,
+  defaultDisabled: question.defaultDisabled,
   ui: question.ui || {},
   type: question.type,
   choices: question.type !== 'input' ? toChoiceConfigs(question.choices!) : [],
@@ -79,7 +79,7 @@ export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => qu
 export const toChoiceConfigs = (choices: Choice[]): ChoiceConfig[] => choices.map(choice => ({
   id: choice.id,
   order: choice.order,
-  disabled: choice.disabled,
+  defaultDisabled: choice.defaultDisabled,
   ui: choice.ui,
   value: choice.value,
   onSelected: choice.onSelected

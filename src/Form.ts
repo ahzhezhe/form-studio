@@ -2,7 +2,7 @@ import shortUUID from 'short-uuid';
 import { Configs } from './Configs';
 import { fromGroupInitConfigs, toGroupConfigs } from './Converters';
 import { eventEmitter } from './EventEmitter';
-import { Choice, Group, Question } from './FormObjects';
+import { Choice, Group, ManagebleItem, Question } from './FormObjects';
 import { InitConfigs } from './InitConfigs';
 import { ChoiceRenderInstruction, GroupRenderInstruction, QuestionRenderInstruction, RenderInstructions } from './RenderInstructions';
 import { Answers, ChoiceValue, Errors, FormRefreshedHook, Validator } from './Types';
@@ -24,6 +24,8 @@ export class Form {
   private questionValidatedAnswerMap = new Map<string, any>();
   private questionValidatingMap = new Map<string, boolean>();
   private questionErrorMap = new Map<string, string>();
+  private itemDisabledByChoiceMap = new Map<string, Choice[]>();
+  private itemEnabledByChoiceMap = new Map<string, Choice[]>();
 
   private constructor(groups: Group[], validators: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
     this.formId = shortUUID.generate();
@@ -58,6 +60,24 @@ export class Form {
     choices.forEach(choice => {
       this.choiceMap.set(choice.id!, choice);
       this.choiceQuestionMap.set(choice.id!, question);
+
+      choice.onSelected.disable?.forEach(id => {
+        let disabledBy = this.itemDisabledByChoiceMap.get(id);
+        if (!disabledBy) {
+          disabledBy = [];
+        }
+        disabledBy.push(choice);
+        this.itemDisabledByChoiceMap.set(id, disabledBy);
+      });
+
+      choice.onSelected.enable?.forEach(id => {
+        let enabledBy = this.itemEnabledByChoiceMap.get(id);
+        if (!enabledBy) {
+          enabledBy = [];
+        }
+        enabledBy.push(choice);
+        this.itemEnabledByChoiceMap.set(id, enabledBy);
+      });
     });
   }
 
@@ -197,12 +217,26 @@ export class Form {
   private setUnvalidatedAnswerAndValidate(question: Question, answer: any) {
     this.questionUnvalidatedAnswerMap.set(question.id, answer);
 
-    if (!question.validator) {
-      return;
+    if (question.type === 'single') {
+      const choice = question.choices.find(choice => choice.value === answer)!;
+      if (this.isChoiceDisabled(choice)) {
+        answer = undefined;
+      }
+    } else if (question.type === 'multiple') {
+      let choices = question.choices.filter(choice => answer.includes(choice.value));
+      choices = choices.filter(choice => !this.isChoiceDisabled(choice));
+      answer = choices.map(choice => choice.value);
     }
 
+    this.questionUnvalidatedAnswerMap.set(question.id, answer);
+
+    if (!question.validator) {
+      this.refreshForm();
+      return;
+    }
     const validator = this.validators[question.validator];
     if (!validator) {
+      this.refreshForm();
       return;
     }
 
@@ -271,22 +305,8 @@ export class Form {
       throw new Error('Question type is not single.');
     }
 
-    const originalValue = this.questionUnvalidatedAnswerMap.get(questionId);
-    const originalChoice = question.choices.find(choice => choice.value === originalValue);
-    const newChoice = question.choices.find(choice => choice.value === value);
-
-    if (value !== undefined && newChoice?.id === originalChoice?.id) {
-      return;
-    }
-
-    this.setUnvalidatedAnswerAndValidate(question, newChoice?.value);
-
-    if (originalChoice) {
-      this.handleChoiceOnToggled(originalChoice, false);
-    }
-    if (newChoice) {
-      this.handleChoiceOnToggled(newChoice, true);
-    }
+    const choice = question.choices.find(choice => choice.value === value);
+    this.setUnvalidatedAnswerAndValidate(question, choice?.value);
   }
 
   /**
@@ -301,111 +321,73 @@ export class Form {
       throw new Error('Question type is not multiple.');
     }
 
-    const originalValues = this.questionUnvalidatedAnswerMap.get(questionId) || [];
-    const originalChoices = question.choices.filter(choice => originalValues.includes(choice.value));
-    const newChoices = question.choices.filter(choice => values.includes(choice.value));
-
-    const removedChoices = originalChoices.filter(choice => !newChoices.find(c => c.id === choice.id));
-    const addedChoices = newChoices.filter(choice => !originalChoices.find(c => c.id === choice.id));
-
-    this.setUnvalidatedAnswerAndValidate(question, newChoices.map(choice => choice.value));
-
-    removedChoices.forEach(choice => this.handleChoiceOnToggled(choice, false));
-    addedChoices.forEach(choice => this.handleChoiceOnToggled(choice, true));
+    const choices = question.choices.filter(choice => values.includes(choice.value));
+    this.setUnvalidatedAnswerAndValidate(question, choices.map(choice => choice.value));
   }
 
-  private handleChoiceOnToggled(choice: Choice, selected: boolean) {
-    let disablings = choice.onSelected.disable || [];
-    let enablings = choice.onSelected.enable || [];
-    if (!selected) {
-      enablings = choice.onSelected.disable || [];
-      disablings = choice.onSelected.enable || [];
+  private isChoiceSelected(choice: Choice) {
+    if (this.isChoiceDisabled(choice)) {
+      return false;
     }
 
-    disablings.forEach(id => {
-      const group = this.groupMap.get(id);
-      const question = this.questionMap.get(id);
-      const choice = this.choiceMap.get(id);
-      if (group) {
-        this.setGroupDisabled(group, true);
-      }
-      if (question) {
-        this.setQuestionDisabled(question, true);
-      }
-      if (choice) {
-        this.setChoiceDisabled(choice, true);
-      }
-    });
-
-    enablings.forEach(id => {
-      const group = this.groupMap.get(id);
-      const question = this.questionMap.get(id);
-      const choice = this.choiceMap.get(id);
-      if (group) {
-        this.setGroupDisabled(group, false);
-      }
-      if (question) {
-        this.setQuestionDisabled(question, false);
-      }
-      if (choice) {
-        this.setChoiceDisabled(choice, false);
-      }
-    });
-
-    this.refreshForm();
-  }
-
-  private setGroupDisabled(group: Group, disabled: boolean) {
-    group.disabled = disabled;
-    group.groups.forEach(subGroup => this.setGroupDisabled(subGroup, disabled));
-    // TODO
-    // group.questions.forEach(question => this.setQuestionDisabled(question, disabled));
-  }
-
-  private setQuestionDisabled(question: Question, disabled: boolean) {
-    question.disabled = disabled;
-    question.choices.forEach(choice => this.setChoiceDisabled(choice, disabled));
-  }
-
-  private setChoiceDisabled(choice: Choice, disabled: boolean) {
-    choice.disabled = disabled;
-    let selected = false;
-    if (!disabled) {
-      const question = this.choiceQuestionMap.get(choice.id)!;
-      if (question.type === 'single') {
-        selected = this.questionUnvalidatedAnswerMap.get(question.id) === choice.value;
-      } else if (question.type === 'multiple') {
-        selected = !!this.questionUnvalidatedAnswerMap.get(question.id)?.includes(choice.value);
-      }
+    const question = this.choiceQuestionMap.get(choice.id)!;
+    if (question.type === 'single') {
+      const answer = this.questionUnvalidatedAnswerMap.get(question.id);
+      return choice.value === answer;
     }
-    this.handleChoiceOnToggled(choice, selected);
-  }
+    if (question.type === 'multiple') {
+      const answer = this.questionUnvalidatedAnswerMap.get(question.id);
+      return !!answer?.includes(choice.value);
+    }
 
-  private isGroupDisabled(group: Group): boolean {
-    if (group.disabled) {
-      return true;
-    }
-    const parentGroup = this.groupParentGroupMap.get(group.id);
-    if (parentGroup) {
-      return this.isGroupDisabled(parentGroup);
-    }
     return false;
   }
 
-  private isQuestionDisabled(question: Question) {
-    if (question.disabled) {
+  private isItemDisabled(item: ManagebleItem) {
+    const disabledByChoices = this.itemDisabledByChoiceMap.get(item.id) || [];
+
+    for (const choice of disabledByChoices) {
+      if (this.isChoiceSelected(choice)) {
+        return true;
+      }
+    }
+
+    const enabledByChoices = this.itemEnabledByChoiceMap.get(item.id) || [];
+
+    for (const choice of enabledByChoices) {
+      if (this.isChoiceSelected(choice)) {
+        return false;
+      }
+    }
+
+    return item.defaultDisabled;
+  }
+
+  private isGroupDisabled(group: Group): boolean {
+    const parentGroup = this.groupParentGroupMap.get(group.id);
+    if (parentGroup && this.isGroupDisabled(parentGroup)) {
       return true;
     }
+
+    return this.isItemDisabled(group);
+  }
+
+  private isQuestionDisabled(question: Question) {
     const group = this.questionGroupMap.get(question.id)!;
-    return this.isGroupDisabled(group);
+    if (this.isGroupDisabled(group)) {
+      return true;
+    }
+
+    return this.isItemDisabled(question);
   }
 
   private isChoiceDisabled(choice: Choice) {
-    if (choice.disabled) {
+    const question = this.choiceQuestionMap.get(choice.id)!;
+    if (this.isQuestionDisabled(question)) {
       return true;
     }
-    const question = this.choiceQuestionMap.get(choice.id)!;
-    return this.isQuestionDisabled(question);
+
+    return this.isItemDisabled(choice);
   }
 
   /**

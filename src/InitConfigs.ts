@@ -13,9 +13,9 @@ export interface ManagebleItemInitConfig {
   order?: number;
   /**
    * Whether this item is disabled by default.
-   * This value might be conditionally updated based on it's parent's `disabled` value or the logic you define in other part of the configs.
+   * The actual disabled property will be based on the logic that you define in other part of the configs.
    */
-  disabled?: boolean;
+  defaultDisabled?: boolean;
   /**
    * Any values that help you determine how to render the frontend UI of this item.
    */

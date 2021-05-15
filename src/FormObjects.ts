@@ -3,7 +3,7 @@ import { ChoiceOnSelected, ChoiceValue, CustomConfig, QuestionType } from './Typ
 export interface ManagebleItem {
   id: string;
   order: number | undefined;
-  disabled: boolean;
+  defaultDisabled: boolean;
   ui: CustomConfig;
 }
 
