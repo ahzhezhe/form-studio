@@ -52,7 +52,7 @@ export const fromChoiceInitConfig = (
     disabled: !!choice.disabled,
     uiConfig: choice.uiConfig || {},
     value: choice.value || id,
-    onChange: choice.onChange || {}
+    onSelected: choice.onSelected || {}
   };
 });
 
@@ -82,5 +82,5 @@ export const toChoiceConfig = (choices: Choice[]): ChoiceConfig[] => choices.map
   disabled: choice.disabled,
   uiConfig: choice.uiConfig,
   value: choice.value,
-  onChange: choice.onChange
+  onSelected: choice.onSelected
 }));

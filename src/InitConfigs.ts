@@ -1,4 +1,4 @@
-import { ChoiceOnChange, ChoiceValue, CustomConfig, QuestionType } from './Types';
+import { ChoiceOnSelected, ChoiceValue, CustomConfig, QuestionType } from './Types';
 
 export interface ManagebleItemInitConfig {
   id?: string;
@@ -21,7 +21,7 @@ export interface QuestionInitConfig extends ManagebleItemInitConfig {
 
 export interface ChoiceInitConfig extends ManagebleItemInitConfig {
   value?: ChoiceValue;
-  onChange?: ChoiceOnChange;
+  onSelected?: ChoiceOnSelected;
 }
 
 export type InitConfig = GroupInitConfig[];

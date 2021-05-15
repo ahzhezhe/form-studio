@@ -239,7 +239,7 @@ export class FormEngine {
 
     this.choiceSelectedMap.set(choiceId, selected);
 
-    this.setDisabled(choice, selected);
+    this.handleChoiceOnSelected(choice, selected);
 
     if (!validate) {
       return;
@@ -269,7 +269,7 @@ export class FormEngine {
 
     this.choiceSelectedMap.set(choiceId, selected);
 
-    this.setDisabled(choice, selected);
+    this.handleChoiceOnSelected(choice, selected);
 
     if (!validate) {
       return;
@@ -286,12 +286,12 @@ export class FormEngine {
     }
   }
 
-  private setDisabled(choice: Choice, selected: boolean) {
-    let disablings = choice.onChange.disable || [];
-    let enablings = choice.onChange.enable || [];
+  private handleChoiceOnSelected(choice: Choice, selected: boolean) {
+    let disablings = choice.onSelected.disable || [];
+    let enablings = choice.onSelected.enable || [];
     if (!selected) {
-      enablings = choice.onChange.disable || [];
-      disablings = choice.onChange.enable || [];
+      enablings = choice.onSelected.disable || [];
+      disablings = choice.onSelected.enable || [];
     }
 
     disablings.forEach(id => {
@@ -302,10 +302,10 @@ export class FormEngine {
         group.disabled = true;
       }
       if (question) {
-        question.disabled = true;
+        this.setQuestionDisabled(question, true);
       }
       if (choice) {
-        choice.disabled = true;
+        this.setChoiceDisabled(choice, true);
       }
     });
 
@@ -317,12 +317,34 @@ export class FormEngine {
         group.disabled = false;
       }
       if (question) {
-        question.disabled = false;
+        this.setQuestionDisabled(question, false);
       }
       if (choice) {
-        choice.disabled = false;
+        this.setChoiceDisabled(choice, false);
       }
     });
+  }
+
+  private setGroupDisabled(group: Group, disabled: boolean) {
+    group.disabled = disabled;
+    group.groups?.forEach(subGroup => this.setGroupDisabled(subGroup, disabled));
+    group.questions?.forEach(question => this.setQuestionDisabled(question, disabled));
+  }
+
+  private setQuestionDisabled(question: Question, disabled: boolean) {
+    question.disabled = disabled;
+    question.choices?.forEach(choice => this.setChoiceDisabled(choice, disabled));
+  }
+
+  private setChoiceDisabled(choice: Choice, disabled: boolean) {
+    choice.disabled = disabled;
+    let selected: boolean;
+    if (disabled) {
+      selected = false;
+    } else {
+      selected = !!this.choiceSelectedMap.get(choice.id);
+    }
+    this.handleChoiceOnSelected(choice, selected);
   }
 
   private getQuestionValue(question: Question) {

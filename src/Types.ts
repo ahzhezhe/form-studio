@@ -4,7 +4,7 @@ export type QuestionType = 'input' | 'single' | 'multiple';
 
 export type ChoiceValue = string | number;
 
-export interface ChoiceOnChange {
+export interface ChoiceOnSelected {
   disable?: string[];
   enable?: string[];
 }
