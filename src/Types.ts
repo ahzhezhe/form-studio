@@ -1,6 +1,6 @@
 export type CustomConfig = Record<string, string | number | boolean>;
 
-export type QuestionType = 'input' | 'singleChoice' | 'multiChoice';
+export type QuestionType = 'input' | 'single' | 'multiple';
 
 export type ChoiceValue = string | number;
 

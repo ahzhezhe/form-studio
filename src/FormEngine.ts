@@ -233,7 +233,7 @@ export class FormEngine {
   private internalSelectChoice(question: Question, choiceId: string, selected: boolean, validate: boolean) {
     const choice = this.findChoice(choiceId);
 
-    if (question.type === 'singleChoice' && selected) {
+    if (question.type === 'single' && selected) {
       question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
     }
 
@@ -263,7 +263,7 @@ export class FormEngine {
       return;
     }
 
-    if (question.type === 'singleChoice' && selected) {
+    if (question.type === 'single' && selected) {
       question.choices!.forEach(choice => this.choiceSelectedMap.set(choice.id, false));
     }
 
@@ -330,11 +330,11 @@ export class FormEngine {
       return this.questionInputValueMap.get(question.id)!;
     }
 
-    if (question.type === 'singleChoice') {
+    if (question.type === 'single') {
       return question.choices!.find(choice => !choice.disabled && this.choiceSelectedMap.get(choice.id))?.value;
     }
 
-    if (question.type === 'multiChoice') {
+    if (question.type === 'multiple') {
       return question.choices!.filter(choice => !choice.disabled && this.choiceSelectedMap.get(choice.id)).map(choice => choice.value);
     }
   }
@@ -403,9 +403,9 @@ export class FormEngine {
 
       if (question.type === 'input') {
         this.setInputValue(questionId, answer);
-      } else if (question.type === 'singleChoice') {
+      } else if (question.type === 'single') {
         this.setChoice(questionId, answer);
-      } else if (question.type === 'multiChoice') {
+      } else if (question.type === 'multiple') {
         this.setChoices(questionId, answer || []);
       }
     }
@@ -422,9 +422,9 @@ export class FormEngine {
 
       if (question.type === 'input') {
         await this.setInputValuePromise(questionId, answer);
-      } else if (question.type === 'singleChoice') {
+      } else if (question.type === 'single') {
         await this.setChoicePromise(questionId, answer);
-      } else if (question.type === 'multiChoice') {
+      } else if (question.type === 'multiple') {
         await this.setChoicesPromise(questionId, answer || []);
       }
     }
