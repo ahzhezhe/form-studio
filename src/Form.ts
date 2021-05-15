@@ -234,18 +234,6 @@ export class Form {
 
     this.questionUnvalidatedAnswerMap.set(question.id, answer);
 
-    if (skipValidation) {
-      this.questionErrorMap.delete(question.id);
-      this.refreshForm();
-      return;
-    }
-
-    const validator = question.validator ? this.validators[question.validator] : undefined;
-    if (!validator) {
-      this.refreshForm();
-      return;
-    }
-
     const onSuccess = () => {
       this.questionValidatedAnswerMap.set(question.id, answer);
       this.questionErrorMap.delete(question.id);
@@ -255,6 +243,20 @@ export class Form {
       this.questionValidatedAnswerMap.delete(question.id);
       this.questionErrorMap.set(question.id, err.message);
     };
+
+    const validator = question.validator ? this.validators[question.validator] : undefined;
+    if (!validator) {
+      onSuccess();
+      this.refreshForm();
+      return;
+    }
+
+    if (skipValidation) {
+      this.questionValidatedAnswerMap.delete(question.id);
+      this.questionErrorMap.delete(question.id);
+      this.refreshForm();
+      return;
+    }
 
     let validationResult: void | Promise<void>;
     try {
