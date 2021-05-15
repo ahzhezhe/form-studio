@@ -5,7 +5,7 @@ import { FormEngine } from './FormEngine';
 import { RenderInstruction } from './RenderInstructions';
 
 export const useRenderInstruction = (form: FormEngine): [RenderInstruction, () => void] => {
-  const [renderInstruction, setRenderInstruction] = useState<RenderInstruction>(form.toRenderInstruction());
+  const [renderInstruction, setRenderInstruction] = useState<RenderInstruction>(form.getRenderInstruction());
 
   useEffect(() => {
     eventEmitter.addListener(form['getFormId'](), refreshRenderInstruction);
@@ -15,7 +15,7 @@ export const useRenderInstruction = (form: FormEngine): [RenderInstruction, () =
   }, []);
 
   const refreshRenderInstruction = () => {
-    setRenderInstruction(form.toRenderInstruction());
+    setRenderInstruction(form.getRenderInstruction());
   };
 
   return [renderInstruction, refreshRenderInstruction];

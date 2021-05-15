@@ -20,8 +20,8 @@ export class FormEngine {
   private questionGroupMap = new Map<string, Group>();
   private choiceQuestionMap = new Map<string, Question>();
   private choiceSelectedMap = new Map<string, boolean>();
-  private questionInputValueMap = new Map<string, any>();
-  private questionAnswerMap = new Map<string, any>();
+  private questionUnvalidatedAnswerMap = new Map<string, any>();
+  private questionValidatedAnswerMap = new Map<string, any>();
   private questionErrorMap = new Map<string, string>();
 
   private constructor(groups: Group[], validators: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
@@ -65,7 +65,7 @@ export class FormEngine {
     return new FormEngine(groups, validators || {}, formRefreshedHook);
   }
 
-  toRenderInstruction(): RenderInstruction {
+  getRenderInstruction(): RenderInstruction {
     return this.toGroupRenderInstruction(this.groups);
   }
 
@@ -85,9 +85,9 @@ export class FormEngine {
       disabled: this.isQuestionDisabled(question),
       uiConfig: question.uiConfig,
       type: question.type,
-      inputValue: question.type === 'input' ? this.questionInputValueMap.get(question.id) : undefined,
       choices: question.type !== 'input' ? this.toChoiceRenderInstruction(question.choices!) : undefined,
-      answer: this.isQuestionDisabled(question) ? undefined : this.questionAnswerMap.get(question.id),
+      unvalidatedAnswer: this.questionUnvalidatedAnswerMap.get(question.id),
+      validatedAnswer: this.isQuestionDisabled(question) ? undefined : this.questionValidatedAnswerMap.get(question.id),
       error: this.questionErrorMap.get(question.id)
     }));
   }
@@ -126,12 +126,12 @@ export class FormEngine {
     }
 
     try {
-      this.questionInputValueMap.set(questionId, value);
+      this.questionUnvalidatedAnswerMap.set(questionId, value);
       this.validateQuestion(question, value);
-      this.questionAnswerMap.set(questionId, value);
+      this.questionValidatedAnswerMap.set(questionId, value);
       this.questionErrorMap.delete(questionId);
     } catch (err) {
-      this.questionAnswerMap.delete(questionId);
+      this.questionValidatedAnswerMap.delete(questionId);
       this.questionErrorMap.set(questionId, err.message);
     }
 
@@ -146,12 +146,12 @@ export class FormEngine {
     }
 
     try {
-      this.questionInputValueMap.set(questionId, value);
+      this.questionUnvalidatedAnswerMap.set(questionId, value);
       await this.validateQuestionPromise(question, value);
-      this.questionAnswerMap.set(questionId, value);
+      this.questionValidatedAnswerMap.set(questionId, value);
       this.questionErrorMap.delete(questionId);
     } catch (err) {
-      this.questionAnswerMap.delete(questionId);
+      this.questionValidatedAnswerMap.delete(questionId);
       this.questionErrorMap.set(questionId, err.message);
     }
 
@@ -249,11 +249,12 @@ export class FormEngine {
 
     try {
       const answer = this.getQuestionValue(question);
+      this.questionUnvalidatedAnswerMap.set(question.id, answer);
       this.validateQuestion(question, answer);
-      this.questionAnswerMap.set(question.id, answer);
+      this.questionValidatedAnswerMap.set(question.id, answer);
       this.questionErrorMap.delete(question.id);
     } catch (err) {
-      this.questionAnswerMap.delete(question.id);
+      this.questionValidatedAnswerMap.delete(question.id);
       this.questionErrorMap.set(question.id, err.message);
     }
   }
@@ -279,11 +280,12 @@ export class FormEngine {
 
     try {
       const answer = this.getQuestionValue(question);
+      this.questionUnvalidatedAnswerMap.set(question.id, answer);
       await this.validateQuestionPromise(question, answer);
-      this.questionAnswerMap.set(question.id, answer);
+      this.questionValidatedAnswerMap.set(question.id, answer);
       this.questionErrorMap.delete(question.id);
     } catch (err) {
-      this.questionAnswerMap.delete(question.id);
+      this.questionValidatedAnswerMap.delete(question.id);
       this.questionErrorMap.set(question.id, err.message);
     }
   }
@@ -351,7 +353,7 @@ export class FormEngine {
 
   private getQuestionValue(question: Question) {
     if (question.type === 'input') {
-      return this.questionInputValueMap.get(question.id)!;
+      return this.questionUnvalidatedAnswerMap.get(question.id)!;
     }
 
     if (question.type === 'single') {
@@ -412,7 +414,7 @@ export class FormEngine {
     return this.isQuestionDisabled(question);
   }
 
-  exportConfig(): Config {
+  getConfig(): Config {
     return toGroupConfig(this.groups);
   }
 
@@ -462,13 +464,27 @@ export class FormEngine {
     }
   }
 
-  exportAnswers(): Answers {
+  getUnvalidatedAnswers(): Answers {
+    const answes: Answers = {};
+
+    for (const entry of this.questionMap.entries()) {
+      const [questionId] = entry;
+      const answer = this.questionUnvalidatedAnswerMap.get(questionId);
+      if (answer !== undefined) {
+        answes[questionId] = answer;
+      }
+    }
+
+    return answes;
+  }
+
+  getValidatedAnswers(): Answers {
     const answes: Answers = {};
 
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
       if (!this.isQuestionDisabled(question)) {
-        const answer = this.questionAnswerMap.get(questionId);
+        const answer = this.questionValidatedAnswerMap.get(questionId);
         if (answer !== undefined) {
           answes[questionId] = answer;
         }
@@ -478,7 +494,7 @@ export class FormEngine {
     return answes;
   }
 
-  exportErrors(): Errors {
+  getErrors(): Errors {
     const errors: Errors = {};
 
     for (const entry of this.questionMap.entries()) {
@@ -495,13 +511,13 @@ export class FormEngine {
   }
 
   validate() {
-    const answers = this.exportAnswers();
+    const answers = this.getValidatedAnswers();
     this.internalImportAnswers(answers, true);
     return this.isClean();
   }
 
   async validatePromise() {
-    const answers = this.exportAnswers();
+    const answers = this.getValidatedAnswers();
     await this.internalImportAnswersPromise(answers, true);
     return this.isClean();
   }

@@ -13,9 +13,9 @@ export interface GroupRenderInstruction extends ManagebleItemRenderInstruction {
 
 export interface QuestionRenderInstruction extends ManagebleItemRenderInstruction {
   type: QuestionType;
-  inputValue: any | undefined;
   choices: ChoiceRenderInstruction[] | undefined;
-  answer: any | undefined;
+  unvalidatedAnswer: any | undefined;
+  validatedAnswer: any | undefined;
   error: string | undefined;
 }
 
