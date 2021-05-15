@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "github-sponsors": "^1.0.1",
-    "short-uuid": "^4.1.0"
+    "short-uuid": "^4.2.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.1",
@@ -41,7 +41,7 @@
     "@typescript-eslint/parser": "^4.23.0",
     "del-cli": "^3.0.1",
     "eslint": "^7.26.0",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.23.1",
     "eslint-plugin-security": "^1.4.0",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.6",
