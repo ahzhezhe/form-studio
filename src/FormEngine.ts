@@ -59,7 +59,7 @@ export class FormEngine {
   }
 
   static fromConfig(config: InitConfig, validators?: Record<string, Validator>) {
-    const groups = fromGroupInitConfig(config);
+    const groups = fromGroupInitConfig(undefined, config);
     return new FormEngine(groups, validators || {});
   }
 
