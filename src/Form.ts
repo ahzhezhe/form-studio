@@ -27,12 +27,15 @@ export class Form {
   private itemDisabledByChoiceMap = new Map<string, Choice[]>();
   private itemEnabledByChoiceMap = new Map<string, Choice[]>();
 
-  private constructor(groups: Group[], validators: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
+  private constructor(groups: Group[], validators: Record<string, Validator>, skipValidations: boolean, formRefreshedHook?: FormRefreshedHook) {
     this.formId = shortUUID.generate();
     this.groups = groups;
     this.validators = validators;
     this.formRefreshedHook = formRefreshedHook;
     this.constructGroupMap(undefined, this.groups);
+    if (!skipValidations) {
+      this.validate();
+    }
   }
 
   private constructGroupMap(parentGroup: Group | undefined, groups: Group[]) {
@@ -90,12 +93,14 @@ export class Form {
    *
    * @param configs configs
    * @param validators validators, object keys are validator name, values are validation functions
+   * @param skipValidations skip validations
    * @param formRefreshedHook function to be invoked when form is refreshed
    * @returns form object
    */
-  static fromConfigs(configs: InitConfigs, validators?: Record<string, Validator>, formRefreshedHook?: FormRefreshedHook) {
+  static fromConfigs(configs: InitConfigs, validators?: Record<string, Validator>, skipValidations = false,
+    formRefreshedHook: FormRefreshedHook | undefined = undefined) {
     const groups = fromGroupInitConfigs(undefined, configs);
-    return new Form(groups, validators || {}, formRefreshedHook);
+    return new Form(groups, validators || {}, skipValidations, formRefreshedHook);
   }
 
   /**
