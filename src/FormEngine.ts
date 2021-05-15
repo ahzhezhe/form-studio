@@ -5,7 +5,7 @@ import { eventEmitter } from './EventEmitter';
 import { InitConfig } from './InitConfigs';
 import { Choice, Group, Question } from './Objects';
 import { ChoiceTemplate, GroupTemplate, QuestionTemplate, Template } from './Templates';
-import { Answers, ChoiceValue, Validator } from './Types';
+import { Answers, ChoiceValue, Errors, Validator } from './Types';
 
 export class FormEngine {
 
@@ -437,11 +437,29 @@ export class FormEngine {
       const [questionId, question] = entry;
       if (!this.isQuestionDisabled(question)) {
         const answer = this.questionAnswerMap.get(questionId);
-        answes[questionId] = answer;
+        if (answer !== undefined) {
+          answes[questionId] = answer;
+        }
       }
     }
 
     return answes;
+  }
+
+  exportErrors(): Errors {
+    const errors: Errors = {};
+
+    for (const entry of this.questionMap.entries()) {
+      const [questionId, question] = entry;
+      if (!this.isQuestionDisabled(question)) {
+        const error = this.questionErrorMap.get(questionId);
+        if (error !== undefined) {
+          errors[questionId] = error;
+        }
+      }
+    }
+
+    return errors;
   }
 
   validate() {
