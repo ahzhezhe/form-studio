@@ -414,7 +414,15 @@ export class FormEngine {
     return toGroupConfig(this.groups);
   }
 
-  importAnswers(answers: Answers, retainCurrentValue?: boolean) {
+  importAnswer(answers: Answers) {
+    this.internalImportAnswers(answers, false);
+  }
+
+  async importAnswerPromise(answers: Answers) {
+    await this.internalImportAnswersPromise(answers, false);
+  }
+
+  private internalImportAnswers(answers: Answers, retainCurrentValue: boolean) {
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
       let answer = answers[questionId];
@@ -433,7 +441,7 @@ export class FormEngine {
     }
   }
 
-  async importAnswersPromise(answers: Answers, retainCurrentValue?: boolean) {
+  private async internalImportAnswersPromise(answers: Answers, retainCurrentValue: boolean) {
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
       let answer = answers[questionId];
@@ -486,13 +494,13 @@ export class FormEngine {
 
   validate() {
     const answers = this.exportAnswers();
-    this.importAnswers(answers, true);
+    this.internalImportAnswers(answers, true);
     return this.isClean();
   }
 
   async validatePromise() {
     const answers = this.exportAnswers();
-    await this.importAnswersPromise(answers, true);
+    await this.internalImportAnswersPromise(answers, true);
     return this.isClean();
   }
 
