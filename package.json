@@ -4,7 +4,13 @@
   "author": "Chang Zhe Jiet",
   "description": "TODO",
   "keywords": [
-    "TODO"
+    "form engine",
+    "form builder",
+    "form editor",
+    "form",
+    "survey",
+    "questionnaire",
+    "react"
   ],
   "homepage": "https://github.com/ahzhezhe/form-engine#readme",
   "repository": {
@@ -22,7 +28,6 @@
   "scripts": {
     "lint": "eslint src/*.ts src/**/*.ts",
     "test": "jest",
-    "tryout": "ts-node tryout.ts",
     "build": "del-cli --force dist && tsc",
     "build:watch": "tsc -w",
     "prepublishOnly": "npm run build",
