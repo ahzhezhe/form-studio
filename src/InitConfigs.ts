@@ -38,7 +38,7 @@ export interface QuestionInitConfig extends ManagebleItemInitConfig {
   /**
    * Question type.
    *
-   * Questions with `input` as type accept `any` as value.
+   * Questions with `any` as type accept `any` as value.
    * You shouldn't have to specify `choices` for this question.
    *
    * Questions with `single` as type accept `ChoiceValue` as value.
@@ -65,7 +65,7 @@ export interface QuestionInitConfig extends ManagebleItemInitConfig {
   /**
    * Default answer.
    *
-   * Questions with `input` as type accept `any` as value.
+   * Questions with `any` as type accept `any` as value.
    *
    * Questions with `single` as type accept `ChoiceValue` as value.
    *

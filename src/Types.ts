@@ -2,7 +2,7 @@ import Form from '.';
 
 export type CustomConfig = Record<string, string | number | boolean>;
 
-export type QuestionType = 'input' | 'single' | 'multiple';
+export type QuestionType = 'any' | 'single' | 'multiple';
 
 export type ChoiceValue = string | number;
 

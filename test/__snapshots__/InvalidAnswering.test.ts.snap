@@ -12,14 +12,14 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
-            "type": "input",
+            "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -50,6 +50,7 @@ Array [
                 "value": "subGroup1Question2Choice3",
               },
             ],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
@@ -57,7 +58,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question2",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -88,6 +88,7 @@ Array [
                 "value": "subGroup1Question3Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
@@ -95,7 +96,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -126,6 +126,7 @@ Array [
                 "value": "subGroup1Question4Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
@@ -133,7 +134,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -145,14 +145,14 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
-        "type": "input",
+        "type": "any",
         "ui": Object {
           "title": "group1Questions",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -183,6 +183,7 @@ Array [
             "value": "group1Question2Choice3",
           },
         ],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
@@ -190,7 +191,6 @@ Array [
         "ui": Object {
           "title": "group1Question2",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -221,6 +221,7 @@ Array [
             "value": "group1Question3Choice3",
           },
         ],
+        "currentAnswer": Array [],
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
@@ -228,7 +229,6 @@ Array [
         "ui": Object {
           "title": "group1Question3",
         },
-        "unvalidatedAnswer": Array [],
         "validatedAnswer": Array [],
         "validating": false,
       },
@@ -274,14 +274,14 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
-            "type": "input",
+            "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -312,6 +312,7 @@ Array [
                 "value": "subGroup1Question2Choice3",
               },
             ],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
@@ -319,7 +320,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question2",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -350,6 +350,7 @@ Array [
                 "value": "subGroup1Question3Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
@@ -357,7 +358,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -388,6 +388,7 @@ Array [
                 "value": "subGroup1Question4Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
@@ -395,7 +396,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -407,14 +407,14 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
-        "type": "input",
+        "type": "any",
         "ui": Object {
           "title": "group1Questions",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -445,6 +445,7 @@ Array [
             "value": "group1Question2Choice3",
           },
         ],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
@@ -452,7 +453,6 @@ Array [
         "ui": Object {
           "title": "group1Question2",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -483,6 +483,7 @@ Array [
             "value": "group1Question3Choice3",
           },
         ],
+        "currentAnswer": Array [],
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
@@ -490,7 +491,6 @@ Array [
         "ui": Object {
           "title": "group1Question3",
         },
-        "unvalidatedAnswer": Array [],
         "validatedAnswer": Array [],
         "validating": false,
       },
@@ -536,14 +536,14 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
-            "type": "input",
+            "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -574,6 +574,7 @@ Array [
                 "value": "subGroup1Question2Choice3",
               },
             ],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
@@ -581,7 +582,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question2",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -612,6 +612,7 @@ Array [
                 "value": "subGroup1Question3Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
@@ -619,7 +620,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -650,6 +650,7 @@ Array [
                 "value": "subGroup1Question4Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
@@ -657,7 +658,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -669,14 +669,14 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
-        "type": "input",
+        "type": "any",
         "ui": Object {
           "title": "group1Questions",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -707,6 +707,7 @@ Array [
             "value": "group1Question2Choice3",
           },
         ],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
@@ -714,7 +715,6 @@ Array [
         "ui": Object {
           "title": "group1Question2",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -745,6 +745,7 @@ Array [
             "value": "group1Question3Choice3",
           },
         ],
+        "currentAnswer": Array [],
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
@@ -752,7 +753,6 @@ Array [
         "ui": Object {
           "title": "group1Question3",
         },
-        "unvalidatedAnswer": Array [],
         "validatedAnswer": Array [],
         "validating": false,
       },
@@ -798,14 +798,14 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
-            "type": "input",
+            "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -836,6 +836,7 @@ Array [
                 "value": "subGroup1Question2Choice3",
               },
             ],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
@@ -843,7 +844,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question2",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -874,6 +874,7 @@ Array [
                 "value": "subGroup1Question3Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
@@ -881,7 +882,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -912,6 +912,7 @@ Array [
                 "value": "subGroup1Question4Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
@@ -919,7 +920,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -931,14 +931,14 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
-        "type": "input",
+        "type": "any",
         "ui": Object {
           "title": "group1Questions",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -969,6 +969,7 @@ Array [
             "value": "group1Question2Choice3",
           },
         ],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
@@ -976,7 +977,6 @@ Array [
         "ui": Object {
           "title": "group1Question2",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -1007,6 +1007,7 @@ Array [
             "value": "group1Question3Choice3",
           },
         ],
+        "currentAnswer": Array [],
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
@@ -1014,7 +1015,6 @@ Array [
         "ui": Object {
           "title": "group1Question3",
         },
-        "unvalidatedAnswer": Array [],
         "validatedAnswer": Array [],
         "validating": false,
       },
@@ -1048,7 +1048,7 @@ Object {
 }
 `;
 
-exports[`Invalid Answering setInput undefined value 1`] = `
+exports[`Invalid Answering setValue undefined value 1`] = `
 Array [
   Object {
     "disabled": false,
@@ -1060,14 +1060,14 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
-            "type": "input",
+            "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -1098,6 +1098,7 @@ Array [
                 "value": "subGroup1Question2Choice3",
               },
             ],
+            "currentAnswer": undefined,
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
@@ -1105,7 +1106,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question2",
             },
-            "unvalidatedAnswer": undefined,
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -1136,6 +1136,7 @@ Array [
                 "value": "subGroup1Question3Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
@@ -1143,7 +1144,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -1174,6 +1174,7 @@ Array [
                 "value": "subGroup1Question4Choice3",
               },
             ],
+            "currentAnswer": Array [],
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
@@ -1181,7 +1182,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [],
             "validatedAnswer": undefined,
             "validating": false,
           },
@@ -1193,14 +1193,14 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
-        "type": "input",
+        "type": "any",
         "ui": Object {
           "title": "group1Questions",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -1231,6 +1231,7 @@ Array [
             "value": "group1Question2Choice3",
           },
         ],
+        "currentAnswer": undefined,
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
@@ -1238,7 +1239,6 @@ Array [
         "ui": Object {
           "title": "group1Question2",
         },
-        "unvalidatedAnswer": undefined,
         "validatedAnswer": undefined,
         "validating": false,
       },
@@ -1269,6 +1269,7 @@ Array [
             "value": "group1Question3Choice3",
           },
         ],
+        "currentAnswer": Array [],
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
@@ -1276,7 +1277,6 @@ Array [
         "ui": Object {
           "title": "group1Question3",
         },
-        "unvalidatedAnswer": Array [],
         "validatedAnswer": Array [],
         "validating": false,
       },
@@ -1286,7 +1286,7 @@ Array [
 ]
 `;
 
-exports[`Invalid Answering setInput undefined value 2`] = `
+exports[`Invalid Answering setValue undefined value 2`] = `
 Object {
   "group1Question1": "This field is required.",
   "group1Question2": "Please select an option.",
@@ -1296,7 +1296,7 @@ Object {
 }
 `;
 
-exports[`Invalid Answering setInput undefined value 3`] = `
+exports[`Invalid Answering setValue undefined value 3`] = `
 Object {
   "group1Question3": Array [],
   "subGroup1Question3": Array [],
@@ -1304,7 +1304,7 @@ Object {
 }
 `;
 
-exports[`Invalid Answering setInput undefined value 4`] = `
+exports[`Invalid Answering setValue undefined value 4`] = `
 Object {
   "group1Question3": Array [],
 }

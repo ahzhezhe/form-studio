@@ -5,12 +5,12 @@ describe('Answering', () => {
 
   const form = Form.fromConfigs(getConfigs(), validators);
 
-  test('setInput', () => {
-    form.setInput('subGroup1Question1', 'subGroup1Question1Input');
+  test('setValue', () => {
+    form.setValue('subGroup1Question1', 'subGroup1Question1Value');
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -19,7 +19,7 @@ describe('Answering', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -28,7 +28,7 @@ describe('Answering', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -37,14 +37,14 @@ describe('Answering', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
 
     form.selectChoice('subGroup1Question2Choice2', false);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -53,14 +53,14 @@ describe('Answering', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
 
     form.selectChoice('subGroup1Question3Choice1', false);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -69,7 +69,7 @@ describe('Answering', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -78,7 +78,7 @@ describe('Answering', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -87,7 +87,7 @@ describe('Answering', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -96,7 +96,7 @@ describe('Answering', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 

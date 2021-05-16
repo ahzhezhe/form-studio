@@ -7,9 +7,9 @@ export const getConfigs = (withDefaultAnswers?: boolean): InitConfigs => {
 
   subGroup1Questions.push({
     id: 'subGroup1Question1',
-    type: 'input',
+    type: 'any',
     ui: { title: 'subGroup1Questions' },
-    validator: 'notNullInput',
+    validator: 'notNull',
     defaultAnswer: getAnswer('subGroup1Question1', withDefaultAnswers)
   });
 
@@ -63,9 +63,9 @@ export const getConfigs = (withDefaultAnswers?: boolean): InitConfigs => {
   group1Questions.push({
     id: 'group1Question1',
     order: 1,
-    type: 'input',
+    type: 'any',
     ui: { title: 'group1Questions' },
-    validator: 'notNullInput',
+    validator: 'notNull',
     defaultAnswer: getAnswer('group1Question1', withDefaultAnswers)
   });
 
@@ -105,11 +105,11 @@ export const getConfigs = (withDefaultAnswers?: boolean): InitConfigs => {
 };
 
 export const answers: Answers = {
-  subGroup1Question1: 'subGroup1Question1Input',
+  subGroup1Question1: 'subGroup1Question1Value',
   subGroup1Question2: 'subGroup1Question2Choice1',
   subGroup1Question3: ['subGroup1Question3Choice1', 'subGroup1Question3Choice2'],
   subGroup1Question4: ['subGroup1Question4Choice1', 'subGroup1Question4Choice2'],
-  group1Question1: 'group1Question1Input',
+  group1Question1: 'group1Question1Value',
   group1Question2: 'group1Question2Choice1',
   group1Question3: ['group1Question3Choice1', 'group1Question3Choice2']
 };
@@ -134,7 +134,7 @@ export const validators: Record<string, Validator> = {
     }
   },
 
-  notNullInput: value => {
+  notNull: value => {
     if (!value) {
       throw new Error('This field is required.');
     }

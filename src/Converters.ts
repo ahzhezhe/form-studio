@@ -37,7 +37,7 @@ export const fromQuestionInitConfigs = (
     defaultDisabled: !!question.defaultDisabled,
     ui: question.ui || {},
     type: question.type,
-    choices: question.type !== 'input' ? fromChoiceInitConfigs(id, question.choices!) : [],
+    choices: question.type !== 'any' ? fromChoiceInitConfigs(id, question.choices!) : [],
     validator: question.validator,
     validation: question.validation || {},
     defaultAnswer: question.defaultAnswer
@@ -72,7 +72,7 @@ export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => qu
   defaultDisabled: question.defaultDisabled,
   ui: question.ui || {},
   type: question.type,
-  choices: question.type !== 'input' ? toChoiceConfigs(question.choices!) : [],
+  choices: question.type !== 'any' ? toChoiceConfigs(question.choices!) : [],
   validator: question.validator,
   validation: question.validation,
   defaultAnswer: question.defaultAnswer

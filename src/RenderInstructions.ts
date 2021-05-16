@@ -30,15 +30,15 @@ export interface QuestionRenderInstruction extends ManagebleItemRenderInstructio
   /**
    * Question type.
    *
-   * For questions with `input` as type,
-   * set the HTML component value using `unvalidatedAnswer` and use form's `setInput` method to handle `onChange` event.
+   * For questions with `any` as type,
+   * set the HTML component value using `currentAnswer` and use form's `setValue` method to handle `onChange` event.
    *
    * For questions with `single` as type,
-   * set the HTML component value using `unvalidatedAnswer` and use form's `setChoice` or `selectChoice` method to handle `onChange` event.
+   * set the HTML component value using `currentAnswer` and use form's `setChoice` or `selectChoice` method to handle `onChange` event.
    * Usually radio button group will be used for this question.
    *
    * For questions with `multiple` as type,
-   * set the HTML component value using `unvalidatedAnswer` and use form's `setChoices` or `selectChoice` method to handle `onChange` event.
+   * set the HTML component value using `currentAnswer` and use form's `setChoices` or `selectChoice` method to handle `onChange` event.
    * Usually check box group will be used for this question.
    */
   type: QuestionType;
@@ -47,19 +47,19 @@ export interface QuestionRenderInstruction extends ManagebleItemRenderInstructio
    */
   choices: ChoiceRenderInstruction[];
   /**
-   * Unvalidated answer of the question.
+   * Current answer of the question. The answer is unvalidated.
    *
-   * For questions with `input` as type, it should be the input value.
+   * For questions with `any` as type, it should be the input value.
    *
    * For questions with `single` as type, it should be the value of the selected choice.
    *
    * For questions with `multiple` as type, it should be a list of values of the selected choices.
    */
-  unvalidatedAnswer: any | undefined;
+  currentAnswer: any | undefined;
   /**
    * Validated answer of the question.
    *
-   * For questions with `input` as type, it should be the input value.
+   * For questions with `any` as type, it should be the input value.
    *
    * For questions with `single` as type, it should be the value of the selected choice.
    *

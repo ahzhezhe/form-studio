@@ -10,7 +10,7 @@ describe('Default Answers', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -19,7 +19,7 @@ describe('Default Answers', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
@@ -28,7 +28,7 @@ describe('Default Answers', () => {
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
-    expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 

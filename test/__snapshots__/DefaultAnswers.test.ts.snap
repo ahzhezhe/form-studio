@@ -12,15 +12,15 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
+            "currentAnswer": "subGroup1Question1Value",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question1",
-            "type": "input",
+            "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "unvalidatedAnswer": "subGroup1Question1Input",
-            "validatedAnswer": "subGroup1Question1Input",
+            "validatedAnswer": "subGroup1Question1Value",
             "validating": false,
           },
           Object {
@@ -50,6 +50,7 @@ Array [
                 "value": "subGroup1Question2Choice3",
               },
             ],
+            "currentAnswer": "subGroup1Question2Choice1",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question2",
@@ -57,7 +58,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question2",
             },
-            "unvalidatedAnswer": "subGroup1Question2Choice1",
             "validatedAnswer": "subGroup1Question2Choice1",
             "validating": false,
           },
@@ -88,6 +88,10 @@ Array [
                 "value": "subGroup1Question3Choice3",
               },
             ],
+            "currentAnswer": Array [
+              "subGroup1Question3Choice1",
+              "subGroup1Question3Choice2",
+            ],
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question3",
@@ -95,10 +99,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
             "validatedAnswer": Array [
               "subGroup1Question3Choice1",
               "subGroup1Question3Choice2",
@@ -132,6 +132,10 @@ Array [
                 "value": "subGroup1Question4Choice3",
               },
             ],
+            "currentAnswer": Array [
+              "subGroup1Question4Choice1",
+              "subGroup1Question4Choice2",
+            ],
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question4",
@@ -139,10 +143,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
             "validatedAnswer": Array [
               "subGroup1Question4Choice1",
               "subGroup1Question4Choice2",
@@ -157,15 +157,15 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
+        "currentAnswer": "group1Question1Value",
         "disabled": false,
         "error": undefined,
         "id": "group1Question1",
-        "type": "input",
+        "type": "any",
         "ui": Object {
           "title": "group1Questions",
         },
-        "unvalidatedAnswer": "group1Question1Input",
-        "validatedAnswer": "group1Question1Input",
+        "validatedAnswer": "group1Question1Value",
         "validating": false,
       },
       Object {
@@ -195,6 +195,7 @@ Array [
             "value": "group1Question2Choice3",
           },
         ],
+        "currentAnswer": "group1Question2Choice1",
         "disabled": false,
         "error": undefined,
         "id": "group1Question2",
@@ -202,7 +203,6 @@ Array [
         "ui": Object {
           "title": "group1Question2",
         },
-        "unvalidatedAnswer": "group1Question2Choice1",
         "validatedAnswer": "group1Question2Choice1",
         "validating": false,
       },
@@ -233,6 +233,10 @@ Array [
             "value": "group1Question3Choice3",
           },
         ],
+        "currentAnswer": Array [
+          "group1Question3Choice1",
+          "group1Question3Choice2",
+        ],
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
@@ -240,10 +244,6 @@ Array [
         "ui": Object {
           "title": "group1Question3",
         },
-        "unvalidatedAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
         "validatedAnswer": Array [
           "group1Question3Choice1",
           "group1Question3Choice2",
@@ -260,13 +260,13 @@ exports[`Default Answers reset 2`] = `Object {}`;
 
 exports[`Default Answers reset 3`] = `
 Object {
-  "group1Question1": "group1Question1Input",
+  "group1Question1": "group1Question1Value",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Input",
+  "subGroup1Question1": "subGroup1Question1Value",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -281,13 +281,13 @@ Object {
 
 exports[`Default Answers reset 4`] = `
 Object {
-  "group1Question1": "group1Question1Input",
+  "group1Question1": "group1Question1Value",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Input",
+  "subGroup1Question1": "subGroup1Question1Value",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -312,15 +312,15 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
+            "currentAnswer": "subGroup1Question1Value",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question1",
-            "type": "input",
+            "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "unvalidatedAnswer": "subGroup1Question1Input",
-            "validatedAnswer": "subGroup1Question1Input",
+            "validatedAnswer": "subGroup1Question1Value",
             "validating": false,
           },
           Object {
@@ -350,6 +350,7 @@ Array [
                 "value": "subGroup1Question2Choice3",
               },
             ],
+            "currentAnswer": "subGroup1Question2Choice1",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question2",
@@ -357,7 +358,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question2",
             },
-            "unvalidatedAnswer": "subGroup1Question2Choice1",
             "validatedAnswer": "subGroup1Question2Choice1",
             "validating": false,
           },
@@ -388,6 +388,10 @@ Array [
                 "value": "subGroup1Question3Choice3",
               },
             ],
+            "currentAnswer": Array [
+              "subGroup1Question3Choice1",
+              "subGroup1Question3Choice2",
+            ],
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question3",
@@ -395,10 +399,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
             "validatedAnswer": Array [
               "subGroup1Question3Choice1",
               "subGroup1Question3Choice2",
@@ -432,6 +432,10 @@ Array [
                 "value": "subGroup1Question4Choice3",
               },
             ],
+            "currentAnswer": Array [
+              "subGroup1Question4Choice1",
+              "subGroup1Question4Choice2",
+            ],
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question4",
@@ -439,10 +443,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
             "validatedAnswer": Array [
               "subGroup1Question4Choice1",
               "subGroup1Question4Choice2",
@@ -457,15 +457,15 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
+        "currentAnswer": "group1Question1Value",
         "disabled": false,
         "error": undefined,
         "id": "group1Question1",
-        "type": "input",
+        "type": "any",
         "ui": Object {
           "title": "group1Questions",
         },
-        "unvalidatedAnswer": "group1Question1Input",
-        "validatedAnswer": "group1Question1Input",
+        "validatedAnswer": "group1Question1Value",
         "validating": false,
       },
       Object {
@@ -495,6 +495,7 @@ Array [
             "value": "group1Question2Choice3",
           },
         ],
+        "currentAnswer": "group1Question2Choice1",
         "disabled": false,
         "error": undefined,
         "id": "group1Question2",
@@ -502,7 +503,6 @@ Array [
         "ui": Object {
           "title": "group1Question2",
         },
-        "unvalidatedAnswer": "group1Question2Choice1",
         "validatedAnswer": "group1Question2Choice1",
         "validating": false,
       },
@@ -533,6 +533,10 @@ Array [
             "value": "group1Question3Choice3",
           },
         ],
+        "currentAnswer": Array [
+          "group1Question3Choice1",
+          "group1Question3Choice2",
+        ],
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
@@ -540,10 +544,6 @@ Array [
         "ui": Object {
           "title": "group1Question3",
         },
-        "unvalidatedAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
         "validatedAnswer": Array [
           "group1Question3Choice1",
           "group1Question3Choice2",
@@ -560,13 +560,13 @@ exports[`Default Answers resetAnswer 2`] = `Object {}`;
 
 exports[`Default Answers resetAnswer 3`] = `
 Object {
-  "group1Question1": "group1Question1Input",
+  "group1Question1": "group1Question1Value",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Input",
+  "subGroup1Question1": "subGroup1Question1Value",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -581,13 +581,13 @@ Object {
 
 exports[`Default Answers resetAnswer 4`] = `
 Object {
-  "group1Question1": "group1Question1Input",
+  "group1Question1": "group1Question1Value",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Input",
+  "subGroup1Question1": "subGroup1Question1Value",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -612,15 +612,15 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
+            "currentAnswer": "subGroup1Question1Value",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question1",
-            "type": "input",
+            "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "unvalidatedAnswer": "subGroup1Question1Input",
-            "validatedAnswer": "subGroup1Question1Input",
+            "validatedAnswer": "subGroup1Question1Value",
             "validating": false,
           },
           Object {
@@ -650,6 +650,7 @@ Array [
                 "value": "subGroup1Question2Choice3",
               },
             ],
+            "currentAnswer": "subGroup1Question2Choice1",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question2",
@@ -657,7 +658,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question2",
             },
-            "unvalidatedAnswer": "subGroup1Question2Choice1",
             "validatedAnswer": "subGroup1Question2Choice1",
             "validating": false,
           },
@@ -688,6 +688,10 @@ Array [
                 "value": "subGroup1Question3Choice3",
               },
             ],
+            "currentAnswer": Array [
+              "subGroup1Question3Choice1",
+              "subGroup1Question3Choice2",
+            ],
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question3",
@@ -695,10 +699,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
             "validatedAnswer": Array [
               "subGroup1Question3Choice1",
               "subGroup1Question3Choice2",
@@ -732,6 +732,10 @@ Array [
                 "value": "subGroup1Question4Choice3",
               },
             ],
+            "currentAnswer": Array [
+              "subGroup1Question4Choice1",
+              "subGroup1Question4Choice2",
+            ],
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question4",
@@ -739,10 +743,6 @@ Array [
             "ui": Object {
               "title": "subGroup1Question3",
             },
-            "unvalidatedAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
             "validatedAnswer": Array [
               "subGroup1Question4Choice1",
               "subGroup1Question4Choice2",
@@ -757,15 +757,15 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
+        "currentAnswer": "group1Question1Value",
         "disabled": false,
         "error": undefined,
         "id": "group1Question1",
-        "type": "input",
+        "type": "any",
         "ui": Object {
           "title": "group1Questions",
         },
-        "unvalidatedAnswer": "group1Question1Input",
-        "validatedAnswer": "group1Question1Input",
+        "validatedAnswer": "group1Question1Value",
         "validating": false,
       },
       Object {
@@ -795,6 +795,7 @@ Array [
             "value": "group1Question2Choice3",
           },
         ],
+        "currentAnswer": "group1Question2Choice1",
         "disabled": false,
         "error": undefined,
         "id": "group1Question2",
@@ -802,7 +803,6 @@ Array [
         "ui": Object {
           "title": "group1Question2",
         },
-        "unvalidatedAnswer": "group1Question2Choice1",
         "validatedAnswer": "group1Question2Choice1",
         "validating": false,
       },
@@ -833,6 +833,10 @@ Array [
             "value": "group1Question3Choice3",
           },
         ],
+        "currentAnswer": Array [
+          "group1Question3Choice1",
+          "group1Question3Choice2",
+        ],
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
@@ -840,10 +844,6 @@ Array [
         "ui": Object {
           "title": "group1Question3",
         },
-        "unvalidatedAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
         "validatedAnswer": Array [
           "group1Question3Choice1",
           "group1Question3Choice2",
@@ -860,13 +860,13 @@ exports[`Default Answers resetGroup 2`] = `Object {}`;
 
 exports[`Default Answers resetGroup 3`] = `
 Object {
-  "group1Question1": "group1Question1Input",
+  "group1Question1": "group1Question1Value",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Input",
+  "subGroup1Question1": "subGroup1Question1Value",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -881,13 +881,13 @@ Object {
 
 exports[`Default Answers resetGroup 4`] = `
 Object {
-  "group1Question1": "group1Question1Input",
+  "group1Question1": "group1Question1Value",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Input",
+  "subGroup1Question1": "subGroup1Question1Value",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",

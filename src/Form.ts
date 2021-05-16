@@ -19,7 +19,7 @@ export class Form {
   private groupParentGroupMap = new Map<string, Group>();
   private questionGroupMap = new Map<string, Group>();
   private choiceQuestionMap = new Map<string, Question>();
-  private questionUnvalidatedAnswerMap = new Map<string, any>();
+  private questionCurrentAnswerMap = new Map<string, any>();
   private questionValidatedAnswerMap = new Map<string, any>();
   private questionValidatingMap = new Map<string, boolean>();
   private questionErrorMap = new Map<string, string>();
@@ -49,7 +49,7 @@ export class Form {
     questions.forEach(question => {
       this.questionMap.set(question.id!, question);
       this.questionGroupMap.set(question.id!, group);
-      if (question.type !== 'input') {
+      if (question.type !== 'any') {
         this.processChoices(question, question.choices);
       }
       if (!!question.defaultAnswer) {
@@ -132,8 +132,8 @@ export class Form {
       disabled: this.isQuestionDisabled(question),
       ui: question.ui,
       type: question.type,
-      choices: question.type !== 'input' ? this.toChoiceRenderInstruction(question.choices) : [],
-      unvalidatedAnswer: this.questionUnvalidatedAnswerMap.get(question.id),
+      choices: question.type !== 'any' ? this.toChoiceRenderInstruction(question.choices) : [],
+      currentAnswer: this.questionCurrentAnswerMap.get(question.id),
       validatedAnswer: this.isQuestionDisabled(question) ? undefined : this.questionValidatedAnswerMap.get(question.id),
       validating: !!this.questionValidatingMap.get(question.id),
       error: this.questionErrorMap.get(question.id)
@@ -214,8 +214,8 @@ export class Form {
   clearAnswer(questionId: string, skipValidation = false) {
     const question = this.findQuestion(questionId);
 
-    if (question.type === 'input') {
-      this.setInput(question.id, undefined, skipValidation);
+    if (question.type === 'any') {
+      this.setValue(question.id, undefined, skipValidation);
     } else if (question.type === 'single') {
       this.setChoice(question.id, undefined, skipValidation);
     } else if (question.type === 'multiple') {
@@ -268,8 +268,8 @@ export class Form {
 
     const defaultAnswer = this.defaultAnswers[questionId];
 
-    if (question.type === 'input') {
-      this.setInput(question.id, defaultAnswer, skipValidation);
+    if (question.type === 'any') {
+      this.setValue(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'single') {
       this.setChoice(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'multiple') {
@@ -279,8 +279,8 @@ export class Form {
     this.refreshForm();
   }
 
-  private setUnvalidatedAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
-    this.questionUnvalidatedAnswerMap.set(question.id, answer);
+  private setCurrentAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
+    this.questionCurrentAnswerMap.set(question.id, answer);
 
     if (question.type === 'single') {
       const choice = question.choices.find(choice => choice.value === answer);
@@ -293,7 +293,7 @@ export class Form {
       answer = choices.map(choice => choice.value);
     }
 
-    this.questionUnvalidatedAnswerMap.set(question.id, answer);
+    this.questionCurrentAnswerMap.set(question.id, answer);
 
     const onSuccess = () => {
       this.questionValidatedAnswerMap.set(question.id, answer);
@@ -348,19 +348,19 @@ export class Form {
   }
 
   /**
-   * Set value of the question with `input` as type.
+   * Set value of the question with `any` as type.
    *
    * @param questionId question id
    * @param value value
    * @param skipValidation skip validation
    */
-  setInput(questionId: string, value: any, skipValidation = false) {
+  setValue(questionId: string, value: any, skipValidation = false) {
     const question = this.findQuestion(questionId);
-    if (question.type !== 'input') {
-      throw new Error('Question type is not input.');
+    if (question.type !== 'any') {
+      throw new Error('Question type is not any.');
     }
 
-    this.setUnvalidatedAnswerAndValidate(question, value, skipValidation);
+    this.setCurrentAnswerAndValidate(question, value, skipValidation);
   }
 
   /**
@@ -377,7 +377,7 @@ export class Form {
     }
 
     const choice = question.choices.find(choice => choice.value === value);
-    this.setUnvalidatedAnswerAndValidate(question, choice?.value, skipValidation);
+    this.setCurrentAnswerAndValidate(question, choice?.value, skipValidation);
   }
 
   /**
@@ -394,7 +394,7 @@ export class Form {
     }
 
     const choices = question.choices.filter(choice => values.includes(choice.value));
-    this.setUnvalidatedAnswerAndValidate(question, choices.map(choice => choice.value), skipValidation);
+    this.setCurrentAnswerAndValidate(question, choices.map(choice => choice.value), skipValidation);
   }
 
   /**
@@ -408,7 +408,7 @@ export class Form {
     const choice = this.findChoice(choiceId);
     const question = this.choiceQuestionMap.get(choiceId)!;
 
-    let currentAnswer = this.questionUnvalidatedAnswerMap.get(question.id);
+    let currentAnswer = this.questionCurrentAnswerMap.get(question.id);
 
     if (question.type === 'single') {
       if (selected) {
@@ -433,11 +433,11 @@ export class Form {
 
     const question = this.choiceQuestionMap.get(choice.id)!;
     if (question.type === 'single') {
-      const answer = this.questionUnvalidatedAnswerMap.get(question.id);
+      const answer = this.questionCurrentAnswerMap.get(question.id);
       return choice.value === answer;
     }
     if (question.type === 'multiple') {
-      const answer = this.questionUnvalidatedAnswerMap.get(question.id);
+      const answer = this.questionCurrentAnswerMap.get(question.id);
       return !!answer?.includes(choice.value);
     }
 
@@ -492,17 +492,17 @@ export class Form {
   }
 
   /**
-   * Get unvalidated answers.
+   * Get current answers. The answers are unvalidated.
    * You can persist it and use it with `importAnswers` method to restore the answers later.
    *
-   * @returns unvalidated answers, object keys are question ids, values are answers
+   * @returns current answers, object keys are question ids, values are answers
    */
-  getUnvalidatedAnswers(): Answers {
+  getCurrentAnswers(): Answers {
     const answes: Answers = {};
 
     for (const entry of this.questionMap.entries()) {
       const [questionId] = entry;
-      const answer = this.questionUnvalidatedAnswerMap.get(questionId);
+      const answer = this.questionCurrentAnswerMap.get(questionId);
       if (answer !== undefined) {
         answes[questionId] = answer;
       }
@@ -591,8 +591,8 @@ export class Form {
       const [questionId, question] = entry;
       const answer = answers[questionId];
 
-      if (question.type === 'input') {
-        this.setInput(questionId, answer, skipValidations);
+      if (question.type === 'any') {
+        this.setValue(questionId, answer, skipValidations);
       } else if (question.type === 'single') {
         this.setChoice(questionId, answer, skipValidations);
       } else if (question.type === 'multiple') {
@@ -607,7 +607,7 @@ export class Form {
    * @returns whether form is clean
    */
   validate() {
-    const answers = this.getUnvalidatedAnswers();
+    const answers = this.getCurrentAnswers();
     this.importAnswers(answers);
     return this.isClean();
   }

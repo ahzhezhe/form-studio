@@ -19,8 +19,8 @@ describe('Basic', () => {
       expect(form.getErrors()).toMatchSnapshot();
     });
 
-    test('getUnvalidatedAnswers', () => {
-      expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    test('getCurrentAnswers', () => {
+      expect(form.getCurrentAnswers()).toMatchSnapshot();
     });
 
     test('getValidatedAnswers', () => {
@@ -45,8 +45,8 @@ describe('Basic', () => {
       expect(form.getErrors()).toMatchSnapshot();
     });
 
-    test('getUnvalidatedAnswers', () => {
-      expect(form.getUnvalidatedAnswers()).toMatchSnapshot();
+    test('getCurrentAnswers', () => {
+      expect(form.getCurrentAnswers()).toMatchSnapshot();
     });
 
     test('getValidatedAnswers', () => {
