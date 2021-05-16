@@ -1,16 +1,13 @@
-import shortUUID from 'short-uuid';
 import { Configs } from './Configs';
 import { fromGroupInitConfigs, toGroupConfigs } from './Converters';
-import { eventEmitter } from './EventEmitter';
 import { Choice, Group, ManagebleItem, Question } from './FormObjects';
 import { InitConfigs } from './InitConfigs';
 import { ChoiceRenderInstruction, GroupRenderInstruction, QuestionRenderInstruction, RenderInstructions } from './RenderInstructions';
-import { Answers, ChoiceValue, Errors, FormRefreshedHook, Validator } from './Types';
+import { Answers, ChoiceValue, Errors, FormUpdateEvent, Validator } from './Types';
 
 export class Form {
 
-  private formId: string;
-  private formRefreshedHook?: FormRefreshedHook;
+  private onFormUpdate?: FormUpdateEvent;
   private groups: Group[];
   private validators: Record<string, Validator>;
   private lastRenderInstructions?: RenderInstructions;
@@ -29,11 +26,10 @@ export class Form {
   private itemDisabledByChoiceMap = new Map<string, Choice[]>();
   private itemEnabledByChoiceMap = new Map<string, Choice[]>();
 
-  private constructor(groups: Group[], validators: Record<string, Validator>, skipValidations: boolean, formRefreshedHook?: FormRefreshedHook) {
-    this.formId = shortUUID.generate();
+  private constructor(groups: Group[], validators: Record<string, Validator>, skipValidations: boolean, onFormUpdate?: FormUpdateEvent) {
     this.groups = groups;
     this.validators = validators;
-    this.formRefreshedHook = formRefreshedHook;
+    this.onFormUpdate = onFormUpdate;
     this.processGroups(undefined, this.groups);
     this.importAnswers(this.defaultAnswers, skipValidations);
   }
@@ -87,10 +83,6 @@ export class Form {
     });
   }
 
-  private getFormId() {
-    return this.formId;
-  }
-
   /**
    * Initiate a form with a config.
    *
@@ -100,10 +92,9 @@ export class Form {
    * @param formRefreshedHook function to be invoked when form is refreshed
    * @returns form object
    */
-  static fromConfigs(configs: InitConfigs, validators?: Record<string, Validator>, skipValidations = false,
-    formRefreshedHook: FormRefreshedHook | undefined = undefined) {
+  static fromConfigs(configs: InitConfigs, validators?: Record<string, Validator>, skipValidations?: boolean, onFormUpdate?: FormUpdateEvent) {
     const groups = fromGroupInitConfigs(undefined, configs);
-    return new Form(groups, validators || {}, skipValidations, formRefreshedHook);
+    return new Form(groups, validators || {}, !!skipValidations, onFormUpdate);
   }
 
   /**
@@ -626,15 +617,16 @@ export class Form {
 
   private refreshForm() {
     const newRenderInstructions = this.getRenderInstructions();
-    const hasChange = JSON.stringify(this.lastRenderInstructions) !== JSON.stringify(newRenderInstructions);
+    const lastRenderInstructions = this.lastRenderInstructions;
     this.lastRenderInstructions = newRenderInstructions;
 
-    if (hasChange) {
-      eventEmitter.emit(this.formId);
+    if (!this.onFormUpdate) {
+      return;
+    }
 
-      if (this.formRefreshedHook) {
-        this.formRefreshedHook();
-      }
+    const hasChange = JSON.stringify(lastRenderInstructions) !== JSON.stringify(newRenderInstructions);
+    if (hasChange) {
+      this.onFormUpdate(this);
     }
   }
 

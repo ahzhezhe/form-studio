@@ -1,3 +1,5 @@
+import Form from '.';
+
 export type CustomConfig = Record<string, string | number | boolean>;
 
 export type QuestionType = 'input' | 'single' | 'multiple';
@@ -23,4 +25,4 @@ export type Answers = Record<string, any>;
 
 export type Errors = Record<string, string>;
 
-export type FormRefreshedHook = () => void | Promise<void>;
+export type FormUpdateEvent = (form: Form) => void | Promise<void>;

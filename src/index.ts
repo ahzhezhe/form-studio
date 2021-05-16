@@ -3,15 +3,13 @@ import { GroupConfig, QuestionConfig, ChoiceConfig, Configs } from './Configs';
 import { Form } from './Form';
 import { GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfigs } from './InitConfigs';
 import { GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstructions } from './RenderInstructions';
-import { CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormRefreshedHook } from './Types';
-import { useRenderInstructions } from './useRenderInstructions';
+import { CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormUpdateEvent } from './Types';
 
 export {
   GroupConfig, QuestionConfig, ChoiceConfig, Configs,
   GroupInitConfig, QuestionInitConfig, ChoiceInitConfig, InitConfigs,
   GroupRenderInstruction, QuestionRenderInstruction, ChoiceRenderInstruction, RenderInstructions,
-  CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormRefreshedHook,
-  useRenderInstructions
+  CustomConfig, QuestionType, ChoiceValue, ChoiceOnSelected, Validator, Answers, Errors, FormUpdateEvent
 };
 
 export default Form;
