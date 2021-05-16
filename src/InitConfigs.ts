@@ -61,6 +61,16 @@ export interface QuestionInitConfig extends ManagebleItemInitConfig {
    * Any values that help to validator to perform validation.
    */
   validation?: CustomConfig;
+  /**
+   * Default answer.
+   *
+   * Questions with `input` as type accept `any` as value.
+   *
+   * Questions with `single` as type accept `ChoiceValue` as value.
+   *
+   * Questions with `multiple` as type accept `ChoiceValue[]` as value.
+   */
+  defaultAnswer?: any;
 }
 
 export interface ChoiceInitConfig extends ManagebleItemInitConfig {

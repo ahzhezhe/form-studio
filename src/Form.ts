@@ -11,9 +11,11 @@ export class Form {
 
   private formId: string;
   private formRefreshedHook?: FormRefreshedHook;
+  private groups: Group[];
   private validators: Record<string, Validator>;
   private lastRenderInstructions?: RenderInstructions;
-  private groups: Group[];
+  private defaultAnswers: Answers = {};
+
   private groupMap = new Map<string, Group>();
   private questionMap = new Map<string, Question>();
   private choiceMap = new Map<string, Choice>();
@@ -32,34 +34,35 @@ export class Form {
     this.groups = groups;
     this.validators = validators;
     this.formRefreshedHook = formRefreshedHook;
-    this.constructGroupMap(undefined, this.groups);
-    if (!skipValidations) {
-      this.validate();
-    }
+    this.processGroups(undefined, this.groups);
+    this.importAnswers(this.defaultAnswers, skipValidations);
   }
 
-  private constructGroupMap(parentGroup: Group | undefined, groups: Group[]) {
+  private processGroups(parentGroup: Group | undefined, groups: Group[]) {
     groups.forEach(group => {
       this.groupMap.set(group.id!, group);
-      this.constructGroupMap(group, group.groups || []);
-      this.constructQuestionMap(group, group.questions || []);
+      this.processGroups(group, group.groups || []);
+      this.processQuestions(group, group.questions || []);
       if (parentGroup) {
         this.groupParentGroupMap.set(group.id!, parentGroup);
       }
     });
   }
 
-  private constructQuestionMap(group: Group, questions: Question[]) {
+  private processQuestions(group: Group, questions: Question[]) {
     questions.forEach(question => {
       this.questionMap.set(question.id!, question);
       this.questionGroupMap.set(question.id!, group);
       if (question.type !== 'input') {
-        this.constructChoiceMap(question, question.choices);
+        this.processChoices(question, question.choices);
+      }
+      if (!!question.defaultAnswer) {
+        this.defaultAnswers[question.id] = question.defaultAnswer;
       }
     });
   }
 
-  private constructChoiceMap(question: Question, choices: Choice[]) {
+  private processChoices(question: Question, choices: Choice[]) {
     choices.forEach(choice => {
       this.choiceMap.set(choice.id!, choice);
       this.choiceQuestionMap.set(choice.id!, question);
@@ -226,6 +229,60 @@ export class Form {
       this.setChoice(question.id, undefined, skipValidation);
     } else if (question.type === 'multiple') {
       this.setChoices(question.id, [], skipValidation);
+    }
+
+    this.refreshForm();
+  }
+
+  /**
+   * Reset answers of the entire form to default answers.
+   *
+   * @param skipValidations skip validations
+   */
+  reset(skipValidations = false) {
+    for (const group of this.groups) {
+      this.resetGroup(group.id, skipValidations);
+    }
+
+    this.refreshForm();
+  }
+
+  /**
+   * Reset answers of the entire group to default answers.
+   *
+   * @param groupId group id
+   * @param skipValidations skip validations
+   */
+  resetGroup(groupId: string, skipValidations = false) {
+    const group = this.findGroup(groupId);
+
+    for (const subGroup of group.groups) {
+      this.resetGroup(subGroup.id, skipValidations);
+    }
+    for (const question of group.questions) {
+      this.resetAnswer(question.id, skipValidations);
+    }
+
+    this.refreshForm();
+  }
+
+  /**
+   * Reset answer of a question to default answer.
+   *
+   * @param questionId question id
+   * @param skipValidation skip validation
+   */
+  resetAnswer(questionId: string, skipValidation = false) {
+    const question = this.findQuestion(questionId);
+
+    const defaultAnswer = this.defaultAnswers[questionId];
+
+    if (question.type === 'input') {
+      this.setInput(question.id, defaultAnswer, skipValidation);
+    } else if (question.type === 'single') {
+      this.setChoice(question.id, defaultAnswer, skipValidation);
+    } else if (question.type === 'multiple') {
+      this.setChoices(question.id, defaultAnswer, skipValidation);
     }
 
     this.refreshForm();

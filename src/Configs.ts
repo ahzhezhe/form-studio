@@ -17,6 +17,7 @@ export interface QuestionConfig extends ManagebleItemConfig {
   choices: ChoiceConfig[];
   validator: string | undefined;
   validation: CustomConfig;
+  defaultAnswer: any;
 }
 
 export interface ChoiceConfig extends ManagebleItemConfig {

@@ -17,6 +17,7 @@ export interface Question extends ManagebleItem {
   choices: Choice[];
   validator: string | undefined;
   validation: CustomConfig;
+  defaultAnswer: any;
 }
 
 export interface Choice extends ManagebleItem {

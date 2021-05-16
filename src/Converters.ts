@@ -39,7 +39,8 @@ export const fromQuestionInitConfigs = (
     type: question.type,
     choices: question.type !== 'input' ? fromChoiceInitConfigs(id, question.choices!) : [],
     validator: question.validator,
-    validation: question.validation || {}
+    validation: question.validation || {},
+    defaultAnswer: question.defaultAnswer
   };
 });
 
@@ -73,7 +74,8 @@ export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => qu
   type: question.type,
   choices: question.type !== 'input' ? toChoiceConfigs(question.choices!) : [],
   validator: question.validator,
-  validation: question.validation
+  validation: question.validation,
+  defaultAnswer: question.defaultAnswer
 }));
 
 export const toChoiceConfigs = (choices: Choice[]): ChoiceConfig[] => choices.map(choice => ({
