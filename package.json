@@ -1,9 +1,10 @@
 {
-  "name": "form-engine",
+  "name": "form-studio",
   "version": "1.0.0",
   "author": "Chang Zhe Jiet",
-  "description": "A tool that helps manage form / survey / questionnaire through simple configurations.",
+  "description": "A tool that helps design, create and manage form / survey / questionnaire through simple configurations.",
   "keywords": [
+    "form studio",
     "form engine",
     "form builder",
     "form editor",
@@ -12,10 +13,10 @@
     "questionnaire",
     "react"
   ],
-  "homepage": "https://github.com/ahzhezhe/form-engine#readme",
+  "homepage": "https://github.com/ahzhezhe/form-studio#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahzhezhe/form-engine"
+    "url": "https://github.com/ahzhezhe/form-studio"
   },
   "funding": "https://www.paypal.me/ahzhezhe",
   "license": "ISC",
