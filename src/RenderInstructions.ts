@@ -34,11 +34,11 @@ export interface QuestionRenderInstruction extends ManagebleItemRenderInstructio
    * set the HTML component value using `unvalidatedAnswer` and use form's `setInput` method to handle `onChange` event.
    *
    * For questions with `single` as type,
-   * set the HTML component value using `unvalidatedAnswer` and use form's `setChoice` method to handle `onChange` event.
+   * set the HTML component value using `unvalidatedAnswer` and use form's `setChoice` or `selectChoice` method to handle `onChange` event.
    * Usually radio button group will be used for this question.
    *
    * For questions with `multiple` as type,
-   * set the HTML component value using `unvalidatedAnswer` and use form's `setChoices` method to handle `onChange` event.
+   * set the HTML component value using `unvalidatedAnswer` and use form's `setChoices` or `selectChoice` method to handle `onChange` event.
    * Usually check box group will be used for this question.
    */
   type: QuestionType;

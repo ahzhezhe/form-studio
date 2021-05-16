@@ -171,6 +171,14 @@ export class Form {
     return question;
   }
 
+  private findChoice(choiceId: string) {
+    const choice = this.choiceMap.get(choiceId);
+    if (!choice) {
+      throw new Error('Choice is not found.');
+    }
+    return choice;
+  }
+
   /**
    * Clear answers of the entire form.
    *
@@ -215,7 +223,7 @@ export class Form {
     if (question.type === 'input') {
       this.setInput(question.id, undefined, skipValidation);
     } else if (question.type === 'single') {
-      this.setChoice(question.id, undefined as any, skipValidation);
+      this.setChoice(question.id, undefined, skipValidation);
     } else if (question.type === 'multiple') {
       this.setChoices(question.id, [], skipValidation);
     }
@@ -314,7 +322,7 @@ export class Form {
    * @param value choice's value
    * @param skipValidation skip validation
    */
-  setChoice(questionId: string, value: ChoiceValue, skipValidation = false) {
+  setChoice(questionId: string, value: ChoiceValue | undefined, skipValidation = false) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'single') {
       throw new Error('Question type is not single.');
@@ -339,6 +347,38 @@ export class Form {
 
     const choices = question.choices.filter(choice => values.includes(choice.value));
     this.setUnvalidatedAnswerAndValidate(question, choices.map(choice => choice.value), skipValidation);
+  }
+
+  /**
+   * Select invididual choice.
+   * Can be used by questions with `single` or `multiple` as type only.
+   *
+   * @param choiceId choice id
+   * @param selected selected/unselected
+   */
+  selectChoice(choiceId: string, selected: boolean) {
+    const choice = this.findChoice(choiceId);
+    const question = this.choiceQuestionMap.get(choiceId)!;
+    if (question.type !== 'single' && question.type !== 'multiple') {
+      throw new Error('Question type is not single or multiple.');
+    }
+
+    let currentAnswer = this.questionUnvalidatedAnswerMap.get(question.id);
+
+    if (question.type === 'single') {
+      if (selected) {
+        this.setChoice(question.id, choice.value);
+      } else if (choice.value === currentAnswer) {
+        this.setChoice(question.id, undefined);
+      }
+    } else if (question.type === 'multiple') {
+      currentAnswer = currentAnswer || [];
+      currentAnswer = currentAnswer.filter(value => value !== choice.value);
+      if (selected) {
+        currentAnswer.push(choice.value);
+      }
+      this.setChoices(question.id, currentAnswer);
+    }
   }
 
   private isChoiceSelected(choice: Choice) {
