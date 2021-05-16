@@ -407,9 +407,6 @@ export class Form {
   selectChoice(choiceId: string, selected: boolean) {
     const choice = this.findChoice(choiceId);
     const question = this.choiceQuestionMap.get(choiceId)!;
-    if (question.type !== 'single' && question.type !== 'multiple') {
-      throw new Error('Question type is not single or multiple.');
-    }
 
     let currentAnswer = this.questionUnvalidatedAnswerMap.get(question.id);
 

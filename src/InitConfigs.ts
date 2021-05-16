@@ -3,6 +3,7 @@ import { ChoiceOnSelected, ChoiceValue, CustomConfig, QuestionType } from './Typ
 export interface ManagebleItemInitConfig {
   /**
    * Item id.
+   * It should be unique throughout the entire form.
    * It will be auto generated if you leave it `undefined`.
    */
   id?: string;

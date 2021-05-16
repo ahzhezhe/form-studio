@@ -1,0 +1,1311 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Invalid Answering setChoice invalid choice 1`] = `
+Array [
+  Object {
+    "disabled": false,
+    "groups": Array [
+      Object {
+        "disabled": false,
+        "groups": Array [],
+        "id": "subGroup1",
+        "questions": Array [
+          Object {
+            "choices": Array [],
+            "disabled": false,
+            "error": "This field is required.",
+            "id": "subGroup1Question1",
+            "type": "input",
+            "ui": Object {
+              "title": "subGroup1Questions",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice1",
+                },
+                "value": "subGroup1Question2Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice2",
+                },
+                "value": "subGroup1Question2Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice3",
+                },
+                "value": "subGroup1Question2Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select an option.",
+            "id": "subGroup1Question2",
+            "type": "single",
+            "ui": Object {
+              "title": "subGroup1Question2",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice1",
+                },
+                "value": "subGroup1Question3Choice1",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice2",
+                },
+                "value": "subGroup1Question3Choice2",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice3",
+                },
+                "value": "subGroup1Question3Choice3",
+              },
+            ],
+            "disabled": true,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question3",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice1",
+                },
+                "value": "subGroup1Question4Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice2",
+                },
+                "value": "subGroup1Question4Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice3",
+                },
+                "value": "subGroup1Question4Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question4",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+        ],
+        "ui": Object {},
+      },
+    ],
+    "id": "group1",
+    "questions": Array [
+      Object {
+        "choices": Array [],
+        "disabled": false,
+        "error": "This field is required.",
+        "id": "group1Question1",
+        "type": "input",
+        "ui": Object {
+          "title": "group1Questions",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice1",
+            "ui": Object {
+              "title": "group1Question2Choice1",
+            },
+            "value": "group1Question2Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice2",
+            "ui": Object {
+              "title": "group1Question2Choice2",
+            },
+            "value": "group1Question2Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice3",
+            "ui": Object {
+              "title": "group1Question2Choice3",
+            },
+            "value": "group1Question2Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": "Please select an option.",
+        "id": "group1Question2",
+        "type": "single",
+        "ui": Object {
+          "title": "group1Question2",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice1",
+            "ui": Object {
+              "title": "group1Question3Choice1",
+            },
+            "value": "group1Question3Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice2",
+            "ui": Object {
+              "title": "group1Question3Choice2",
+            },
+            "value": "group1Question3Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice3",
+            "ui": Object {
+              "title": "group1Question3Choice3",
+            },
+            "value": "group1Question3Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": undefined,
+        "id": "group1Question3",
+        "type": "multiple",
+        "ui": Object {
+          "title": "group1Question3",
+        },
+        "unvalidatedAnswer": Array [],
+        "validatedAnswer": Array [],
+        "validating": false,
+      },
+    ],
+    "ui": Object {},
+  },
+]
+`;
+
+exports[`Invalid Answering setChoice invalid choice 2`] = `
+Object {
+  "group1Question1": "This field is required.",
+  "group1Question2": "Please select an option.",
+  "subGroup1Question1": "This field is required.",
+  "subGroup1Question2": "Please select an option.",
+  "subGroup1Question4": "Please select at least 1 option.",
+}
+`;
+
+exports[`Invalid Answering setChoice invalid choice 3`] = `
+Object {
+  "group1Question3": Array [],
+  "subGroup1Question3": Array [],
+  "subGroup1Question4": Array [],
+}
+`;
+
+exports[`Invalid Answering setChoice invalid choice 4`] = `
+Object {
+  "group1Question3": Array [],
+}
+`;
+
+exports[`Invalid Answering setChoice undefined value 1`] = `
+Array [
+  Object {
+    "disabled": false,
+    "groups": Array [
+      Object {
+        "disabled": false,
+        "groups": Array [],
+        "id": "subGroup1",
+        "questions": Array [
+          Object {
+            "choices": Array [],
+            "disabled": false,
+            "error": "This field is required.",
+            "id": "subGroup1Question1",
+            "type": "input",
+            "ui": Object {
+              "title": "subGroup1Questions",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice1",
+                },
+                "value": "subGroup1Question2Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice2",
+                },
+                "value": "subGroup1Question2Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice3",
+                },
+                "value": "subGroup1Question2Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select an option.",
+            "id": "subGroup1Question2",
+            "type": "single",
+            "ui": Object {
+              "title": "subGroup1Question2",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice1",
+                },
+                "value": "subGroup1Question3Choice1",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice2",
+                },
+                "value": "subGroup1Question3Choice2",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice3",
+                },
+                "value": "subGroup1Question3Choice3",
+              },
+            ],
+            "disabled": true,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question3",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice1",
+                },
+                "value": "subGroup1Question4Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice2",
+                },
+                "value": "subGroup1Question4Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice3",
+                },
+                "value": "subGroup1Question4Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question4",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+        ],
+        "ui": Object {},
+      },
+    ],
+    "id": "group1",
+    "questions": Array [
+      Object {
+        "choices": Array [],
+        "disabled": false,
+        "error": "This field is required.",
+        "id": "group1Question1",
+        "type": "input",
+        "ui": Object {
+          "title": "group1Questions",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice1",
+            "ui": Object {
+              "title": "group1Question2Choice1",
+            },
+            "value": "group1Question2Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice2",
+            "ui": Object {
+              "title": "group1Question2Choice2",
+            },
+            "value": "group1Question2Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice3",
+            "ui": Object {
+              "title": "group1Question2Choice3",
+            },
+            "value": "group1Question2Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": "Please select an option.",
+        "id": "group1Question2",
+        "type": "single",
+        "ui": Object {
+          "title": "group1Question2",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice1",
+            "ui": Object {
+              "title": "group1Question3Choice1",
+            },
+            "value": "group1Question3Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice2",
+            "ui": Object {
+              "title": "group1Question3Choice2",
+            },
+            "value": "group1Question3Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice3",
+            "ui": Object {
+              "title": "group1Question3Choice3",
+            },
+            "value": "group1Question3Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": undefined,
+        "id": "group1Question3",
+        "type": "multiple",
+        "ui": Object {
+          "title": "group1Question3",
+        },
+        "unvalidatedAnswer": Array [],
+        "validatedAnswer": Array [],
+        "validating": false,
+      },
+    ],
+    "ui": Object {},
+  },
+]
+`;
+
+exports[`Invalid Answering setChoice undefined value 2`] = `
+Object {
+  "group1Question1": "This field is required.",
+  "group1Question2": "Please select an option.",
+  "subGroup1Question1": "This field is required.",
+  "subGroup1Question2": "Please select an option.",
+  "subGroup1Question4": "Please select at least 1 option.",
+}
+`;
+
+exports[`Invalid Answering setChoice undefined value 3`] = `
+Object {
+  "group1Question3": Array [],
+  "subGroup1Question3": Array [],
+  "subGroup1Question4": Array [],
+}
+`;
+
+exports[`Invalid Answering setChoice undefined value 4`] = `
+Object {
+  "group1Question3": Array [],
+}
+`;
+
+exports[`Invalid Answering setChoices empty value 1`] = `
+Array [
+  Object {
+    "disabled": false,
+    "groups": Array [
+      Object {
+        "disabled": false,
+        "groups": Array [],
+        "id": "subGroup1",
+        "questions": Array [
+          Object {
+            "choices": Array [],
+            "disabled": false,
+            "error": "This field is required.",
+            "id": "subGroup1Question1",
+            "type": "input",
+            "ui": Object {
+              "title": "subGroup1Questions",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice1",
+                },
+                "value": "subGroup1Question2Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice2",
+                },
+                "value": "subGroup1Question2Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice3",
+                },
+                "value": "subGroup1Question2Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select an option.",
+            "id": "subGroup1Question2",
+            "type": "single",
+            "ui": Object {
+              "title": "subGroup1Question2",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice1",
+                },
+                "value": "subGroup1Question3Choice1",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice2",
+                },
+                "value": "subGroup1Question3Choice2",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice3",
+                },
+                "value": "subGroup1Question3Choice3",
+              },
+            ],
+            "disabled": true,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question3",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice1",
+                },
+                "value": "subGroup1Question4Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice2",
+                },
+                "value": "subGroup1Question4Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice3",
+                },
+                "value": "subGroup1Question4Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question4",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+        ],
+        "ui": Object {},
+      },
+    ],
+    "id": "group1",
+    "questions": Array [
+      Object {
+        "choices": Array [],
+        "disabled": false,
+        "error": "This field is required.",
+        "id": "group1Question1",
+        "type": "input",
+        "ui": Object {
+          "title": "group1Questions",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice1",
+            "ui": Object {
+              "title": "group1Question2Choice1",
+            },
+            "value": "group1Question2Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice2",
+            "ui": Object {
+              "title": "group1Question2Choice2",
+            },
+            "value": "group1Question2Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice3",
+            "ui": Object {
+              "title": "group1Question2Choice3",
+            },
+            "value": "group1Question2Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": "Please select an option.",
+        "id": "group1Question2",
+        "type": "single",
+        "ui": Object {
+          "title": "group1Question2",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice1",
+            "ui": Object {
+              "title": "group1Question3Choice1",
+            },
+            "value": "group1Question3Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice2",
+            "ui": Object {
+              "title": "group1Question3Choice2",
+            },
+            "value": "group1Question3Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice3",
+            "ui": Object {
+              "title": "group1Question3Choice3",
+            },
+            "value": "group1Question3Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": undefined,
+        "id": "group1Question3",
+        "type": "multiple",
+        "ui": Object {
+          "title": "group1Question3",
+        },
+        "unvalidatedAnswer": Array [],
+        "validatedAnswer": Array [],
+        "validating": false,
+      },
+    ],
+    "ui": Object {},
+  },
+]
+`;
+
+exports[`Invalid Answering setChoices empty value 2`] = `
+Object {
+  "group1Question1": "This field is required.",
+  "group1Question2": "Please select an option.",
+  "subGroup1Question1": "This field is required.",
+  "subGroup1Question2": "Please select an option.",
+  "subGroup1Question4": "Please select at least 1 option.",
+}
+`;
+
+exports[`Invalid Answering setChoices empty value 3`] = `
+Object {
+  "group1Question3": Array [],
+  "subGroup1Question3": Array [],
+  "subGroup1Question4": Array [],
+}
+`;
+
+exports[`Invalid Answering setChoices empty value 4`] = `
+Object {
+  "group1Question3": Array [],
+}
+`;
+
+exports[`Invalid Answering setChoices invalid choice 1`] = `
+Array [
+  Object {
+    "disabled": false,
+    "groups": Array [
+      Object {
+        "disabled": false,
+        "groups": Array [],
+        "id": "subGroup1",
+        "questions": Array [
+          Object {
+            "choices": Array [],
+            "disabled": false,
+            "error": "This field is required.",
+            "id": "subGroup1Question1",
+            "type": "input",
+            "ui": Object {
+              "title": "subGroup1Questions",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice1",
+                },
+                "value": "subGroup1Question2Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice2",
+                },
+                "value": "subGroup1Question2Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice3",
+                },
+                "value": "subGroup1Question2Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select an option.",
+            "id": "subGroup1Question2",
+            "type": "single",
+            "ui": Object {
+              "title": "subGroup1Question2",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice1",
+                },
+                "value": "subGroup1Question3Choice1",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice2",
+                },
+                "value": "subGroup1Question3Choice2",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice3",
+                },
+                "value": "subGroup1Question3Choice3",
+              },
+            ],
+            "disabled": true,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question3",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice1",
+                },
+                "value": "subGroup1Question4Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice2",
+                },
+                "value": "subGroup1Question4Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice3",
+                },
+                "value": "subGroup1Question4Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question4",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+        ],
+        "ui": Object {},
+      },
+    ],
+    "id": "group1",
+    "questions": Array [
+      Object {
+        "choices": Array [],
+        "disabled": false,
+        "error": "This field is required.",
+        "id": "group1Question1",
+        "type": "input",
+        "ui": Object {
+          "title": "group1Questions",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice1",
+            "ui": Object {
+              "title": "group1Question2Choice1",
+            },
+            "value": "group1Question2Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice2",
+            "ui": Object {
+              "title": "group1Question2Choice2",
+            },
+            "value": "group1Question2Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice3",
+            "ui": Object {
+              "title": "group1Question2Choice3",
+            },
+            "value": "group1Question2Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": "Please select an option.",
+        "id": "group1Question2",
+        "type": "single",
+        "ui": Object {
+          "title": "group1Question2",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice1",
+            "ui": Object {
+              "title": "group1Question3Choice1",
+            },
+            "value": "group1Question3Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice2",
+            "ui": Object {
+              "title": "group1Question3Choice2",
+            },
+            "value": "group1Question3Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice3",
+            "ui": Object {
+              "title": "group1Question3Choice3",
+            },
+            "value": "group1Question3Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": undefined,
+        "id": "group1Question3",
+        "type": "multiple",
+        "ui": Object {
+          "title": "group1Question3",
+        },
+        "unvalidatedAnswer": Array [],
+        "validatedAnswer": Array [],
+        "validating": false,
+      },
+    ],
+    "ui": Object {},
+  },
+]
+`;
+
+exports[`Invalid Answering setChoices invalid choice 2`] = `
+Object {
+  "group1Question1": "This field is required.",
+  "group1Question2": "Please select an option.",
+  "subGroup1Question1": "This field is required.",
+  "subGroup1Question2": "Please select an option.",
+  "subGroup1Question4": "Please select at least 1 option.",
+}
+`;
+
+exports[`Invalid Answering setChoices invalid choice 3`] = `
+Object {
+  "group1Question3": Array [],
+  "subGroup1Question3": Array [],
+  "subGroup1Question4": Array [],
+}
+`;
+
+exports[`Invalid Answering setChoices invalid choice 4`] = `
+Object {
+  "group1Question3": Array [],
+}
+`;
+
+exports[`Invalid Answering setInput undefined value 1`] = `
+Array [
+  Object {
+    "disabled": false,
+    "groups": Array [
+      Object {
+        "disabled": false,
+        "groups": Array [],
+        "id": "subGroup1",
+        "questions": Array [
+          Object {
+            "choices": Array [],
+            "disabled": false,
+            "error": "This field is required.",
+            "id": "subGroup1Question1",
+            "type": "input",
+            "ui": Object {
+              "title": "subGroup1Questions",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice1",
+                },
+                "value": "subGroup1Question2Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice2",
+                },
+                "value": "subGroup1Question2Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question2Choice3",
+                },
+                "value": "subGroup1Question2Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select an option.",
+            "id": "subGroup1Question2",
+            "type": "single",
+            "ui": Object {
+              "title": "subGroup1Question2",
+            },
+            "unvalidatedAnswer": undefined,
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice1",
+                },
+                "value": "subGroup1Question3Choice1",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice2",
+                },
+                "value": "subGroup1Question3Choice2",
+              },
+              Object {
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question3Choice3",
+                },
+                "value": "subGroup1Question3Choice3",
+              },
+            ],
+            "disabled": true,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question3",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice1",
+                },
+                "value": "subGroup1Question4Choice1",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice2",
+                },
+                "value": "subGroup1Question4Choice2",
+              },
+              Object {
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
+                "ui": Object {
+                  "title": "subGroup1Question4Choice3",
+                },
+                "value": "subGroup1Question4Choice3",
+              },
+            ],
+            "disabled": false,
+            "error": "Please select at least 1 option.",
+            "id": "subGroup1Question4",
+            "type": "multiple",
+            "ui": Object {
+              "title": "subGroup1Question3",
+            },
+            "unvalidatedAnswer": Array [],
+            "validatedAnswer": undefined,
+            "validating": false,
+          },
+        ],
+        "ui": Object {},
+      },
+    ],
+    "id": "group1",
+    "questions": Array [
+      Object {
+        "choices": Array [],
+        "disabled": false,
+        "error": "This field is required.",
+        "id": "group1Question1",
+        "type": "input",
+        "ui": Object {
+          "title": "group1Questions",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice1",
+            "ui": Object {
+              "title": "group1Question2Choice1",
+            },
+            "value": "group1Question2Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice2",
+            "ui": Object {
+              "title": "group1Question2Choice2",
+            },
+            "value": "group1Question2Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question2Choice3",
+            "ui": Object {
+              "title": "group1Question2Choice3",
+            },
+            "value": "group1Question2Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": "Please select an option.",
+        "id": "group1Question2",
+        "type": "single",
+        "ui": Object {
+          "title": "group1Question2",
+        },
+        "unvalidatedAnswer": undefined,
+        "validatedAnswer": undefined,
+        "validating": false,
+      },
+      Object {
+        "choices": Array [
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice1",
+            "ui": Object {
+              "title": "group1Question3Choice1",
+            },
+            "value": "group1Question3Choice1",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice2",
+            "ui": Object {
+              "title": "group1Question3Choice2",
+            },
+            "value": "group1Question3Choice2",
+          },
+          Object {
+            "disabled": false,
+            "id": "group1Question3Choice3",
+            "ui": Object {
+              "title": "group1Question3Choice3",
+            },
+            "value": "group1Question3Choice3",
+          },
+        ],
+        "disabled": false,
+        "error": undefined,
+        "id": "group1Question3",
+        "type": "multiple",
+        "ui": Object {
+          "title": "group1Question3",
+        },
+        "unvalidatedAnswer": Array [],
+        "validatedAnswer": Array [],
+        "validating": false,
+      },
+    ],
+    "ui": Object {},
+  },
+]
+`;
+
+exports[`Invalid Answering setInput undefined value 2`] = `
+Object {
+  "group1Question1": "This field is required.",
+  "group1Question2": "Please select an option.",
+  "subGroup1Question1": "This field is required.",
+  "subGroup1Question2": "Please select an option.",
+  "subGroup1Question4": "Please select at least 1 option.",
+}
+`;
+
+exports[`Invalid Answering setInput undefined value 3`] = `
+Object {
+  "group1Question3": Array [],
+  "subGroup1Question3": Array [],
+  "subGroup1Question4": Array [],
+}
+`;
+
+exports[`Invalid Answering setInput undefined value 4`] = `
+Object {
+  "group1Question3": Array [],
+}
+`;
