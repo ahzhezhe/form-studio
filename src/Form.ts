@@ -10,7 +10,6 @@ export class Form {
   private onFormUpdate?: FormUpdateEvent;
   private groups: Group[];
   private validators: Record<string, Validator>;
-  private lastRenderInstructions?: RenderInstructions;
   private defaultAnswers: Answers = {};
 
   private groupMap = new Map<string, Group>();
@@ -31,7 +30,9 @@ export class Form {
     this.validators = validators;
     this.onFormUpdate = onFormUpdate;
     this.processGroups(undefined, this.groups);
-    this.importAnswers(this.defaultAnswers, skipValidations);
+    this.endByInformFormUpdate(() => {
+      this.internalImportAnswers(this.defaultAnswers, skipValidations);
+    });
   }
 
   private processGroups(parentGroup: Group | undefined, groups: Group[]) {
@@ -179,11 +180,11 @@ export class Form {
    * @param skipValidations skip validations
    */
   clear(skipValidations = false) {
-    for (const group of this.groups) {
-      this.clearGroup(group.id, skipValidations);
-    }
-
-    this.refreshForm();
+    this.endByInformFormUpdate(() => {
+      for (const group of this.groups) {
+        this.internalClearGroup(group.id, skipValidations);
+      }
+    });
   }
 
   /**
@@ -193,16 +194,20 @@ export class Form {
    * @param skipValidations skip validations
    */
   clearGroup(groupId: string, skipValidations = false) {
+    this.endByInformFormUpdate(() => {
+      this.internalClearGroup(groupId, skipValidations);
+    });
+  }
+
+  private internalClearGroup(groupId: string, skipValidations = false) {
     const group = this.findGroup(groupId);
 
     for (const subGroup of group.groups) {
-      this.clearGroup(subGroup.id, skipValidations);
+      this.internalClearGroup(subGroup.id, skipValidations);
     }
     for (const question of group.questions) {
-      this.clearAnswer(question.id, skipValidations);
+      this.internalClearAnswer(question.id, skipValidations);
     }
-
-    this.refreshForm();
   }
 
   /**
@@ -212,17 +217,21 @@ export class Form {
    * @param skipValidation skip validation
    */
   clearAnswer(questionId: string, skipValidation = false) {
+    this.endByInformFormUpdate(() => {
+      this.internalClearAnswer(questionId, skipValidation);
+    });
+  }
+
+  private internalClearAnswer(questionId: string, skipValidation = false) {
     const question = this.findQuestion(questionId);
 
     if (question.type === 'any') {
-      this.setValue(question.id, undefined, skipValidation);
+      this.internalSetValue(question.id, undefined, skipValidation);
     } else if (question.type === 'single') {
-      this.setChoice(question.id, undefined, skipValidation);
+      this.internalSetChoice(question.id, undefined, skipValidation);
     } else if (question.type === 'multiple') {
-      this.setChoices(question.id, [], skipValidation);
+      this.internalSetChoices(question.id, [], skipValidation);
     }
-
-    this.refreshForm();
   }
 
   /**
@@ -231,11 +240,11 @@ export class Form {
    * @param skipValidations skip validations
    */
   reset(skipValidations = false) {
-    for (const group of this.groups) {
-      this.resetGroup(group.id, skipValidations);
-    }
-
-    this.refreshForm();
+    this.endByInformFormUpdate(() => {
+      for (const group of this.groups) {
+        this.internalResetGroup(group.id, skipValidations);
+      }
+    });
   }
 
   /**
@@ -245,16 +254,20 @@ export class Form {
    * @param skipValidations skip validations
    */
   resetGroup(groupId: string, skipValidations = false) {
+    this.endByInformFormUpdate(() => {
+      this.internalResetGroup(groupId, skipValidations);
+    });
+  }
+
+  private internalResetGroup(groupId: string, skipValidations = false) {
     const group = this.findGroup(groupId);
 
     for (const subGroup of group.groups) {
-      this.resetGroup(subGroup.id, skipValidations);
+      this.internalResetGroup(subGroup.id, skipValidations);
     }
     for (const question of group.questions) {
-      this.resetAnswer(question.id, skipValidations);
+      this.internalResetAnswer(question.id, skipValidations);
     }
-
-    this.refreshForm();
   }
 
   /**
@@ -264,19 +277,23 @@ export class Form {
    * @param skipValidation skip validation
    */
   resetAnswer(questionId: string, skipValidation = false) {
+    this.endByInformFormUpdate(() => {
+      this.internalResetAnswer(questionId, skipValidation);
+    });
+  }
+
+  private internalResetAnswer(questionId: string, skipValidation = false) {
     const question = this.findQuestion(questionId);
 
     const defaultAnswer = this.defaultAnswers[questionId];
 
     if (question.type === 'any') {
-      this.setValue(question.id, defaultAnswer, skipValidation);
+      this.internalSetValue(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'single') {
-      this.setChoice(question.id, defaultAnswer, skipValidation);
+      this.internalSetChoice(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'multiple') {
-      this.setChoices(question.id, defaultAnswer || [], skipValidation);
+      this.internalSetChoices(question.id, defaultAnswer || [], skipValidation);
     }
-
-    this.refreshForm();
   }
 
   private setCurrentAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
@@ -308,14 +325,12 @@ export class Form {
     const validator = question.validator ? this.validators[question.validator] : undefined;
     if (!validator) {
       onSuccess();
-      this.refreshForm();
       return;
     }
 
     if (skipValidation) {
       this.questionValidatedAnswerMap.delete(question.id);
       this.questionErrorMap.delete(question.id);
-      this.refreshForm();
       return;
     }
 
@@ -324,27 +339,24 @@ export class Form {
       validationResult = validator(answer, question.validation || {});
     } catch (err) {
       onError(err);
-      this.refreshForm();
       return;
     }
 
     if (validationResult instanceof Promise) {
       this.questionValidatingMap.set(question.id, true);
-      this.refreshForm();
 
       validationResult
         .then(onSuccess)
         .catch(onError)
         .finally(() => {
           this.questionValidatingMap.delete(question.id);
-          this.refreshForm();
+          this.informFormUpdate();
         });
 
       return;
     }
 
     onSuccess();
-    this.refreshForm();
   }
 
   /**
@@ -355,6 +367,12 @@ export class Form {
    * @param skipValidation skip validation
    */
   setValue(questionId: string, value: any, skipValidation = false) {
+    this.endByInformFormUpdate(() => {
+      this.internalSetValue(questionId, value, skipValidation);
+    });
+  }
+
+  private internalSetValue(questionId: string, value: any, skipValidation = false) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'any') {
       throw new Error('Question type is not any.');
@@ -371,6 +389,12 @@ export class Form {
    * @param skipValidation skip validation
    */
   setChoice(questionId: string, value: ChoiceValue | undefined, skipValidation = false) {
+    this.endByInformFormUpdate(() => {
+      this.internalSetChoice(questionId, value, skipValidation);
+    });
+  }
+
+  private internalSetChoice(questionId: string, value: ChoiceValue | undefined, skipValidation = false) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'single') {
       throw new Error('Question type is not single.');
@@ -388,6 +412,12 @@ export class Form {
    * @param skipValidation skip validation
    */
   setChoices(questionId: string, values: ChoiceValue[], skipValidation = false) {
+    this.endByInformFormUpdate(() => {
+      this.internalSetChoices(questionId, values, skipValidation);
+    });
+  }
+
+  private internalSetChoices(questionId: string, values: ChoiceValue[], skipValidation = false) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'multiple') {
       throw new Error('Question type is not multiple.');
@@ -405,6 +435,12 @@ export class Form {
    * @param selected selected/unselected
    */
   selectChoice(choiceId: string, selected: boolean) {
+    this.endByInformFormUpdate(() => {
+      this.internalSelectChoice(choiceId, selected);
+    });
+  }
+
+  private internalSelectChoice(choiceId: string, selected: boolean) {
     const choice = this.findChoice(choiceId);
     const question = this.choiceQuestionMap.get(choiceId)!;
 
@@ -412,9 +448,9 @@ export class Form {
 
     if (question.type === 'single') {
       if (selected) {
-        this.setChoice(question.id, choice.value);
+        this.internalSetChoice(question.id, choice.value);
       } else if (choice.value === currentAnswer) {
-        this.setChoice(question.id, undefined);
+        this.internalSetChoice(question.id, undefined);
       }
     } else if (question.type === 'multiple') {
       currentAnswer = currentAnswer || [];
@@ -422,7 +458,7 @@ export class Form {
       if (selected) {
         currentAnswer.push(choice.value);
       }
-      this.setChoices(question.id, currentAnswer);
+      this.internalSetChoices(question.id, currentAnswer);
     }
   }
 
@@ -587,16 +623,22 @@ export class Form {
    * @skipValidations skip validations
    */
   importAnswers(answers: Answers, skipValidations = false) {
+    this.endByInformFormUpdate(() => {
+      this.internalImportAnswers(answers, skipValidations);
+    });
+  }
+
+  private internalImportAnswers(answers: Answers, skipValidations = false) {
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
       const answer = answers[questionId];
 
       if (question.type === 'any') {
-        this.setValue(questionId, answer, skipValidations);
+        this.internalSetValue(questionId, answer, skipValidations);
       } else if (question.type === 'single') {
-        this.setChoice(questionId, answer, skipValidations);
+        this.internalSetChoice(questionId, answer, skipValidations);
       } else if (question.type === 'multiple') {
-        this.setChoices(questionId, answer || [], skipValidations);
+        this.internalSetChoices(questionId, answer || [], skipValidations);
       }
     }
   }
@@ -607,24 +649,21 @@ export class Form {
    * @returns whether form is clean
    */
   validate() {
-    const answers = this.getCurrentAnswers();
-    this.importAnswers(answers);
-    return this.isClean();
+    return this.endByInformFormUpdate(() => {
+      const answers = this.getCurrentAnswers();
+      this.internalImportAnswers(answers);
+      return this.isClean();
+    });
   }
 
-  private refreshForm() {
-    const newRenderInstructions = this.getRenderInstructions();
-    const lastRenderInstructions = this.lastRenderInstructions;
-    this.lastRenderInstructions = newRenderInstructions;
+  private endByInformFormUpdate<T>(action: () => T) {
+    const result = action();
+    this.informFormUpdate();
+    return result;
+  }
 
-    if (!this.onFormUpdate) {
-      return;
-    }
-
-    const hasChange = JSON.stringify(lastRenderInstructions) !== JSON.stringify(newRenderInstructions);
-    if (hasChange) {
-      this.onFormUpdate(this);
-    }
+  private informFormUpdate() {
+    this.onFormUpdate?.(this);
   }
 
 }
