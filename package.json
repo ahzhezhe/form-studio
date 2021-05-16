@@ -2,7 +2,7 @@
   "name": "form-engine",
   "version": "1.0.0",
   "author": "Chang Zhe Jiet",
-  "description": "TODO",
+  "description": "A tool that helps manage form / survey / questionnaire through simple configurations.",
   "keywords": [
     "form engine",
     "form builder",
