@@ -1,15 +1,5 @@
 import { Form } from '../src/Form';
-import { RenderInstructions } from '../src/RenderInstructions';
-import { validators, getConfigs } from '.';
-
-const findQuestion = (renderInstructions: RenderInstructions, questionId: string) => {
-  for (const question of renderInstructions[0].groups[0].questions) {
-    if (question.id === questionId) {
-      return question;
-    }
-  }
-  throw new Error();
-};
+import { validators, getConfigs, findQuestion } from '.';
 
 describe('Choice Toggling', () => {
 

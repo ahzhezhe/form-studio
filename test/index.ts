@@ -1,6 +1,6 @@
-import { Answers } from '../src';
 import { GroupInitConfig, InitConfigs, QuestionInitConfig } from '../src/InitConfigs';
-import { Validator } from '../src/Types';
+import { RenderInstructions } from '../src/RenderInstructions';
+import { Answers, Validator } from '../src/Types';
 
 export const getConfigs = (withDefaultAnswers?: boolean): InitConfigs => {
   const subGroup1Questions: QuestionInitConfig[] = [];
@@ -139,4 +139,22 @@ export const validators: Record<string, Validator> = {
       throw new Error('This field is required.');
     }
   }
+};
+
+export const findQuestion = (renderInstructions: RenderInstructions, questionId: string) => {
+  for (const group of renderInstructions) {
+    for (const subGroup of group.groups) {
+      for (const question of subGroup.questions) {
+        if (question.id === questionId) {
+          return question;
+        }
+      }
+    }
+    for (const question of group.questions) {
+      if (question.id === questionId) {
+        return question;
+      }
+    }
+  }
+  throw new Error();
 };
