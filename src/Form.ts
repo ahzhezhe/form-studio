@@ -273,7 +273,7 @@ export class Form {
     } else if (question.type === 'single') {
       this.setChoice(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'multiple') {
-      this.setChoices(question.id, defaultAnswer, skipValidation);
+      this.setChoices(question.id, defaultAnswer || [], skipValidation);
     }
 
     this.refreshForm();
