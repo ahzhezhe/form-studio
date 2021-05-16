@@ -27,7 +27,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "lint": "eslint src/*.ts src/**/*.ts",
+    "lint": "eslint src/*.ts src/**/*.ts test/**/*.ts",
     "test": "jest",
     "build": "del-cli --force dist && tsc",
     "build:watch": "tsc -w",

@@ -8,14 +8,14 @@ const asyncValidators: Record<string, Validator> = {
   ...validators,
 
   notNull: async value => {
-    await sleep(500);
+    await sleep(100);
     if (!value) {
       throw new Error('This field is required.');
     }
   }
 };
 
-describe('Aysnc Validation', async () => {
+describe('Aysnc Validation', () => {
 
   test('Valid answer', async () => {
 
@@ -29,7 +29,7 @@ describe('Aysnc Validation', async () => {
     expect(question.validatedAnswer).toBeUndefined();
     expect(question.error).toBeUndefined();
 
-    await sleep(600);
+    await sleep(200);
     question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
 
     expect(question.validating).toBe(false);
@@ -51,7 +51,7 @@ describe('Aysnc Validation', async () => {
     expect(question.validatedAnswer).toBeUndefined();
     expect(question.error).toBeUndefined();
 
-    await sleep(600);
+    await sleep(200);
     question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
 
     expect(question.validating).toBe(false);
