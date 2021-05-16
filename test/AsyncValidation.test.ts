@@ -21,11 +21,11 @@ describe('Aysnc Validation', () => {
 
     const form = Form.fromConfigs(getConfigs(), asyncValidators, true);
 
-    form.setValue('subGroup1Question1', 'subGroup1Question1Value');
+    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
     let question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
 
     expect(question.validating).toBe(true);
-    expect(question.currentAnswer).toBe('subGroup1Question1Value');
+    expect(question.currentAnswer).toBe('subGroup1Question1Answer');
     expect(question.validatedAnswer).toBeUndefined();
     expect(question.error).toBeUndefined();
 
@@ -33,8 +33,8 @@ describe('Aysnc Validation', () => {
     question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
 
     expect(question.validating).toBe(false);
-    expect(question.currentAnswer).toBe('subGroup1Question1Value');
-    expect(question.validatedAnswer).toBe('subGroup1Question1Value');
+    expect(question.currentAnswer).toBe('subGroup1Question1Answer');
+    expect(question.validatedAnswer).toBe('subGroup1Question1Answer');
     expect(question.error).toBeUndefined();
 
   });
@@ -43,7 +43,7 @@ describe('Aysnc Validation', () => {
 
     const form = Form.fromConfigs(getConfigs(), asyncValidators, true);
 
-    form.setValue('subGroup1Question1', undefined);
+    form.setAnswer('subGroup1Question1', undefined);
     let question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
 
     expect(question.validating).toBe(true);

@@ -1,15 +1,15 @@
 import { Configs } from './Configs';
-import { fromGroupInitConfigs, toGroupConfigs } from './Converters';
-import { Choice, Group, ManagebleItem, Question } from './FormObjects';
-import { InitConfigs } from './InitConfigs';
-import { ChoiceRenderInstruction, GroupRenderInstruction, QuestionRenderInstruction, RenderInstructions } from './RenderInstructions';
-import { Answers, ChoiceValue, Errors, FormUpdateEvent, Validator } from './Types';
+import { fromGroupConfigs, toGroupConfigs } from './Converters';
+import { ExportedConfigs } from './ExportedConfigs';
+import { Choice, Group, Item, Question } from './FormObjects';
+import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
+import { Answers, ChoiceValue, Errors, FormUpdateEvent, Validators } from './Types';
 
 export class Form {
 
   private onFormUpdate?: FormUpdateEvent;
   private groups: Group[];
-  private validators: Record<string, Validator>;
+  private validators: Validators;
   private defaultAnswers: Answers = {};
 
   private groupMap = new Map<string, Group>();
@@ -25,7 +25,7 @@ export class Form {
   private itemDisabledByChoiceMap = new Map<string, Choice[]>();
   private itemEnabledByChoiceMap = new Map<string, Choice[]>();
 
-  private constructor(groups: Group[], validators: Record<string, Validator>, skipValidations: boolean, onFormUpdate?: FormUpdateEvent) {
+  private constructor(groups: Group[], validators: Validators, skipValidations: boolean, onFormUpdate?: FormUpdateEvent) {
     this.groups = groups;
     this.validators = validators;
     this.onFormUpdate = onFormUpdate;
@@ -88,23 +88,23 @@ export class Form {
    * Initiate a form with a config.
    *
    * @param configs configs
-   * @param validators validators, object keys are validator name, values are validation functions
+   * @param validators validators
    * @param skipValidations skip validations
    * @param formRefreshedHook function to be invoked when form is refreshed
    * @returns form object
    */
-  static fromConfigs(configs: InitConfigs, validators?: Record<string, Validator>, skipValidations?: boolean, onFormUpdate?: FormUpdateEvent) {
-    const groups = fromGroupInitConfigs(undefined, configs);
+  static fromConfigs(configs: Configs, validators?: Validators, skipValidations?: boolean, onFormUpdate?: FormUpdateEvent) {
+    const groups = fromGroupConfigs(undefined, configs);
     return new Form(groups, validators || {}, !!skipValidations, onFormUpdate);
   }
 
   /**
    * Get sanitized configs of this form.
-   * You can persist it and use it with `fromConfigs` method to reinitiate the form later.
+   * You can persist it and use it with [[fromConfigs]] method to reinitiate the form later.
    *
    * @returns configs
    */
-  getConfigs(): Configs {
+  getConfigs(): ExportedConfigs {
     return toGroupConfigs(this.groups);
   }
 
@@ -114,26 +114,26 @@ export class Form {
    * @returns render instructions
    */
   getRenderInstructions(): RenderInstructions {
-    return this.toGroupRenderInstruction(this.groups);
+    return this.toGroupRenderInstructions(this.groups);
   }
 
-  private toGroupRenderInstruction(groups: Group[]): GroupRenderInstruction[] {
-    return groups.map((group): GroupRenderInstruction => ({
+  private toGroupRenderInstructions(groups: Group[]): GroupRenderInstructions[] {
+    return groups.map((group): GroupRenderInstructions => ({
       id: group.id,
       disabled: this.isGroupDisabled(group),
       ui: group.ui,
-      groups: this.toGroupRenderInstruction(group.groups),
-      questions: this.toQuestionRenderInstruction(group.questions)
+      groups: this.toGroupRenderInstructions(group.groups),
+      questions: this.toQuestionRenderInstructions(group.questions)
     }));
   }
 
-  private toQuestionRenderInstruction(questions: Question[]): QuestionRenderInstruction[] {
-    return questions.map((question): QuestionRenderInstruction => ({
+  private toQuestionRenderInstructions(questions: Question[]): QuestionRenderInstructions[] {
+    return questions.map((question): QuestionRenderInstructions => ({
       id: question.id,
       disabled: this.isQuestionDisabled(question),
       ui: question.ui,
       type: question.type,
-      choices: question.type !== 'any' ? this.toChoiceRenderInstruction(question.choices) : [],
+      choices: question.type !== 'any' ? this.toChoiceRenderInstructions(question.choices) : [],
       currentAnswer: this.questionCurrentAnswerMap.get(question.id),
       validatedAnswer: this.isQuestionDisabled(question) ? undefined : this.questionValidatedAnswerMap.get(question.id),
       validating: !!this.questionValidatingMap.get(question.id),
@@ -141,8 +141,8 @@ export class Form {
     }));
   }
 
-  private toChoiceRenderInstruction(choices: Choice[]): ChoiceRenderInstruction[] {
-    return choices.map((choice): ChoiceRenderInstruction => ({
+  private toChoiceRenderInstructions(choices: Choice[]): ChoiceRenderInstructions[] {
+    return choices.map((choice): ChoiceRenderInstructions => ({
       id: choice.id,
       disabled: this.isChoiceDisabled(choice),
       ui: choice.ui,
@@ -226,7 +226,7 @@ export class Form {
     const question = this.findQuestion(questionId);
 
     if (question.type === 'any') {
-      this.internalSetValue(question.id, undefined, skipValidation);
+      this.internalSetAnswer(question.id, undefined, skipValidation);
     } else if (question.type === 'single') {
       this.internalSetChoice(question.id, undefined, skipValidation);
     } else if (question.type === 'multiple') {
@@ -288,7 +288,7 @@ export class Form {
     const defaultAnswer = this.defaultAnswers[questionId];
 
     if (question.type === 'any') {
-      this.internalSetValue(question.id, defaultAnswer, skipValidation);
+      this.internalSetAnswer(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'single') {
       this.internalSetChoice(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'multiple') {
@@ -360,29 +360,29 @@ export class Form {
   }
 
   /**
-   * Set value of the question with `any` as type.
+   * Set answer of the question with `any` as [[type]].
    *
    * @param questionId question id
-   * @param value value
+   * @param answer answer
    * @param skipValidation skip validation
    */
-  setValue(questionId: string, value: any, skipValidation = false) {
+  setAnswer(questionId: string, answer: any, skipValidation = false) {
     this.endByInformFormUpdate(() => {
-      this.internalSetValue(questionId, value, skipValidation);
+      this.internalSetAnswer(questionId, answer, skipValidation);
     });
   }
 
-  private internalSetValue(questionId: string, value: any, skipValidation: boolean) {
+  private internalSetAnswer(questionId: string, answer: any, skipValidation: boolean) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'any') {
       throw new Error('Question type is not any.');
     }
 
-    this.setCurrentAnswerAndValidate(question, value, skipValidation);
+    this.setCurrentAnswerAndValidate(question, answer, skipValidation);
   }
 
   /**
-   * Set value of the question with `single` as type.
+   * Set answer of the question with `single` as [[type]].
    *
    * @param questionId question id
    * @param value choice's value
@@ -405,7 +405,7 @@ export class Form {
   }
 
   /**
-   * Set values of the question with `multiple` as type.
+   * Set answers of the question with `multiple` as [[type]].
    *
    * @param questionId question id
    * @param values choices' values
@@ -429,7 +429,7 @@ export class Form {
 
   /**
    * Select invididual choice.
-   * Can be used by questions with `single` or `multiple` as type only.
+   * Can be used by questions with `single` or `multiple` as [[type]] only.
    *
    * @param choiceId choice id
    * @param selected selected/unselected
@@ -481,7 +481,7 @@ export class Form {
     return false;
   }
 
-  private isItemDisabled(item: ManagebleItem) {
+  private isItemDisabled(item: Item) {
     const disabledByChoices = this.itemDisabledByChoiceMap.get(item.id) || [];
 
     for (const choice of disabledByChoices) {
@@ -530,9 +530,9 @@ export class Form {
 
   /**
    * Get current answers. The answers are unvalidated.
-   * You can persist it and use it with `importAnswers` method to restore the answers later.
+   * You can persist it and use it with [[importAnswers]] method to restore the answers later.
    *
-   * @returns current answers, object keys are question ids, values are answers
+   * @returns current answers
    */
   getCurrentAnswers(): Answers {
     const answes: Answers = {};
@@ -551,9 +551,9 @@ export class Form {
   /**
    * Get validated answers.
    * If a question is disabled or it's answer is not valid, it's answer will be set to `undefined`.
-   * You can persist it and use it with `importAnswers` method to restore the answers later.
+   * You can persist it and use it with [[importAnswers]] method to restore the answers later.
    *
-   * @returns validated answers, object keys are question ids, values are answers
+   * @returns validated answers
    */
   getValidatedAnswers(): Answers {
     const answes: Answers = {};
@@ -575,9 +575,9 @@ export class Form {
    * Get error messages.
    *
    * Questions which didn't go through validation will not have error messages, even if their answers are currently invalid.
-   * You can use `validate` method to validate all answers in the form.
+   * You can use [[validate]] method to validate all answers in the form.
    *
-   * @returns errors, object keys are question ids, values are error message
+   * @returns errors
    */
   getErrors(): Errors {
     const errors: Errors = {};
@@ -599,7 +599,7 @@ export class Form {
    * Check whether form is clean.
    *
    * Form will always be clean if it didn't go through any validation, even if there are invalid answers in the form.
-   * You can use `validate` method to validate all answers in the form.
+   * You can use [[validate]] method to validate all answers in the form.
    *
    * @returns whether form is clean
    */
@@ -635,7 +635,7 @@ export class Form {
       const answer = answers[questionId];
 
       if (question.type === 'any') {
-        this.internalSetValue(questionId, answer, skipValidations);
+        this.internalSetAnswer(questionId, answer, skipValidations);
       } else if (question.type === 'single') {
         this.internalSetChoice(questionId, answer, skipValidations);
       } else if (question.type === 'multiple') {

@@ -1,8 +1,8 @@
-import { ChoiceConfig, GroupConfig, QuestionConfig } from './Configs';
+import { ChoiceConfigs, GroupConfigs, ItemConfigs, QuestionConfigs } from './Configs';
+import { ExportedChoiceConfigs, ExportedGroupConfigs, ExportedQuestionConfigs } from './ExportedConfigs';
 import { Choice, Group, Question } from './FormObjects';
-import { ChoiceInitConfig, GroupInitConfig, ManagebleItemInitConfig, QuestionInitConfig } from './InitConfigs';
 
-const managebleItemSorter = (a: ManagebleItemInitConfig, b: ManagebleItemInitConfig) => {
+const itemSorter = (a: ItemConfigs, b: ItemConfigs) => {
   if (!!!a.order && !!!b.order) {
     return 0;
   }
@@ -15,21 +15,21 @@ const managebleItemSorter = (a: ManagebleItemInitConfig, b: ManagebleItemInitCon
   return a.order - b.order;
 };
 
-export const fromGroupInitConfigs = (
-  parentGroupId: string | undefined, groups: GroupInitConfig[]): Group[] => groups.sort(managebleItemSorter).map((group, i) => {
+export const fromGroupConfigs = (
+  parentGroupId: string | undefined, groups: GroupConfigs[]): Group[] => groups.sort(itemSorter).map((group, i) => {
   const id = group.id || (parentGroupId ? `${parentGroupId}_g${i}` : `g${i}`);
   return {
     id,
     order: group.order,
     defaultDisabled: !!group.defaultDisabled,
     ui: group.ui || {},
-    groups: group.groups ? fromGroupInitConfigs(id, group.groups) : [],
-    questions: group.questions ? fromQuestionInitConfigs(id, group.questions) : []
+    groups: group.groups ? fromGroupConfigs(id, group.groups) : [],
+    questions: group.questions ? fromQuestionConfigs(id, group.questions) : []
   };
 });
 
-export const fromQuestionInitConfigs = (
-  groupId: string, questions: QuestionInitConfig[]): Question[] => questions.sort(managebleItemSorter).map((question, i) => {
+export const fromQuestionConfigs = (
+  groupId: string, questions: QuestionConfigs[]): Question[] => questions.sort(itemSorter).map((question, i) => {
   const id = question.id || `${groupId}_q${i}`;
   return {
     id,
@@ -37,15 +37,15 @@ export const fromQuestionInitConfigs = (
     defaultDisabled: !!question.defaultDisabled,
     ui: question.ui || {},
     type: question.type,
-    choices: question.type !== 'any' ? fromChoiceInitConfigs(id, question.choices!) : [],
+    choices: question.type !== 'any' ? fromChoiceConfigs(id, question.choices!) : [],
     validator: question.validator,
     validation: question.validation || {},
     defaultAnswer: question.defaultAnswer
   };
 });
 
-export const fromChoiceInitConfigs = (
-  questionId: string, choices: ChoiceInitConfig[]): Choice[] => choices.sort(managebleItemSorter).map((choice, i) => {
+export const fromChoiceConfigs = (
+  questionId: string, choices: ChoiceConfigs[]): Choice[] => choices.sort(itemSorter).map((choice, i) => {
   const id = choice.id || `${questionId}_c${i}`;
   return {
     id,
@@ -57,7 +57,7 @@ export const fromChoiceInitConfigs = (
   };
 });
 
-export const toGroupConfigs = (groups: Group[]): GroupConfig[] => groups.map(group => ({
+export const toGroupConfigs = (groups: Group[]): ExportedGroupConfigs[] => groups.map(group => ({
   id: group.id,
   order: group.order,
   defaultDisabled: group.defaultDisabled,
@@ -66,7 +66,7 @@ export const toGroupConfigs = (groups: Group[]): GroupConfig[] => groups.map(gro
   questions: toQuestionConfigs(group.questions)
 }));
 
-export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => questions.map(question => ({
+export const toQuestionConfigs = (questions: Question[]): ExportedQuestionConfigs[] => questions.map(question => ({
   id: question.id,
   order: question.order,
   defaultDisabled: question.defaultDisabled,
@@ -78,7 +78,7 @@ export const toQuestionConfigs = (questions: Question[]): QuestionConfig[] => qu
   defaultAnswer: question.defaultAnswer
 }));
 
-export const toChoiceConfigs = (choices: Choice[]): ChoiceConfig[] => choices.map(choice => ({
+export const toChoiceConfigs = (choices: Choice[]): ExportedChoiceConfigs[] => choices.map(choice => ({
   id: choice.id,
   order: choice.order,
   defaultDisabled: choice.defaultDisabled,

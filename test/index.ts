@@ -1,9 +1,9 @@
-import { GroupInitConfig, InitConfigs, QuestionInitConfig } from '../src/InitConfigs';
+import { GroupConfigs, Configs, QuestionConfigs } from '../src/Configs';
 import { RenderInstructions } from '../src/RenderInstructions';
 import { Answers, Validator } from '../src/Types';
 
-export const getConfigs = (withDefaultAnswers?: boolean): InitConfigs => {
-  const subGroup1Questions: QuestionInitConfig[] = [];
+export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
+  const subGroup1Questions: QuestionConfigs[] = [];
 
   subGroup1Questions.push({
     id: 'subGroup1Question1',
@@ -53,12 +53,12 @@ export const getConfigs = (withDefaultAnswers?: boolean): InitConfigs => {
     defaultAnswer: getAnswer('subGroup1Question4', withDefaultAnswers)
   });
 
-  const subGroup1: GroupInitConfig = {
+  const subGroup1: GroupConfigs = {
     id: 'subGroup1',
     questions: subGroup1Questions
   };
 
-  const group1Questions: QuestionInitConfig[] = [];
+  const group1Questions: QuestionConfigs[] = [];
 
   group1Questions.push({
     id: 'group1Question1',
@@ -95,7 +95,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): InitConfigs => {
     defaultAnswer: getAnswer('group1Question2', withDefaultAnswers)
   });
 
-  const group1: GroupInitConfig = {
+  const group1: GroupConfigs = {
     id: 'group1',
     groups: [subGroup1],
     questions: group1Questions
@@ -105,11 +105,11 @@ export const getConfigs = (withDefaultAnswers?: boolean): InitConfigs => {
 };
 
 export const answers: Answers = {
-  subGroup1Question1: 'subGroup1Question1Value',
+  subGroup1Question1: 'subGroup1Question1Answer',
   subGroup1Question2: 'subGroup1Question2Choice1',
   subGroup1Question3: ['subGroup1Question3Choice1', 'subGroup1Question3Choice2'],
   subGroup1Question4: ['subGroup1Question4Choice1', 'subGroup1Question4Choice2'],
-  group1Question1: 'group1Question1Value',
+  group1Question1: 'group1Question1Answer',
   group1Question2: 'group1Question2Choice1',
   group1Question3: ['group1Question3Choice1', 'group1Question3Choice2']
 };
@@ -122,20 +122,20 @@ const getAnswer = (questionId: string, withDefaultAnswers?: boolean) => {
 };
 
 export const validators: Record<string, Validator> = {
-  atLeast1: value => {
-    if (value.length < 1) {
+  atLeast1: answer => {
+    if (answer.length < 1) {
       throw new Error('Please select at least 1 option.');
     }
   },
 
-  notNullSingle: value => {
-    if (!value) {
+  notNullSingle: answer => {
+    if (!answer) {
       throw new Error('Please select an option.');
     }
   },
 
-  notNull: value => {
-    if (!value) {
+  notNull: answer => {
+    if (!answer) {
       throw new Error('This field is required.');
     }
   }

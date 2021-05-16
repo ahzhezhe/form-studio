@@ -31,40 +31,40 @@ describe('Validation', () => {
     expect(Object.keys(form.getErrors()).length).toBe(0);
   });
 
-  test('setValue with validation', () => {
+  test('setAnswer with validation', () => {
     const form = Form.fromConfigs(getConfigs(), validators, true);
 
     expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
 
-    form.setValue('subGroup1Question1', 'subGroup1Question1Value');
+    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
 
     expect(form.getValidatedAnswers()['subGroup1Question1']).toBeTruthy();
     expect(form.getCurrentAnswers()['subGroup1Question1']).toBeTruthy();
     expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
 
-    form.setValue('subGroup1Question1', undefined);
+    form.setAnswer('subGroup1Question1', undefined);
 
     expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getErrors()['subGroup1Question1']).toBeTruthy();
   });
 
-  test('setValue skip validation', () => {
+  test('setAnswer skip validation', () => {
     const form = Form.fromConfigs(getConfigs(), validators, true);
 
     expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
 
-    form.setValue('subGroup1Question1', 'subGroup1Question1Value', true);
+    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer', true);
 
     expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getCurrentAnswers()['subGroup1Question1']).toBeTruthy();
     expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
 
-    form.setValue('subGroup1Question1', undefined, true);
+    form.setAnswer('subGroup1Question1', undefined, true);
 
     expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();

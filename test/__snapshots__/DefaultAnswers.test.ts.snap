@@ -12,7 +12,7 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
-            "currentAnswer": "subGroup1Question1Value",
+            "currentAnswer": "subGroup1Question1Answer",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question1",
@@ -20,7 +20,7 @@ Array [
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "validatedAnswer": "subGroup1Question1Value",
+            "validatedAnswer": "subGroup1Question1Answer",
             "validating": false,
           },
           Object {
@@ -157,7 +157,7 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
-        "currentAnswer": "group1Question1Value",
+        "currentAnswer": "group1Question1Answer",
         "disabled": false,
         "error": undefined,
         "id": "group1Question1",
@@ -165,7 +165,7 @@ Array [
         "ui": Object {
           "title": "group1Questions",
         },
-        "validatedAnswer": "group1Question1Value",
+        "validatedAnswer": "group1Question1Answer",
         "validating": false,
       },
       Object {
@@ -260,13 +260,13 @@ exports[`Default Answers reset 2`] = `Object {}`;
 
 exports[`Default Answers reset 3`] = `
 Object {
-  "group1Question1": "group1Question1Value",
+  "group1Question1": "group1Question1Answer",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Value",
+  "subGroup1Question1": "subGroup1Question1Answer",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -281,13 +281,13 @@ Object {
 
 exports[`Default Answers reset 4`] = `
 Object {
-  "group1Question1": "group1Question1Value",
+  "group1Question1": "group1Question1Answer",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Value",
+  "subGroup1Question1": "subGroup1Question1Answer",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -312,7 +312,7 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
-            "currentAnswer": "subGroup1Question1Value",
+            "currentAnswer": "subGroup1Question1Answer",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question1",
@@ -320,7 +320,7 @@ Array [
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "validatedAnswer": "subGroup1Question1Value",
+            "validatedAnswer": "subGroup1Question1Answer",
             "validating": false,
           },
           Object {
@@ -457,7 +457,7 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
-        "currentAnswer": "group1Question1Value",
+        "currentAnswer": "group1Question1Answer",
         "disabled": false,
         "error": undefined,
         "id": "group1Question1",
@@ -465,7 +465,7 @@ Array [
         "ui": Object {
           "title": "group1Questions",
         },
-        "validatedAnswer": "group1Question1Value",
+        "validatedAnswer": "group1Question1Answer",
         "validating": false,
       },
       Object {
@@ -560,13 +560,13 @@ exports[`Default Answers resetAnswer 2`] = `Object {}`;
 
 exports[`Default Answers resetAnswer 3`] = `
 Object {
-  "group1Question1": "group1Question1Value",
+  "group1Question1": "group1Question1Answer",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Value",
+  "subGroup1Question1": "subGroup1Question1Answer",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -581,13 +581,13 @@ Object {
 
 exports[`Default Answers resetAnswer 4`] = `
 Object {
-  "group1Question1": "group1Question1Value",
+  "group1Question1": "group1Question1Answer",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Value",
+  "subGroup1Question1": "subGroup1Question1Answer",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -612,7 +612,7 @@ Array [
         "questions": Array [
           Object {
             "choices": Array [],
-            "currentAnswer": "subGroup1Question1Value",
+            "currentAnswer": "subGroup1Question1Answer",
             "disabled": false,
             "error": undefined,
             "id": "subGroup1Question1",
@@ -620,7 +620,7 @@ Array [
             "ui": Object {
               "title": "subGroup1Questions",
             },
-            "validatedAnswer": "subGroup1Question1Value",
+            "validatedAnswer": "subGroup1Question1Answer",
             "validating": false,
           },
           Object {
@@ -757,7 +757,7 @@ Array [
     "questions": Array [
       Object {
         "choices": Array [],
-        "currentAnswer": "group1Question1Value",
+        "currentAnswer": "group1Question1Answer",
         "disabled": false,
         "error": undefined,
         "id": "group1Question1",
@@ -765,7 +765,7 @@ Array [
         "ui": Object {
           "title": "group1Questions",
         },
-        "validatedAnswer": "group1Question1Value",
+        "validatedAnswer": "group1Question1Answer",
         "validating": false,
       },
       Object {
@@ -860,13 +860,13 @@ exports[`Default Answers resetGroup 2`] = `Object {}`;
 
 exports[`Default Answers resetGroup 3`] = `
 Object {
-  "group1Question1": "group1Question1Value",
+  "group1Question1": "group1Question1Answer",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Value",
+  "subGroup1Question1": "subGroup1Question1Answer",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",
@@ -881,13 +881,13 @@ Object {
 
 exports[`Default Answers resetGroup 4`] = `
 Object {
-  "group1Question1": "group1Question1Value",
+  "group1Question1": "group1Question1Answer",
   "group1Question2": "group1Question2Choice1",
   "group1Question3": Array [
     "group1Question3Choice1",
     "group1Question3Choice2",
   ],
-  "subGroup1Question1": "subGroup1Question1Value",
+  "subGroup1Question1": "subGroup1Question1Answer",
   "subGroup1Question2": "subGroup1Question2Choice1",
   "subGroup1Question3": Array [
     "subGroup1Question3Choice1",

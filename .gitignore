@@ -2,4 +2,4 @@ node_modules
 dist
 test/__coverage__
 test/__output__
-tryout.ts
+docs

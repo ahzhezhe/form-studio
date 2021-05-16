@@ -5,8 +5,8 @@ describe('Invalid Answering', () => {
 
   const form = Form.fromConfigs(getConfigs(), validators);
 
-  test('setValue undefined value', () => {
-    form.setValue('subGroup1Question1', undefined);
+  test('setAnswer undefined answer', () => {
+    form.setAnswer('subGroup1Question1', undefined);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
@@ -14,7 +14,7 @@ describe('Invalid Answering', () => {
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
-  test('setChoice undefined value', () => {
+  test('setChoice undefined answer', () => {
     form.setChoice('subGroup1Question2', undefined);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
@@ -23,7 +23,7 @@ describe('Invalid Answering', () => {
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
-  test('setChoices empty value', () => {
+  test('setChoices empty answer', () => {
     form.setChoices('subGroup1Question3', []);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
@@ -32,8 +32,8 @@ describe('Invalid Answering', () => {
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
-  test('setValue invalid question', () => {
-    expect(() => form.setValue('invalid', 'subGroup1Question1Value')).toThrow();
+  test('setAnswer invalid question', () => {
+    expect(() => form.setAnswer('invalid', 'subGroup1Question1Answer')).toThrow();
   });
 
   test('setChoice invalid question', () => {
@@ -66,8 +66,8 @@ describe('Invalid Answering', () => {
     expect(() => form.selectChoice('invalid', true)).toThrow();
   });
 
-  test('setValue invalid question type', () => {
-    expect(() => form.setValue('subGroup1Question2', 'subGroup1Question2Value')).toThrow();
+  test('setAnswer invalid question type', () => {
+    expect(() => form.setAnswer('subGroup1Question2', 'subGroup1Question2Value')).toThrow();
   });
 
   test('setChoice invalid question type', () => {

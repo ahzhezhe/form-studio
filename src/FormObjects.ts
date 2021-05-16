@@ -1,26 +1,26 @@
-import { ChoiceOnSelected, ChoiceValue, CustomConfig, QuestionType } from './Types';
+import { ChoiceOnSelected, ChoiceValue, CustomConfigs, QuestionType } from './Types';
 
-export interface ManagebleItem {
+export interface Item {
   id: string;
   order: number | undefined;
   defaultDisabled: boolean;
-  ui: CustomConfig;
+  ui: CustomConfigs;
 }
 
-export interface Group extends ManagebleItem {
+export interface Group extends Item {
   groups: Group[];
   questions: Question[];
 }
 
-export interface Question extends ManagebleItem {
+export interface Question extends Item {
   type: QuestionType;
   choices: Choice[];
   validator: string | undefined;
-  validation: CustomConfig;
+  validation: CustomConfigs;
   defaultAnswer: any;
 }
 
-export interface Choice extends ManagebleItem {
+export interface Choice extends Item {
   value: ChoiceValue;
   onSelected: ChoiceOnSelected;
 }

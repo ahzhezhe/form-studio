@@ -1,12 +1,12 @@
 import Form from '.';
 
-export type CustomConfig = Record<string, string | number | boolean>;
+export type CustomConfigs = Record<string, string | number | boolean>;
 
 export type QuestionType = 'any' | 'single' | 'multiple';
 
 export type ChoiceValue = string | number;
 
-export interface ChoiceOnSelected {
+export type ChoiceOnSelected = {
   /**
    * A list of group id, question id or choice id.
    * They will be disabled when this choice is selected and enabled when this choice is unselected.
@@ -19,10 +19,28 @@ export interface ChoiceOnSelected {
   enable?: string[];
 }
 
-export type Validator = (value: any, validation: CustomConfig) => void | Promise<void>;
+/**
+ * Validation function.
+ */
+export type Validator = (answer: any, validation: CustomConfigs) => void | Promise<void>;
 
+/**
+ * Keys are validator name, values are [[Validator]] function.
+ */
+export type Validators = Record<string, Validator>;
+
+/**
+ * Keys are question id, values are answers.
+ */
 export type Answers = Record<string, any>;
 
+/**
+ * Keys are question id, values are error messages.
+ */
 export type Errors = Record<string, string>;
 
+/**
+ * Function to be called when form is updated.
+ * `Form` object will be passed in.
+ */
 export type FormUpdateEvent = (form: Form) => void | Promise<void>;

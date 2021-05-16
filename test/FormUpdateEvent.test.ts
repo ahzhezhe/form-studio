@@ -10,7 +10,7 @@ test('Form Update Event', () => {
   const form = Form.fromConfigs(getConfigs(), validators, true, onFormUpdate);
   expect.assertions(1);
 
-  form.setValue('subGroup1Question1', 'subGroup1Question1Value');
+  form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
   expect.assertions(2);
 
   form.setChoice('subGroup1Question2', 'subGroup1Question2Choice1');

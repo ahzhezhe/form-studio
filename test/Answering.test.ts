@@ -5,8 +5,8 @@ describe('Answering', () => {
 
   const form = Form.fromConfigs(getConfigs(), validators);
 
-  test('setValue', () => {
-    form.setValue('subGroup1Question1', 'subGroup1Question1Value');
+  test('setAnswer', () => {
+    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
