@@ -199,7 +199,7 @@ export class Form {
     });
   }
 
-  private internalClearGroup(groupId: string, skipValidations = false) {
+  private internalClearGroup(groupId: string, skipValidations: boolean) {
     const group = this.findGroup(groupId);
 
     for (const subGroup of group.groups) {
@@ -222,7 +222,7 @@ export class Form {
     });
   }
 
-  private internalClearAnswer(questionId: string, skipValidation = false) {
+  private internalClearAnswer(questionId: string, skipValidation: boolean) {
     const question = this.findQuestion(questionId);
 
     if (question.type === 'any') {
@@ -259,7 +259,7 @@ export class Form {
     });
   }
 
-  private internalResetGroup(groupId: string, skipValidations = false) {
+  private internalResetGroup(groupId: string, skipValidations: boolean) {
     const group = this.findGroup(groupId);
 
     for (const subGroup of group.groups) {
@@ -282,7 +282,7 @@ export class Form {
     });
   }
 
-  private internalResetAnswer(questionId: string, skipValidation = false) {
+  private internalResetAnswer(questionId: string, skipValidation: boolean) {
     const question = this.findQuestion(questionId);
 
     const defaultAnswer = this.defaultAnswers[questionId];
@@ -372,7 +372,7 @@ export class Form {
     });
   }
 
-  private internalSetValue(questionId: string, value: any, skipValidation = false) {
+  private internalSetValue(questionId: string, value: any, skipValidation: boolean) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'any') {
       throw new Error('Question type is not any.');
@@ -394,7 +394,7 @@ export class Form {
     });
   }
 
-  private internalSetChoice(questionId: string, value: ChoiceValue | undefined, skipValidation = false) {
+  private internalSetChoice(questionId: string, value: ChoiceValue | undefined, skipValidation: boolean) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'single') {
       throw new Error('Question type is not single.');
@@ -417,7 +417,7 @@ export class Form {
     });
   }
 
-  private internalSetChoices(questionId: string, values: ChoiceValue[], skipValidation = false) {
+  private internalSetChoices(questionId: string, values: ChoiceValue[], skipValidation: boolean) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'multiple') {
       throw new Error('Question type is not multiple.');
@@ -433,14 +433,15 @@ export class Form {
    *
    * @param choiceId choice id
    * @param selected selected/unselected
+   * @param skipValidation skip validation
    */
-  selectChoice(choiceId: string, selected: boolean) {
+  selectChoice(choiceId: string, selected: boolean, skipValidation = false) {
     this.endByInformFormUpdate(() => {
-      this.internalSelectChoice(choiceId, selected);
+      this.internalSelectChoice(choiceId, selected, skipValidation);
     });
   }
 
-  private internalSelectChoice(choiceId: string, selected: boolean) {
+  private internalSelectChoice(choiceId: string, selected: boolean, skipValidation: boolean) {
     const choice = this.findChoice(choiceId);
     const question = this.choiceQuestionMap.get(choiceId)!;
 
@@ -448,9 +449,9 @@ export class Form {
 
     if (question.type === 'single') {
       if (selected) {
-        this.internalSetChoice(question.id, choice.value);
+        this.internalSetChoice(question.id, choice.value, skipValidation);
       } else if (choice.value === currentAnswer) {
-        this.internalSetChoice(question.id, undefined);
+        this.internalSetChoice(question.id, undefined, skipValidation);
       }
     } else if (question.type === 'multiple') {
       currentAnswer = currentAnswer || [];
@@ -458,7 +459,7 @@ export class Form {
       if (selected) {
         currentAnswer.push(choice.value);
       }
-      this.internalSetChoices(question.id, currentAnswer);
+      this.internalSetChoices(question.id, currentAnswer, skipValidation);
     }
   }
 
@@ -628,7 +629,7 @@ export class Form {
     });
   }
 
-  private internalImportAnswers(answers: Answers, skipValidations = false) {
+  private internalImportAnswers(answers: Answers, skipValidations: boolean) {
     for (const entry of this.questionMap.entries()) {
       const [questionId, question] = entry;
       const answer = answers[questionId];
@@ -651,7 +652,7 @@ export class Form {
   validate() {
     return this.endByInformFormUpdate(() => {
       const answers = this.getCurrentAnswers();
-      this.internalImportAnswers(answers);
+      this.internalImportAnswers(answers, false);
       return this.isClean();
     });
   }
