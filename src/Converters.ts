@@ -30,7 +30,7 @@ export const fromGroupInitConfigs = (
 
 export const fromQuestionInitConfigs = (
   groupId: string, questions: QuestionInitConfig[]): Question[] => questions.sort(managebleItemSorter).map((question, i) => {
-  const id = question.id || (groupId ? `${groupId}_q${i}` : `q${i}`);
+  const id = question.id || `${groupId}_q${i}`;
   return {
     id,
     order: question.order,
@@ -46,7 +46,7 @@ export const fromQuestionInitConfigs = (
 
 export const fromChoiceInitConfigs = (
   questionId: string, choices: ChoiceInitConfig[]): Choice[] => choices.sort(managebleItemSorter).map((choice, i) => {
-  const id = choice.id || (questionId ? `${questionId}_c${i}` : `c${i}`);
+  const id = choice.id || `${questionId}_c${i}`;
   return {
     id,
     order: choice.order,
