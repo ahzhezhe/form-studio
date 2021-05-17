@@ -124,19 +124,19 @@ const getAnswer = (questionId: string, withDefaultAnswers?: boolean) => {
 export const validators: Record<string, Validator> = {
   atLeast1: answer => {
     if (answer.length < 1) {
-      throw new Error('Please select at least 1 option.');
+      throw 'Please select at least 1 option.';
     }
   },
 
   notNullSingle: answer => {
     if (!answer) {
-      throw new Error('Please select an option.');
+      throw 'Please select an option.';
     }
   },
 
   notNull: answer => {
     if (!answer) {
-      throw new Error('This field is required.');
+      throw 'This field is required.';
     }
   }
 };

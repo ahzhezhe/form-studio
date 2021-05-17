@@ -84,9 +84,9 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    */
   validating: boolean;
   /**
-   * Message of the error thrown by validator.
+   * Error thrown by validator.
    */
-  error: string | undefined;
+  error: any;
 }
 
 /**

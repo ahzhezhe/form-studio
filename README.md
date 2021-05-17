@@ -135,7 +135,7 @@ The second question is disabled by default. If 'yes' is selected for the first q
 # **Validators**
 `form-studio` doesn't come with any predefined validator. You need to define your own validators according to your project needs.
 
-A validator is a function that will be called when the answer of a question is updated, it throws `Error` when validation fails.
+A validator is a function that will be called when the answer of a question is updated, it throws error when validation fails.
 
 Each question can be assigned with a name of the validator to be used and a set of validation configs to be used by the validator.
 
@@ -209,7 +209,7 @@ Questions also come with the following important properties that you will need t
 - `currentAnswer`: current answer of the question, it is unvalidated and might not be valid, but you will still need to show them on UI
 - `validatedAnswer`: validated answer
 - `validating`: whether or not the question is currently being validating, it could happen if the validator used is an aysnc function, you might want to show a spinner or some other indicator on UI
-- `error`: error message for question which failed validation
+- `error`: error for question which failed validation
 
 ### **Example (React)**
 ```javascript
@@ -245,18 +245,18 @@ export const SurveyPage = () => {
   const renderRadioGroup = (question: QuestionRenderInstructions) => {
     const { id, choices, error, currentAnswer } = question;
     return (
-      <Radio
+      <RadioGroup
         error={error}
         value={currentAnswer}
         onChange={e => form.setChoice(id, e.target.value)}>
         {choices!.map(choice =>
-          <RadioOption
+          <Radio
             value={choice.value}
             disabled={choice.disabled}>
             {choice.ui.title}
-          </RadioOption>
+          </Radio>
         )}
-      </Radio>
+      </RadioGroup>
     );
   };
 

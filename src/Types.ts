@@ -35,9 +35,9 @@ export type Validators = Record<string, Validator>;
 export type Answers = Record<string, any>;
 
 /**
- * Keys are question id, values are error messages.
+ * Keys are question id, values are error thrown by validator.
  */
-export type Errors = Record<string, string>;
+export type Errors = Record<string, any>;
 
 /**
  * Function to be called when form is updated.

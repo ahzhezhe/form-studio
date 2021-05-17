@@ -24,7 +24,7 @@ export class Form {
   private questionCurrentAnswerMap = new Map<string, any>();
   private questionValidatedAnswerMap = new Map<string, any>();
   private questionValidatingMap = new Map<string, boolean>();
-  private questionErrorMap = new Map<string, string>();
+  private questionErrorMap = new Map<string, any>();
   private itemDisabledByChoiceMap = new Map<string, Choice[]>();
   private itemEnabledByChoiceMap = new Map<string, Choice[]>();
 
@@ -408,7 +408,7 @@ export class Form {
 
     const onError = (err: any) => {
       this.questionValidatedAnswerMap.delete(question.id);
-      this.questionErrorMap.set(question.id, err.message);
+      this.questionErrorMap.set(question.id, err);
     };
 
     const validators = this.getValidators(question.validators);
@@ -661,9 +661,9 @@ export class Form {
   }
 
   /**
-   * Get error messages.
+   * Get errors.
    *
-   * Questions which didn't go through validation will not have error messages, even if their answers are currently invalid.
+   * Questions which didn't go through validation will not have errors, even if their answers are currently invalid.
    * You can use [[validate]] method to validate all answers in the form.
    *
    * @returns errors
