@@ -50,7 +50,7 @@ Each of them has the following properties:
 - `id`: An unique id to identify the item
 - `order`: Sort order of the item among it's parent
 - `defaultDisabled`: To indicate that the item is disabled by default
-- `ui`: Any values that help you determine on how to render the frontend UI for this item
+- `ui`: Any values that help you determine on how to render the frontend UI for this item, it should contain minimal but useful information, e.g. title, placeholder
 
 ### **Group**
 A group is a logical grouping of a set of questions.
@@ -121,6 +121,7 @@ The second question is disabled by default. If 'yes' is selected for the first q
         "defaultDisabled": true,
         "type": "any",
         "ui": {
+          "type": "string",
           "title": "What is you name?",
         },
       }
@@ -174,7 +175,7 @@ Form will be updated when answer is set, validation is triggered, etc.
 
 Usually form updated listener is only needed when the form is being used in frontend, so that you can trigger an UI rerender when form is updated.
 
-### **Example (Frontend React)**
+### **Example (React)**
 ```javascript
 const [renderInstructions, setRenderInstructions] = useState();
 
@@ -191,8 +192,105 @@ const form = new Form(configs, validators, onFormUpdate);
 <br />
 
 # **Render Instructions**
-```
-TODO
+Render instructions can be get by calling `getRenderInstructions` method.
+
+It is a set of instructions that tell you how the form should look like.
+
+Each item in the instructions comes with the following properties:
+- `id`: An unique id to identify the item
+- `disabled`: Whether or not this item is disabled, you should handle it in the UI, e.g. hide or grey out disabled item
+- `ui`: The exact same values that you specified in the form configs
+
+Questions also come with the following important properties that you will need to determine the UI:
+- `type`:
+  - `any`: render whatever UI that is required based on your custom `ui` config, e.g. if `ui.inputType` is `string`, then a simple text input is rendered
+  - `single`: render UI that allows user to select 1 option from a list of options, e.g. select, radio button group
+  - `multiple`: render UI that allows user to select multiple options from a list of options, e.g. check box group
+- `currentAnswer`: current answer of the question, it is unvalidated and might not be valid, but you will still need to show them on UI
+- `validatedAnswer`: validated answer
+- `validating`: whether or not the question is currently being validating, it could happen if the validator used is an aysnc function, you might want to show a spinner or some other indicator on UI
+- `error`: error message for question which failed validation
+
+### **Example (React)**
+```javascript
+let form: Form;
+
+export const SurveyPage = () => {
+  const [renderInstructions, setRenderInstructions] = useState<GroupRenderInstructions[]>([]);
+
+  useEffect(() => {
+    form = new Form(configs, validators, true, form => setRenderInstructions(form.getRenderInstructions()));
+  }, []);
+
+  const renderQuestion = (question: QuestionRenderInstructions) => {
+    const { disabled, type, ui } = question;
+    if (disabled) {
+      return null;
+    }
+    if (type === 'any') {
+      return (
+        <>
+          {ui.inputType === 'string' && renderStringInput(question)}
+        </>
+      );
+    }
+    if (type === 'single') {
+      return renderRadioGroup(question);
+    }
+    if (type === 'multiple') {
+      return renderCheckBoxGroup(question);
+    }
+  };
+
+  const renderRadioGroup = (question: QuestionRenderInstructions) => {
+    const { id, choices, error, currentAnswer } = question;
+    return (
+      <Radio
+        error={error}
+        value={currentAnswer}
+        onChange={e => form.setChoice(id, e.target.value)}>
+        {choices!.map(choice =>
+          <RadioOption
+            value={choice.value}
+            disabled={choice.disabled}>
+            {choice.ui.title}
+          </RadioOption>
+        )}
+      </Radio>
+    );
+  };
+
+  const renderCheckBoxGroup = (question: QuestionRenderInstructions) => {
+    const { id, choices, error, currentAnswer } = question;
+    return (
+      <CheckBoxGroup
+        error={error}
+        value={currentAnswer}
+        onChange={answer => form.setChoices(id, answer as any[])}>
+        {choices!.map(choice =>
+          <CheckBox
+            value={choice.value}
+            disabled={choice.disabled}>
+            {choice.ui.title}
+          </CheckBox>
+        )}
+      </CheckBoxGroup>
+    );
+  };
+
+  const renderStringInput = (question: QuestionRenderInstructions) => {
+    const { id, ui, currentAnswer, error } = question;
+    return (
+      <TextInput
+        error={error}
+        maxLength={ui.maxLength as number}
+        value={currentAnswer}
+        onChange={e => form.setAnswer(id, e.target.value)} />
+    );
+  };
+
+  return renderInstructions[0].questions.map(question => renderQuestion(question));
+};
 ```
 
 <br />
