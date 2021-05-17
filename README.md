@@ -20,6 +20,8 @@ It does not provide:
 
 [API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.0/index.html)
 
+[Demo](https://github.com/ahzhezhe/form-studio-demo)
+
 <br />
 
 ## **Install via NPM**
