@@ -64,7 +64,7 @@ export interface QuestionConfigs extends ItemConfigs {
    */
   choices?: ChoiceConfigs[];
   /**
-   * Name of the validators to be used for validation when answer of this question is changed.
+   * Names of the validators to be used for validation when answer of this question is changed.
    *
    * Validators will be executed in sequence of their positions in the list.
    */

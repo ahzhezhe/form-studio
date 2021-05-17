@@ -20,10 +20,14 @@ It does not provide:
 
 [API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.1/index.html)
 
+<br />
+
 ## **Install via NPM**
 ```
 npm install form-studio
 ```
+
+<br />
 
 ## **Import**
 ```javascript
@@ -34,6 +38,8 @@ or
 const FormStudio = require('form-studio');
 const { default: Form } = FormStudio;
 ```
+
+<br />
 
 # **Form Configs**
 Form configs is the definition of the form. It should be persisted somewhere (e.g. database) so that it can be reused later.
@@ -46,14 +52,14 @@ Each of them has the following properties:
 - `defaultDisabled`: To indicate that the item is disabled by default
 - `ui`: Any values that help you determine on how to render the frontend UI for this item
 
-## **Group**
+### **Group**
 A group is a logical grouping of a set of questions.
 
 A form needs at least 1 group.
 
 Groups can also have sub-groups.
 
-## **Question**
+### **Question**
 There are 3 types of questions: `any`, `single` and `multiple`.
 
 A question comes with an answer (could be undefined if it is unanswered) and an error (could be undefined if it is unanswered, unvalidated or passed validation).
@@ -68,7 +74,7 @@ A question comes with an answer (could be undefined if it is unanswered) and an 
 
 You can also define the validators to be used by a question to validate its answer.
 
-## **Choice**
+### **Choice**
 Choices are for `single` or `multiple` questions.
 
 A choice comes with a value. Value of the choices will be the answer of the question.
@@ -123,6 +129,8 @@ The second question is disabled by default. If 'yes' is selected for the first q
 ]
 ```
 
+<br />
+
 # **Validators**
 `form-studio` doesn't come with any predefined validator. You need to define your own validators according to your project needs.
 
@@ -157,6 +165,8 @@ const validators = {
 };
 ```
 
+<br />
+
 # **Form Update Listener**
 A listener function that will be called when form is updated.
 
@@ -171,15 +181,21 @@ const [renderInstructions, setRenderInstructions] = useState();
 const onFormUpdate = form => setRenderInstructions(form.getRenderInstructions());
 ```
 
+<br />
+
 # **Construct a Form with Configs & Validators**
 ```javascript
 const form = new Form(configs, validators, onFormUpdate);
 ```
 
+<br />
+
 # **Render Instructions**
 ```
 TODO
 ```
+
+<br />
 
 # **Setting Answers**
 `any` questions use `setAnswer` method to set answer.
@@ -199,6 +215,8 @@ form.setAnswer('name', 'Jason');
 onChange={e => form.setChoice(id, e.target.value)}
 onChange={e => form.setAnswer(id, e.target.value)}
 ```
+
+<br />
 
 # **Validate and Persist the Answers**
 Use `validate` method to make sure that all the answers are validated.
@@ -240,6 +258,8 @@ res.status(200);
 res.end();
 ```
 
+<br />
+
 # **Importing Answers**
 Use `importAnswers` method to import answers to the entire form.
 
@@ -254,6 +274,8 @@ form.importAnswers(answers);
 const answers = await ... // retrieve from database
 form.importAnswers(answers);
 ```
+
+<br />
 
 # **Other Features**
 Use the following methods to clear current answers:
