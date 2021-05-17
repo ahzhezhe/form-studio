@@ -38,7 +38,7 @@ export const fromQuestionConfigs = (
     ui: question.ui || {},
     type: question.type,
     choices: question.type !== 'any' ? fromChoiceConfigs(id, question.choices!) : [],
-    validator: question.validator,
+    validators: question.validators || [],
     validation: question.validation || {},
     defaultAnswer: question.defaultAnswer
   };
@@ -73,7 +73,7 @@ export const toQuestionConfigs = (questions: Question[]): ExportedQuestionConfig
   ui: question.ui || {},
   type: question.type,
   choices: question.type !== 'any' ? toChoiceConfigs(question.choices!) : [],
-  validator: question.validator,
+  validators: question.validators,
   validation: question.validation,
   defaultAnswer: question.defaultAnswer
 }));

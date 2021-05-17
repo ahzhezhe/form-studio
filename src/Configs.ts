@@ -21,7 +21,7 @@ export interface ItemConfigs {
    */
   defaultDisabled?: boolean;
   /**
-   * Any values that help you determine how to render the frontend UI of this item.
+   * Any values that help you determine on how to render the frontend UI for this item.
    */
   ui?: CustomConfigs;
 }
@@ -64,9 +64,11 @@ export interface QuestionConfigs extends ItemConfigs {
    */
   choices?: ChoiceConfigs[];
   /**
-   * Name of the validator to be used for validation when answer of this question is changed.
+   * Name of the validators to be used for validation when answer of this question is changed.
+   *
+   * Validators will be executed in sequence of their positions in the list.
    */
-  validator?: string;
+  validators?: string[];
   /**
    * Any values that help to validator to perform validation.
    */
@@ -99,7 +101,7 @@ export interface ChoiceConfigs extends ItemConfigs {
 }
 
 /**
- * Configs to initiate a form.
+ * Configs to construct a form.
  *
  * @category Configs
  */

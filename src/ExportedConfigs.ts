@@ -24,7 +24,7 @@ export interface ExportedGroupConfigs extends ExportedItemConfigs {
 export interface ExportedQuestionConfigs extends ExportedItemConfigs {
   type: QuestionType;
   choices: ExportedChoiceConfigs[];
-  validator: string | undefined;
+  validators: string[];
   validation: CustomConfigs;
   defaultAnswer: any;
 }
@@ -39,7 +39,7 @@ export interface ExportedChoiceConfigs extends ExportedItemConfigs {
 
 /**
  * Exported form configs.
- * You can persist it and use it with [[fromConfigs]] method to reinitiate the form later.
+ * You can persist it and use it to reconstruct the form later.
  *
  * @category Exported Configs
  */

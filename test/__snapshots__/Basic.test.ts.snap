@@ -22,7 +22,9 @@ Array [
               "title": "subGroup1Questions",
             },
             "validation": Object {},
-            "validator": "notNull",
+            "validators": Array [
+              "notNull",
+            ],
           },
           Object {
             "choices": Array [
@@ -74,7 +76,9 @@ Array [
               "title": "subGroup1Question2",
             },
             "validation": Object {},
-            "validator": "notNullSingle",
+            "validators": Array [
+              "notNullSingle",
+            ],
           },
           Object {
             "choices": Array [
@@ -118,7 +122,9 @@ Array [
               "title": "subGroup1Question3",
             },
             "validation": Object {},
-            "validator": "atLeast1",
+            "validators": Array [
+              "atLeast1",
+            ],
           },
           Object {
             "choices": Array [
@@ -162,7 +168,9 @@ Array [
               "title": "subGroup1Question3",
             },
             "validation": Object {},
-            "validator": "atLeast1",
+            "validators": Array [
+              "atLeast1",
+            ],
           },
         ],
         "ui": Object {},
@@ -182,7 +190,9 @@ Array [
           "title": "group1Questions",
         },
         "validation": Object {},
-        "validator": "notNull",
+        "validators": Array [
+          "notNull",
+        ],
       },
       Object {
         "choices": Array [
@@ -226,7 +236,9 @@ Array [
           "title": "group1Question2",
         },
         "validation": Object {},
-        "validator": "notNullSingle",
+        "validators": Array [
+          "notNullSingle",
+        ],
       },
       Object {
         "choices": Array [
@@ -270,7 +282,7 @@ Array [
           "title": "group1Question3",
         },
         "validation": Object {},
-        "validator": undefined,
+        "validators": Array [],
       },
     ],
     "ui": Object {},
@@ -562,7 +574,9 @@ Array [
               "title": "subGroup1Questions",
             },
             "validation": Object {},
-            "validator": "notNull",
+            "validators": Array [
+              "notNull",
+            ],
           },
           Object {
             "choices": Array [
@@ -614,7 +628,9 @@ Array [
               "title": "subGroup1Question2",
             },
             "validation": Object {},
-            "validator": "notNullSingle",
+            "validators": Array [
+              "notNullSingle",
+            ],
           },
           Object {
             "choices": Array [
@@ -661,7 +677,9 @@ Array [
               "title": "subGroup1Question3",
             },
             "validation": Object {},
-            "validator": "atLeast1",
+            "validators": Array [
+              "atLeast1",
+            ],
           },
           Object {
             "choices": Array [
@@ -708,7 +726,9 @@ Array [
               "title": "subGroup1Question3",
             },
             "validation": Object {},
-            "validator": "atLeast1",
+            "validators": Array [
+              "atLeast1",
+            ],
           },
         ],
         "ui": Object {},
@@ -728,7 +748,9 @@ Array [
           "title": "group1Questions",
         },
         "validation": Object {},
-        "validator": "notNull",
+        "validators": Array [
+          "notNull",
+        ],
       },
       Object {
         "choices": Array [
@@ -772,7 +794,9 @@ Array [
           "title": "group1Question2",
         },
         "validation": Object {},
-        "validator": "notNullSingle",
+        "validators": Array [
+          "notNullSingle",
+        ],
       },
       Object {
         "choices": Array [
@@ -819,7 +843,7 @@ Array [
           "title": "group1Question3",
         },
         "validation": Object {},
-        "validator": undefined,
+        "validators": Array [],
       },
     ],
     "ui": Object {},

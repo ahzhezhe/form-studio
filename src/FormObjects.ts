@@ -15,7 +15,7 @@ export interface Group extends Item {
 export interface Question extends Item {
   type: QuestionType;
   choices: Choice[];
-  validator: string | undefined;
+  validators: string[];
   validation: CustomConfigs;
   defaultAnswer: any;
 }

@@ -79,6 +79,8 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
   validatedAnswer: any | undefined;
   /**
    * Whether question is currently being validating.
+   *
+   * This value can be `true` if the validator used is an aysnc function.
    */
   validating: boolean;
   /**

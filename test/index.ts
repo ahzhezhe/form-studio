@@ -9,7 +9,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     id: 'subGroup1Question1',
     type: 'any',
     ui: { title: 'subGroup1Questions' },
-    validator: 'notNull',
+    validators: ['notNull'],
     defaultAnswer: getAnswer('subGroup1Question1', withDefaultAnswers)
   });
 
@@ -17,7 +17,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     id: 'subGroup1Question2',
     type: 'single',
     ui: { title: 'subGroup1Question2' },
-    validator: 'notNullSingle',
+    validators: ['notNullSingle'],
     choices: [
       { id: 'subGroup1Question2Choice1', ui: { title: 'subGroup1Question2Choice1' }, onSelected: { enable: ['subGroup1Question3'] } },
       { id: 'subGroup1Question2Choice2', ui: { title: 'subGroup1Question2Choice2' }, onSelected: { disable: ['subGroup1Question4'] } },
@@ -31,7 +31,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     defaultDisabled: true,
     type: 'multiple',
     ui: { title: 'subGroup1Question3' },
-    validator: 'atLeast1',
+    validators: ['atLeast1'],
     choices: [
       { id: 'subGroup1Question3Choice1', ui: { title: 'subGroup1Question3Choice1' } },
       { id: 'subGroup1Question3Choice2', ui: { title: 'subGroup1Question3Choice2' } },
@@ -44,7 +44,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     id: 'subGroup1Question4',
     type: 'multiple',
     ui: { title: 'subGroup1Question3' },
-    validator: 'atLeast1',
+    validators: ['atLeast1'],
     choices: [
       { id: 'subGroup1Question4Choice1', ui: { title: 'subGroup1Question4Choice1' } },
       { id: 'subGroup1Question4Choice2', ui: { title: 'subGroup1Question4Choice2' } },
@@ -65,7 +65,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     order: 1,
     type: 'any',
     ui: { title: 'group1Questions' },
-    validator: 'notNull',
+    validators: ['notNull'],
     defaultAnswer: getAnswer('group1Question1', withDefaultAnswers)
   });
 
@@ -86,7 +86,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     order: 2,
     type: 'single',
     ui: { title: 'group1Question2' },
-    validator: 'notNullSingle',
+    validators: ['notNullSingle'],
     choices: [
       { id: 'group1Question2Choice1', ui: { title: 'group1Question2Choice1' } },
       { id: 'group1Question2Choice2', ui: { title: 'group1Question2Choice2' } },

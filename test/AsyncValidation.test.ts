@@ -19,7 +19,7 @@ describe('Aysnc Validation', () => {
 
   test('Valid answer', async () => {
 
-    const form = Form.fromConfigs(getConfigs(), asyncValidators, true);
+    const form = new Form(getConfigs(), asyncValidators, true);
 
     form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
     let question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
@@ -41,7 +41,7 @@ describe('Aysnc Validation', () => {
 
   test('Invalid answer', async () => {
 
-    const form = Form.fromConfigs(getConfigs(), asyncValidators, true);
+    const form = new Form(getConfigs(), asyncValidators, true);
 
     form.setAnswer('subGroup1Question1', undefined);
     let question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');

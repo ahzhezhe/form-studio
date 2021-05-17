@@ -3,7 +3,7 @@ import { fromGroupConfigs, toGroupConfigs } from './Converters';
 import { ExportedConfigs } from './ExportedConfigs';
 import { Choice, Group, Item, Question } from './FormObjects';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
-import { Answers, ChoiceValue, Errors, FormUpdateEvent, Validators } from './Types';
+import { Answers, ChoiceValue, Errors, FormUpdateEvent, Validator, Validators } from './Types';
 
 /**
  * @category Form
@@ -28,13 +28,22 @@ export class Form {
   private itemDisabledByChoiceMap = new Map<string, Choice[]>();
   private itemEnabledByChoiceMap = new Map<string, Choice[]>();
 
-  private constructor(groups: Group[], validators: Validators, skipValidations: boolean, onFormUpdate?: FormUpdateEvent) {
-    this.groups = groups;
-    this.validators = validators;
+  /**
+   * Construct a form.
+   *
+   * @param configs configs
+   * @param validators validators
+   * @param skipValidations skip validations
+   * @param onFormUpdate function to be invoked when form is refreshed
+   * @returns form object
+   */
+  constructor(configs: Configs, validators?: Validators, skipValidations?: boolean, onFormUpdate?: FormUpdateEvent) {
+    this.groups = fromGroupConfigs(undefined, configs);
+    this.validators = validators || {};
     this.onFormUpdate = onFormUpdate;
     this.processGroups(undefined, this.groups);
     this.endByInformFormUpdate(() => {
-      this.internalImportAnswers(this.defaultAnswers, skipValidations);
+      this.internalImportAnswers(this.defaultAnswers, !!skipValidations);
     });
   }
 
@@ -88,22 +97,8 @@ export class Form {
   }
 
   /**
-   * Initiate a form with a config.
-   *
-   * @param configs configs
-   * @param validators validators
-   * @param skipValidations skip validations
-   * @param formRefreshedHook function to be invoked when form is refreshed
-   * @returns form object
-   */
-  static fromConfigs(configs: Configs, validators?: Validators, skipValidations?: boolean, onFormUpdate?: FormUpdateEvent) {
-    const groups = fromGroupConfigs(undefined, configs);
-    return new Form(groups, validators || {}, !!skipValidations, onFormUpdate);
-  }
-
-  /**
    * Get sanitized configs of this form.
-   * You can persist it and use it with [[fromConfigs]] method to reinitiate the form later.
+   * You can persist it and use it to reconstruct the form later.
    *
    * @returns configs
    */
@@ -299,6 +294,35 @@ export class Form {
     }
   }
 
+  private getValidators(names: string[]) {
+    const validators: Validator[] = [];
+
+    for (const name of names) {
+      const validator = this.validators[name];
+      if (validator) {
+        validators.push(validator);
+      }
+    }
+
+    return validators;
+  }
+
+  private executeValidators(validators: Validator[], question: Question, answer: any): void | Promise<void> {
+    const validator = validators.shift();
+
+    if (!validator) {
+      return;
+    }
+
+    const validationResult = validator(answer, question.validation);
+
+    if (validationResult instanceof Promise) {
+      return validationResult.then(() => this.executeValidators(validators, question, answer));
+    }
+
+    return this.executeValidators(validators, question, answer);
+  }
+
   private setCurrentAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
     this.questionCurrentAnswerMap.set(question.id, answer);
 
@@ -325,8 +349,8 @@ export class Form {
       this.questionErrorMap.set(question.id, err.message);
     };
 
-    const validator = question.validator ? this.validators[question.validator] : undefined;
-    if (!validator) {
+    const validators = this.getValidators(question.validators);
+    if (!validators.length) {
       onSuccess();
       return;
     }
@@ -339,7 +363,7 @@ export class Form {
 
     let validationResult: void | Promise<void>;
     try {
-      validationResult = validator(answer, question.validation || {});
+      validationResult = this.executeValidators(validators, question, answer);
     } catch (err) {
       onError(err);
       return;

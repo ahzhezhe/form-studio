@@ -5,7 +5,7 @@ describe('Basic', () => {
 
   describe('No Default Answers', () => {
 
-    const form = Form.fromConfigs(getConfigs(), validators);
+    const form = new Form(getConfigs(), validators);
 
     test('getConfigs', () => {
       expect(form.getConfigs()).toMatchSnapshot();
@@ -31,7 +31,7 @@ describe('Basic', () => {
 
   describe('With Default Answers', () => {
 
-    const form = Form.fromConfigs(getConfigs(true), validators);
+    const form = new Form(getConfigs(true), validators);
 
     test('getConfigs', () => {
       expect(form.getConfigs()).toMatchSnapshot();
