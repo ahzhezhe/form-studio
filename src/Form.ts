@@ -32,18 +32,80 @@ export class Form {
    * Construct a form.
    *
    * @param configs configs
+   */
+  constructor(configs: Configs);
+  /**
+   * Construct a form.
+   *
+   * @param configs configs
+   * @param validators validators
+   */
+  constructor(configs: Configs, validators: Validators);
+  /**
+   * Construct a form.
+   *
+   * @param configs configs
+   * @param validators validators
+   * @param skipValidations skip validations
+   */
+  constructor(configs: Configs, validators: Validators, skipValidations: boolean);
+  /**
+   * Construct a form.
+   *
+   * @param configs configs
+   * @param onFormUpdate function to be called when form is updated
+   */
+  constructor(configs: Configs, onFormUpdate: FormUpdateListener);
+  /**
+   * Construct a form.
+   *
+   * @param configs configs
+   * @param validators validators
+   * @param onFormUpdate function to be called when form is updated
+   */
+  constructor(configs: Configs, validators: Validators, onFormUpdate: FormUpdateListener);
+  /**
+   * Construct a form.
+   *
+   * @param configs configs
    * @param validators validators
    * @param skipValidations skip validations
    * @param onFormUpdate function to be called when form is updated
-   * @returns form object
    */
-  constructor(configs: Configs, validators?: Validators, skipValidations?: boolean, onFormUpdate?: FormUpdateListener) {
+  constructor(configs: Configs, validators: Validators, skipValidations: boolean, onFormUpdate: FormUpdateListener);
+  constructor(configs: Configs, arg1?: Validators | FormUpdateListener, arg2?: boolean | FormUpdateListener, arg3?: FormUpdateListener) {
+    let validators: Validators = {};
+    let onFormUpdate: FormUpdateListener | undefined;
+    let skipValidations = false;
+
+    const isFunction = (obj: any) => !!(obj?.constructor && obj.call && obj.apply);
+
+    if (arg1 !== undefined) {
+      if (isFunction(arg1)) {
+        onFormUpdate = arg1 as FormUpdateListener;
+      } else {
+        validators = arg1 as Validators;
+      }
+    }
+
+    if (arg2 !== undefined) {
+      if (typeof arg2 === 'boolean') {
+        skipValidations = arg2;
+      } else {
+        onFormUpdate = arg2;
+      }
+    }
+
+    if (arg3) {
+      onFormUpdate = arg3;
+    }
+
     this.groups = fromGroupConfigs(undefined, configs);
-    this.validators = validators || {};
+    this.validators = validators;
     this.onFormUpdate = onFormUpdate;
     this.processGroups(undefined, this.groups);
     this.endByInformFormUpdate(() => {
-      this.internalImportAnswers(this.defaultAnswers, !!skipValidations);
+      this.internalImportAnswers(this.defaultAnswers, skipValidations);
     });
   }
 
