@@ -1,17 +1,17 @@
 {
+  "name": "form-studio - v0.1",
+  "out": "docs/form-studio-v0.1",
   "entryPoints": [
     "src/index.ts"
   ],
-  "out": "docs",
-  "excludePrivate": true,
-  "disableSources": true,
-  "includeVersion": true,
-  "hideGenerator": true,
   "categoryOrder": [
     "Form",
     "Configs",
     "Exported Configs",
     "Render Instructions",
     "*"
-  ]
+  ],
+  "excludePrivate": true,
+  "disableSources": true,
+  "hideGenerator": true
 }
