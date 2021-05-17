@@ -4,5 +4,14 @@
   ],
   "out": "docs",
   "excludePrivate": true,
-  "disableSources": true
+  "disableSources": true,
+  "includeVersion": true,
+  "hideGenerator": true,
+  "categoryOrder": [
+    "Form",
+    "Configs",
+    "Exported Configs",
+    "Render Instructions",
+    "*"
+  ]
 }

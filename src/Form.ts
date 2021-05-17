@@ -5,6 +5,9 @@ import { Choice, Group, Item, Question } from './FormObjects';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
 import { Answers, ChoiceValue, Errors, FormUpdateEvent, Validators } from './Types';
 
+/**
+ * @category Form
+ */
 export class Form {
 
   private onFormUpdate?: FormUpdateEvent;

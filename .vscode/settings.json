@@ -12,9 +12,6 @@
   "[typescript]": {
     "editor.formatOnSave": false
   },
-  "[typescriptreact]": {
-    "editor.formatOnSave": false
-  },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true
 }
