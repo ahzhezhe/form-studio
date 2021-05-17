@@ -43,4 +43,4 @@ export type Errors = Record<string, string>;
  * Function to be called when form is updated.
  * `Form` object will be passed in.
  */
-export type FormUpdateEvent = (form: Form) => void | Promise<void>;
+export type FormUpdateListener = (form: Form) => void | Promise<void>;

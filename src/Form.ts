@@ -3,14 +3,14 @@ import { fromGroupConfigs, toGroupConfigs } from './Converters';
 import { ExportedConfigs } from './ExportedConfigs';
 import { Choice, Group, Item, Question } from './FormObjects';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
-import { Answers, ChoiceValue, Errors, FormUpdateEvent, Validator, Validators } from './Types';
+import { Answers, ChoiceValue, Errors, FormUpdateListener, Validator, Validators } from './Types';
 
 /**
  * @category Form
  */
 export class Form {
 
-  private onFormUpdate?: FormUpdateEvent;
+  private onFormUpdate?: FormUpdateListener;
   private groups: Group[];
   private validators: Validators;
   private defaultAnswers: Answers = {};
@@ -34,10 +34,10 @@ export class Form {
    * @param configs configs
    * @param validators validators
    * @param skipValidations skip validations
-   * @param onFormUpdate function to be invoked when form is refreshed
+   * @param onFormUpdate function to be called when form is updated
    * @returns form object
    */
-  constructor(configs: Configs, validators?: Validators, skipValidations?: boolean, onFormUpdate?: FormUpdateEvent) {
+  constructor(configs: Configs, validators?: Validators, skipValidations?: boolean, onFormUpdate?: FormUpdateListener) {
     this.groups = fromGroupConfigs(undefined, configs);
     this.validators = validators || {};
     this.onFormUpdate = onFormUpdate;
