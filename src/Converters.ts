@@ -52,7 +52,7 @@ export const fromChoiceConfigs = (
     order: choice.order,
     defaultDisabled: !!choice.defaultDisabled,
     ui: choice.ui || {},
-    value: choice.value || id,
+    value: choice.value === undefined ? id : choice.value,
     onSelected: choice.onSelected || {}
   };
 });
