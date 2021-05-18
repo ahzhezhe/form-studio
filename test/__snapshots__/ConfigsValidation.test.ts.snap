@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfigsValidation Duplicated choice values 1`] = `
+Object {
+  "errors": Object {
+    "g0_q0": Array [
+      "There are choices with same values.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated choice values 2`] = `
+Object {
+  "errors": Object {
+    "g0_q0": Array [
+      "There are choices with same values.",
+    ],
+    "id": Array [
+      "Id is not unique.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated choice values 3`] = `
+Object {
+  "errors": Object {
+    "g0_q0": Array [
+      "There are choices with same values.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated choice values 4`] = `
+Object {
+  "pass": true,
+}
+`;
+
+exports[`ConfigsValidation Duplicated ids 1`] = `
+Object {
+  "errors": Object {
+    "id": Array [
+      "Id is not unique.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated ids 2`] = `
+Object {
+  "errors": Object {
+    "id": Array [
+      "Id is not unique.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated ids 3`] = `
+Object {
+  "errors": Object {
+    "id": Array [
+      "Id is not unique.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated ids 4`] = `
+Object {
+  "errors": Object {
+    "id": Array [
+      "Id is not unique.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation No choices 1`] = `
+Object {
+  "errors": Object {
+    "g0": Array [
+      "There are no choices.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation No choices 2`] = `
+Object {
+  "errors": Object {
+    "g0": Array [
+      "There are no choices.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation No choices 3`] = `
+Object {
+  "errors": Object {
+    "g0": Array [
+      "There are no choices.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation No choices 4`] = `
+Object {
+  "errors": Object {
+    "g0": Array [
+      "There are no choices.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation No choices 5`] = `
+Object {
+  "pass": true,
+}
+`;
+
+exports[`ConfigsValidation No groups 1`] = `
+Object {
+  "errors": Object {
+    "": Array [
+      "There are no groups.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation No questions 1`] = `
+Object {
+  "errors": Object {
+    "g0": Array [
+      "There are no questions.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Unrecognized ids in choices onSelected 1`] = `
+Object {
+  "errors": Object {
+    "c2": Array [
+      "There are unrecognized id(s) in onSelected configs.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Unrecognized ids in choices onSelected 2`] = `
+Object {
+  "errors": Object {
+    "c2": Array [
+      "There are unrecognized id(s) in onSelected configs.",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Unrecognized ids in choices onSelected 3`] = `
+Object {
+  "pass": true,
+}
+`;
+
+exports[`ConfigsValidation Unrecognized ids in choices onSelected 4`] = `
+Object {
+  "pass": true,
+}
+`;

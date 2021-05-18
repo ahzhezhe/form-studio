@@ -37,7 +37,7 @@ export const fromQuestionConfigs = (
     defaultDisabled: !!question.defaultDisabled,
     ui: question.ui || {},
     type: question.type,
-    choices: question.type !== 'any' ? fromChoiceConfigs(id, question.choices!) : [],
+    choices: question.type !== 'any' ? fromChoiceConfigs(id, question.choices || []) : [],
     validators: question.validators || [],
     validation: question.validation || {},
     defaultAnswer: question.defaultAnswer
@@ -52,7 +52,7 @@ export const fromChoiceConfigs = (
     order: choice.order,
     defaultDisabled: !!choice.defaultDisabled,
     ui: choice.ui || {},
-    value: choice.value === undefined ? id : choice.value,
+    value: choice.value === undefined || choice.value === null ? id : choice.value,
     onSelected: choice.onSelected || {}
   };
 });
@@ -72,7 +72,7 @@ export const toQuestionConfigs = (questions: Question[]): ExportedQuestionConfig
   defaultDisabled: question.defaultDisabled,
   ui: question.ui || {},
   type: question.type,
-  choices: question.type !== 'any' ? toChoiceConfigs(question.choices!) : [],
+  choices: question.type !== 'any' ? toChoiceConfigs(question.choices) : [],
   validators: question.validators,
   validation: question.validation,
   defaultAnswer: question.defaultAnswer

@@ -132,6 +132,13 @@ The second question is disabled by default. If 'yes' is selected for the first q
 ]
 ```
 
+### **Validate Configs**
+You can call `validateConfigs` method to validate your configs.
+
+```
+Form.validateConfigs(configs);
+```
+
 <br />
 
 # **Validators**

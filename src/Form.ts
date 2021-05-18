@@ -1,4 +1,5 @@
 import { Configs } from './Configs';
+import { validateConfigs } from './ConfigsValidators';
 import { fromGroupConfigs, toGroupConfigs } from './Converters';
 import { ExportedConfigs } from './ExportedConfigs';
 import { Choice, Group, Item, Question } from './FormObjects';
@@ -32,6 +33,7 @@ export class Form {
    * Construct a form.
    *
    * @param configs configs
+   * @throws if configs is invalid
    */
   constructor(configs: Configs);
   /**
@@ -39,6 +41,7 @@ export class Form {
    *
    * @param configs configs
    * @param validators validators
+   * @throws if configs is invalid
    */
   constructor(configs: Configs, validators: Validators);
   /**
@@ -47,6 +50,7 @@ export class Form {
    * @param configs configs
    * @param validators validators
    * @param skipValidations skip validations
+   * @throws if configs is invalid
    */
   constructor(configs: Configs, validators: Validators, skipValidations: boolean);
   /**
@@ -54,6 +58,7 @@ export class Form {
    *
    * @param configs configs
    * @param onFormUpdate function to be called when form is updated
+   * @throws if configs is invalid
    */
   constructor(configs: Configs, onFormUpdate: FormUpdateListener);
   /**
@@ -62,6 +67,7 @@ export class Form {
    * @param configs configs
    * @param validators validators
    * @param onFormUpdate function to be called when form is updated
+   * @throws if configs is invalid
    */
   constructor(configs: Configs, validators: Validators, onFormUpdate: FormUpdateListener);
   /**
@@ -71,6 +77,7 @@ export class Form {
    * @param validators validators
    * @param skipValidations skip validations
    * @param onFormUpdate function to be called when form is updated
+   * @throws if configs is invalid
    */
   constructor(configs: Configs, validators: Validators, skipValidations: boolean, onFormUpdate: FormUpdateListener);
   constructor(configs: Configs, arg1?: Validators | FormUpdateListener, arg2?: boolean | FormUpdateListener, arg3?: FormUpdateListener) {
@@ -101,6 +108,11 @@ export class Form {
     }
 
     this.groups = fromGroupConfigs(undefined, configs);
+    const result = validateConfigs(this.groups, false);
+    if (!result.pass) {
+      throw new Error('Invalid configs. You may use validateConfigs method to see what is wrong.');
+    }
+
     this.validators = validators;
     this.onFormUpdate = onFormUpdate;
     this.processGroups(undefined, this.groups);
@@ -111,19 +123,19 @@ export class Form {
 
   private processGroups(parentGroup: Group | undefined, groups: Group[]) {
     groups.forEach(group => {
-      this.groupMap.set(group.id!, group);
+      this.groupMap.set(group.id, group);
       this.processGroups(group, group.groups || []);
       this.processQuestions(group, group.questions || []);
       if (parentGroup) {
-        this.groupParentGroupMap.set(group.id!, parentGroup);
+        this.groupParentGroupMap.set(group.id, parentGroup);
       }
     });
   }
 
   private processQuestions(group: Group, questions: Question[]) {
     questions.forEach(question => {
-      this.questionMap.set(question.id!, question);
-      this.questionGroupMap.set(question.id!, group);
+      this.questionMap.set(question.id, question);
+      this.questionGroupMap.set(question.id, group);
       if (question.type !== 'any') {
         this.processChoices(question, question.choices);
       }
@@ -135,8 +147,8 @@ export class Form {
 
   private processChoices(question: Question, choices: Choice[]) {
     choices.forEach(choice => {
-      this.choiceMap.set(choice.id!, choice);
-      this.choiceQuestionMap.set(choice.id!, question);
+      this.choiceMap.set(choice.id, choice);
+      this.choiceQuestionMap.set(choice.id, question);
 
       choice.onSelected.disable?.forEach(id => {
         let disabledBy = this.itemDisabledByChoiceMap.get(id);
@@ -754,6 +766,29 @@ export class Form {
 
   private informFormUpdate() {
     this.onFormUpdate?.(this);
+  }
+
+  /**
+   * Validate configs.
+   *
+   * The following validations will be conducted:
+   * - Form is not without any groups
+   * - No duplicated ids within the form
+   * - No duplicated choice values within a question
+   * - No groups without questions
+   * - No `single` or `multiple` questions without choices
+   * - No circular choices' `onSelected` configs
+   *
+   * Put `strict` as `true` to validate the following:
+   * - No unrecognized ids in choices' `onSelected` configs
+   *
+   * @param configs configs
+   * @param strict strict
+   * @returns validation result
+   */
+  static validateConfigs(configs: Configs, strict = false) {
+    const groups = fromGroupConfigs(undefined, configs);
+    return validateConfigs(groups, strict);
   }
 
 }

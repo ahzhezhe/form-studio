@@ -9,7 +9,7 @@ export interface ItemRenderInstructions {
    */
   id: string;
   /**
-   * Whether this item is disabled.
+   * Whether or not this item is disabled.
    */
   disabled: boolean;
   /**
@@ -78,7 +78,7 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    */
   validatedAnswer: any | undefined;
   /**
-   * Whether question is currently being validating.
+   * Whether or not the question is currently being validating.
    *
    * This value can be `true` if the validator used is an aysnc function.
    */

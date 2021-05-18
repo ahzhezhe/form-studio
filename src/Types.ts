@@ -48,3 +48,17 @@ export type Errors = Record<string, any>;
  * `Form` object will be passed in.
  */
 export type FormUpdateListener = (form: Form) => void | Promise<void>;
+
+export type ConfigsValidationResult = {
+  /**
+   * Whether or not the configs is valid.
+   */
+  pass: boolean;
+  /**
+   * Errors of invalid configs.
+   *
+   * Keys are group / question / choice ids, values are error messages.
+   * If key is an empty string, that means the error is related to the form itself.
+   */
+  errors?: Record<string, string[]>;
+}

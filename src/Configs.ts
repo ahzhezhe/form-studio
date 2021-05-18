@@ -16,7 +16,7 @@ export interface ItemConfigs {
    */
   order?: number;
   /**
-   * Whether this item is disabled by default.
+   * Whether or not this item is disabled by default.
    * The actual disabled property will be based on the logic that you define in other part of the configs.
    */
   defaultDisabled?: boolean;
