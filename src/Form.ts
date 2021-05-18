@@ -768,6 +768,7 @@ export class Form {
     this.onFormUpdate?.(this);
   }
 
+  // TODO: - No circular choices' `onSelected` configs
   /**
    * Validate configs.
    *
@@ -777,7 +778,6 @@ export class Form {
    * - No duplicated choice values within a question
    * - No groups without questions
    * - No `single` or `multiple` questions without choices
-   * - No circular choices' `onSelected` configs
    *
    * Put `strict` as `true` to validate the following:
    * - No unrecognized ids in choices' `onSelected` configs

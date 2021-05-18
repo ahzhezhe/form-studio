@@ -2,9 +2,6 @@ import { Group } from './FormObjects';
 import { ConfigsValidationResult } from './Types';
 import { ChoiceValue } from '.';
 
-// - Form is not without any groups
-//    * - No circular choices' `onSelected` configs
-
 export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValidationResult => {
   const errorMap = new Map<string, string[]>();
 
@@ -12,12 +9,12 @@ export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValida
     addError(errorMap, '', 'There are no groups.');
 
   } else {
-    const ids: string[] = [];
+    const allIds: string[] = [];
     const questionChoiceValues = new Map<string, ChoiceValue[]>();
     const choiceOnSelectedIds = new Map<string, string[]>();
-    collectData(errorMap, ids, questionChoiceValues, choiceOnSelectedIds, groups);
+    collectData(errorMap, allIds, questionChoiceValues, choiceOnSelectedIds, groups);
 
-    const duplicatedIds = findDuplicates(ids);
+    const duplicatedIds = findDuplicates(allIds);
     duplicatedIds.forEach(id => addError(errorMap, id, 'Id is not unique.'));
 
     for (const [questionId, values] of questionChoiceValues.entries()) {
@@ -29,8 +26,8 @@ export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValida
 
     if (strict) {
       for (const [choiceId, onSelectedIds] of choiceOnSelectedIds.entries()) {
-        for (const id of onSelectedIds) {
-          if (!ids.includes(id)) {
+        for (const onSelectedId of onSelectedIds) {
+          if (!allIds.includes(onSelectedId)) {
             addError(errorMap, choiceId, 'There are unrecognized id(s) in onSelected configs.');
             break;
           }
@@ -49,11 +46,11 @@ export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValida
   return { pass: true };
 };
 
-const collectData = (errorMap: Map<string, string[]>, ids: string[], questionChoiceValues: Map<string, ChoiceValue[]>,
+const collectData = (errorMap: Map<string, string[]>, allIds: string[], questionChoiceValues: Map<string, ChoiceValue[]>,
   choiceOnSelectedIds: Map<string, string[]>, groups: Group[]) => {
   for (const group of groups) {
-    ids.push(group.id);
-    collectData(errorMap, ids, questionChoiceValues, choiceOnSelectedIds, group.groups);
+    allIds.push(group.id);
+    collectData(errorMap, allIds, questionChoiceValues, choiceOnSelectedIds, group.groups);
 
     if (group.questions.length === 0) {
       addError(errorMap, group.id, 'There are no questions.');
@@ -61,7 +58,7 @@ const collectData = (errorMap: Map<string, string[]>, ids: string[], questionCho
     }
 
     for (const question of group.questions) {
-      ids.push(question.id);
+      allIds.push(question.id);
 
       if (question.type !== 'any') {
         if (question.choices.length === 0) {
@@ -70,7 +67,7 @@ const collectData = (errorMap: Map<string, string[]>, ids: string[], questionCho
         }
 
         for (const choice of question.choices) {
-          ids.push(choice.id);
+          allIds.push(choice.id);
           const onSelectedIds = [...(choice.onSelected.enable || []), ...(choice.onSelected.disable || [])];
           if (onSelectedIds.length) {
             choiceOnSelectedIds.set(choice.id, onSelectedIds);
