@@ -1,6 +1,6 @@
 import Form from '.';
 
-export type CustomConfigValue = string | number | boolean | CustomConfigValue[] | CustomConfigs;
+export type CustomConfigValue = undefined | string | number | boolean | CustomConfigValue[] | CustomConfigs;
 
 export type CustomConfigs = {
   [key: string]: CustomConfigValue;
