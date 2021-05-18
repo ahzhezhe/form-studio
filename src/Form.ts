@@ -4,7 +4,7 @@ import { fromGroupConfigs, toGroupConfigs } from './Converters';
 import { ExportedConfigs } from './ExportedConfigs';
 import { Choice, Group, Item, Question } from './FormObjects';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
-import { Answers, ChoiceValue, Errors, FormUpdateListener, Validator, Validators } from './Types';
+import { Answers, ChoiceValue, ConfigsValidationResult, Errors, FormUpdateListener, Validator, Validators } from './Types';
 
 /**
  * @category Form
@@ -786,7 +786,7 @@ export class Form {
    * @param strict strict
    * @returns validation result
    */
-  static validateConfigs(configs: Configs, strict = false) {
+  static validateConfigs(configs: Configs, strict = false): ConfigsValidationResult {
     const groups = fromGroupConfigs(undefined, configs);
     return validateConfigs(groups, strict);
   }
