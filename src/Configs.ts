@@ -7,7 +7,7 @@ export interface ItemConfigs {
   /**
    * Item id.
    * It should be unique throughout the entire form.
-   * It will be auto generated if you leave it `undefined`.
+   * It will be auto generated if you leave it falsy.
    */
   id?: string;
   /**
