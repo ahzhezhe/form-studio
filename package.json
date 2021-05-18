@@ -1,6 +1,6 @@
 {
   "name": "form-studio",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Chang Zhe Jiet",
   "description": "A tool that helps design, create and manage form / survey / questionnaire through simple JSON configurations.",
   "keywords": [
