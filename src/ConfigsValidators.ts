@@ -6,7 +6,7 @@ export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValida
   const errorMap = new Map<string, string[]>();
 
   if (groups.length === 0) {
-    addError(errorMap, '', 'There are no groups.');
+    addError(errorMap, '', 'There are no groups');
 
   } else {
     const allIds: string[] = [];
@@ -15,12 +15,12 @@ export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValida
     collectData(errorMap, allIds, questionChoiceValues, choiceOnSelectedIds, groups);
 
     const duplicatedIds = findDuplicates(allIds);
-    duplicatedIds.forEach(id => addError(errorMap, id, 'Id is not unique.'));
+    duplicatedIds.forEach(id => addError(errorMap, id, 'Id is not unique'));
 
     for (const [questionId, values] of questionChoiceValues.entries()) {
       const duplicatedValues = findDuplicates(values);
       if (duplicatedValues.length) {
-        addError(errorMap, questionId, 'There are choices with same values.');
+        addError(errorMap, questionId, 'There are choices with same values');
       }
     }
 
@@ -28,7 +28,7 @@ export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValida
       for (const [choiceId, onSelectedIds] of choiceOnSelectedIds.entries()) {
         for (const onSelectedId of onSelectedIds) {
           if (!allIds.includes(onSelectedId)) {
-            addError(errorMap, choiceId, 'There are unrecognized id(s) in onSelected configs.');
+            addError(errorMap, choiceId, 'There are unrecognized id(s) in onSelected configs');
             break;
           }
         }
@@ -53,7 +53,7 @@ const collectData = (errorMap: Map<string, string[]>, allIds: string[], question
     collectData(errorMap, allIds, questionChoiceValues, choiceOnSelectedIds, group.groups);
 
     if (group.questions.length === 0) {
-      addError(errorMap, group.id, 'There are no questions.');
+      addError(errorMap, group.id, 'There are no questions');
       continue;
     }
 
@@ -62,7 +62,7 @@ const collectData = (errorMap: Map<string, string[]>, allIds: string[], question
 
       if (question.type !== 'any') {
         if (question.choices.length === 0) {
-          addError(errorMap, group.id, 'There are no choices.');
+          addError(errorMap, group.id, 'There are no choices');
           continue;
         }
 
