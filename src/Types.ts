@@ -1,10 +1,14 @@
 import Form from '.';
 
-export type CustomConfigs = Record<string, string | number | boolean>;
+export type CustomConfigValue = string | number | boolean | CustomConfigValue[] | CustomConfigs;
+
+export type CustomConfigs = {
+  [key: string]: CustomConfigValue;
+}
 
 export type QuestionType = 'any' | 'single' | 'multiple';
 
-export type ChoiceValue = string | number;
+export type ChoiceValue = string | number | boolean;
 
 export type ChoiceOnSelected = {
   /**
