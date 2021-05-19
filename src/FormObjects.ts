@@ -2,7 +2,6 @@ import { ChoiceOnSelected, ChoiceValue, CustomConfigs, QuestionType } from './Ty
 
 export interface Item {
   id: string;
-  order: number | undefined;
   defaultDisabled: boolean;
   ui: CustomConfigs;
 }

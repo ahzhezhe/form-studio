@@ -9,14 +9,12 @@ Array [
         "defaultDisabled": false,
         "groups": Array [],
         "id": "subGroup1",
-        "order": undefined,
         "questions": Array [
           Object {
             "choices": Array [],
             "defaultAnswer": undefined,
             "defaultDisabled": false,
             "id": "subGroup1Question1",
-            "order": undefined,
             "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
@@ -36,7 +34,6 @@ Array [
                     "subGroup1Question3",
                   ],
                 },
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question2Choice1",
                 },
@@ -50,7 +47,6 @@ Array [
                     "subGroup1Question4",
                   ],
                 },
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question2Choice2",
                 },
@@ -60,7 +56,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question2Choice3",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question2Choice3",
                 },
@@ -70,7 +65,6 @@ Array [
             "defaultAnswer": undefined,
             "defaultDisabled": false,
             "id": "subGroup1Question2",
-            "order": undefined,
             "type": "single",
             "ui": Object {
               "title": "subGroup1Question2",
@@ -86,7 +80,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question3Choice1",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question3Choice1",
                 },
@@ -96,7 +89,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question3Choice2",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question3Choice2",
                 },
@@ -106,7 +98,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question3Choice3",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question3Choice3",
                 },
@@ -116,7 +107,6 @@ Array [
             "defaultAnswer": undefined,
             "defaultDisabled": true,
             "id": "subGroup1Question3",
-            "order": undefined,
             "type": "multiple",
             "ui": Object {
               "title": "subGroup1Question3",
@@ -132,7 +122,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question4Choice1",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question4Choice1",
                 },
@@ -142,7 +131,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question4Choice2",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question4Choice2",
                 },
@@ -152,7 +140,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question4Choice3",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question4Choice3",
                 },
@@ -162,7 +149,6 @@ Array [
             "defaultAnswer": undefined,
             "defaultDisabled": false,
             "id": "subGroup1Question4",
-            "order": undefined,
             "type": "multiple",
             "ui": Object {
               "title": "subGroup1Question3",
@@ -177,14 +163,12 @@ Array [
       },
     ],
     "id": "group1",
-    "order": undefined,
     "questions": Array [
       Object {
         "choices": Array [],
         "defaultAnswer": undefined,
         "defaultDisabled": false,
         "id": "group1Question1",
-        "order": 1,
         "type": "any",
         "ui": Object {
           "title": "group1Questions",
@@ -200,7 +184,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question2Choice1",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question2Choice1",
             },
@@ -210,7 +193,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question2Choice2",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question2Choice2",
             },
@@ -220,7 +202,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question2Choice3",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question2Choice3",
             },
@@ -230,7 +211,6 @@ Array [
         "defaultAnswer": undefined,
         "defaultDisabled": false,
         "id": "group1Question2",
-        "order": 2,
         "type": "single",
         "ui": Object {
           "title": "group1Question2",
@@ -246,7 +226,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question3Choice1",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question3Choice1",
             },
@@ -256,7 +235,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question3Choice2",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question3Choice2",
             },
@@ -266,7 +244,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question3Choice3",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question3Choice3",
             },
@@ -276,7 +253,6 @@ Array [
         "defaultAnswer": undefined,
         "defaultDisabled": false,
         "id": "group1Question3",
-        "order": undefined,
         "type": "multiple",
         "ui": Object {
           "title": "group1Question3",
@@ -561,14 +537,12 @@ Array [
         "defaultDisabled": false,
         "groups": Array [],
         "id": "subGroup1",
-        "order": undefined,
         "questions": Array [
           Object {
             "choices": Array [],
             "defaultAnswer": "subGroup1Question1Answer",
             "defaultDisabled": false,
             "id": "subGroup1Question1",
-            "order": undefined,
             "type": "any",
             "ui": Object {
               "title": "subGroup1Questions",
@@ -588,7 +562,6 @@ Array [
                     "subGroup1Question3",
                   ],
                 },
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question2Choice1",
                 },
@@ -602,7 +575,6 @@ Array [
                     "subGroup1Question4",
                   ],
                 },
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question2Choice2",
                 },
@@ -612,7 +584,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question2Choice3",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question2Choice3",
                 },
@@ -622,7 +593,6 @@ Array [
             "defaultAnswer": "subGroup1Question2Choice1",
             "defaultDisabled": false,
             "id": "subGroup1Question2",
-            "order": undefined,
             "type": "single",
             "ui": Object {
               "title": "subGroup1Question2",
@@ -638,7 +608,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question3Choice1",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question3Choice1",
                 },
@@ -648,7 +617,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question3Choice2",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question3Choice2",
                 },
@@ -658,7 +626,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question3Choice3",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question3Choice3",
                 },
@@ -671,7 +638,6 @@ Array [
             ],
             "defaultDisabled": true,
             "id": "subGroup1Question3",
-            "order": undefined,
             "type": "multiple",
             "ui": Object {
               "title": "subGroup1Question3",
@@ -687,7 +653,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question4Choice1",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question4Choice1",
                 },
@@ -697,7 +662,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question4Choice2",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question4Choice2",
                 },
@@ -707,7 +671,6 @@ Array [
                 "defaultDisabled": false,
                 "id": "subGroup1Question4Choice3",
                 "onSelected": Object {},
-                "order": undefined,
                 "ui": Object {
                   "title": "subGroup1Question4Choice3",
                 },
@@ -720,7 +683,6 @@ Array [
             ],
             "defaultDisabled": false,
             "id": "subGroup1Question4",
-            "order": undefined,
             "type": "multiple",
             "ui": Object {
               "title": "subGroup1Question3",
@@ -735,14 +697,12 @@ Array [
       },
     ],
     "id": "group1",
-    "order": undefined,
     "questions": Array [
       Object {
         "choices": Array [],
         "defaultAnswer": "group1Question1Answer",
         "defaultDisabled": false,
         "id": "group1Question1",
-        "order": 1,
         "type": "any",
         "ui": Object {
           "title": "group1Questions",
@@ -758,7 +718,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question2Choice1",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question2Choice1",
             },
@@ -768,7 +727,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question2Choice2",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question2Choice2",
             },
@@ -778,7 +736,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question2Choice3",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question2Choice3",
             },
@@ -788,7 +745,6 @@ Array [
         "defaultAnswer": "group1Question2Choice1",
         "defaultDisabled": false,
         "id": "group1Question2",
-        "order": 2,
         "type": "single",
         "ui": Object {
           "title": "group1Question2",
@@ -804,7 +760,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question3Choice1",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question3Choice1",
             },
@@ -814,7 +769,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question3Choice2",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question3Choice2",
             },
@@ -824,7 +778,6 @@ Array [
             "defaultDisabled": false,
             "id": "group1Question3Choice3",
             "onSelected": Object {},
-            "order": undefined,
             "ui": Object {
               "title": "group1Question3Choice3",
             },
@@ -837,7 +790,6 @@ Array [
         ],
         "defaultDisabled": false,
         "id": "group1Question3",
-        "order": undefined,
         "type": "multiple",
         "ui": Object {
           "title": "group1Question3",

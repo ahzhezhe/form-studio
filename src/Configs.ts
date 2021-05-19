@@ -11,11 +11,6 @@ export interface ItemConfigs {
    */
   id?: string;
   /**
-   * Item sort order.
-   * Items will be sorted by their positions in the list if their order is `undefined`.
-   */
-  order?: number;
-  /**
    * Whether or not this item is disabled by default.
    * The actual disabled property will be based on the logic that you define in other part of the configs.
    */

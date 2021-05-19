@@ -5,6 +5,10 @@
 [![GitHub issues](https://img.shields.io/github/issues/ahzhezhe/form-studio)](https://github.com/ahzhezhe/form-studio/issues)
 [![GitHub license](https://img.shields.io/github/license/ahzhezhe/form-studio)](https://github.com/ahzhezhe/form-studio/blob/master/LICENSE)
 
+### **`Disclaimer`**`: This library is still under development phase, it might have breaking changes even if there is no major version increase.`
+
+<br />
+
 ## **What is form-studio?**
 It is a tool that helps design, create and manage form / survey / questionnaire through simple JSON configurations.
 
