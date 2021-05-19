@@ -16,7 +16,7 @@ export interface ItemConfigs {
    */
   defaultDisabled?: boolean;
   /**
-   * Any values that help you determine on how to render the frontend UI or do validation.
+   * Any values that help you determine on how to render the frontend UI or how to perform validation.
    */
   custom?: any;
 }

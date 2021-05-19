@@ -56,7 +56,7 @@ Each of them has the following properties:
 - `id`: An unique id to identify the item
 - `order`: Sort order of the item among it's parent
 - `defaultDisabled`: To indicate that the item is disabled by default
-- `ui`: Any values that help you determine on how to render the frontend UI for this item, it should contain minimal but useful information, e.g. title, placeholder
+- `custom`: Any values that help you determine on how to render the frontend UI or how to perform validation, it should contain minimal but useful information, e.g. title, placeholder
 
 ### **Group**
 A group is a logical grouping of a set of questions.
@@ -66,22 +66,22 @@ A form needs at least 1 group.
 Groups can also have sub-groups.
 
 ### **Question**
-There are 3 types of questions: `any`, `single` and `multiple`.
+There are 3 types of questions: `any`, `choice` and `choices`.
 
 A question comes with an answer (could be undefined if it is unanswered) and an error (could be undefined if it is unanswered, unvalidated or passed validation).
 
 `any` questions accept `any` value as an answer.
 
-`single` questions accept a choice value as an answer.
+`choice` questions accept a choice value as an answer.
 
-`multiple` questions accept a list of choice values as an answer.
+`choices` questions accept a list of choice values as an answer.
 
-`single` and `multiple` questions need to have 1 or more choices.
+`choice` and `choices` questions need to have 1 or more choices.
 
 You can also define the validators to be used by a question to validate its answer.
 
 ### **Choice**
-Choices are for `single` or `multiple` questions.
+Choices are for `choice` or `choices` questions.
 
 A choice comes with a value. Value of the choices will be the answer of the question.
 
@@ -98,14 +98,14 @@ The second question is disabled by default. If 'yes' is selected for the first q
     "questions": [
       {
         "id": "proceed",
-        "type": "single",
-        "ui": {
+        "type": "choice",
+        "custom": {
           "title": "Would you like to proceed?"
         },
         "choices": [
           {
             "value": "yes",
-            "ui": {
+            "custom": {
               "title": "Yes"
             },
             "onSelected": {
@@ -116,7 +116,7 @@ The second question is disabled by default. If 'yes' is selected for the first q
           },
           {
             "value": "no",
-            "ui": {
+            "custom": {
               "title": "No"
             }
           }
@@ -126,7 +126,7 @@ The second question is disabled by default. If 'yes' is selected for the first q
         "id": "name",
         "defaultDisabled": true,
         "type": "any",
-        "ui": {
+        "custom": {
           "type": "string",
           "title": "What is you name?",
         },
@@ -167,8 +167,8 @@ const validators = {
     }
   },
 
-  number: (answer, validation) => {
-    const { min, max } = validation;
+  number: (answer, question) => {
+    const { min, max } = question.custom;
     if (answer < min){
       throw new Error('Please enter no less than ' + min + '.');
     }
@@ -212,13 +212,13 @@ It is a set of instructions that tell you how the form should look like.
 Each item in the instructions comes with the following properties:
 - `id`: An unique id to identify the item
 - `disabled`: Whether or not this item is disabled, you should handle it in the UI, e.g. hide or grey out disabled item
-- `ui`: The exact same values that you specified in the form configs
+- `custom`: The exact same values that you specified in the form configs
 
 Questions also come with the following important properties that you will need to determine the UI:
 - `type`:
-  - `any`: render whatever UI that is required based on your custom `ui` config, e.g. if `ui.inputType` is `string`, then a simple text input is rendered
-  - `single`: render UI that allows user to select 1 option from a list of options, e.g. select, radio button group
-  - `multiple`: render UI that allows user to select multiple options from a list of options, e.g. check box group
+  - `any`: render whatever UI that is required based on your `custom` configs, e.g. if `custom.inputType` is `string`, then a simple text input is rendered
+  - `choice`: render UI that allows user to select 1 option from a list of options, e.g. select, radio button group
+  - `choices`: render UI that allows user to select multiple options from a list of options, e.g. check box group
 - `currentAnswer`: current answer of the question, it is unvalidated and might not be valid, but you will still need to show them on UI
 - `validatedAnswer`: validated answer
 - `validating`: whether or not the question is currently being validating, it could happen if the validator used is an aysnc function, you might want to show a spinner or some other indicator on UI
@@ -236,21 +236,21 @@ export const SurveyPage = () => {
   }, []);
 
   const renderQuestion = (question: QuestionRenderInstructions) => {
-    const { disabled, type, ui } = question;
+    const { disabled, type, custom } = question;
     if (disabled) {
       return null;
     }
     if (type === 'any') {
       return (
         <>
-          {ui.inputType === 'string' && renderStringInput(question)}
+          {custom.inputType === 'string' && renderStringInput(question)}
         </>
       );
     }
-    if (type === 'single') {
+    if (type === 'choice') {
       return renderRadioGroup(question);
     }
-    if (type === 'multiple') {
+    if (type === 'choices') {
       return renderCheckBoxGroup(question);
     }
   };
@@ -266,7 +266,7 @@ export const SurveyPage = () => {
           <Radio
             value={choice.value}
             disabled={choice.disabled}>
-            {choice.ui.title}
+            {choice.custom.title}
           </Radio>
         )}
       </RadioGroup>
@@ -284,7 +284,7 @@ export const SurveyPage = () => {
           <CheckBox
             value={choice.value}
             disabled={choice.disabled}>
-            {choice.ui.title}
+            {choice.custom.title}
           </CheckBox>
         )}
       </CheckBoxGroup>
@@ -292,11 +292,11 @@ export const SurveyPage = () => {
   };
 
   const renderStringInput = (question: QuestionRenderInstructions) => {
-    const { id, ui, currentAnswer, error } = question;
+    const { id, custom, currentAnswer, error } = question;
     return (
       <TextInput
         error={error}
-        maxLength={ui.maxLength as number}
+        maxLength={custom.maxLength as number}
         value={currentAnswer}
         onChange={e => form.setAnswer(id, e.target.value)} />
     );
@@ -311,9 +311,9 @@ export const SurveyPage = () => {
 # **Setting Answers**
 `any` questions use `setAnswer` method to set answer.
 
-`single` questions use `setChoice` or `selectChoice` method to set answer.
+`choice` questions use `setChoice` or `selectChoice` method to set answer.
 
-`multiple` questions use `setChoices` or `selectChoice` method to set answer.
+`choices` questions use `setChoices` or `selectChoice` method to set answer.
 
 ### **Example (General)**
 ```javascript
