@@ -11,22 +11,22 @@ import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator
 export class Form {
 
   private onFormUpdate?: FormUpdateListener;
-  private groups: Group[];
+  private configs: ExportedConfigs;
   private validators: Validators;
   private defaultAnswers: Answers = {};
 
-  private groupMap = new Map<string, Group>();
-  private questionMap = new Map<string, Question>();
-  private choiceMap = new Map<string, Choice>();
-  private groupParentGroupMap = new Map<string, Group>();
-  private questionGroupMap = new Map<string, Group>();
-  private choiceQuestionMap = new Map<string, Question>();
-  private questionCurrentAnswerMap = new Map<string, any>();
-  private questionValidatedAnswerMap = new Map<string, any>();
-  private questionValidatingMap = new Map<string, boolean>();
-  private questionErrorMap = new Map<string, any>();
-  private itemDisabledByChoiceMap = new Map<string, Choice[]>();
-  private itemEnabledByChoiceMap = new Map<string, Choice[]>();
+  private groupById = new Map<string, Group>();
+  private questionById = new Map<string, Question>();
+  private choiceById = new Map<string, Choice>();
+  private parentGroupByGroupId = new Map<string, Group>();
+  private groupByQuestionId = new Map<string, Group>();
+  private questionByChoiceId = new Map<string, Question>();
+  private currentAnswerByQuestionId = new Map<string, any>();
+  private validatedAnswerByQuestionId = new Map<string, any>();
+  private validatingByQuestionId = new Map<string, boolean>();
+  private errorByQuestionId = new Map<string, any>();
+  private disabledByChoicesById = new Map<string, Choice[]>();
+  private enabledByChoicesById = new Map<string, Choice[]>();
 
   /**
    * Construct a form.
@@ -106,15 +106,15 @@ export class Form {
       onFormUpdate = arg3;
     }
 
-    this.groups = sanitizeGroupConfigs(undefined, configs);
-    const result = validateConfigs(this.groups, false);
+    this.configs = sanitizeGroupConfigs(undefined, configs);
+    const result = validateConfigs(this.configs, false);
     if (!result.pass) {
       throw new Error('Invalid configs. You may use validateConfigs method to see what is wrong.');
     }
 
     this.validators = validators;
     this.onFormUpdate = onFormUpdate;
-    this.processGroups(undefined, this.groups);
+    this.processGroups(undefined, this.configs);
     this.endByInformFormUpdate(() => {
       this.internalImportAnswers(this.defaultAnswers, skipValidations);
     });
@@ -122,19 +122,19 @@ export class Form {
 
   private processGroups(parentGroup: Group | undefined, groups: Group[]) {
     groups.forEach(group => {
-      this.groupMap.set(group.id, group);
+      this.groupById.set(group.id, group);
       this.processGroups(group, group.groups || []);
       this.processQuestions(group, group.questions || []);
       if (parentGroup) {
-        this.groupParentGroupMap.set(group.id, parentGroup);
+        this.parentGroupByGroupId.set(group.id, parentGroup);
       }
     });
   }
 
   private processQuestions(group: Group, questions: Question[]) {
     questions.forEach(question => {
-      this.questionMap.set(question.id, question);
-      this.questionGroupMap.set(question.id, group);
+      this.questionById.set(question.id, question);
+      this.groupByQuestionId.set(question.id, group);
       if (question.type !== 'any') {
         this.processChoices(question, question.choices);
       }
@@ -146,25 +146,25 @@ export class Form {
 
   private processChoices(question: Question, choices: Choice[]) {
     choices.forEach(choice => {
-      this.choiceMap.set(choice.id, choice);
-      this.choiceQuestionMap.set(choice.id, question);
+      this.choiceById.set(choice.id, choice);
+      this.questionByChoiceId.set(choice.id, question);
 
       choice.onSelected.disable?.forEach(id => {
-        let disabledBy = this.itemDisabledByChoiceMap.get(id);
-        if (!disabledBy) {
-          disabledBy = [];
+        let disabledByChoices = this.disabledByChoicesById.get(id);
+        if (!disabledByChoices) {
+          disabledByChoices = [];
         }
-        disabledBy.push(choice);
-        this.itemDisabledByChoiceMap.set(id, disabledBy);
+        disabledByChoices.push(choice);
+        this.disabledByChoicesById.set(id, disabledByChoices);
       });
 
       choice.onSelected.enable?.forEach(id => {
-        let enabledBy = this.itemEnabledByChoiceMap.get(id);
-        if (!enabledBy) {
-          enabledBy = [];
+        let enabledByChoices = this.enabledByChoicesById.get(id);
+        if (!enabledByChoices) {
+          enabledByChoices = [];
         }
-        enabledBy.push(choice);
-        this.itemEnabledByChoiceMap.set(id, enabledBy);
+        enabledByChoices.push(choice);
+        this.enabledByChoicesById.set(id, enabledByChoices);
       });
     });
   }
@@ -177,7 +177,7 @@ export class Form {
    * @returns configs
    */
   getConfigs(): ExportedConfigs {
-    return this.groups;
+    return this.configs;
   }
 
   /**
@@ -186,7 +186,7 @@ export class Form {
    * @returns render instructions
    */
   getRenderInstructions(): RenderInstructions {
-    return this.toGroupRenderInstructions(this.groups);
+    return this.toGroupRenderInstructions(this.configs);
   }
 
   private toGroupRenderInstructions(groups: Group[]): GroupRenderInstructions[] {
@@ -206,10 +206,10 @@ export class Form {
       custom: question.custom,
       type: question.type,
       choices: question.type !== 'any' ? this.toChoiceRenderInstructions(question.choices) : [],
-      currentAnswer: this.questionCurrentAnswerMap.get(question.id),
-      validatedAnswer: this.isQuestionDisabled(question) ? undefined : this.questionValidatedAnswerMap.get(question.id),
-      validating: !!this.questionValidatingMap.get(question.id),
-      error: this.questionErrorMap.get(question.id)
+      currentAnswer: this.currentAnswerByQuestionId.get(question.id),
+      validatedAnswer: this.isQuestionDisabled(question) ? undefined : this.validatedAnswerByQuestionId.get(question.id),
+      validating: !!this.validatingByQuestionId.get(question.id),
+      error: this.errorByQuestionId.get(question.id)
     }));
   }
 
@@ -223,7 +223,7 @@ export class Form {
   }
 
   private findGroup(groupId: string) {
-    const group = this.groupMap.get(groupId);
+    const group = this.groupById.get(groupId);
     if (!group) {
       throw new Error('Group is not found.');
     }
@@ -231,7 +231,7 @@ export class Form {
   }
 
   private findQuestion(questionId: string) {
-    const question = this.questionMap.get(questionId);
+    const question = this.questionById.get(questionId);
     if (!question) {
       throw new Error('Question is not found.');
     }
@@ -239,7 +239,7 @@ export class Form {
   }
 
   private findChoice(choiceId: string) {
-    const choice = this.choiceMap.get(choiceId);
+    const choice = this.choiceById.get(choiceId);
     if (!choice) {
       throw new Error('Choice is not found.');
     }
@@ -253,7 +253,7 @@ export class Form {
    */
   clear(skipValidations = false) {
     this.endByInformFormUpdate(() => {
-      for (const group of this.groups) {
+      for (const group of this.configs) {
         this.internalClearGroup(group.id, skipValidations);
       }
     });
@@ -313,7 +313,7 @@ export class Form {
    */
   reset(skipValidations = false) {
     this.endByInformFormUpdate(() => {
-      for (const group of this.groups) {
+      for (const group of this.configs) {
         this.internalResetGroup(group.id, skipValidations);
       }
     });
@@ -398,7 +398,7 @@ export class Form {
   }
 
   private setCurrentAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
-    this.questionCurrentAnswerMap.set(question.id, answer);
+    this.currentAnswerByQuestionId.set(question.id, answer);
 
     if (question.type === 'choice') {
       const choice = question.choices.find(choice => choice.value === answer);
@@ -411,16 +411,16 @@ export class Form {
       answer = choices.map(choice => choice.value);
     }
 
-    this.questionCurrentAnswerMap.set(question.id, answer);
+    this.currentAnswerByQuestionId.set(question.id, answer);
 
     const onSuccess = () => {
-      this.questionValidatedAnswerMap.set(question.id, answer);
-      this.questionErrorMap.delete(question.id);
+      this.validatedAnswerByQuestionId.set(question.id, answer);
+      this.errorByQuestionId.delete(question.id);
     };
 
     const onError = (err: any) => {
-      this.questionValidatedAnswerMap.delete(question.id);
-      this.questionErrorMap.set(question.id, err);
+      this.validatedAnswerByQuestionId.delete(question.id);
+      this.errorByQuestionId.set(question.id, err);
     };
 
     const validators = this.getValidators(question.validators);
@@ -430,8 +430,8 @@ export class Form {
     }
 
     if (skipValidation) {
-      this.questionValidatedAnswerMap.delete(question.id);
-      this.questionErrorMap.delete(question.id);
+      this.validatedAnswerByQuestionId.delete(question.id);
+      this.errorByQuestionId.delete(question.id);
       return;
     }
 
@@ -444,13 +444,13 @@ export class Form {
     }
 
     if (validationResult instanceof Promise) {
-      this.questionValidatingMap.set(question.id, true);
+      this.validatingByQuestionId.set(question.id, true);
 
       validationResult
         .then(onSuccess)
         .catch(onError)
         .finally(() => {
-          this.questionValidatingMap.delete(question.id);
+          this.validatingByQuestionId.delete(question.id);
           this.informFormUpdate();
         });
 
@@ -545,9 +545,9 @@ export class Form {
 
   private internalSelectChoice(choiceId: string, selected: boolean, skipValidation: boolean) {
     const choice = this.findChoice(choiceId);
-    const question = this.choiceQuestionMap.get(choiceId)!;
+    const question = this.questionByChoiceId.get(choiceId)!;
 
-    let currentAnswer = this.questionCurrentAnswerMap.get(question.id);
+    let currentAnswer = this.currentAnswerByQuestionId.get(question.id);
 
     if (question.type === 'choice') {
       if (selected) {
@@ -570,13 +570,13 @@ export class Form {
       return false;
     }
 
-    const question = this.choiceQuestionMap.get(choice.id)!;
+    const question = this.questionByChoiceId.get(choice.id)!;
     if (question.type === 'choice') {
-      const answer = this.questionCurrentAnswerMap.get(question.id);
+      const answer = this.currentAnswerByQuestionId.get(question.id);
       return choice.value === answer;
     }
     if (question.type === 'choices') {
-      const answer = this.questionCurrentAnswerMap.get(question.id);
+      const answer = this.currentAnswerByQuestionId.get(question.id);
       return !!answer?.includes(choice.value);
     }
 
@@ -584,7 +584,7 @@ export class Form {
   }
 
   private isItemDisabled(item: Item) {
-    const disabledByChoices = this.itemDisabledByChoiceMap.get(item.id) || [];
+    const disabledByChoices = this.disabledByChoicesById.get(item.id) || [];
 
     for (const choice of disabledByChoices) {
       if (this.isChoiceSelected(choice)) {
@@ -592,7 +592,7 @@ export class Form {
       }
     }
 
-    const enabledByChoices = this.itemEnabledByChoiceMap.get(item.id) || [];
+    const enabledByChoices = this.enabledByChoicesById.get(item.id) || [];
 
     for (const choice of enabledByChoices) {
       if (this.isChoiceSelected(choice)) {
@@ -604,7 +604,7 @@ export class Form {
   }
 
   private isGroupDisabled(group: Group): boolean {
-    const parentGroup = this.groupParentGroupMap.get(group.id);
+    const parentGroup = this.parentGroupByGroupId.get(group.id);
     if (parentGroup && this.isGroupDisabled(parentGroup)) {
       return true;
     }
@@ -613,7 +613,7 @@ export class Form {
   }
 
   private isQuestionDisabled(question: Question) {
-    const group = this.questionGroupMap.get(question.id)!;
+    const group = this.groupByQuestionId.get(question.id)!;
     if (this.isGroupDisabled(group)) {
       return true;
     }
@@ -622,7 +622,7 @@ export class Form {
   }
 
   private isChoiceDisabled(choice: Choice) {
-    const question = this.choiceQuestionMap.get(choice.id)!;
+    const question = this.questionByChoiceId.get(choice.id)!;
     if (this.isQuestionDisabled(question)) {
       return true;
     }
@@ -640,9 +640,8 @@ export class Form {
   getCurrentAnswers(): Answers {
     const answes: Answers = {};
 
-    for (const entry of this.questionMap.entries()) {
-      const [questionId] = entry;
-      const answer = this.questionCurrentAnswerMap.get(questionId);
+    for (const [questionId] of this.questionById.entries()) {
+      const answer = this.currentAnswerByQuestionId.get(questionId);
       if (answer !== undefined) {
         answes[questionId] = answer;
       }
@@ -663,10 +662,9 @@ export class Form {
   getValidatedAnswers(): Answers {
     const answes: Answers = {};
 
-    for (const entry of this.questionMap.entries()) {
-      const [questionId, question] = entry;
+    for (const [questionId, question] of this.questionById.entries()) {
       if (!this.isQuestionDisabled(question)) {
-        const answer = this.questionValidatedAnswerMap.get(questionId);
+        const answer = this.validatedAnswerByQuestionId.get(questionId);
         if (answer !== undefined) {
           answes[questionId] = answer;
         }
@@ -688,10 +686,9 @@ export class Form {
   getErrors(): Errors {
     const errors: Errors = {};
 
-    for (const entry of this.questionMap.entries()) {
-      const [questionId, question] = entry;
+    for (const [questionId, question] of this.questionById.entries()) {
       if (!this.isQuestionDisabled(question)) {
-        const error = this.questionErrorMap.get(questionId);
+        const error = this.errorByQuestionId.get(questionId);
         if (error !== undefined) {
           errors[questionId] = error;
         }
@@ -711,8 +708,7 @@ export class Form {
    * @returns whether form is clean
    */
   isClean() {
-    for (const entry of this.questionErrorMap.entries()) {
-      const [questionId, error] = entry;
+    for (const [questionId, error] of this.errorByQuestionId.entries()) {
       const question = this.findQuestion(questionId);
       if (this.isQuestionDisabled(question)) {
         continue;
@@ -737,8 +733,7 @@ export class Form {
   }
 
   private internalImportAnswers(answers: Answers, skipValidations: boolean) {
-    for (const entry of this.questionMap.entries()) {
-      const [questionId, question] = entry;
+    for (const [questionId, question] of this.questionById.entries()) {
       const answer = answers[questionId];
 
       if (question.type === 'any') {
