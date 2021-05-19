@@ -9,8 +9,16 @@ describe('ConfigsValidation', () => {
   });
 
   test('No questions', () => {
-    const configs: Configs = [{
+    let configs: Configs = [{
       questions: []
+    }];
+    expect(Form.validateConfigs(configs)).toMatchSnapshot();
+
+    configs = [{ }];
+    expect(Form.validateConfigs(configs)).toMatchSnapshot();
+
+    configs = [{
+      groups: [{ }]
     }];
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
   });

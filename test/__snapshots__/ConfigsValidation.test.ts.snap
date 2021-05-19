@@ -158,6 +158,31 @@ Object {
 }
 `;
 
+exports[`ConfigsValidation No questions 2`] = `
+Object {
+  "errors": Object {
+    "g0": Array [
+      "There are no questions",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation No questions 3`] = `
+Object {
+  "errors": Object {
+    "g0": Array [
+      "There are no questions",
+    ],
+    "g0_g0": Array [
+      "There are no questions",
+    ],
+  },
+  "pass": false,
+}
+`;
+
 exports[`ConfigsValidation Unrecognized ids in choices onSelected 1`] = `
 Object {
   "errors": Object {

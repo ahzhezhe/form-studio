@@ -1,5 +1,5 @@
 import { Configs } from './Configs';
-import { fromGroupConfigs } from './ConfigsSanitizers';
+import { sanitizeGroupConfigs } from './ConfigsSanitizers';
 import { validateConfigs } from './ConfigsValidators';
 import { Choice, ExportedConfigs, Group, Item, Question } from './ExportedConfigs';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
@@ -106,7 +106,7 @@ export class Form {
       onFormUpdate = arg3;
     }
 
-    this.groups = fromGroupConfigs(undefined, configs);
+    this.groups = sanitizeGroupConfigs(undefined, configs);
     const result = validateConfigs(this.groups, false);
     if (!result.pass) {
       throw new Error('Invalid configs. You may use validateConfigs method to see what is wrong.');
@@ -793,7 +793,7 @@ export class Form {
    * @returns validation result
    */
   static validateConfigs(configs: Configs, strict = false): ConfigsValidationResult {
-    const groups = fromGroupConfigs(undefined, configs);
+    const groups = sanitizeGroupConfigs(undefined, configs);
     return validateConfigs(groups, strict);
   }
 
