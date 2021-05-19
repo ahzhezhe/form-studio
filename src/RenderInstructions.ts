@@ -1,4 +1,4 @@
-import { CustomConfigs, QuestionType } from './Types';
+import { QuestionType } from './Types';
 
 /**
  * @category Render Instructions
@@ -13,9 +13,9 @@ export interface ItemRenderInstructions {
    */
   disabled: boolean;
   /**
-   * Any values that help you determine how to render the frontend UI of this item.
+   * Any values that help you determine how to render the frontend UI.
    */
-  ui: CustomConfigs;
+  custom: any;
 }
 
 /**

@@ -8,7 +8,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
   subGroup1Questions.push({
     id: 'subGroup1Question1',
     type: 'any',
-    ui: { title: 'subGroup1Questions' },
+    custom: { title: 'subGroup1Questions' },
     validators: ['notNull'],
     defaultAnswer: getAnswer('subGroup1Question1', withDefaultAnswers)
   });
@@ -16,12 +16,12 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
   subGroup1Questions.push({
     id: 'subGroup1Question2',
     type: 'single',
-    ui: { title: 'subGroup1Question2' },
+    custom: { title: 'subGroup1Question2' },
     validators: ['notNullSingle'],
     choices: [
-      { id: 'subGroup1Question2Choice1', ui: { title: 'subGroup1Question2Choice1' }, onSelected: { enable: ['subGroup1Question3'] } },
-      { id: 'subGroup1Question2Choice2', ui: { title: 'subGroup1Question2Choice2' }, onSelected: { disable: ['subGroup1Question4'] } },
-      { id: 'subGroup1Question2Choice3', ui: { title: 'subGroup1Question2Choice3' } }
+      { id: 'subGroup1Question2Choice1', custom: { title: 'subGroup1Question2Choice1' }, onSelected: { enable: ['subGroup1Question3'] } },
+      { id: 'subGroup1Question2Choice2', custom: { title: 'subGroup1Question2Choice2' }, onSelected: { disable: ['subGroup1Question4'] } },
+      { id: 'subGroup1Question2Choice3', custom: { title: 'subGroup1Question2Choice3' } }
     ],
     defaultAnswer: getAnswer('subGroup1Question2', withDefaultAnswers)
   });
@@ -30,12 +30,12 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     id: 'subGroup1Question3',
     defaultDisabled: true,
     type: 'multiple',
-    ui: { title: 'subGroup1Question3' },
+    custom: { title: 'subGroup1Question3' },
     validators: ['atLeast1'],
     choices: [
-      { id: 'subGroup1Question3Choice1', ui: { title: 'subGroup1Question3Choice1' } },
-      { id: 'subGroup1Question3Choice2', ui: { title: 'subGroup1Question3Choice2' } },
-      { id: 'subGroup1Question3Choice3', ui: { title: 'subGroup1Question3Choice3' } }
+      { id: 'subGroup1Question3Choice1', custom: { title: 'subGroup1Question3Choice1' } },
+      { id: 'subGroup1Question3Choice2', custom: { title: 'subGroup1Question3Choice2' } },
+      { id: 'subGroup1Question3Choice3', custom: { title: 'subGroup1Question3Choice3' } }
     ],
     defaultAnswer: getAnswer('subGroup1Question3', withDefaultAnswers)
   });
@@ -43,12 +43,12 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
   subGroup1Questions.push({
     id: 'subGroup1Question4',
     type: 'multiple',
-    ui: { title: 'subGroup1Question3' },
+    custom: { title: 'subGroup1Question3' },
     validators: ['atLeast1'],
     choices: [
-      { id: 'subGroup1Question4Choice1', ui: { title: 'subGroup1Question4Choice1' } },
-      { id: 'subGroup1Question4Choice2', ui: { title: 'subGroup1Question4Choice2' } },
-      { id: 'subGroup1Question4Choice3', ui: { title: 'subGroup1Question4Choice3' } }
+      { id: 'subGroup1Question4Choice1', custom: { title: 'subGroup1Question4Choice1' } },
+      { id: 'subGroup1Question4Choice2', custom: { title: 'subGroup1Question4Choice2' } },
+      { id: 'subGroup1Question4Choice3', custom: { title: 'subGroup1Question4Choice3' } }
     ],
     defaultAnswer: getAnswer('subGroup1Question4', withDefaultAnswers)
   });
@@ -63,7 +63,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
   group1Questions.push({
     id: 'group1Question1',
     type: 'any',
-    ui: { title: 'group1Questions' },
+    custom: { title: 'group1Questions' },
     validators: ['notNull'],
     defaultAnswer: getAnswer('group1Question1', withDefaultAnswers)
   });
@@ -71,12 +71,12 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
   group1Questions.push({
     id: 'group1Question2',
     type: 'single',
-    ui: { title: 'group1Question2' },
+    custom: { title: 'group1Question2' },
     validators: ['notNullSingle'],
     choices: [
-      { id: 'group1Question2Choice1', ui: { title: 'group1Question2Choice1' } },
-      { id: 'group1Question2Choice2', ui: { title: 'group1Question2Choice2' } },
-      { id: 'group1Question2Choice3', ui: { title: 'group1Question2Choice3' } }
+      { id: 'group1Question2Choice1', custom: { title: 'group1Question2Choice1' } },
+      { id: 'group1Question2Choice2', custom: { title: 'group1Question2Choice2' } },
+      { id: 'group1Question2Choice3', custom: { title: 'group1Question2Choice3' } }
     ],
     defaultAnswer: getAnswer('group1Question2', withDefaultAnswers)
   });
@@ -84,11 +84,11 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
   group1Questions.push({
     id: 'group1Question3',
     type: 'multiple',
-    ui: { title: 'group1Question3' },
+    custom: { title: 'group1Question3' },
     choices: [
-      { id: 'group1Question3Choice1', ui: { title: 'group1Question3Choice1' } },
-      { id: 'group1Question3Choice2', ui: { title: 'group1Question3Choice2' } },
-      { id: 'group1Question3Choice3', ui: { title: 'group1Question3Choice3' } }
+      { id: 'group1Question3Choice1', custom: { title: 'group1Question3Choice1' } },
+      { id: 'group1Question3Choice2', custom: { title: 'group1Question3Choice2' } },
+      { id: 'group1Question3Choice3', custom: { title: 'group1Question3Choice3' } }
     ],
     defaultAnswer: getAnswer('group1Question3', withDefaultAnswers)
   });

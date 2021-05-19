@@ -1,8 +1,7 @@
 import { Configs } from './Configs';
+import { fromGroupConfigs } from './ConfigsSanitizers';
 import { validateConfigs } from './ConfigsValidators';
-import { fromGroupConfigs, toGroupConfigs } from './Converters';
-import { ExportedConfigs } from './ExportedConfigs';
-import { Choice, Group, Item, Question } from './FormObjects';
+import { Choice, ExportedConfigs, Group, Item, Question } from './ExportedConfigs';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
 import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator, Validators } from './Types';
 
@@ -177,7 +176,7 @@ export class Form {
    * @returns configs
    */
   getConfigs(): ExportedConfigs {
-    return toGroupConfigs(this.groups);
+    return this.groups;
   }
 
   /**
@@ -193,7 +192,7 @@ export class Form {
     return groups.map((group): GroupRenderInstructions => ({
       id: group.id,
       disabled: this.isGroupDisabled(group),
-      ui: group.ui,
+      custom: group.custom,
       groups: this.toGroupRenderInstructions(group.groups),
       questions: this.toQuestionRenderInstructions(group.questions)
     }));
@@ -203,7 +202,7 @@ export class Form {
     return questions.map((question): QuestionRenderInstructions => ({
       id: question.id,
       disabled: this.isQuestionDisabled(question),
-      ui: question.ui,
+      custom: question.custom,
       type: question.type,
       choices: question.type !== 'any' ? this.toChoiceRenderInstructions(question.choices) : [],
       currentAnswer: this.questionCurrentAnswerMap.get(question.id),
@@ -217,7 +216,7 @@ export class Form {
     return choices.map((choice): ChoiceRenderInstructions => ({
       id: choice.id,
       disabled: this.isChoiceDisabled(choice),
-      ui: choice.ui,
+      custom: choice.custom,
       value: choice.value
     }));
   }
@@ -388,7 +387,7 @@ export class Form {
       return;
     }
 
-    const validationResult = validator(answer, question.validation);
+    const validationResult = validator(answer, question);
 
     if (validationResult instanceof Promise) {
       return validationResult.then(() => this.executeValidators(validators, question, answer));

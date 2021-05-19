@@ -1,4 +1,4 @@
-import { ChoiceOnSelected, CustomConfigs, QuestionType } from './Types';
+import { ChoiceOnSelected, QuestionType } from './Types';
 
 /**
  * @category Configs
@@ -16,9 +16,9 @@ export interface ItemConfigs {
    */
   defaultDisabled?: boolean;
   /**
-   * Any values that help you determine on how to render the frontend UI for this item.
+   * Any values that help you determine on how to render the frontend UI or do validation.
    */
-  ui?: CustomConfigs;
+  custom?: any;
 }
 
 /**
@@ -64,10 +64,6 @@ export interface QuestionConfigs extends ItemConfigs {
    * Validators will be executed in sequence of their positions in the list.
    */
   validators?: string[];
-  /**
-   * Any values that help to validator to perform validation.
-   */
-  validation?: CustomConfigs;
   /**
    * Default answer.
    *

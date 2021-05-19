@@ -1,6 +1,5 @@
 import { ChoiceConfigs, GroupConfigs, QuestionConfigs } from './Configs';
-import { ExportedChoiceConfigs, ExportedGroupConfigs, ExportedQuestionConfigs } from './ExportedConfigs';
-import { Choice, Group, Question } from './FormObjects';
+import { Choice, Group, Question } from './ExportedConfigs';
 
 export const fromGroupConfigs = (
   parentGroupId: string | undefined, groups: GroupConfigs[]): Group[] => groups.map((group, i) => {
@@ -8,7 +7,7 @@ export const fromGroupConfigs = (
   return {
     id,
     defaultDisabled: !!group.defaultDisabled,
-    ui: group.ui || {},
+    custom: group.custom,
     groups: group.groups ? fromGroupConfigs(id, group.groups) : [],
     questions: group.questions ? fromQuestionConfigs(id, group.questions) : []
   };
@@ -20,11 +19,10 @@ export const fromQuestionConfigs = (
   return {
     id,
     defaultDisabled: !!question.defaultDisabled,
-    ui: question.ui || {},
+    custom: question.custom,
     type: question.type,
     choices: question.type !== 'any' ? fromChoiceConfigs(id, question.choices || []) : [],
     validators: question.validators || [],
-    validation: question.validation || {},
     defaultAnswer: question.defaultAnswer
   };
 });
@@ -35,35 +33,8 @@ export const fromChoiceConfigs = (
   return {
     id,
     defaultDisabled: !!choice.defaultDisabled,
-    ui: choice.ui || {},
+    custom: choice.custom,
     value: choice.value === undefined || choice.value === null ? id : choice.value,
     onSelected: choice.onSelected || {}
   };
 });
-
-export const toGroupConfigs = (groups: Group[]): ExportedGroupConfigs[] => groups.map(group => ({
-  id: group.id,
-  defaultDisabled: group.defaultDisabled,
-  ui: group.ui || {},
-  groups: toGroupConfigs(group.groups),
-  questions: toQuestionConfigs(group.questions)
-}));
-
-export const toQuestionConfigs = (questions: Question[]): ExportedQuestionConfigs[] => questions.map(question => ({
-  id: question.id,
-  defaultDisabled: question.defaultDisabled,
-  ui: question.ui || {},
-  type: question.type,
-  choices: question.type !== 'any' ? toChoiceConfigs(question.choices) : [],
-  validators: question.validators,
-  validation: question.validation,
-  defaultAnswer: question.defaultAnswer
-}));
-
-export const toChoiceConfigs = (choices: Choice[]): ExportedChoiceConfigs[] => choices.map(choice => ({
-  id: choice.id,
-  defaultDisabled: choice.defaultDisabled,
-  ui: choice.ui,
-  value: choice.value,
-  onSelected: choice.onSelected
-}));

@@ -1,10 +1,5 @@
+import { Question } from './ExportedConfigs';
 import Form from '.';
-
-export type CustomConfigValue = undefined | string | number | boolean | CustomConfigValue[] | CustomConfigs;
-
-export type CustomConfigs = {
-  [key: string]: CustomConfigValue;
-}
 
 export type QuestionType = 'any' | 'single' | 'multiple';
 
@@ -24,7 +19,7 @@ export type ChoiceOnSelected = {
 /**
  * Validation function.
  */
-export type Validator = (answer: any, validation: CustomConfigs) => void | Promise<void>;
+export type Validator = (answer: any, question: Question) => void | Promise<void>;
 
 /**
  * Keys are validator name, values are [[Validator]] function.

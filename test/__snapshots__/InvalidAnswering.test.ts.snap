@@ -3,9 +3,11 @@
 exports[`Invalid Answering setAnswer undefined answer 1`] = `
 Array [
   Object {
+    "custom": undefined,
     "disabled": false,
     "groups": Array [
       Object {
+        "custom": undefined,
         "disabled": false,
         "groups": Array [],
         "id": "subGroup1",
@@ -13,132 +15,131 @@ Array [
           Object {
             "choices": Array [],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Questions",
+            },
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
             "type": "any",
-            "ui": Object {
-              "title": "subGroup1Questions",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
                 "value": "subGroup1Question2Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
                 "value": "subGroup1Question2Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
                 "value": "subGroup1Question2Choice3",
               },
             ],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Question2",
+            },
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
             "type": "single",
-            "ui": Object {
-              "title": "subGroup1Question2",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice1",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
                 "value": "subGroup1Question3Choice1",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice2",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
                 "value": "subGroup1Question3Choice2",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice3",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
                 "value": "subGroup1Question3Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
                 "value": "subGroup1Question4Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
                 "value": "subGroup1Question4Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
                 "value": "subGroup1Question4Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
         ],
-        "ui": Object {},
       },
     ],
     "id": "group1",
@@ -146,94 +147,93 @@ Array [
       Object {
         "choices": Array [],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Questions",
+        },
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
         "type": "any",
-        "ui": Object {
-          "title": "group1Questions",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice1",
             },
+            "disabled": false,
+            "id": "group1Question2Choice1",
             "value": "group1Question2Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice2",
             },
+            "disabled": false,
+            "id": "group1Question2Choice2",
             "value": "group1Question2Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice3",
             },
+            "disabled": false,
+            "id": "group1Question2Choice3",
             "value": "group1Question2Choice3",
           },
         ],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Question2",
+        },
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
         "type": "single",
-        "ui": Object {
-          "title": "group1Question2",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice1",
             },
+            "disabled": false,
+            "id": "group1Question3Choice1",
             "value": "group1Question3Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice2",
             },
+            "disabled": false,
+            "id": "group1Question3Choice2",
             "value": "group1Question3Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice3",
             },
+            "disabled": false,
+            "id": "group1Question3Choice3",
             "value": "group1Question3Choice3",
           },
         ],
         "currentAnswer": Array [],
+        "custom": Object {
+          "title": "group1Question3",
+        },
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
         "type": "multiple",
-        "ui": Object {
-          "title": "group1Question3",
-        },
         "validatedAnswer": Array [],
         "validating": false,
       },
     ],
-    "ui": Object {},
   },
 ]
 `;
@@ -265,9 +265,11 @@ Object {
 exports[`Invalid Answering setChoice invalid choice 1`] = `
 Array [
   Object {
+    "custom": undefined,
     "disabled": false,
     "groups": Array [
       Object {
+        "custom": undefined,
         "disabled": false,
         "groups": Array [],
         "id": "subGroup1",
@@ -275,132 +277,131 @@ Array [
           Object {
             "choices": Array [],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Questions",
+            },
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
             "type": "any",
-            "ui": Object {
-              "title": "subGroup1Questions",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
                 "value": "subGroup1Question2Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
                 "value": "subGroup1Question2Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
                 "value": "subGroup1Question2Choice3",
               },
             ],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Question2",
+            },
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
             "type": "single",
-            "ui": Object {
-              "title": "subGroup1Question2",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice1",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
                 "value": "subGroup1Question3Choice1",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice2",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
                 "value": "subGroup1Question3Choice2",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice3",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
                 "value": "subGroup1Question3Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
                 "value": "subGroup1Question4Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
                 "value": "subGroup1Question4Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
                 "value": "subGroup1Question4Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
         ],
-        "ui": Object {},
       },
     ],
     "id": "group1",
@@ -408,94 +409,93 @@ Array [
       Object {
         "choices": Array [],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Questions",
+        },
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
         "type": "any",
-        "ui": Object {
-          "title": "group1Questions",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice1",
             },
+            "disabled": false,
+            "id": "group1Question2Choice1",
             "value": "group1Question2Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice2",
             },
+            "disabled": false,
+            "id": "group1Question2Choice2",
             "value": "group1Question2Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice3",
             },
+            "disabled": false,
+            "id": "group1Question2Choice3",
             "value": "group1Question2Choice3",
           },
         ],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Question2",
+        },
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
         "type": "single",
-        "ui": Object {
-          "title": "group1Question2",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice1",
             },
+            "disabled": false,
+            "id": "group1Question3Choice1",
             "value": "group1Question3Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice2",
             },
+            "disabled": false,
+            "id": "group1Question3Choice2",
             "value": "group1Question3Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice3",
             },
+            "disabled": false,
+            "id": "group1Question3Choice3",
             "value": "group1Question3Choice3",
           },
         ],
         "currentAnswer": Array [],
+        "custom": Object {
+          "title": "group1Question3",
+        },
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
         "type": "multiple",
-        "ui": Object {
-          "title": "group1Question3",
-        },
         "validatedAnswer": Array [],
         "validating": false,
       },
     ],
-    "ui": Object {},
   },
 ]
 `;
@@ -527,9 +527,11 @@ Object {
 exports[`Invalid Answering setChoice undefined answer 1`] = `
 Array [
   Object {
+    "custom": undefined,
     "disabled": false,
     "groups": Array [
       Object {
+        "custom": undefined,
         "disabled": false,
         "groups": Array [],
         "id": "subGroup1",
@@ -537,132 +539,131 @@ Array [
           Object {
             "choices": Array [],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Questions",
+            },
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
             "type": "any",
-            "ui": Object {
-              "title": "subGroup1Questions",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
                 "value": "subGroup1Question2Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
                 "value": "subGroup1Question2Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
                 "value": "subGroup1Question2Choice3",
               },
             ],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Question2",
+            },
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
             "type": "single",
-            "ui": Object {
-              "title": "subGroup1Question2",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice1",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
                 "value": "subGroup1Question3Choice1",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice2",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
                 "value": "subGroup1Question3Choice2",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice3",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
                 "value": "subGroup1Question3Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
                 "value": "subGroup1Question4Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
                 "value": "subGroup1Question4Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
                 "value": "subGroup1Question4Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
         ],
-        "ui": Object {},
       },
     ],
     "id": "group1",
@@ -670,94 +671,93 @@ Array [
       Object {
         "choices": Array [],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Questions",
+        },
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
         "type": "any",
-        "ui": Object {
-          "title": "group1Questions",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice1",
             },
+            "disabled": false,
+            "id": "group1Question2Choice1",
             "value": "group1Question2Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice2",
             },
+            "disabled": false,
+            "id": "group1Question2Choice2",
             "value": "group1Question2Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice3",
             },
+            "disabled": false,
+            "id": "group1Question2Choice3",
             "value": "group1Question2Choice3",
           },
         ],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Question2",
+        },
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
         "type": "single",
-        "ui": Object {
-          "title": "group1Question2",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice1",
             },
+            "disabled": false,
+            "id": "group1Question3Choice1",
             "value": "group1Question3Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice2",
             },
+            "disabled": false,
+            "id": "group1Question3Choice2",
             "value": "group1Question3Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice3",
             },
+            "disabled": false,
+            "id": "group1Question3Choice3",
             "value": "group1Question3Choice3",
           },
         ],
         "currentAnswer": Array [],
+        "custom": Object {
+          "title": "group1Question3",
+        },
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
         "type": "multiple",
-        "ui": Object {
-          "title": "group1Question3",
-        },
         "validatedAnswer": Array [],
         "validating": false,
       },
     ],
-    "ui": Object {},
   },
 ]
 `;
@@ -789,9 +789,11 @@ Object {
 exports[`Invalid Answering setChoices empty answer 1`] = `
 Array [
   Object {
+    "custom": undefined,
     "disabled": false,
     "groups": Array [
       Object {
+        "custom": undefined,
         "disabled": false,
         "groups": Array [],
         "id": "subGroup1",
@@ -799,132 +801,131 @@ Array [
           Object {
             "choices": Array [],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Questions",
+            },
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
             "type": "any",
-            "ui": Object {
-              "title": "subGroup1Questions",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
                 "value": "subGroup1Question2Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
                 "value": "subGroup1Question2Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
                 "value": "subGroup1Question2Choice3",
               },
             ],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Question2",
+            },
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
             "type": "single",
-            "ui": Object {
-              "title": "subGroup1Question2",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice1",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
                 "value": "subGroup1Question3Choice1",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice2",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
                 "value": "subGroup1Question3Choice2",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice3",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
                 "value": "subGroup1Question3Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
                 "value": "subGroup1Question4Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
                 "value": "subGroup1Question4Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
                 "value": "subGroup1Question4Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
         ],
-        "ui": Object {},
       },
     ],
     "id": "group1",
@@ -932,94 +933,93 @@ Array [
       Object {
         "choices": Array [],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Questions",
+        },
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
         "type": "any",
-        "ui": Object {
-          "title": "group1Questions",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice1",
             },
+            "disabled": false,
+            "id": "group1Question2Choice1",
             "value": "group1Question2Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice2",
             },
+            "disabled": false,
+            "id": "group1Question2Choice2",
             "value": "group1Question2Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice3",
             },
+            "disabled": false,
+            "id": "group1Question2Choice3",
             "value": "group1Question2Choice3",
           },
         ],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Question2",
+        },
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
         "type": "single",
-        "ui": Object {
-          "title": "group1Question2",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice1",
             },
+            "disabled": false,
+            "id": "group1Question3Choice1",
             "value": "group1Question3Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice2",
             },
+            "disabled": false,
+            "id": "group1Question3Choice2",
             "value": "group1Question3Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice3",
             },
+            "disabled": false,
+            "id": "group1Question3Choice3",
             "value": "group1Question3Choice3",
           },
         ],
         "currentAnswer": Array [],
+        "custom": Object {
+          "title": "group1Question3",
+        },
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
         "type": "multiple",
-        "ui": Object {
-          "title": "group1Question3",
-        },
         "validatedAnswer": Array [],
         "validating": false,
       },
     ],
-    "ui": Object {},
   },
 ]
 `;
@@ -1051,9 +1051,11 @@ Object {
 exports[`Invalid Answering setChoices invalid choice 1`] = `
 Array [
   Object {
+    "custom": undefined,
     "disabled": false,
     "groups": Array [
       Object {
+        "custom": undefined,
         "disabled": false,
         "groups": Array [],
         "id": "subGroup1",
@@ -1061,132 +1063,131 @@ Array [
           Object {
             "choices": Array [],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Questions",
+            },
             "disabled": false,
             "error": "This field is required.",
             "id": "subGroup1Question1",
             "type": "any",
-            "ui": Object {
-              "title": "subGroup1Questions",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice1",
                 "value": "subGroup1Question2Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice2",
                 "value": "subGroup1Question2Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question2Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question2Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question2Choice3",
                 "value": "subGroup1Question2Choice3",
               },
             ],
             "currentAnswer": undefined,
+            "custom": Object {
+              "title": "subGroup1Question2",
+            },
             "disabled": false,
             "error": "Please select an option.",
             "id": "subGroup1Question2",
             "type": "single",
-            "ui": Object {
-              "title": "subGroup1Question2",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice1",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice1",
                 "value": "subGroup1Question3Choice1",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice2",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice2",
                 "value": "subGroup1Question3Choice2",
               },
               Object {
-                "disabled": true,
-                "id": "subGroup1Question3Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question3Choice3",
                 },
+                "disabled": true,
+                "id": "subGroup1Question3Choice3",
                 "value": "subGroup1Question3Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": true,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question3",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
           Object {
             "choices": Array [
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice1",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice1",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice1",
                 "value": "subGroup1Question4Choice1",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice2",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice2",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice2",
                 "value": "subGroup1Question4Choice2",
               },
               Object {
-                "disabled": false,
-                "id": "subGroup1Question4Choice3",
-                "ui": Object {
+                "custom": Object {
                   "title": "subGroup1Question4Choice3",
                 },
+                "disabled": false,
+                "id": "subGroup1Question4Choice3",
                 "value": "subGroup1Question4Choice3",
               },
             ],
             "currentAnswer": Array [],
+            "custom": Object {
+              "title": "subGroup1Question3",
+            },
             "disabled": false,
             "error": "Please select at least 1 option.",
             "id": "subGroup1Question4",
             "type": "multiple",
-            "ui": Object {
-              "title": "subGroup1Question3",
-            },
             "validatedAnswer": undefined,
             "validating": false,
           },
         ],
-        "ui": Object {},
       },
     ],
     "id": "group1",
@@ -1194,94 +1195,93 @@ Array [
       Object {
         "choices": Array [],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Questions",
+        },
         "disabled": false,
         "error": "This field is required.",
         "id": "group1Question1",
         "type": "any",
-        "ui": Object {
-          "title": "group1Questions",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice1",
             },
+            "disabled": false,
+            "id": "group1Question2Choice1",
             "value": "group1Question2Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice2",
             },
+            "disabled": false,
+            "id": "group1Question2Choice2",
             "value": "group1Question2Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question2Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question2Choice3",
             },
+            "disabled": false,
+            "id": "group1Question2Choice3",
             "value": "group1Question2Choice3",
           },
         ],
         "currentAnswer": undefined,
+        "custom": Object {
+          "title": "group1Question2",
+        },
         "disabled": false,
         "error": "Please select an option.",
         "id": "group1Question2",
         "type": "single",
-        "ui": Object {
-          "title": "group1Question2",
-        },
         "validatedAnswer": undefined,
         "validating": false,
       },
       Object {
         "choices": Array [
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice1",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice1",
             },
+            "disabled": false,
+            "id": "group1Question3Choice1",
             "value": "group1Question3Choice1",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice2",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice2",
             },
+            "disabled": false,
+            "id": "group1Question3Choice2",
             "value": "group1Question3Choice2",
           },
           Object {
-            "disabled": false,
-            "id": "group1Question3Choice3",
-            "ui": Object {
+            "custom": Object {
               "title": "group1Question3Choice3",
             },
+            "disabled": false,
+            "id": "group1Question3Choice3",
             "value": "group1Question3Choice3",
           },
         ],
         "currentAnswer": Array [],
+        "custom": Object {
+          "title": "group1Question3",
+        },
         "disabled": false,
         "error": undefined,
         "id": "group1Question3",
         "type": "multiple",
-        "ui": Object {
-          "title": "group1Question3",
-        },
         "validatedAnswer": Array [],
         "validating": false,
       },
     ],
-    "ui": Object {},
   },
 ]
 `;

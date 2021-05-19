@@ -1,37 +1,36 @@
-import { ChoiceOnSelected, CustomConfigs, QuestionType } from './Types';
+import { ChoiceOnSelected, QuestionType } from './Types';
 
 /**
  * @category Exported Configs
  */
-export interface ExportedItemConfigs {
+export interface Item {
   id: string;
   defaultDisabled: boolean;
-  ui: CustomConfigs;
+  custom: any;
 }
 
 /**
  * @category Exported Configs
  */
-export interface ExportedGroupConfigs extends ExportedItemConfigs {
-  groups: ExportedGroupConfigs[];
-  questions: ExportedQuestionConfigs[];
+export interface Group extends Item {
+  groups: Group[];
+  questions: Question[];
 }
 
 /**
  * @category Exported Configs
  */
-export interface ExportedQuestionConfigs extends ExportedItemConfigs {
+export interface Question extends Item {
   type: QuestionType;
-  choices: ExportedChoiceConfigs[];
+  choices: Choice[];
   validators: string[];
-  validation: CustomConfigs;
   defaultAnswer: any;
 }
 
 /**
  * @category Exported Configs
  */
-export interface ExportedChoiceConfigs extends ExportedItemConfigs {
+export interface Choice extends Item {
   value: any;
   onSelected: ChoiceOnSelected;
 }
@@ -42,4 +41,4 @@ export interface ExportedChoiceConfigs extends ExportedItemConfigs {
  *
  * @category Exported Configs
  */
-export type ExportedConfigs = ExportedGroupConfigs[];
+export type ExportedConfigs = Group[];

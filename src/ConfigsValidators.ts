@@ -1,4 +1,4 @@
-import { Group } from './FormObjects';
+import { Group } from './ExportedConfigs';
 import { ConfigsValidationResult } from './Types';
 
 export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValidationResult => {
