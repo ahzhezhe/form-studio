@@ -1,21 +1,15 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "esnext",
+    "module": "commonjs",
     "outDir": "dist",
     "declaration": true,
     "esModuleInterop": true,
-    "strictBindCallApply": true,
     "strict": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "allowJs": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "sourceMap": true
+    "emitDecoratorMetadata": true
   },
   "include": [
     "src"
