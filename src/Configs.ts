@@ -1,4 +1,4 @@
-import { ChoiceOnSelected, ChoiceValue, CustomConfigs, QuestionType } from './Types';
+import { ChoiceOnSelected, CustomConfigs, QuestionType } from './Types';
 
 /**
  * @category Configs
@@ -45,11 +45,11 @@ export interface QuestionConfigs extends ItemConfigs {
    * Questions with `any` as [[type]] accept `any` as answer.
    * You shouldn't have to specify [[choices]] for this question.
    *
-   * Questions with `single` as [[type]] accept [[ChoiceValue]] as answer.
+   * Questions with `single` as [[type]] accept `any` as answer.
    * You should specify [[choices]] for this question.
    * Usually radio button group will be used for this question.
    *
-   * Questions with `multiple` as [[type]] accept [[ChoiceValue]][] as answer.
+   * Questions with `multiple` as [[type]] accept `any`[] as answer.
    * You should specify [[choices]] for this question.
    * Usually check box group will be used for this question.
    */
@@ -73,9 +73,9 @@ export interface QuestionConfigs extends ItemConfigs {
    *
    * Questions with `any` as [[type]] accept `any` as answer.
    *
-   * Questions with `single` as [[type]] accept [[ChoiceValue]] as answer.
+   * Questions with `single` as [[type]] accept `any` as answer.
    *
-   * Questions with `multiple` as [[type]] accept [[ChoiceValue]][] as answer.
+   * Questions with `multiple` as [[type]] accept `any`[] as answer.
    */
   defaultAnswer?: any;
 }
@@ -88,7 +88,7 @@ export interface ChoiceConfigs extends ItemConfigs {
    * Value of this choice. It will be used as answer of the question.
    * Id will be used as value if you leave it `undefined`.
    */
-  value?: ChoiceValue;
+  value?: any;
   /**
    * Actions to be performed when this choice is toggled.
    */

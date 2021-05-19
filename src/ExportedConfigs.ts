@@ -1,4 +1,4 @@
-import { ChoiceOnSelected, ChoiceValue, CustomConfigs, QuestionType } from './Types';
+import { ChoiceOnSelected, CustomConfigs, QuestionType } from './Types';
 
 /**
  * @category Exported Configs
@@ -32,7 +32,7 @@ export interface ExportedQuestionConfigs extends ExportedItemConfigs {
  * @category Exported Configs
  */
 export interface ExportedChoiceConfigs extends ExportedItemConfigs {
-  value: ChoiceValue;
+  value: any;
   onSelected: ChoiceOnSelected;
 }
 

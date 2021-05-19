@@ -4,7 +4,7 @@ import { fromGroupConfigs, toGroupConfigs } from './Converters';
 import { ExportedConfigs } from './ExportedConfigs';
 import { Choice, Group, Item, Question } from './FormObjects';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
-import { Answers, ChoiceValue, ConfigsValidationResult, Errors, FormUpdateListener, Validator, Validators } from './Types';
+import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator, Validators } from './Types';
 
 /**
  * @category Form
@@ -489,13 +489,13 @@ export class Form {
    * @param value choice's value
    * @param skipValidation skip validation
    */
-  setChoice(questionId: string, value: ChoiceValue | undefined, skipValidation = false) {
+  setChoice(questionId: string, value: any, skipValidation = false) {
     this.endByInformFormUpdate(() => {
       this.internalSetChoice(questionId, value, skipValidation);
     });
   }
 
-  private internalSetChoice(questionId: string, value: ChoiceValue | undefined, skipValidation: boolean) {
+  private internalSetChoice(questionId: string, value: any, skipValidation: boolean) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'single') {
       throw new Error('Question type is not single.');
@@ -512,13 +512,13 @@ export class Form {
    * @param values choices' values
    * @param skipValidation skip validation
    */
-  setChoices(questionId: string, values: ChoiceValue[], skipValidation = false) {
+  setChoices(questionId: string, values: any[], skipValidation = false) {
     this.endByInformFormUpdate(() => {
       this.internalSetChoices(questionId, values, skipValidation);
     });
   }
 
-  private internalSetChoices(questionId: string, values: ChoiceValue[], skipValidation: boolean) {
+  private internalSetChoices(questionId: string, values: any[], skipValidation: boolean) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'multiple') {
       throw new Error('Question type is not multiple.');

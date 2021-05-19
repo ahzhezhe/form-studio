@@ -1,4 +1,4 @@
-import { ChoiceOnSelected, ChoiceValue, CustomConfigs, QuestionType } from './Types';
+import { ChoiceOnSelected, CustomConfigs, QuestionType } from './Types';
 
 export interface Item {
   id: string;
@@ -20,6 +20,6 @@ export interface Question extends Item {
 }
 
 export interface Choice extends Item {
-  value: ChoiceValue;
+  value: any;
   onSelected: ChoiceOnSelected;
 }

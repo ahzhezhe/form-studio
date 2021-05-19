@@ -1,6 +1,5 @@
 import { Group } from './FormObjects';
 import { ConfigsValidationResult } from './Types';
-import { ChoiceValue } from '.';
 
 export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValidationResult => {
   const errorMap = new Map<string, string[]>();
@@ -10,7 +9,7 @@ export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValida
 
   } else {
     const allIds: string[] = [];
-    const questionChoiceValues = new Map<string, ChoiceValue[]>();
+    const questionChoiceValues = new Map<string, any[]>();
     const choiceOnSelectedIds = new Map<string, string[]>();
     collectData(errorMap, allIds, questionChoiceValues, choiceOnSelectedIds, groups);
 
@@ -46,7 +45,7 @@ export const validateConfigs = (groups: Group[], strict: boolean): ConfigsValida
   return { pass: true };
 };
 
-const collectData = (errorMap: Map<string, string[]>, allIds: string[], questionChoiceValues: Map<string, ChoiceValue[]>,
+const collectData = (errorMap: Map<string, string[]>, allIds: string[], questionChoiceValues: Map<string, any[]>,
   choiceOnSelectedIds: Map<string, string[]>, groups: Group[]) => {
   for (const group of groups) {
     allIds.push(group.id);

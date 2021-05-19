@@ -1,4 +1,4 @@
-import { ChoiceValue, CustomConfigs, QuestionType } from './Types';
+import { CustomConfigs, QuestionType } from './Types';
 
 /**
  * @category Render Instructions
@@ -96,7 +96,7 @@ export interface ChoiceRenderInstructions extends ItemRenderInstructions {
   /**
    * Value of this choice. It will be used as answer of the question.
    */
-  value: ChoiceValue;
+  value: any;
 }
 
 /**

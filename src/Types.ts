@@ -8,8 +8,6 @@ export type CustomConfigs = {
 
 export type QuestionType = 'any' | 'single' | 'multiple';
 
-export type ChoiceValue = string | number | boolean;
-
 export type ChoiceOnSelected = {
   /**
    * A list of group id, question id or choice id.
