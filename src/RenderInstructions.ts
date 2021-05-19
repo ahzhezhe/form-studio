@@ -42,17 +42,17 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    * For questions with `any` as type,
    * set the HTML component value using [[currentAnswer]] and use form's [[setAnswer]] method to handle `onChange` event.
    *
-   * For questions with `single` as type,
+   * For questions with `choice` as type,
    * set the HTML component value using [[currentAnswer]] and use form's [[setChoice]] or [[selectChoice]] method to handle `onChange` event.
    * Usually radio button group will be used for this question.
    *
-   * For questions with `multiple` as type,
+   * For questions with `choices` as type,
    * set the HTML component value using [[currentAnswer]] and use form's [[setChoices]] or [[selectChoice]] method to handle `onChange` event.
    * Usually check box group will be used for this question.
    */
   type: QuestionType;
   /**
-   * Choices for questions with `single` or `multiple` as [[type]].
+   * Choices for questions with `choice` or `choices` as [[type]].
    */
   choices: ChoiceRenderInstructions[];
   /**
@@ -60,9 +60,9 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    *
    * For questions with `any` as [[type]], it should be the input value.
    *
-   * For questions with `single` as [[type]], it should be the value of the selected choice.
+   * For questions with `choice` as [[type]], it should be the value of the selected choice.
    *
-   * For questions with `multiple` as [[type]], it should be a list of values of the selected choices.
+   * For questions with `choices` as [[type]], it should be a list of values of the selected choices.
    */
   currentAnswer: any | undefined;
   /**
@@ -70,9 +70,9 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    *
    * For questions with `any` as [[type]], it should be the input value.
    *
-   * For questions with `single` as [[type]], it should be the value of the selected choice.
+   * For questions with `choice` as [[type]], it should be the value of the selected choice.
    *
-   * For questions with `multiple` as [[type]], it should be a list of values of the selected choices.
+   * For questions with `choices` as [[type]], it should be a list of values of the selected choices.
    *
    * If the question is disabled or the answer is not valid, the answer will be set to `undefined`.
    */

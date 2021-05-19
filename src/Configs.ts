@@ -45,17 +45,17 @@ export interface QuestionConfigs extends ItemConfigs {
    * Questions with `any` as [[type]] accept `any` as answer.
    * You shouldn't have to specify [[choices]] for this question.
    *
-   * Questions with `single` as [[type]] accept `any` as answer.
+   * Questions with `choice` as [[type]] accept `any` as answer.
    * You should specify [[choices]] for this question.
    * Usually radio button group will be used for this question.
    *
-   * Questions with `multiple` as [[type]] accept `any`[] as answer.
+   * Questions with `choices` as [[type]] accept `any`[] as answer.
    * You should specify [[choices]] for this question.
    * Usually check box group will be used for this question.
    */
   type: QuestionType;
   /**
-   * Choices for questions with `single` or `multiple` as [[type]].
+   * Choices for questions with `choice` or `choices` as [[type]].
    */
   choices?: ChoiceConfigs[];
   /**
@@ -69,9 +69,9 @@ export interface QuestionConfigs extends ItemConfigs {
    *
    * Questions with `any` as [[type]] accept `any` as answer.
    *
-   * Questions with `single` as [[type]] accept `any` as answer.
+   * Questions with `choice` as [[type]] accept `any` as answer.
    *
-   * Questions with `multiple` as [[type]] accept `any`[] as answer.
+   * Questions with `choices` as [[type]] accept `any`[] as answer.
    */
   defaultAnswer?: any;
 }

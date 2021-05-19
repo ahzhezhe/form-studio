@@ -18,14 +18,14 @@ describe('ConfigsValidation', () => {
   test('No choices', () => {
     let configs: Configs = [{
       questions: [{
-        type: 'single'
+        type: 'choice'
       }]
     }];
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
 
     configs = [{
       questions: [{
-        type: 'single',
+        type: 'choice',
         choices: []
       }]
     }];
@@ -33,14 +33,14 @@ describe('ConfigsValidation', () => {
 
     configs = [{
       questions: [{
-        type: 'multiple'
+        type: 'choices'
       }]
     }];
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
 
     configs = [{
       questions: [{
-        type: 'multiple',
+        type: 'choices',
         choices: []
       }]
     }];
@@ -59,7 +59,7 @@ describe('ConfigsValidation', () => {
       id: 'id',
       questions: [{
         id: 'id',
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'id' }]
       }]
     }];
@@ -69,7 +69,7 @@ describe('ConfigsValidation', () => {
       id: 'id',
       questions: [{
         id: 'id',
-        type: 'single',
+        type: 'choice',
         choices: [{ }]
       }]
     }];
@@ -78,7 +78,7 @@ describe('ConfigsValidation', () => {
     configs = [{
       id: 'id',
       questions: [{
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'id' }]
       }]
     }];
@@ -87,7 +87,7 @@ describe('ConfigsValidation', () => {
     configs = [{
       questions: [{
         id: 'id',
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'id' }]
       }]
     }];
@@ -97,7 +97,7 @@ describe('ConfigsValidation', () => {
   test('Duplicated choice values', () => {
     let configs: Configs = [{
       questions: [{
-        type: 'single',
+        type: 'choice',
         choices: [{ value: 'value' }, { value: 'value' }]
       }]
     }];
@@ -105,7 +105,7 @@ describe('ConfigsValidation', () => {
 
     configs = [{
       questions: [{
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'id' }, { id: 'id' }]
       }]
     }];
@@ -113,7 +113,7 @@ describe('ConfigsValidation', () => {
 
     configs = [{
       questions: [{
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'id' }, { value: 'id' }]
       }]
     }];
@@ -121,12 +121,12 @@ describe('ConfigsValidation', () => {
 
     configs = [{
       questions: [{
-        type: 'single',
+        type: 'choice',
         choices: [{ value: 'a' }, { value: 'b' }]
       }]
     }, {
       questions: [{
-        type: 'single',
+        type: 'choice',
         choices: [{ value: 'a' }, { value: 'b' }]
       }]
     }];
@@ -138,7 +138,7 @@ describe('ConfigsValidation', () => {
       id: 'g1',
       questions: [{
         id: 'q1',
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
           enable: ['xx']
         } }]
@@ -150,7 +150,7 @@ describe('ConfigsValidation', () => {
       id: 'g1',
       questions: [{
         id: 'q1',
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
           disable: ['xx']
         } }]
@@ -162,7 +162,7 @@ describe('ConfigsValidation', () => {
       id: 'g1',
       questions: [{
         id: 'q1',
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
           disable: ['g1', 'q1', 'c1']
         } }]
@@ -174,7 +174,7 @@ describe('ConfigsValidation', () => {
       id: 'g1',
       questions: [{
         id: 'q1',
-        type: 'single',
+        type: 'choice',
         choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
           disable: ['xx']
         } }]

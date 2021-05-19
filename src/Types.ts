@@ -1,7 +1,7 @@
 import { Question } from './ExportedConfigs';
 import Form from '.';
 
-export type QuestionType = 'any' | 'single' | 'multiple';
+export type QuestionType = 'any' | 'choice' | 'choices';
 
 export type ChoiceOnSelected = {
   /**

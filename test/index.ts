@@ -15,7 +15,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
 
   subGroup1Questions.push({
     id: 'subGroup1Question2',
-    type: 'single',
+    type: 'choice',
     custom: { title: 'subGroup1Question2' },
     validators: ['notNullSingle'],
     choices: [
@@ -29,7 +29,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
   subGroup1Questions.push({
     id: 'subGroup1Question3',
     defaultDisabled: true,
-    type: 'multiple',
+    type: 'choices',
     custom: { title: 'subGroup1Question3' },
     validators: ['atLeast1'],
     choices: [
@@ -42,7 +42,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
 
   subGroup1Questions.push({
     id: 'subGroup1Question4',
-    type: 'multiple',
+    type: 'choices',
     custom: { title: 'subGroup1Question3' },
     validators: ['atLeast1'],
     choices: [
@@ -70,7 +70,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
 
   group1Questions.push({
     id: 'group1Question2',
-    type: 'single',
+    type: 'choice',
     custom: { title: 'group1Question2' },
     validators: ['notNullSingle'],
     choices: [
@@ -83,7 +83,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
 
   group1Questions.push({
     id: 'group1Question3',
-    type: 'multiple',
+    type: 'choices',
     custom: { title: 'group1Question3' },
     choices: [
       { id: 'group1Question3Choice1', custom: { title: 'group1Question3Choice1' } },

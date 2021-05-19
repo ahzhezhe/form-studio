@@ -298,9 +298,9 @@ export class Form {
 
     if (question.type === 'any') {
       this.internalSetAnswer(question.id, undefined, skipValidation);
-    } else if (question.type === 'single') {
+    } else if (question.type === 'choice') {
       this.internalSetChoice(question.id, undefined, skipValidation);
-    } else if (question.type === 'multiple') {
+    } else if (question.type === 'choices') {
       this.internalSetChoices(question.id, [], skipValidation);
     }
   }
@@ -360,9 +360,9 @@ export class Form {
 
     if (question.type === 'any') {
       this.internalSetAnswer(question.id, defaultAnswer, skipValidation);
-    } else if (question.type === 'single') {
+    } else if (question.type === 'choice') {
       this.internalSetChoice(question.id, defaultAnswer, skipValidation);
-    } else if (question.type === 'multiple') {
+    } else if (question.type === 'choices') {
       this.internalSetChoices(question.id, defaultAnswer || [], skipValidation);
     }
   }
@@ -399,12 +399,12 @@ export class Form {
   private setCurrentAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
     this.questionCurrentAnswerMap.set(question.id, answer);
 
-    if (question.type === 'single') {
+    if (question.type === 'choice') {
       const choice = question.choices.find(choice => choice.value === answer);
       if (choice && this.isChoiceDisabled(choice)) {
         answer = undefined;
       }
-    } else if (question.type === 'multiple') {
+    } else if (question.type === 'choices') {
       let choices = question.choices.filter(choice => answer.includes(choice.value));
       choices = choices.filter(choice => !this.isChoiceDisabled(choice));
       answer = choices.map(choice => choice.value);
@@ -475,14 +475,14 @@ export class Form {
   private internalSetAnswer(questionId: string, answer: any, skipValidation: boolean) {
     const question = this.findQuestion(questionId);
     if (question.type !== 'any') {
-      throw new Error('Question type is not any.');
+      throw new Error("Question type is not 'any'.");
     }
 
     this.setCurrentAnswerAndValidate(question, answer, skipValidation);
   }
 
   /**
-   * Set answer of the question with `single` as [[type]].
+   * Set answer of the question with `choice` as [[type]].
    *
    * @param questionId question id
    * @param value choice's value
@@ -496,8 +496,8 @@ export class Form {
 
   private internalSetChoice(questionId: string, value: any, skipValidation: boolean) {
     const question = this.findQuestion(questionId);
-    if (question.type !== 'single') {
-      throw new Error('Question type is not single.');
+    if (question.type !== 'choice') {
+      throw new Error("Question type is not 'choice'.");
     }
 
     const choice = question.choices.find(choice => choice.value === value);
@@ -505,7 +505,7 @@ export class Form {
   }
 
   /**
-   * Set answers of the question with `multiple` as [[type]].
+   * Set answers of the question with `choices` as [[type]].
    *
    * @param questionId question id
    * @param values choices' values
@@ -519,8 +519,8 @@ export class Form {
 
   private internalSetChoices(questionId: string, values: any[], skipValidation: boolean) {
     const question = this.findQuestion(questionId);
-    if (question.type !== 'multiple') {
-      throw new Error('Question type is not multiple.');
+    if (question.type !== 'choices') {
+      throw new Error("Question type is not 'choices'.");
     }
 
     const choices = question.choices.filter(choice => values.includes(choice.value));
@@ -529,7 +529,7 @@ export class Form {
 
   /**
    * Select invididual choice.
-   * Can be used by questions with `single` or `multiple` as [[type]] only.
+   * Can be used by questions with `choice` or `choices` as [[type]] only.
    *
    * @param choiceId choice id
    * @param selected selected/unselected
@@ -547,13 +547,13 @@ export class Form {
 
     let currentAnswer = this.questionCurrentAnswerMap.get(question.id);
 
-    if (question.type === 'single') {
+    if (question.type === 'choice') {
       if (selected) {
         this.internalSetChoice(question.id, choice.value, skipValidation);
       } else if (choice.value === currentAnswer) {
         this.internalSetChoice(question.id, undefined, skipValidation);
       }
-    } else if (question.type === 'multiple') {
+    } else if (question.type === 'choices') {
       currentAnswer = currentAnswer || [];
       currentAnswer = currentAnswer.filter(value => value !== choice.value);
       if (selected) {
@@ -569,11 +569,11 @@ export class Form {
     }
 
     const question = this.choiceQuestionMap.get(choice.id)!;
-    if (question.type === 'single') {
+    if (question.type === 'choice') {
       const answer = this.questionCurrentAnswerMap.get(question.id);
       return choice.value === answer;
     }
-    if (question.type === 'multiple') {
+    if (question.type === 'choices') {
       const answer = this.questionCurrentAnswerMap.get(question.id);
       return !!answer?.includes(choice.value);
     }
@@ -736,9 +736,9 @@ export class Form {
 
       if (question.type === 'any') {
         this.internalSetAnswer(questionId, answer, skipValidations);
-      } else if (question.type === 'single') {
+      } else if (question.type === 'choice') {
         this.internalSetChoice(questionId, answer, skipValidations);
-      } else if (question.type === 'multiple') {
+      } else if (question.type === 'choices') {
         this.internalSetChoices(questionId, answer || [], skipValidations);
       }
     }
@@ -776,7 +776,7 @@ export class Form {
    * - No duplicated ids within the form
    * - No duplicated choice values within a question
    * - No groups without questions
-   * - No `single` or `multiple` questions without choices
+   * - No questions with `choice` or `choices` as type without choices
    *
    * Put `strict` as `true` to validate the following:
    * - No unrecognized ids in choices' `onSelected` configs

@@ -32,7 +32,7 @@ describe('Answering', () => {
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
-  test('selectChoice single', () => {
+  test('selectChoice choice', () => {
     form.selectChoice('subGroup1Question2Choice2', true);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
@@ -48,7 +48,7 @@ describe('Answering', () => {
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
-  test('selectChoice multiple', () => {
+  test('selectChoice choices', () => {
     form.selectChoice('subGroup1Question3Choice1', true);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
