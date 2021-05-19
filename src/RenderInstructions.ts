@@ -44,11 +44,11 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    *
    * For questions with `choice` as type,
    * set the HTML component value using [[currentAnswer]] and use form's [[setChoice]] or [[selectChoice]] method to handle `onChange` event.
-   * Usually radio button group will be used for this question.
+   * Usually radio button group or dropdown select will be used for this type of questions.
    *
    * For questions with `choices` as type,
    * set the HTML component value using [[currentAnswer]] and use form's [[setChoices]] or [[selectChoice]] method to handle `onChange` event.
-   * Usually check box group will be used for this question.
+   * Usually checkbox group or select with multiple mode turned on will be used for this type of questions.
    */
   type: QuestionType;
   /**

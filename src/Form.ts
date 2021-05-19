@@ -171,6 +171,7 @@ export class Form {
 
   /**
    * Get sanitized configs of this form.
+   *
    * You can persist it and use it to reconstruct the form later.
    *
    * @returns configs
@@ -529,7 +530,8 @@ export class Form {
 
   /**
    * Select invididual choice.
-   * Can be used by questions with `choice` or `choices` as [[type]] only.
+   *
+   * This method can be used by questions with `choice` or `choices` as [[type]] only.
    *
    * @param choiceId choice id
    * @param selected selected/unselected
@@ -630,6 +632,7 @@ export class Form {
 
   /**
    * Get current answers. The answers are unvalidated.
+   *
    * You can persist it and use it with [[importAnswers]] method to restore the answers later.
    *
    * @returns current answers
@@ -650,7 +653,9 @@ export class Form {
 
   /**
    * Get validated answers.
+   *
    * If a question is disabled or it's answer is not valid, it's answer will be set to `undefined`.
+   *
    * You can persist it and use it with [[importAnswers]] method to restore the answers later.
    *
    * @returns validated answers
@@ -675,6 +680,7 @@ export class Form {
    * Get errors.
    *
    * Questions which didn't go through validation will not have errors, even if their answers are currently invalid.
+   *
    * You can use [[validate]] method to validate all answers in the form.
    *
    * @returns errors
@@ -699,6 +705,7 @@ export class Form {
    * Check whether form is clean.
    *
    * Form will always be clean if it didn't go through any validation, even if there are invalid answers in the form.
+   *
    * You can use [[validate]] method to validate all answers in the form.
    *
    * @returns whether form is clean

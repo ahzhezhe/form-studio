@@ -6,13 +6,14 @@ import { ChoiceOnSelected, QuestionType } from './Types';
 export interface ItemConfigs {
   /**
    * Item id.
+   *
    * It should be unique throughout the entire form.
+   *
    * It will be auto generated if you leave it falsy.
    */
   id?: string;
   /**
    * Whether or not this item is disabled by default.
-   * The actual disabled property will be based on the logic that you define in other part of the configs.
    */
   defaultDisabled?: boolean;
   /**
@@ -47,11 +48,11 @@ export interface QuestionConfigs extends ItemConfigs {
    *
    * Questions with `choice` as [[type]] accept `any` as answer.
    * You should specify [[choices]] for this question.
-   * Usually radio button group will be used for this question.
+   * Usually radio button group or dropdown select will be used for this type of questions.
    *
    * Questions with `choices` as [[type]] accept `any`[] as answer.
    * You should specify [[choices]] for this question.
-   * Usually check box group will be used for this question.
+   * Usually checkbox group or select with multiple mode turned on will be used for this type of questions.
    */
   type: QuestionType;
   /**
@@ -82,6 +83,9 @@ export interface QuestionConfigs extends ItemConfigs {
 export interface ChoiceConfigs extends ItemConfigs {
   /**
    * Value of this choice. It will be used as answer of the question.
+   *
+   * Using primitive type like `string` or `number` is recommended due to the limitation in comparing complex value.
+   *
    * Id will be used as value if you leave it `undefined`.
    */
   value?: any;

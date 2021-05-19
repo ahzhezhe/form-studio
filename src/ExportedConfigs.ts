@@ -37,6 +37,7 @@ export interface Choice extends Item {
 
 /**
  * Exported form configs.
+ *
  * You can persist it and use it to reconstruct the form later.
  *
  * @category Exported Configs
