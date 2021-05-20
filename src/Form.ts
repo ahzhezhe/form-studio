@@ -1,6 +1,6 @@
 import { Configs } from './Configs';
 import { sanitizeGroupConfigs } from './ConfigsSanitizers';
-import { validateConfigs } from './ConfigsValidators';
+import { ConfigsValidator } from './ConfigsValidator';
 import { Choice, ExportedConfigs, Group, Item, Question } from './ExportedConfigs';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
 import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator, Validators } from './Types';
@@ -107,7 +107,7 @@ export class Form {
     }
 
     this.configs = sanitizeGroupConfigs(undefined, configs);
-    const result = validateConfigs(this.configs, false);
+    const result = new ConfigsValidator().validate(this.configs, false);
     if (!result.pass) {
       throw new Error('Invalid configs. You may use validateConfigs method to see what is wrong.');
     }
@@ -769,7 +769,6 @@ export class Form {
     this.onFormUpdate?.(this);
   }
 
-  // TODO: - No circular choices' `onSelected` configs
   /**
    * Validate configs.
    *
@@ -789,7 +788,7 @@ export class Form {
    */
   static validateConfigs(configs: Configs, strict = false): ConfigsValidationResult {
     const groups = sanitizeGroupConfigs(undefined, configs);
-    return validateConfigs(groups, strict);
+    return new ConfigsValidator().validate(groups, strict);
   }
 
 }
