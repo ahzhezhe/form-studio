@@ -55,11 +55,7 @@ export class ConfigsValidator {
   }
 
   private checkCircular(mainId: string, subId: string) {
-    const parentIds = this.parentIdsById.get(subId);
-
-    if (!parentIds) {
-      return;
-    }
+    const parentIds = this.parentIdsById.get(subId)!;
 
     if (parentIds.includes(mainId)) {
       this.addError(mainId, `Circular relationship with '${subId}'`);
