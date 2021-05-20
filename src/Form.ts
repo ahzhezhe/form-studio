@@ -775,9 +775,10 @@ export class Form {
    * The following validations will be conducted:
    * - Form is not without any groups
    * - No duplicated ids within the form
-   * - No duplicated choice values within a question
    * - No groups without questions
    * - No questions with `choice` or `choices` as type without choices
+   * - No duplicated choice values within a question
+   * - No circular choices' `onSelected` configs
    *
    * Put `strict` as `true` to validate the following:
    * - No unrecognized ids in choices' `onSelected` configs

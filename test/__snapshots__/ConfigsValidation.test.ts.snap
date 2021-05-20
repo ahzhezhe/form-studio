@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ConfigsValidation Circular relationship 1`] = `
+Object {
+  "errors": Object {
+    "c1": Array [
+      "Circular relationship with 'c2'",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Circular relationship 2`] = `
+Object {
+  "errors": Object {
+    "q1": Array [
+      "Circular relationship with 'c2'",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Circular relationship 3`] = `
+Object {
+  "errors": Object {
+    "g1": Array [
+      "Circular relationship with 'q1'",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Circular relationship 4`] = `
+Object {
+  "pass": true,
+}
+`;
+
 exports[`ConfigsValidation Duplicated choice values 1`] = `
 Object {
   "errors": Object {
@@ -42,9 +81,54 @@ Object {
 }
 `;
 
+exports[`ConfigsValidation Duplicated choice values 5`] = `
+Object {
+  "errors": Object {
+    "g0_q0": Array [
+      "There are choices with same values",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated choice values 6`] = `
+Object {
+  "errors": Object {
+    "g0_q0": Array [
+      "There are choices with same values",
+    ],
+    "id": Array [
+      "Id is not unique",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated choice values 7`] = `
+Object {
+  "errors": Object {
+    "g0_q0": Array [
+      "There are choices with same values",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation Duplicated choice values 8`] = `
+Object {
+  "pass": true,
+}
+`;
+
 exports[`ConfigsValidation Duplicated ids 1`] = `
 Object {
   "errors": Object {
+    "g0_q0": Array [
+      "There are choices with same values",
+    ],
     "id": Array [
       "Id is not unique",
     ],
@@ -70,15 +154,7 @@ Object {
     "id": Array [
       "Id is not unique",
     ],
-  },
-  "pass": false,
-}
-`;
-
-exports[`ConfigsValidation Duplicated ids 4`] = `
-Object {
-  "errors": Object {
-    "id": Array [
+    "id_q0": Array [
       "Id is not unique",
     ],
   },
@@ -206,12 +282,6 @@ Object {
 `;
 
 exports[`ConfigsValidation Unrecognized ids in choices onSelected 3`] = `
-Object {
-  "pass": true,
-}
-`;
-
-exports[`ConfigsValidation Unrecognized ids in choices onSelected 4`] = `
 Object {
   "pass": true,
 }
