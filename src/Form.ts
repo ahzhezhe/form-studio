@@ -10,23 +10,23 @@ import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator
  */
 export class Form {
 
-  private readonly onFormUpdate?: FormUpdateListener;
-  private readonly configs: ExportedConfigs;
-  private readonly validators: Validators;
-  private readonly defaultAnswers: Answers = {};
+  readonly #onFormUpdate?: FormUpdateListener;
+  readonly #configs: ExportedConfigs;
+  readonly #validators: Validators;
+  readonly #defaultAnswers: Answers = {};
 
-  private readonly groupById = new Map<string, Group>();
-  private readonly questionById = new Map<string, Question>();
-  private readonly choiceById = new Map<string, Choice>();
-  private readonly parentGroupByGroupId = new Map<string, Group>();
-  private readonly groupByQuestionId = new Map<string, Group>();
-  private readonly questionByChoiceId = new Map<string, Question>();
-  private readonly currentAnswerByQuestionId = new Map<string, any>();
-  private readonly validatedAnswerByQuestionId = new Map<string, any>();
-  private readonly validatingByQuestionId = new Map<string, boolean>();
-  private readonly errorByQuestionId = new Map<string, any>();
-  private readonly disabledByChoicesById = new Map<string, Choice[]>();
-  private readonly enabledByChoicesById = new Map<string, Choice[]>();
+  readonly #groupById = new Map<string, Group>();
+  readonly #questionById = new Map<string, Question>();
+  readonly #choiceById = new Map<string, Choice>();
+  readonly #parentGroupByGroupId = new Map<string, Group>();
+  readonly #groupByQuestionId = new Map<string, Group>();
+  readonly #questionByChoiceId = new Map<string, Question>();
+  readonly #currentAnswerByQuestionId = new Map<string, any>();
+  readonly #validatedAnswerByQuestionId = new Map<string, any>();
+  readonly #validatingByQuestionId = new Map<string, boolean>();
+  readonly #errorByQuestionId = new Map<string, any>();
+  readonly #disabledByChoicesById = new Map<string, Choice[]>();
+  readonly #enabledByChoicesById = new Map<string, Choice[]>();
 
   /**
    * Construct a form.
@@ -106,65 +106,65 @@ export class Form {
       onFormUpdate = arg3;
     }
 
-    this.configs = sanitizeGroupConfigs(undefined, configs);
-    const result = new ConfigsValidator().validate(this.configs, false);
+    this.#configs = sanitizeGroupConfigs(undefined, configs);
+    const result = new ConfigsValidator().validate(this.#configs, false);
     if (!result.pass) {
       throw new Error('Invalid configs. You may use validateConfigs method to see what is wrong.');
     }
 
-    this.validators = validators;
-    this.onFormUpdate = onFormUpdate;
-    this.processGroups(undefined, this.configs);
-    this.endByInformFormUpdate(() => {
-      this.internalImportAnswers(this.defaultAnswers, skipValidations);
+    this.#validators = validators;
+    this.#onFormUpdate = onFormUpdate;
+    this.#processGroups(undefined, this.#configs);
+    this.#endByInformFormUpdate(() => {
+      this.#internalImportAnswers(this.#defaultAnswers, skipValidations);
     });
   }
 
-  private processGroups(parentGroup: Group | undefined, groups: Group[]) {
+  #processGroups(parentGroup: Group | undefined, groups: Group[]) {
     groups.forEach(group => {
-      this.groupById.set(group.id, group);
-      this.processGroups(group, group.groups || []);
-      this.processQuestions(group, group.questions || []);
+      this.#groupById.set(group.id, group);
+      this.#processGroups(group, group.groups || []);
+      this.#processQuestions(group, group.questions || []);
       if (parentGroup) {
-        this.parentGroupByGroupId.set(group.id, parentGroup);
+        this.#parentGroupByGroupId.set(group.id, parentGroup);
       }
     });
   }
 
-  private processQuestions(group: Group, questions: Question[]) {
+  #processQuestions(group: Group, questions: Question[]) {
     questions.forEach(question => {
-      this.questionById.set(question.id, question);
-      this.groupByQuestionId.set(question.id, group);
+      this.#questionById.set(question.id, question);
+      this.#groupByQuestionId.set(question.id, group);
       if (question.type !== 'any') {
-        this.processChoices(question, question.choices);
+        this.#processChoices(question, question.choices);
       }
       if (!!question.defaultAnswer) {
-        this.defaultAnswers[question.id] = question.defaultAnswer;
+        this.#defaultAnswers[question.id] = question.defaultAnswer;
       }
     });
   }
 
-  private processChoices(question: Question, choices: Choice[]) {
+  #processChoices(question: Question, choices: Choice[]) {
     choices.forEach(choice => {
-      this.choiceById.set(choice.id, choice);
-      this.questionByChoiceId.set(choice.id, question);
+      this.#choiceById.set(choice.id, choice);
+      this.#questionByChoiceId.set(choice.id, question);
 
       choice.onSelected.disable?.forEach(id => {
-        let disabledByChoices = this.disabledByChoicesById.get(id);
+        let disabledByChoices = this.#disabledByChoicesById.get(id);
         if (!disabledByChoices) {
           disabledByChoices = [];
         }
         disabledByChoices.push(choice);
-        this.disabledByChoicesById.set(id, disabledByChoices);
+        this.#disabledByChoicesById.set(id, disabledByChoices);
       });
 
       choice.onSelected.enable?.forEach(id => {
-        let enabledByChoices = this.enabledByChoicesById.get(id);
+        let enabledByChoices = this.#enabledByChoicesById.get(id);
         if (!enabledByChoices) {
           enabledByChoices = [];
         }
         enabledByChoices.push(choice);
-        this.enabledByChoicesById.set(id, enabledByChoices);
+        this.#enabledByChoicesById.set(id, enabledByChoices);
       });
     });
   }
@@ -177,7 +177,7 @@ export class Form {
    * @returns configs
    */
   getConfigs(): ExportedConfigs {
-    return this.configs;
+    return this.#configs;
   }
 
   /**
@@ -186,60 +186,60 @@ export class Form {
    * @returns render instructions
    */
   getRenderInstructions(): RenderInstructions {
-    return this.toGroupRenderInstructions(this.configs);
+    return this.#toGroupRenderInstructions(this.#configs);
   }
 
-  private toGroupRenderInstructions(groups: Group[]): GroupRenderInstructions[] {
+  #toGroupRenderInstructions(groups: Group[]): GroupRenderInstructions[] {
     return groups.map((group): GroupRenderInstructions => ({
       id: group.id,
-      disabled: this.isGroupDisabled(group),
+      disabled: this.#isGroupDisabled(group),
       custom: group.custom,
-      groups: this.toGroupRenderInstructions(group.groups),
-      questions: this.toQuestionRenderInstructions(group.questions)
+      groups: this.#toGroupRenderInstructions(group.groups),
+      questions: this.#toQuestionRenderInstructions(group.questions)
     }));
   }
 
-  private toQuestionRenderInstructions(questions: Question[]): QuestionRenderInstructions[] {
+  #toQuestionRenderInstructions(questions: Question[]): QuestionRenderInstructions[] {
     return questions.map((question): QuestionRenderInstructions => ({
       id: question.id,
-      disabled: this.isQuestionDisabled(question),
+      disabled: this.#isQuestionDisabled(question),
       custom: question.custom,
       type: question.type,
-      choices: question.type !== 'any' ? this.toChoiceRenderInstructions(question.choices) : [],
-      currentAnswer: this.currentAnswerByQuestionId.get(question.id),
-      validatedAnswer: this.isQuestionDisabled(question) ? undefined : this.validatedAnswerByQuestionId.get(question.id),
-      validating: !!this.validatingByQuestionId.get(question.id),
-      error: this.errorByQuestionId.get(question.id)
+      choices: question.type !== 'any' ? this.#toChoiceRenderInstructions(question.choices) : [],
+      currentAnswer: this.#currentAnswerByQuestionId.get(question.id),
+      validatedAnswer: this.#isQuestionDisabled(question) ? undefined : this.#validatedAnswerByQuestionId.get(question.id),
+      validating: !!this.#validatingByQuestionId.get(question.id),
+      error: this.#errorByQuestionId.get(question.id)
     }));
   }
 
-  private toChoiceRenderInstructions(choices: Choice[]): ChoiceRenderInstructions[] {
+  #toChoiceRenderInstructions(choices: Choice[]): ChoiceRenderInstructions[] {
     return choices.map((choice): ChoiceRenderInstructions => ({
       id: choice.id,
-      disabled: this.isChoiceDisabled(choice),
+      disabled: this.#isChoiceDisabled(choice),
       custom: choice.custom,
       value: choice.value
     }));
   }
 
-  private findGroup(groupId: string) {
-    const group = this.groupById.get(groupId);
+  #findGroup(groupId: string) {
+    const group = this.#groupById.get(groupId);
     if (!group) {
       throw new Error('Group is not found.');
     }
     return group;
   }
 
-  private findQuestion(questionId: string) {
-    const question = this.questionById.get(questionId);
+  #findQuestion(questionId: string) {
+    const question = this.#questionById.get(questionId);
     if (!question) {
       throw new Error('Question is not found.');
     }
     return question;
   }
 
-  private findChoice(choiceId: string) {
-    const choice = this.choiceById.get(choiceId);
+  #findChoice(choiceId: string) {
+    const choice = this.#choiceById.get(choiceId);
     if (!choice) {
       throw new Error('Choice is not found.');
     }
@@ -252,9 +252,9 @@ export class Form {
    * @param skipValidations skip validations
    */
   clear(skipValidations = false) {
-    this.endByInformFormUpdate(() => {
-      for (const group of this.configs) {
-        this.internalClearGroup(group.id, skipValidations);
+    this.#endByInformFormUpdate(() => {
+      for (const group of this.#configs) {
+        this.#internalClearGroup(group.id, skipValidations);
       }
     });
   }
@@ -266,19 +266,19 @@ export class Form {
    * @param skipValidations skip validations
    */
   clearGroup(groupId: string, skipValidations = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalClearGroup(groupId, skipValidations);
+    this.#endByInformFormUpdate(() => {
+      this.#internalClearGroup(groupId, skipValidations);
     });
   }
 
-  private internalClearGroup(groupId: string, skipValidations: boolean) {
-    const group = this.findGroup(groupId);
+  #internalClearGroup(groupId: string, skipValidations: boolean) {
+    const group = this.#findGroup(groupId);
 
     for (const subGroup of group.groups) {
-      this.internalClearGroup(subGroup.id, skipValidations);
+      this.#internalClearGroup(subGroup.id, skipValidations);
     }
     for (const question of group.questions) {
-      this.internalClearAnswer(question.id, skipValidations);
+      this.#internalClearAnswer(question.id, skipValidations);
     }
   }
 
@@ -289,20 +289,20 @@ export class Form {
    * @param skipValidation skip validation
    */
   clearAnswer(questionId: string, skipValidation = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalClearAnswer(questionId, skipValidation);
+    this.#endByInformFormUpdate(() => {
+      this.#internalClearAnswer(questionId, skipValidation);
     });
   }
 
-  private internalClearAnswer(questionId: string, skipValidation: boolean) {
-    const question = this.findQuestion(questionId);
+  #internalClearAnswer(questionId: string, skipValidation: boolean) {
+    const question = this.#findQuestion(questionId);
 
     if (question.type === 'any') {
-      this.internalSetAnswer(question.id, undefined, skipValidation);
+      this.#internalSetAnswer(question.id, undefined, skipValidation);
     } else if (question.type === 'choice') {
-      this.internalSetChoice(question.id, undefined, skipValidation);
+      this.#internalSetChoice(question.id, undefined, skipValidation);
     } else if (question.type === 'choices') {
-      this.internalSetChoices(question.id, [], skipValidation);
+      this.#internalSetChoices(question.id, [], skipValidation);
     }
   }
 
@@ -312,9 +312,9 @@ export class Form {
    * @param skipValidations skip validations
    */
   reset(skipValidations = false) {
-    this.endByInformFormUpdate(() => {
-      for (const group of this.configs) {
-        this.internalResetGroup(group.id, skipValidations);
+    this.#endByInformFormUpdate(() => {
+      for (const group of this.#configs) {
+        this.#internalResetGroup(group.id, skipValidations);
       }
     });
   }
@@ -326,19 +326,19 @@ export class Form {
    * @param skipValidations skip validations
    */
   resetGroup(groupId: string, skipValidations = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalResetGroup(groupId, skipValidations);
+    this.#endByInformFormUpdate(() => {
+      this.#internalResetGroup(groupId, skipValidations);
     });
   }
 
-  private internalResetGroup(groupId: string, skipValidations: boolean) {
-    const group = this.findGroup(groupId);
+  #internalResetGroup(groupId: string, skipValidations: boolean) {
+    const group = this.#findGroup(groupId);
 
     for (const subGroup of group.groups) {
-      this.internalResetGroup(subGroup.id, skipValidations);
+      this.#internalResetGroup(subGroup.id, skipValidations);
     }
     for (const question of group.questions) {
-      this.internalResetAnswer(question.id, skipValidations);
+      this.#internalResetAnswer(question.id, skipValidations);
     }
   }
 
@@ -349,30 +349,30 @@ export class Form {
    * @param skipValidation skip validation
    */
   resetAnswer(questionId: string, skipValidation = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalResetAnswer(questionId, skipValidation);
+    this.#endByInformFormUpdate(() => {
+      this.#internalResetAnswer(questionId, skipValidation);
     });
   }
 
-  private internalResetAnswer(questionId: string, skipValidation: boolean) {
-    const question = this.findQuestion(questionId);
+  #internalResetAnswer(questionId: string, skipValidation: boolean) {
+    const question = this.#findQuestion(questionId);
 
-    const defaultAnswer = this.defaultAnswers[questionId];
+    const defaultAnswer = this.#defaultAnswers[questionId];
 
     if (question.type === 'any') {
-      this.internalSetAnswer(question.id, defaultAnswer, skipValidation);
+      this.#internalSetAnswer(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'choice') {
-      this.internalSetChoice(question.id, defaultAnswer, skipValidation);
+      this.#internalSetChoice(question.id, defaultAnswer, skipValidation);
     } else if (question.type === 'choices') {
-      this.internalSetChoices(question.id, defaultAnswer || [], skipValidation);
+      this.#internalSetChoices(question.id, defaultAnswer || [], skipValidation);
     }
   }
 
-  private getValidators(names: string[]) {
+  #getValidators(names: string[]) {
     const validators: Validator[] = [];
 
     for (const name of names) {
-      const validator = this.validators[name];
+      const validator = this.#validators[name];
       if (validator) {
         validators.push(validator);
       }
@@ -381,7 +381,7 @@ export class Form {
     return validators;
   }
 
-  private executeValidators(validators: Validator[], question: Question, answer: any): void | Promise<void> {
+  #executeValidators(validators: Validator[], question: Question, answer: any): void | Promise<void> {
     const validator = validators.shift();
 
     if (!validator) {
@@ -391,67 +391,67 @@ export class Form {
     const validationResult = validator(answer, question);
 
     if (validationResult instanceof Promise) {
-      return validationResult.then(() => this.executeValidators(validators, question, answer));
+      return validationResult.then(() => this.#executeValidators(validators, question, answer));
     }
 
-    return this.executeValidators(validators, question, answer);
+    return this.#executeValidators(validators, question, answer);
   }
 
-  private setCurrentAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
-    this.currentAnswerByQuestionId.set(question.id, answer);
+  #setCurrentAnswerAndValidate(question: Question, answer: any, skipValidation: boolean) {
+    this.#currentAnswerByQuestionId.set(question.id, answer);
 
     if (question.type === 'choice') {
       const choice = question.choices.find(choice => choice.value === answer);
-      if (choice && this.isChoiceDisabled(choice)) {
+      if (choice && this.#isChoiceDisabled(choice)) {
         answer = undefined;
       }
     } else if (question.type === 'choices') {
       let choices = question.choices.filter(choice => answer.includes(choice.value));
-      choices = choices.filter(choice => !this.isChoiceDisabled(choice));
+      choices = choices.filter(choice => !this.#isChoiceDisabled(choice));
       answer = choices.map(choice => choice.value);
     }
 
-    this.currentAnswerByQuestionId.set(question.id, answer);
+    this.#currentAnswerByQuestionId.set(question.id, answer);
 
     const onSuccess = () => {
-      this.validatedAnswerByQuestionId.set(question.id, answer);
-      this.errorByQuestionId.delete(question.id);
+      this.#validatedAnswerByQuestionId.set(question.id, answer);
+      this.#errorByQuestionId.delete(question.id);
     };
 
     const onError = (err: any) => {
-      this.validatedAnswerByQuestionId.delete(question.id);
-      this.errorByQuestionId.set(question.id, err);
+      this.#validatedAnswerByQuestionId.delete(question.id);
+      this.#errorByQuestionId.set(question.id, err);
     };
 
-    const validators = this.getValidators(question.validators);
+    const validators = this.#getValidators(question.validators);
     if (!validators.length) {
       onSuccess();
       return;
     }
 
     if (skipValidation) {
-      this.validatedAnswerByQuestionId.delete(question.id);
-      this.errorByQuestionId.delete(question.id);
+      this.#validatedAnswerByQuestionId.delete(question.id);
+      this.#errorByQuestionId.delete(question.id);
       return;
     }
 
     let validationResult: void | Promise<void>;
     try {
-      validationResult = this.executeValidators(validators, question, answer);
+      validationResult = this.#executeValidators(validators, question, answer);
     } catch (err) {
       onError(err);
       return;
     }
 
     if (validationResult instanceof Promise) {
-      this.validatingByQuestionId.set(question.id, true);
+      this.#validatingByQuestionId.set(question.id, true);
 
       validationResult
         .then(onSuccess)
         .catch(onError)
         .finally(() => {
-          this.validatingByQuestionId.delete(question.id);
-          this.informFormUpdate();
+          this.#validatingByQuestionId.delete(question.id);
+          this.#informFormUpdate();
         });
 
       return;
@@ -468,18 +468,18 @@ export class Form {
    * @param skipValidation skip validation
    */
   setAnswer(questionId: string, answer: any, skipValidation = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalSetAnswer(questionId, answer, skipValidation);
+    this.#endByInformFormUpdate(() => {
+      this.#internalSetAnswer(questionId, answer, skipValidation);
     });
   }
 
-  private internalSetAnswer(questionId: string, answer: any, skipValidation: boolean) {
-    const question = this.findQuestion(questionId);
+  #internalSetAnswer(questionId: string, answer: any, skipValidation: boolean) {
+    const question = this.#findQuestion(questionId);
     if (question.type !== 'any') {
       throw new Error("Question type is not 'any'.");
     }
 
-    this.setCurrentAnswerAndValidate(question, answer, skipValidation);
+    this.#setCurrentAnswerAndValidate(question, answer, skipValidation);
   }
 
   /**
@@ -490,19 +490,19 @@ export class Form {
    * @param skipValidation skip validation
    */
   setChoice(questionId: string, value: any, skipValidation = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalSetChoice(questionId, value, skipValidation);
+    this.#endByInformFormUpdate(() => {
+      this.#internalSetChoice(questionId, value, skipValidation);
     });
   }
 
-  private internalSetChoice(questionId: string, value: any, skipValidation: boolean) {
-    const question = this.findQuestion(questionId);
+  #internalSetChoice(questionId: string, value: any, skipValidation: boolean) {
+    const question = this.#findQuestion(questionId);
     if (question.type !== 'choice') {
       throw new Error("Question type is not 'choice'.");
     }
 
     const choice = question.choices.find(choice => choice.value === value);
-    this.setCurrentAnswerAndValidate(question, choice?.value, skipValidation);
+    this.#setCurrentAnswerAndValidate(question, choice?.value, skipValidation);
   }
 
   /**
@@ -513,19 +513,19 @@ export class Form {
    * @param skipValidation skip validation
    */
   setChoices(questionId: string, values: any[], skipValidation = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalSetChoices(questionId, values, skipValidation);
+    this.#endByInformFormUpdate(() => {
+      this.#internalSetChoices(questionId, values, skipValidation);
     });
   }
 
-  private internalSetChoices(questionId: string, values: any[], skipValidation: boolean) {
-    const question = this.findQuestion(questionId);
+  #internalSetChoices(questionId: string, values: any[], skipValidation: boolean) {
+    const question = this.#findQuestion(questionId);
     if (question.type !== 'choices') {
       throw new Error("Question type is not 'choices'.");
     }
 
     const choices = question.choices.filter(choice => values.includes(choice.value));
-    this.setCurrentAnswerAndValidate(question, choices.map(choice => choice.value), skipValidation);
+    this.#setCurrentAnswerAndValidate(question, choices.map(choice => choice.value), skipValidation);
   }
 
   /**
@@ -538,22 +538,22 @@ export class Form {
    * @param skipValidation skip validation
    */
   selectChoice(choiceId: string, selected: boolean, skipValidation = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalSelectChoice(choiceId, selected, skipValidation);
+    this.#endByInformFormUpdate(() => {
+      this.#internalSelectChoice(choiceId, selected, skipValidation);
     });
   }
 
-  private internalSelectChoice(choiceId: string, selected: boolean, skipValidation: boolean) {
-    const choice = this.findChoice(choiceId);
-    const question = this.questionByChoiceId.get(choiceId)!;
+  #internalSelectChoice(choiceId: string, selected: boolean, skipValidation: boolean) {
+    const choice = this.#findChoice(choiceId);
+    const question = this.#questionByChoiceId.get(choiceId)!;
 
-    let currentAnswer = this.currentAnswerByQuestionId.get(question.id);
+    let currentAnswer = this.#currentAnswerByQuestionId.get(question.id);
 
     if (question.type === 'choice') {
       if (selected) {
-        this.internalSetChoice(question.id, choice.value, skipValidation);
+        this.#internalSetChoice(question.id, choice.value, skipValidation);
       } else if (choice.value === currentAnswer) {
-        this.internalSetChoice(question.id, undefined, skipValidation);
+        this.#internalSetChoice(question.id, undefined, skipValidation);
       }
     } else if (question.type === 'choices') {
       currentAnswer = currentAnswer || [];
@@ -561,41 +561,41 @@ export class Form {
       if (selected) {
         currentAnswer.push(choice.value);
       }
-      this.internalSetChoices(question.id, currentAnswer, skipValidation);
+      this.#internalSetChoices(question.id, currentAnswer, skipValidation);
     }
   }
 
-  private isChoiceSelected(choice: Choice) {
-    if (this.isChoiceDisabled(choice)) {
+  #isChoiceSelected(choice: Choice) {
+    if (this.#isChoiceDisabled(choice)) {
       return false;
     }
 
-    const question = this.questionByChoiceId.get(choice.id)!;
+    const question = this.#questionByChoiceId.get(choice.id)!;
     if (question.type === 'choice') {
-      const answer = this.currentAnswerByQuestionId.get(question.id);
+      const answer = this.#currentAnswerByQuestionId.get(question.id);
       return choice.value === answer;
     }
     if (question.type === 'choices') {
-      const answer = this.currentAnswerByQuestionId.get(question.id);
+      const answer = this.#currentAnswerByQuestionId.get(question.id);
       return !!answer?.includes(choice.value);
     }
 
     return false;
   }
 
-  private isItemDisabled(item: Item) {
-    const disabledByChoices = this.disabledByChoicesById.get(item.id) || [];
+  #isItemDisabled(item: Item) {
+    const disabledByChoices = this.#disabledByChoicesById.get(item.id) || [];
 
     for (const choice of disabledByChoices) {
-      if (this.isChoiceSelected(choice)) {
+      if (this.#isChoiceSelected(choice)) {
         return true;
       }
     }
 
-    const enabledByChoices = this.enabledByChoicesById.get(item.id) || [];
+    const enabledByChoices = this.#enabledByChoicesById.get(item.id) || [];
 
     for (const choice of enabledByChoices) {
-      if (this.isChoiceSelected(choice)) {
+      if (this.#isChoiceSelected(choice)) {
         return false;
       }
     }
@@ -603,31 +603,31 @@ export class Form {
     return item.defaultDisabled;
   }
 
-  private isGroupDisabled(group: Group): boolean {
-    const parentGroup = this.parentGroupByGroupId.get(group.id);
-    if (parentGroup && this.isGroupDisabled(parentGroup)) {
+  #isGroupDisabled(group: Group): boolean {
+    const parentGroup = this.#parentGroupByGroupId.get(group.id);
+    if (parentGroup && this.#isGroupDisabled(parentGroup)) {
       return true;
     }
 
-    return this.isItemDisabled(group);
+    return this.#isItemDisabled(group);
   }
 
-  private isQuestionDisabled(question: Question) {
-    const group = this.groupByQuestionId.get(question.id)!;
-    if (this.isGroupDisabled(group)) {
+  #isQuestionDisabled(question: Question) {
+    const group = this.#groupByQuestionId.get(question.id)!;
+    if (this.#isGroupDisabled(group)) {
       return true;
     }
 
-    return this.isItemDisabled(question);
+    return this.#isItemDisabled(question);
   }
 
-  private isChoiceDisabled(choice: Choice) {
-    const question = this.questionByChoiceId.get(choice.id)!;
-    if (this.isQuestionDisabled(question)) {
+  #isChoiceDisabled(choice: Choice) {
+    const question = this.#questionByChoiceId.get(choice.id)!;
+    if (this.#isQuestionDisabled(question)) {
       return true;
     }
 
-    return this.isItemDisabled(choice);
+    return this.#isItemDisabled(choice);
   }
 
   /**
@@ -640,8 +640,8 @@ export class Form {
   getCurrentAnswers(): Answers {
     const answes: Answers = {};
 
-    for (const [questionId] of this.questionById.entries()) {
-      const answer = this.currentAnswerByQuestionId.get(questionId);
+    for (const [questionId] of this.#questionById.entries()) {
+      const answer = this.#currentAnswerByQuestionId.get(questionId);
       if (answer !== undefined) {
         answes[questionId] = answer;
       }
@@ -662,9 +662,9 @@ export class Form {
   getValidatedAnswers(): Answers {
     const answes: Answers = {};
 
-    for (const [questionId, question] of this.questionById.entries()) {
-      if (!this.isQuestionDisabled(question)) {
-        const answer = this.validatedAnswerByQuestionId.get(questionId);
+    for (const [questionId, question] of this.#questionById.entries()) {
+      if (!this.#isQuestionDisabled(question)) {
+        const answer = this.#validatedAnswerByQuestionId.get(questionId);
         if (answer !== undefined) {
           answes[questionId] = answer;
         }
@@ -686,9 +686,9 @@ export class Form {
   getErrors(): Errors {
     const errors: Errors = {};
 
-    for (const [questionId, question] of this.questionById.entries()) {
-      if (!this.isQuestionDisabled(question)) {
-        const error = this.errorByQuestionId.get(questionId);
+    for (const [questionId, question] of this.#questionById.entries()) {
+      if (!this.#isQuestionDisabled(question)) {
+        const error = this.#errorByQuestionId.get(questionId);
         if (error !== undefined) {
           errors[questionId] = error;
         }
@@ -708,9 +708,9 @@ export class Form {
    * @returns whether form is clean
    */
   isClean() {
-    for (const [questionId, error] of this.errorByQuestionId.entries()) {
-      const question = this.findQuestion(questionId);
-      if (this.isQuestionDisabled(question)) {
+    for (const [questionId, error] of this.#errorByQuestionId.entries()) {
+      const question = this.#findQuestion(questionId);
+      if (this.#isQuestionDisabled(question)) {
         continue;
       }
       if (error) {
@@ -727,21 +727,21 @@ export class Form {
    * @skipValidations skip validations
    */
   importAnswers(answers: Answers, skipValidations = false) {
-    this.endByInformFormUpdate(() => {
-      this.internalImportAnswers(answers, skipValidations);
+    this.#endByInformFormUpdate(() => {
+      this.#internalImportAnswers(answers, skipValidations);
     });
   }
 
-  private internalImportAnswers(answers: Answers, skipValidations: boolean) {
-    for (const [questionId, question] of this.questionById.entries()) {
+  #internalImportAnswers(answers: Answers, skipValidations: boolean) {
+    for (const [questionId, question] of this.#questionById.entries()) {
       const answer = answers[questionId];
 
       if (question.type === 'any') {
-        this.internalSetAnswer(questionId, answer, skipValidations);
+        this.#internalSetAnswer(questionId, answer, skipValidations);
       } else if (question.type === 'choice') {
-        this.internalSetChoice(questionId, answer, skipValidations);
+        this.#internalSetChoice(questionId, answer, skipValidations);
       } else if (question.type === 'choices') {
-        this.internalSetChoices(questionId, answer || [], skipValidations);
+        this.#internalSetChoices(questionId, answer || [], skipValidations);
       }
     }
   }
@@ -752,21 +752,21 @@ export class Form {
    * @returns whether form is clean
    */
   validate() {
-    return this.endByInformFormUpdate(() => {
+    return this.#endByInformFormUpdate(() => {
       const answers = this.getCurrentAnswers();
-      this.internalImportAnswers(answers, false);
+      this.#internalImportAnswers(answers, false);
       return this.isClean();
     });
   }
 
-  private endByInformFormUpdate<T>(action: () => T) {
+  #endByInformFormUpdate<T>(action: () => T) {
     const result = action();
-    this.informFormUpdate();
+    this.#informFormUpdate();
     return result;
   }
 
-  private informFormUpdate() {
-    this.onFormUpdate?.(this);
+  #informFormUpdate() {
+    this.#onFormUpdate?.(this);
   }
 
   /**
