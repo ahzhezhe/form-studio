@@ -1,5 +1,5 @@
-import { Validator } from '../src';
 import { Form } from '../src/Form';
+import { Validator } from '../src/Types';
 import { validators, getConfigs, findQuestion } from '.';
 
 const sleep = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds));
