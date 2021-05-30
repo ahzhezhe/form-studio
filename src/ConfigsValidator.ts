@@ -3,12 +3,12 @@ import { ConfigsValidationResult } from './Types';
 
 export class ConfigsValidator {
 
-  private errorsById = new Map<string, string[]>();
-  private allIds: string[] = [];
-  private choiceValuesByQuestionId = new Map<string, any[]>();
-  private onSelectedIdsByChoiceId = new Map<string, string[]>();
-  private parentIdsById = new Map<string, string[]>();
-  private circularIds: string[] = [];
+  private readonly errorsById = new Map<string, string[]>();
+  private readonly allIds: string[] = [];
+  private readonly choiceValuesByQuestionId = new Map<string, any[]>();
+  private readonly onSelectedIdsByChoiceId = new Map<string, string[]>();
+  private readonly parentIdsById = new Map<string, string[]>();
+  private readonly circularIds: string[] = [];
 
   validate(configs: ExportedConfigs, strict: boolean): ConfigsValidationResult {
     // Form is not without any groups

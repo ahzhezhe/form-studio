@@ -10,23 +10,23 @@ import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator
  */
 export class Form {
 
-  private onFormUpdate?: FormUpdateListener;
-  private configs: ExportedConfigs;
-  private validators: Validators;
-  private defaultAnswers: Answers = {};
+  private readonly onFormUpdate?: FormUpdateListener;
+  private readonly configs: ExportedConfigs;
+  private readonly validators: Validators;
+  private readonly defaultAnswers: Answers = {};
 
-  private groupById = new Map<string, Group>();
-  private questionById = new Map<string, Question>();
-  private choiceById = new Map<string, Choice>();
-  private parentGroupByGroupId = new Map<string, Group>();
-  private groupByQuestionId = new Map<string, Group>();
-  private questionByChoiceId = new Map<string, Question>();
-  private currentAnswerByQuestionId = new Map<string, any>();
-  private validatedAnswerByQuestionId = new Map<string, any>();
-  private validatingByQuestionId = new Map<string, boolean>();
-  private errorByQuestionId = new Map<string, any>();
-  private disabledByChoicesById = new Map<string, Choice[]>();
-  private enabledByChoicesById = new Map<string, Choice[]>();
+  private readonly groupById = new Map<string, Group>();
+  private readonly questionById = new Map<string, Question>();
+  private readonly choiceById = new Map<string, Choice>();
+  private readonly parentGroupByGroupId = new Map<string, Group>();
+  private readonly groupByQuestionId = new Map<string, Group>();
+  private readonly questionByChoiceId = new Map<string, Question>();
+  private readonly currentAnswerByQuestionId = new Map<string, any>();
+  private readonly validatedAnswerByQuestionId = new Map<string, any>();
+  private readonly validatingByQuestionId = new Map<string, boolean>();
+  private readonly errorByQuestionId = new Map<string, any>();
+  private readonly disabledByChoicesById = new Map<string, Choice[]>();
+  private readonly enabledByChoicesById = new Map<string, Choice[]>();
 
   /**
    * Construct a form.
