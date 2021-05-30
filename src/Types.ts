@@ -1,5 +1,5 @@
 import { Question } from './ExportedConfigs';
-import Form from '.';
+import { Form } from './Form';
 
 export type QuestionType = 'any' | 'choice' | 'choices';
 
