@@ -35,12 +35,11 @@ npm install form-studio
 
 ## **Import**
 ```javascript
-import Form from 'form-studio';
+import { Form } from 'form-studio';
 ```
 or
 ```javascript
-const FormStudio = require('form-studio');
-const { default: Form } = FormStudio;
+const { Form } = require('form-studio');
 ```
 
 <br />
