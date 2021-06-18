@@ -4,7 +4,7 @@ import { validators, getConfigs, findQuestion } from '.';
 describe('Choice Toggling', () => {
 
   test('enable', () => {
-    const form = new Form(getConfigs(), validators);
+    const form = new Form(getConfigs(), { validators });
     let question = findQuestion(form.getRenderInstructions(), 'subGroup1Question3');
 
     expect(question.disabled).toBe(true);
@@ -21,7 +21,7 @@ describe('Choice Toggling', () => {
   });
 
   test('disable', () => {
-    const form = new Form(getConfigs(), validators);
+    const form = new Form(getConfigs(), { validators });
     let question = findQuestion(form.getRenderInstructions(), 'subGroup1Question4');
 
     expect(question.disabled).toBe(false);

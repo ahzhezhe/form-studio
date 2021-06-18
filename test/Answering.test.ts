@@ -3,7 +3,7 @@ import { validators, answers, getConfigs } from '.';
 
 describe('Answering', () => {
 
-  const form = new Form(getConfigs(), validators);
+  const form = new Form(getConfigs(), { validators });
 
   test('setAnswer', () => {
     form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');

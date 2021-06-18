@@ -7,7 +7,7 @@ test('Form Update Event', () => {
     expect(true).toBeTruthy();
   };
 
-  const form = new Form(getConfigs(), validators, true, onFormUpdate);
+  const form = new Form(getConfigs(), { validators, skipValidations: true, onFormUpdate });
   expect.assertions(1);
 
   form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');

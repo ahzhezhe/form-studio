@@ -5,6 +5,21 @@ import { Choice, ExportedConfigs, Group, Item, Question } from './ExportedConfig
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
 import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator, Validators } from './Types';
 
+export type FormOptions = {
+  /**
+   * Validators
+   */
+  validators?: Validators;
+  /**
+   * Skip validations
+   */
+  skipValidations?: boolean;
+  /**
+   * Function to be called when form is updated
+   */
+  onFormUpdate?: FormUpdateListener;
+}
+
 /**
  * @category Form
  */
@@ -32,78 +47,18 @@ export class Form {
    * Construct a form.
    *
    * @param configs configs
+   * @param options options
    * @throws if configs is invalid
    */
-  constructor(configs: Configs);
-  /**
-   * Construct a form.
-   *
-   * @param configs configs
-   * @param validators validators
-   * @throws if configs is invalid
-   */
-  constructor(configs: Configs, validators: Validators);
-  /**
-   * Construct a form.
-   *
-   * @param configs configs
-   * @param validators validators
-   * @param skipValidations skip validations
-   * @throws if configs is invalid
-   */
-  constructor(configs: Configs, validators: Validators, skipValidations: boolean);
-  /**
-   * Construct a form.
-   *
-   * @param configs configs
-   * @param onFormUpdate function to be called when form is updated
-   * @throws if configs is invalid
-   */
-  constructor(configs: Configs, onFormUpdate: FormUpdateListener);
-  /**
-   * Construct a form.
-   *
-   * @param configs configs
-   * @param validators validators
-   * @param onFormUpdate function to be called when form is updated
-   * @throws if configs is invalid
-   */
-  constructor(configs: Configs, validators: Validators, onFormUpdate: FormUpdateListener);
-  /**
-   * Construct a form.
-   *
-   * @param configs configs
-   * @param validators validators
-   * @param skipValidations skip validations
-   * @param onFormUpdate function to be called when form is updated
-   * @throws if configs is invalid
-   */
-  constructor(configs: Configs, validators: Validators, skipValidations: boolean, onFormUpdate: FormUpdateListener);
-  constructor(configs: Configs, arg1?: Validators | FormUpdateListener, arg2?: boolean | FormUpdateListener, arg3?: FormUpdateListener) {
+  constructor(configs: Configs, options?: FormOptions) {
     let validators: Validators = {};
     let onFormUpdate: FormUpdateListener | undefined;
     let skipValidations = false;
 
-    const isFunction = (obj: any) => !!(obj?.constructor && obj.call && obj.apply);
-
-    if (arg1 !== undefined) {
-      if (isFunction(arg1)) {
-        onFormUpdate = arg1 as FormUpdateListener;
-      } else {
-        validators = arg1 as Validators;
-      }
-    }
-
-    if (arg2 !== undefined) {
-      if (typeof arg2 === 'boolean') {
-        skipValidations = arg2;
-      } else {
-        onFormUpdate = arg2;
-      }
-    }
-
-    if (arg3) {
-      onFormUpdate = arg3;
+    if (options) {
+      validators = options.validators || {};
+      onFormUpdate = options.onFormUpdate;
+      skipValidations = !!options.skipValidations;
     }
 
     this.#configs = sanitizeGroupConfigs(undefined, configs);

@@ -196,7 +196,7 @@ const onFormUpdate = form => setRenderInstructions(form.getRenderInstructions())
 
 # **Construct a Form with Configs & Validators**
 ```javascript
-const form = new Form(configs, validators, onFormUpdate);
+const form = new Form(configs, { validators, onFormUpdate });
 ```
 
 <br />
@@ -229,7 +229,11 @@ export const SurveyPage = () => {
   const [renderInstructions, setRenderInstructions] = useState<GroupRenderInstructions[]>([]);
 
   useEffect(() => {
-    form = new Form(configs, validators, true, form => setRenderInstructions(form.getRenderInstructions()));
+    form = new Form(configs, {
+      validators,
+      skipValidations: true,
+      onFormUpdate: form => setRenderInstructions(form.getRenderInstructions())
+    });
   }, []);
 
   const renderQuestion = (question: QuestionRenderInstructions) => {

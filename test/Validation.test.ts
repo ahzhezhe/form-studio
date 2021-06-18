@@ -4,7 +4,7 @@ import { validators, getConfigs, answers } from '.';
 describe('Validation', () => {
 
   test('construct with validations', () => {
-    const form = new Form(getConfigs(), validators);
+    const form = new Form(getConfigs(), { validators });
 
     expect(form.isClean()).toBeFalsy();
 
@@ -16,7 +16,7 @@ describe('Validation', () => {
   });
 
   test('construct skip validations', () => {
-    const form = new Form(getConfigs(), validators, true);
+    const form = new Form(getConfigs(), { validators, skipValidations: true });
 
     expect(form.isClean()).toBeTruthy();
 
@@ -32,7 +32,7 @@ describe('Validation', () => {
   });
 
   test('setAnswer with validation', () => {
-    const form = new Form(getConfigs(), validators, true);
+    const form = new Form(getConfigs(), { validators, skipValidations: true });
 
     expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();
@@ -52,7 +52,7 @@ describe('Validation', () => {
   });
 
   test('setAnswer skip validation', () => {
-    const form = new Form(getConfigs(), validators, true);
+    const form = new Form(getConfigs(), { validators, skipValidations: true });
 
     expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
     expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();

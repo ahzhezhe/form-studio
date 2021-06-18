@@ -3,7 +3,7 @@ import { validators, getConfigs } from '.';
 
 describe('Invalid Answering', () => {
 
-  const form = new Form(getConfigs(), validators);
+  const form = new Form(getConfigs(), { validators });
 
   test('setAnswer undefined answer', () => {
     form.setAnswer('subGroup1Question1', undefined);

@@ -3,7 +3,7 @@ import { validators, getConfigs } from '.';
 
 describe('Default Answers', () => {
 
-  const form = new Form(getConfigs(true), validators);
+  const form = new Form(getConfigs(true), { validators });
 
   test('resetAnswer', () => {
     form.resetAnswer('subGroup1Question1');
