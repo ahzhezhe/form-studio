@@ -13,40 +13,43 @@ test('Form Update Event', () => {
   form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
   expect.assertions(2);
 
-  form.setChoice('subGroup1Question2', 'subGroup1Question2Choice1');
+  form.setAny('subGroup1Question1', 'subGroup1Question1Answer');
   expect.assertions(3);
 
-  form.setChoices('subGroup1Question3', ['subGroup1Question3Choice1', 'subGroup1Question3Choice2']);
+  form.setChoice('subGroup1Question2', 'subGroup1Question2Choice1');
   expect.assertions(4);
 
-  form.selectChoice('subGroup1Question2Choice2', true);
+  form.setChoices('subGroup1Question3', ['subGroup1Question3Choice1', 'subGroup1Question3Choice2']);
   expect.assertions(5);
 
-  form.selectChoice('subGroup1Question3Choice1', true);
+  form.selectChoice('subGroup1Question2Choice2', true);
   expect.assertions(6);
 
-  form.importAnswers(answers);
+  form.selectChoice('subGroup1Question3Choice1', true);
   expect.assertions(7);
 
-  form.clearAnswer('subGroup1Question1');
+  form.importAnswers(answers);
   expect.assertions(8);
 
-  form.clearGroup('subGroup1');
+  form.clearAnswer('subGroup1Question1');
   expect.assertions(9);
 
-  form.clear();
+  form.clearGroup('subGroup1');
   expect.assertions(10);
 
-  form.resetAnswer('subGroup1Question1');
+  form.clear();
   expect.assertions(11);
 
-  form.resetGroup('subGroup1');
+  form.resetAnswer('subGroup1Question1');
   expect.assertions(12);
 
-  form.reset();
+  form.resetGroup('subGroup1');
   expect.assertions(13);
 
-  form.validate();
+  form.reset();
   expect.assertions(14);
+
+  form.validate();
+  expect.assertions(15);
 
 });

@@ -5,8 +5,8 @@ describe('Answering', () => {
 
   const form = new Form(getConfigs(), { validators });
 
-  test('setAnswer', () => {
-    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
+  test('setAny', () => {
+    form.setAny('subGroup1Question1', 'subGroup1Question1Answer');
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
@@ -93,6 +93,17 @@ describe('Answering', () => {
 
   test('clear', () => {
     form.clear();
+
+    expect(form.getRenderInstructions()).toMatchSnapshot();
+    expect(form.getErrors()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
+    expect(form.getValidatedAnswers()).toMatchSnapshot();
+  });
+
+  test('setAnswer', () => {
+    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
+    form.setAnswer('subGroup1Question2', 'subGroup1Question2Choice1');
+    form.setAnswer('subGroup1Question3', ['subGroup1Question3Choice1', 'subGroup1Question3Choice2']);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();

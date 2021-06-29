@@ -252,14 +252,7 @@ export class Form {
 
   #internalClearAnswer(questionId: string, options?: SetAnswerOptions) {
     const question = this.#findQuestion(questionId);
-
-    if (question.type === 'any') {
-      this.#internalSetAnswer(question.id, undefined, options);
-    } else if (question.type === 'choice') {
-      this.#internalSetChoice(question.id, undefined, options);
-    } else if (question.type === 'choices') {
-      this.#internalSetChoices(question.id, [], options);
-    }
+    this.#internalSetAnswer(question.id, undefined, options);
   }
 
   /**
@@ -312,16 +305,8 @@ export class Form {
 
   #internalResetAnswer(questionId: string, options?: SetAnswerOptions) {
     const question = this.#findQuestion(questionId);
-
     const defaultAnswer = this.#defaultAnswers[questionId];
-
-    if (question.type === 'any') {
-      this.#internalSetAnswer(question.id, defaultAnswer, options);
-    } else if (question.type === 'choice') {
-      this.#internalSetChoice(question.id, defaultAnswer, options);
-    } else if (question.type === 'choices') {
-      this.#internalSetChoices(question.id, defaultAnswer || [], options);
-    }
+    this.#internalSetAnswer(question.id, defaultAnswer, options);
   }
 
   #getValidators(names: string[]) {
@@ -419,7 +404,7 @@ export class Form {
   }
 
   /**
-   * Set answer of the question with `any` as [[type]].
+   * Set answer of a question.
    *
    * @param questionId question id
    * @param answer answer
@@ -433,6 +418,31 @@ export class Form {
 
   #internalSetAnswer(questionId: string, answer: any, options?: SetAnswerOptions) {
     const question = this.#findQuestion(questionId);
+
+    if (question.type === 'any') {
+      this.#internalSetAny(question.id, answer, options);
+    } else if (question.type === 'choice') {
+      this.#internalSetChoice(question.id, answer, options);
+    } else if (question.type === 'choices') {
+      this.#internalSetChoices(question.id, answer || [], options);
+    }
+  }
+
+  /**
+   * Set answer of a question with `any` as [[type]].
+   *
+   * @param questionId question id
+   * @param answer answer
+   * @param options options
+   */
+  setAny(questionId: string, answer: any, options?: SetAnswerOptions) {
+    this.#endByInformFormUpdate(() => {
+      this.#internalSetAny(questionId, answer, options);
+    });
+  }
+
+  #internalSetAny(questionId: string, answer: any, options?: SetAnswerOptions) {
+    const question = this.#findQuestion(questionId);
     if (question.type !== 'any') {
       throw new Error("Question type is not 'any'.");
     }
@@ -441,7 +451,7 @@ export class Form {
   }
 
   /**
-   * Set answer of the question with `choice` as [[type]].
+   * Set answer of a question with `choice` as [[type]].
    *
    * @param questionId question id
    * @param value choice's value
@@ -464,7 +474,7 @@ export class Form {
   }
 
   /**
-   * Set answers of the question with `choices` as [[type]].
+   * Set answers of a question with `choices` as [[type]].
    *
    * @param questionId question id
    * @param values choices' values
@@ -725,16 +735,9 @@ export class Form {
   }
 
   #internalImportAnswers(answers: Answers, options?: SetAnswerOptions) {
-    for (const [questionId, question] of this.#questionById.entries()) {
+    for (const questionId of this.#questionById.keys()) {
       const answer = answers[questionId];
-
-      if (question.type === 'any') {
-        this.#internalSetAnswer(questionId, answer, options);
-      } else if (question.type === 'choice') {
-        this.#internalSetChoice(questionId, answer, options);
-      } else if (question.type === 'choices') {
-        this.#internalSetChoices(questionId, answer || [], options);
-      }
+      this.#internalSetAnswer(questionId, answer, options);
     }
   }
 

@@ -21,7 +21,7 @@ describe('Aysnc Validation', () => {
 
     const form = new Form(getConfigs(), { validators: asyncValidators });
 
-    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
+    form.setAny('subGroup1Question1', 'subGroup1Question1Answer');
     let question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
 
     expect(question.validating).toBe(true);
@@ -43,7 +43,7 @@ describe('Aysnc Validation', () => {
 
     const form = new Form(getConfigs(), { validators: asyncValidators });
 
-    form.setAnswer('subGroup1Question1', undefined);
+    form.setAny('subGroup1Question1', undefined);
     let question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
 
     expect(question.validating).toBe(true);

@@ -5,8 +5,8 @@ describe('Invalid Answering', () => {
 
   const form = new Form(getConfigs(), { validators });
 
-  test('setAnswer undefined answer', () => {
-    form.setAnswer('subGroup1Question1', undefined);
+  test('setAny undefined answer', () => {
+    form.setAny('subGroup1Question1', undefined);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
@@ -32,8 +32,19 @@ describe('Invalid Answering', () => {
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
-  test('setAnswer invalid question', () => {
-    expect(() => form.setAnswer('invalid', 'subGroup1Question1Answer')).toThrow();
+  test('setAnswer undefined answer', () => {
+    form.setAnswer('subGroup1Question1', undefined);
+    form.setAnswer('subGroup1Question2', undefined);
+    form.setAnswer('subGroup1Question3', undefined);
+
+    expect(form.getRenderInstructions()).toMatchSnapshot();
+    expect(form.getErrors()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
+    expect(form.getValidatedAnswers()).toMatchSnapshot();
+  });
+
+  test('setAny invalid question', () => {
+    expect(() => form.setAny('invalid', 'subGroup1Question1Answer')).toThrow();
   });
 
   test('setChoice invalid question', () => {
@@ -53,8 +64,26 @@ describe('Invalid Answering', () => {
     expect(form.getValidatedAnswers()).toMatchSnapshot();
   });
 
+  test('setAnswer invalid choice', () => {
+    form.setChoice('subGroup1Question2', 'invalid');
+
+    expect(form.getRenderInstructions()).toMatchSnapshot();
+    expect(form.getErrors()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
+    expect(form.getValidatedAnswers()).toMatchSnapshot();
+  });
+
   test('setChoices invalid choice', () => {
     form.setChoices('subGroup1Question3', ['invalid']);
+
+    expect(form.getRenderInstructions()).toMatchSnapshot();
+    expect(form.getErrors()).toMatchSnapshot();
+    expect(form.getCurrentAnswers()).toMatchSnapshot();
+    expect(form.getValidatedAnswers()).toMatchSnapshot();
+  });
+
+  test('setAnswer invalid choice', () => {
+    form.setAnswer('subGroup1Question3', ['invalid']);
 
     expect(form.getRenderInstructions()).toMatchSnapshot();
     expect(form.getErrors()).toMatchSnapshot();
@@ -66,8 +95,8 @@ describe('Invalid Answering', () => {
     expect(() => form.selectChoice('invalid', true)).toThrow();
   });
 
-  test('setAnswer invalid question type', () => {
-    expect(() => form.setAnswer('subGroup1Question2', 'subGroup1Question2Value')).toThrow();
+  test('setAny invalid question type', () => {
+    expect(() => form.setAny('subGroup1Question2', 'subGroup1Question2Value')).toThrow();
   });
 
   test('setChoice invalid question type', () => {
