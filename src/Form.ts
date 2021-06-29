@@ -71,6 +71,7 @@ export class Form {
     this.#validators = validators;
     this.#onFormUpdate = onFormUpdate;
     this.#processGroups(undefined, this.#configs.groups);
+    this.#processQuestions(undefined, this.#configs.questions);
     this.#endByInformFormUpdate(() => {
       this.#internalImportAnswers(this.#defaultAnswers, options);
     });
@@ -87,10 +88,12 @@ export class Form {
     });
   }
 
-  #processQuestions(group: Group, questions: Question[]) {
+  #processQuestions(group: Group | undefined, questions: Question[]) {
     questions.forEach(question => {
       this.#questionById.set(question.id, question);
-      this.#groupByQuestionId.set(question.id, group);
+      if (group) {
+        this.#groupByQuestionId.set(question.id, group);
+      }
       if (question.type !== 'any') {
         this.#processChoices(question, question.choices);
       }
@@ -605,16 +608,14 @@ export class Form {
     if (parentGroup && this.#isGroupDisabled(parentGroup)) {
       return true;
     }
-
     return this.#isItemDisabled(group);
   }
 
   #isQuestionDisabled(question: Question) {
-    const group = this.#groupByQuestionId.get(question.id)!;
-    if (this.#isGroupDisabled(group)) {
+    const group = this.#groupByQuestionId.get(question.id);
+    if (group && this.#isGroupDisabled(group)) {
       return true;
     }
-
     return this.#isItemDisabled(question);
   }
 
@@ -623,7 +624,6 @@ export class Form {
     if (this.#isQuestionDisabled(question)) {
       return true;
     }
-
     return this.#isItemDisabled(choice);
   }
 
