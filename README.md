@@ -20,7 +20,7 @@ It does not provide:
 - Any UI components, define your own UI configurations that suit your project needs and render the UI according to your own design system.
 - Validators, define your own validators that suit your project needs.
 
-[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.3/index.html)
+[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.4/index.html)
 
 [Demo](https://github.com/ahzhezhe/form-studio-demo)
 
@@ -231,7 +231,7 @@ export const SurveyPage = () => {
   useEffect(() => {
     form = new Form(configs, {
       validators,
-      skipValidations: true,
+      validate: false,
       onFormUpdate: form => setRenderInstructions(form.getRenderInstructions())
     });
   }, []);
