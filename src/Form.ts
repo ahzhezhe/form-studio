@@ -5,14 +5,14 @@ import { Choice, ExportedConfigs, Group, Item, Question } from './ExportedConfig
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
 import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator, Validators } from './Types';
 
-export type SetAnswerOptions = {
+export type UpdateAnswerOptions = {
   /**
    * Validate the answer, default = `true`
    */
   validate?: boolean;
 }
 
-export type FormOptions = SetAnswerOptions & {
+export type FormOptions = UpdateAnswerOptions & {
   /**
    * Validators
    */
@@ -207,7 +207,7 @@ export class Form {
    *
    * @param options options
    */
-  clear(options?: SetAnswerOptions) {
+  clear(options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       for (const group of this.#configs) {
         this.#internalClearGroup(group.id, options);
@@ -221,13 +221,13 @@ export class Form {
    * @param groupId group id
    * @param options options
    */
-  clearGroup(groupId: string, options?: SetAnswerOptions) {
+  clearGroup(groupId: string, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalClearGroup(groupId, options);
     });
   }
 
-  #internalClearGroup(groupId: string, options?: SetAnswerOptions) {
+  #internalClearGroup(groupId: string, options?: UpdateAnswerOptions) {
     const group = this.#findGroup(groupId);
 
     for (const subGroup of group.groups) {
@@ -244,13 +244,13 @@ export class Form {
    * @param questionId question id
    * @param options options
    */
-  clearAnswer(questionId: string, options?: SetAnswerOptions) {
+  clearAnswer(questionId: string, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalClearAnswer(questionId, options);
     });
   }
 
-  #internalClearAnswer(questionId: string, options?: SetAnswerOptions) {
+  #internalClearAnswer(questionId: string, options?: UpdateAnswerOptions) {
     const question = this.#findQuestion(questionId);
     this.#internalSetAnswer(question.id, undefined, options);
   }
@@ -260,7 +260,7 @@ export class Form {
    *
    * @param options options
    */
-  reset(options?: SetAnswerOptions) {
+  reset(options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       for (const group of this.#configs) {
         this.#internalResetGroup(group.id, options);
@@ -274,13 +274,13 @@ export class Form {
    * @param groupId group id
    * @param options options
    */
-  resetGroup(groupId: string, options?: SetAnswerOptions) {
+  resetGroup(groupId: string, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalResetGroup(groupId, options);
     });
   }
 
-  #internalResetGroup(groupId: string, options?: SetAnswerOptions) {
+  #internalResetGroup(groupId: string, options?: UpdateAnswerOptions) {
     const group = this.#findGroup(groupId);
 
     for (const subGroup of group.groups) {
@@ -297,13 +297,13 @@ export class Form {
    * @param questionId question id
    * @param options options
    */
-  resetAnswer(questionId: string, options?: SetAnswerOptions) {
+  resetAnswer(questionId: string, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalResetAnswer(questionId, options);
     });
   }
 
-  #internalResetAnswer(questionId: string, options?: SetAnswerOptions) {
+  #internalResetAnswer(questionId: string, options?: UpdateAnswerOptions) {
     const question = this.#findQuestion(questionId);
     const defaultAnswer = this.#defaultAnswers[questionId];
     this.#internalSetAnswer(question.id, defaultAnswer, options);
@@ -338,7 +338,7 @@ export class Form {
     return this.#executeValidators(validators, question, answer, previousAnswer);
   }
 
-  #setCurrentAnswerAndValidate(question: Question, answer: any, options?: SetAnswerOptions) {
+  #setCurrentAnswerAndValidate(question: Question, answer: any, options?: UpdateAnswerOptions) {
     const previousAnswer = this.#currentAnswerByQuestionId.get(question.id);
 
     this.#currentAnswerByQuestionId.set(question.id, answer);
@@ -410,13 +410,13 @@ export class Form {
    * @param answer answer
    * @param options options
    */
-  setAnswer(questionId: string, answer: any, options?: SetAnswerOptions) {
+  setAnswer(questionId: string, answer: any, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalSetAnswer(questionId, answer, options);
     });
   }
 
-  #internalSetAnswer(questionId: string, answer: any, options?: SetAnswerOptions) {
+  #internalSetAnswer(questionId: string, answer: any, options?: UpdateAnswerOptions) {
     const question = this.#findQuestion(questionId);
 
     if (question.type === 'any') {
@@ -435,13 +435,13 @@ export class Form {
    * @param answer answer
    * @param options options
    */
-  setAny(questionId: string, answer: any, options?: SetAnswerOptions) {
+  setAny(questionId: string, answer: any, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalSetAny(questionId, answer, options);
     });
   }
 
-  #internalSetAny(questionId: string, answer: any, options?: SetAnswerOptions) {
+  #internalSetAny(questionId: string, answer: any, options?: UpdateAnswerOptions) {
     const question = this.#findQuestion(questionId);
     if (question.type !== 'any') {
       throw new Error("Question type is not 'any'.");
@@ -457,13 +457,13 @@ export class Form {
    * @param value choice's value
    * @param options options
    */
-  setChoice(questionId: string, value: any, options?: SetAnswerOptions) {
+  setChoice(questionId: string, value: any, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalSetChoice(questionId, value, options);
     });
   }
 
-  #internalSetChoice(questionId: string, value: any, options?: SetAnswerOptions) {
+  #internalSetChoice(questionId: string, value: any, options?: UpdateAnswerOptions) {
     const question = this.#findQuestion(questionId);
     if (question.type !== 'choice') {
       throw new Error("Question type is not 'choice'.");
@@ -480,13 +480,13 @@ export class Form {
    * @param values choices' values
    * @param options options
    */
-  setChoices(questionId: string, values: any[], options?: SetAnswerOptions) {
+  setChoices(questionId: string, values: any[], options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalSetChoices(questionId, values, options);
     });
   }
 
-  #internalSetChoices(questionId: string, values: any[], options?: SetAnswerOptions) {
+  #internalSetChoices(questionId: string, values: any[], options?: UpdateAnswerOptions) {
     const question = this.#findQuestion(questionId);
     if (question.type !== 'choices') {
       throw new Error("Question type is not 'choices'.");
@@ -505,13 +505,13 @@ export class Form {
    * @param selected selected/unselected
    * @param options options
    */
-  selectChoice(choiceId: string, selected: boolean, options?: SetAnswerOptions) {
+  selectChoice(choiceId: string, selected: boolean, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalSelectChoice(choiceId, selected, options);
     });
   }
 
-  #internalSelectChoice(choiceId: string, selected: boolean, options?: SetAnswerOptions) {
+  #internalSelectChoice(choiceId: string, selected: boolean, options?: UpdateAnswerOptions) {
     const choice = this.#findChoice(choiceId);
     const question = this.#questionByChoiceId.get(choiceId)!;
 
@@ -728,13 +728,13 @@ export class Form {
    * @param answers answers
    * @param options options
    */
-  importAnswers(answers: Answers, options?: SetAnswerOptions) {
+  importAnswers(answers: Answers, options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
       this.#internalImportAnswers(answers, options);
     });
   }
 
-  #internalImportAnswers(answers: Answers, options?: SetAnswerOptions) {
+  #internalImportAnswers(answers: Answers, options?: UpdateAnswerOptions) {
     for (const questionId of this.#questionById.keys()) {
       const answer = answers[questionId];
       this.#internalSetAnswer(questionId, answer, options);

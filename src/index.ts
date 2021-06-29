@@ -1,4 +1,4 @@
-export { Form, FormOptions } from './Form';
+export { Form, FormOptions, UpdateAnswerOptions } from './Form';
 
 export { GroupConfigs, QuestionConfigs, ChoiceConfigs, Configs } from './Configs';
 
