@@ -42,4 +42,7 @@ export interface Choice extends Item {
  *
  * @category Exported Configs
  */
-export type ExportedConfigs = Group[];
+export type ExportedConfigs = {
+  groups: Group[];
+  questions: Question[];
+};

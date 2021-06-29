@@ -1,6 +1,6 @@
 {
-  "name": "form-studio - v0.5",
-  "out": "docs/form-studio-v0.5",
+  "name": "form-studio - v0.6",
+  "out": "docs/form-studio-v0.6",
   "entryPoints": [
     "src/index.ts"
   ],

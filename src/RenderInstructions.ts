@@ -23,6 +23,12 @@ export interface ItemRenderInstructions {
  */
 export interface GroupRenderInstructions extends ItemRenderInstructions {
   /**
+   * Whether or not there are questions in this group that are currently being validated.
+   *
+   * This value can be `true` if the validator used is an aysnc function.
+   */
+  validating: boolean;
+  /**
    * Sub-groups.
    */
   groups: GroupRenderInstructions[];
@@ -78,7 +84,7 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    */
   validatedAnswer: any | undefined;
   /**
-   * Whether or not the question is currently being validating.
+   * Whether or not the question is currently being validated.
    *
    * This value can be `true` if the validator used is an aysnc function.
    */
@@ -104,4 +110,19 @@ export interface ChoiceRenderInstructions extends ItemRenderInstructions {
  *
  * @category Render Instructions
  */
-export type RenderInstructions = GroupRenderInstructions[];
+export interface RenderInstructions {
+  /**
+   * Whether or not there are questions in the form that are currently being validated.
+   *
+   * This value can be `true` if the validator used is an aysnc function.
+   */
+  validating: boolean;
+  /**
+   * Groups.
+   */
+  groups: GroupRenderInstructions[];
+  /**
+   * Questions directly under the form, without grouping.
+   */
+  questions: QuestionRenderInstructions[];
+}

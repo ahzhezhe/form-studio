@@ -1,18 +1,18 @@
 import { Configs } from './Configs';
-import { sanitizeGroupConfigs } from './ConfigsSanitizers';
+import { sanitizeConfigs } from './ConfigsSanitizers';
 import { ConfigsValidator } from './ConfigsValidator';
 import { Choice, ExportedConfigs, Group, Item, Question } from './ExportedConfigs';
 import { ChoiceRenderInstructions, GroupRenderInstructions, QuestionRenderInstructions, RenderInstructions } from './RenderInstructions';
 import { Answers, ConfigsValidationResult, Errors, FormUpdateListener, Validator, Validators } from './Types';
 
-export type UpdateAnswerOptions = {
+export interface UpdateAnswerOptions {
   /**
    * Validate the answer, default = `true`
    */
   validate?: boolean;
 }
 
-export type FormOptions = UpdateAnswerOptions & {
+export interface FormOptions extends UpdateAnswerOptions {
   /**
    * Validators
    */
@@ -62,7 +62,7 @@ export class Form {
       onFormUpdate = options.onFormUpdate;
     }
 
-    this.#configs = sanitizeGroupConfigs(undefined, configs);
+    this.#configs = sanitizeConfigs(configs);
     const result = new ConfigsValidator().validate(this.#configs, false);
     if (!result.pass) {
       throw new Error('Invalid configs. You may use validateConfigs method to see what is wrong.');
@@ -70,7 +70,7 @@ export class Form {
 
     this.#validators = validators;
     this.#onFormUpdate = onFormUpdate;
-    this.#processGroups(undefined, this.#configs);
+    this.#processGroups(undefined, this.#configs.groups);
     this.#endByInformFormUpdate(() => {
       this.#internalImportAnswers(this.#defaultAnswers, options);
     });
@@ -142,17 +142,27 @@ export class Form {
    * @returns render instructions
    */
   getRenderInstructions(): RenderInstructions {
-    return this.#toGroupRenderInstructions(this.#configs);
+    const groups = this.#toGroupRenderInstructions(this.#configs.groups);
+    const questions = this.#toQuestionRenderInstructions(this.#configs.questions);
+    const validating = groups.some(group => group.validating) || questions.some(question => question.validating);
+    return { validating, groups, questions };
   }
 
   #toGroupRenderInstructions(groups: Group[]): GroupRenderInstructions[] {
-    return groups.map((group): GroupRenderInstructions => ({
-      id: group.id,
-      disabled: this.#isGroupDisabled(group),
-      custom: group.custom,
-      groups: this.#toGroupRenderInstructions(group.groups),
-      questions: this.#toQuestionRenderInstructions(group.questions)
-    }));
+    return groups.map((group): GroupRenderInstructions => {
+      const groups = this.#toGroupRenderInstructions(group.groups);
+      const questions = this.#toQuestionRenderInstructions(group.questions);
+      const validating = groups.some(group => group.validating) || questions.some(question => question.validating);
+
+      return {
+        id: group.id,
+        disabled: this.#isGroupDisabled(group),
+        custom: group.custom,
+        validating,
+        groups,
+        questions
+      };
+    });
   }
 
   #toQuestionRenderInstructions(questions: Question[]): QuestionRenderInstructions[] {
@@ -209,7 +219,7 @@ export class Form {
    */
   clear(options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
-      for (const group of this.#configs) {
+      for (const group of this.#configs.groups) {
         this.#internalClearGroup(group.id, options);
       }
     });
@@ -262,7 +272,7 @@ export class Form {
    */
   reset(options?: UpdateAnswerOptions) {
     this.#endByInformFormUpdate(() => {
-      for (const group of this.#configs) {
+      for (const group of this.#configs.groups) {
         this.#internalResetGroup(group.id, options);
       }
     });
@@ -797,8 +807,8 @@ export class Form {
    * @returns validation result
    */
   static validateConfigs(configs: Configs, strict = false): ConfigsValidationResult {
-    const groups = sanitizeGroupConfigs(undefined, configs);
-    return new ConfigsValidator().validate(groups, strict);
+    const sanitizedconfigs = sanitizeConfigs(configs);
+    return new ConfigsValidator().validate(sanitizedconfigs, strict);
   }
 
 }

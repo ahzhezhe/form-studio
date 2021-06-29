@@ -212,11 +212,22 @@ Object {
 }
 `;
 
-exports[`ConfigsValidation No groups 1`] = `
+exports[`ConfigsValidation No groups or questions 1`] = `
 Object {
   "errors": Object {
     "": Array [
-      "There are no groups",
+      "There are no groups or questions",
+    ],
+  },
+  "pass": false,
+}
+`;
+
+exports[`ConfigsValidation No groups or questions 2`] = `
+Object {
+  "errors": Object {
+    "": Array [
+      "There are no groups or questions",
     ],
   },
   "pass": false,

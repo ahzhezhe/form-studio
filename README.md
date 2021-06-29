@@ -20,7 +20,7 @@ It does not provide:
 - Any UI components, define your own UI configurations that suit your project needs and render the UI according to your own design system.
 - Validators, define your own validators that suit your project needs.
 
-[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.5/index.html)
+[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.6/index.html)
 
 [Demo](https://github.com/ahzhezhe/form-studio-demo)
 
@@ -90,47 +90,49 @@ The following example consists of 1 group and 2 questions under it.
 The second question is disabled by default. If 'yes' is selected for the first question, the second question will be enabled.
 
 ```json
-[
-  {
-    "questions": [
-      {
-        "id": "proceed",
-        "type": "choice",
-        "custom": {
-          "title": "Would you like to proceed?"
-        },
-        "choices": [
-          {
-            "value": "yes",
-            "custom": {
-              "title": "Yes"
-            },
-            "onSelected": {
-              "enable": [
-                "name"
-              ]
-            }
+{
+  "groups": [
+    {
+      "questions": [
+        {
+          "id": "proceed",
+          "type": "choice",
+          "custom": {
+            "title": "Would you like to proceed?"
           },
-          {
-            "value": "no",
-            "custom": {
-              "title": "No"
+          "choices": [
+            {
+              "value": "yes",
+              "custom": {
+                "title": "Yes"
+              },
+              "onSelected": {
+                "enable": [
+                  "name"
+                ]
+              }
+            },
+            {
+              "value": "no",
+              "custom": {
+                "title": "No"
+              }
             }
-          }
-        ],
-      },
-      {
-        "id": "name",
-        "defaultDisabled": true,
-        "type": "any",
-        "custom": {
-          "type": "string",
-          "title": "What is you name?",
+          ],
         },
-      }
-    ]
-  }
-]
+        {
+          "id": "name",
+          "defaultDisabled": true,
+          "type": "any",
+          "custom": {
+            "type": "string",
+            "title": "What is you name?",
+          },
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ### **Validate Configs**
@@ -187,7 +189,7 @@ Usually form updated listener is only needed when the form is being used in fron
 
 ### **Example (React)**
 ```javascript
-const [renderInstructions, setRenderInstructions] = useState();
+const [renderInstructions, setRenderInstructions] = useState<RenderInstructions>();
 
 const onFormUpdate = form => setRenderInstructions(form.getRenderInstructions());
 ```
@@ -226,7 +228,7 @@ Questions also come with the following important properties that you will need t
 let form: Form;
 
 export const SurveyPage = () => {
-  const [renderInstructions, setRenderInstructions] = useState<GroupRenderInstructions[]>([]);
+  const [renderInstructions, setRenderInstructions] = useState<RenderInstructions>();
 
   useEffect(() => {
     form = new Form(configs, {
@@ -299,33 +301,33 @@ export const SurveyPage = () => {
         error={error}
         maxLength={custom.maxLength as number}
         value={currentAnswer}
-        onChange={e => form.setAnswer(id, e.target.value)} />
+        onChange={e => form.setAny(id, e.target.value)} />
     );
   };
 
-  return renderInstructions[0].questions.map(question => renderQuestion(question));
+  return renderInstructions?.questions.map(question => renderQuestion(question));
 };
 ```
 
 <br />
 
 # **Setting Answers**
-`any` questions use `setAnswer` method to set answer.
+`any` questions use `setAnswer` or `setAny` method to set answer.
 
-`choice` questions use `setChoice` or `selectChoice` method to set answer.
+`choice` questions use `setAnswer`, `setChoice` or `selectChoice` method to set answer.
 
-`choices` questions use `setChoices` or `selectChoice` method to set answer.
+`choices` questions use `setAnswer`, `setChoices` or `selectChoice` method to set answer.
 
 ### **Example (General)**
 ```javascript
 form.setChoice('proceed', 'yes');
-form.setAnswer('name', 'Jason');
+form.setAny('name', 'Jason');
 ```
 
 ### **Example (Frontend)**
 ```javascript
 onChange={e => form.setChoice(id, e.target.value)}
-onChange={e => form.setAnswer(id, e.target.value)}
+onChange={e => form.setAny(id, e.target.value)}
 ```
 
 <br />

@@ -1,259 +1,265 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Default Answers reset 1`] = `
-Array [
-  Object {
-    "custom": undefined,
-    "disabled": false,
-    "groups": Array [
-      Object {
-        "custom": undefined,
-        "disabled": false,
-        "groups": Array [],
-        "id": "subGroup1",
-        "questions": Array [
-          Object {
-            "choices": Array [],
-            "currentAnswer": "subGroup1Question1Answer",
-            "custom": Object {
-              "title": "subGroup1Questions",
+Object {
+  "groups": Array [
+    Object {
+      "custom": undefined,
+      "disabled": false,
+      "groups": Array [
+        Object {
+          "custom": undefined,
+          "disabled": false,
+          "groups": Array [],
+          "id": "subGroup1",
+          "questions": Array [
+            Object {
+              "choices": Array [],
+              "currentAnswer": "subGroup1Question1Answer",
+              "custom": Object {
+                "title": "subGroup1Questions",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question1",
+              "type": "any",
+              "validatedAnswer": "subGroup1Question1Answer",
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question1",
-            "type": "any",
-            "validatedAnswer": "subGroup1Question1Answer",
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice1",
+                  "value": "subGroup1Question2Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice1",
-                "value": "subGroup1Question2Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice2",
+                  "value": "subGroup1Question2Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice2",
-                "value": "subGroup1Question2Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice3",
+                  "value": "subGroup1Question2Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice3",
-                "value": "subGroup1Question2Choice3",
+              ],
+              "currentAnswer": "subGroup1Question2Choice1",
+              "custom": Object {
+                "title": "subGroup1Question2",
               },
-            ],
-            "currentAnswer": "subGroup1Question2Choice1",
-            "custom": Object {
-              "title": "subGroup1Question2",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question2",
+              "type": "choice",
+              "validatedAnswer": "subGroup1Question2Choice1",
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question2",
-            "type": "choice",
-            "validatedAnswer": "subGroup1Question2Choice1",
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice1",
+                  "value": "subGroup1Question3Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice1",
-                "value": "subGroup1Question3Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice2",
+                  "value": "subGroup1Question3Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice2",
-                "value": "subGroup1Question3Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice3",
+                  "value": "subGroup1Question3Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice3",
-                "value": "subGroup1Question3Choice3",
+              ],
+              "currentAnswer": Array [
+                "subGroup1Question3Choice1",
+                "subGroup1Question3Choice2",
+              ],
+              "custom": Object {
+                "title": "subGroup1Question3",
               },
-            ],
-            "currentAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
-            "custom": Object {
-              "title": "subGroup1Question3",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question3",
+              "type": "choices",
+              "validatedAnswer": Array [
+                "subGroup1Question3Choice1",
+                "subGroup1Question3Choice2",
+              ],
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question3",
-            "type": "choices",
-            "validatedAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice1",
+                  "value": "subGroup1Question4Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice1",
-                "value": "subGroup1Question4Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice2",
+                  "value": "subGroup1Question4Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice2",
-                "value": "subGroup1Question4Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice3",
+                  "value": "subGroup1Question4Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice3",
-                "value": "subGroup1Question4Choice3",
+              ],
+              "currentAnswer": Array [
+                "subGroup1Question4Choice1",
+                "subGroup1Question4Choice2",
+              ],
+              "custom": Object {
+                "title": "subGroup1Question3",
               },
-            ],
-            "currentAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
-            "custom": Object {
-              "title": "subGroup1Question3",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question4",
+              "type": "choices",
+              "validatedAnswer": Array [
+                "subGroup1Question4Choice1",
+                "subGroup1Question4Choice2",
+              ],
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question4",
-            "type": "choices",
-            "validatedAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
-            "validating": false,
-          },
-        ],
-      },
-    ],
-    "id": "group1",
-    "questions": Array [
-      Object {
-        "choices": Array [],
-        "currentAnswer": "group1Question1Answer",
-        "custom": Object {
-          "title": "group1Questions",
+          ],
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question1",
-        "type": "any",
-        "validatedAnswer": "group1Question1Answer",
-        "validating": false,
-      },
-      Object {
-        "choices": Array [
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice1",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice1",
-            "value": "group1Question2Choice1",
+      ],
+      "id": "group1",
+      "questions": Array [
+        Object {
+          "choices": Array [],
+          "currentAnswer": "group1Question1Answer",
+          "custom": Object {
+            "title": "group1Questions",
           },
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice2",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice2",
-            "value": "group1Question2Choice2",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice3",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice3",
-            "value": "group1Question2Choice3",
-          },
-        ],
-        "currentAnswer": "group1Question2Choice1",
-        "custom": Object {
-          "title": "group1Question2",
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question1",
+          "type": "any",
+          "validatedAnswer": "group1Question1Answer",
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question2",
-        "type": "choice",
-        "validatedAnswer": "group1Question2Choice1",
-        "validating": false,
-      },
-      Object {
-        "choices": Array [
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice1",
+        Object {
+          "choices": Array [
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice1",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice1",
+              "value": "group1Question2Choice1",
             },
-            "disabled": false,
-            "id": "group1Question3Choice1",
-            "value": "group1Question3Choice1",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice2",
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice2",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice2",
+              "value": "group1Question2Choice2",
             },
-            "disabled": false,
-            "id": "group1Question3Choice2",
-            "value": "group1Question3Choice2",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice3",
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice3",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice3",
+              "value": "group1Question2Choice3",
             },
-            "disabled": false,
-            "id": "group1Question3Choice3",
-            "value": "group1Question3Choice3",
+          ],
+          "currentAnswer": "group1Question2Choice1",
+          "custom": Object {
+            "title": "group1Question2",
           },
-        ],
-        "currentAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
-        "custom": Object {
-          "title": "group1Question3",
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question2",
+          "type": "choice",
+          "validatedAnswer": "group1Question2Choice1",
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question3",
-        "type": "choices",
-        "validatedAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
-        "validating": false,
-      },
-    ],
-  },
-]
+        Object {
+          "choices": Array [
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice1",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice1",
+              "value": "group1Question3Choice1",
+            },
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice2",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice2",
+              "value": "group1Question3Choice2",
+            },
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice3",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice3",
+              "value": "group1Question3Choice3",
+            },
+          ],
+          "currentAnswer": Array [
+            "group1Question3Choice1",
+            "group1Question3Choice2",
+          ],
+          "custom": Object {
+            "title": "group1Question3",
+          },
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question3",
+          "type": "choices",
+          "validatedAnswer": Array [
+            "group1Question3Choice1",
+            "group1Question3Choice2",
+          ],
+          "validating": false,
+        },
+      ],
+      "validating": false,
+    },
+  ],
+  "questions": Array [],
+  "validating": false,
+}
 `;
 
 exports[`Default Answers reset 2`] = `Object {}`;
@@ -301,259 +307,265 @@ Object {
 `;
 
 exports[`Default Answers resetAnswer 1`] = `
-Array [
-  Object {
-    "custom": undefined,
-    "disabled": false,
-    "groups": Array [
-      Object {
-        "custom": undefined,
-        "disabled": false,
-        "groups": Array [],
-        "id": "subGroup1",
-        "questions": Array [
-          Object {
-            "choices": Array [],
-            "currentAnswer": "subGroup1Question1Answer",
-            "custom": Object {
-              "title": "subGroup1Questions",
+Object {
+  "groups": Array [
+    Object {
+      "custom": undefined,
+      "disabled": false,
+      "groups": Array [
+        Object {
+          "custom": undefined,
+          "disabled": false,
+          "groups": Array [],
+          "id": "subGroup1",
+          "questions": Array [
+            Object {
+              "choices": Array [],
+              "currentAnswer": "subGroup1Question1Answer",
+              "custom": Object {
+                "title": "subGroup1Questions",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question1",
+              "type": "any",
+              "validatedAnswer": "subGroup1Question1Answer",
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question1",
-            "type": "any",
-            "validatedAnswer": "subGroup1Question1Answer",
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice1",
+                  "value": "subGroup1Question2Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice1",
-                "value": "subGroup1Question2Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice2",
+                  "value": "subGroup1Question2Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice2",
-                "value": "subGroup1Question2Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice3",
+                  "value": "subGroup1Question2Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice3",
-                "value": "subGroup1Question2Choice3",
+              ],
+              "currentAnswer": "subGroup1Question2Choice1",
+              "custom": Object {
+                "title": "subGroup1Question2",
               },
-            ],
-            "currentAnswer": "subGroup1Question2Choice1",
-            "custom": Object {
-              "title": "subGroup1Question2",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question2",
+              "type": "choice",
+              "validatedAnswer": "subGroup1Question2Choice1",
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question2",
-            "type": "choice",
-            "validatedAnswer": "subGroup1Question2Choice1",
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice1",
+                  "value": "subGroup1Question3Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice1",
-                "value": "subGroup1Question3Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice2",
+                  "value": "subGroup1Question3Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice2",
-                "value": "subGroup1Question3Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice3",
+                  "value": "subGroup1Question3Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice3",
-                "value": "subGroup1Question3Choice3",
+              ],
+              "currentAnswer": Array [
+                "subGroup1Question3Choice1",
+                "subGroup1Question3Choice2",
+              ],
+              "custom": Object {
+                "title": "subGroup1Question3",
               },
-            ],
-            "currentAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
-            "custom": Object {
-              "title": "subGroup1Question3",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question3",
+              "type": "choices",
+              "validatedAnswer": Array [
+                "subGroup1Question3Choice1",
+                "subGroup1Question3Choice2",
+              ],
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question3",
-            "type": "choices",
-            "validatedAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice1",
+                  "value": "subGroup1Question4Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice1",
-                "value": "subGroup1Question4Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice2",
+                  "value": "subGroup1Question4Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice2",
-                "value": "subGroup1Question4Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice3",
+                  "value": "subGroup1Question4Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice3",
-                "value": "subGroup1Question4Choice3",
+              ],
+              "currentAnswer": Array [
+                "subGroup1Question4Choice1",
+                "subGroup1Question4Choice2",
+              ],
+              "custom": Object {
+                "title": "subGroup1Question3",
               },
-            ],
-            "currentAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
-            "custom": Object {
-              "title": "subGroup1Question3",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question4",
+              "type": "choices",
+              "validatedAnswer": Array [
+                "subGroup1Question4Choice1",
+                "subGroup1Question4Choice2",
+              ],
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question4",
-            "type": "choices",
-            "validatedAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
-            "validating": false,
-          },
-        ],
-      },
-    ],
-    "id": "group1",
-    "questions": Array [
-      Object {
-        "choices": Array [],
-        "currentAnswer": "group1Question1Answer",
-        "custom": Object {
-          "title": "group1Questions",
+          ],
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question1",
-        "type": "any",
-        "validatedAnswer": "group1Question1Answer",
-        "validating": false,
-      },
-      Object {
-        "choices": Array [
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice1",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice1",
-            "value": "group1Question2Choice1",
+      ],
+      "id": "group1",
+      "questions": Array [
+        Object {
+          "choices": Array [],
+          "currentAnswer": "group1Question1Answer",
+          "custom": Object {
+            "title": "group1Questions",
           },
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice2",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice2",
-            "value": "group1Question2Choice2",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice3",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice3",
-            "value": "group1Question2Choice3",
-          },
-        ],
-        "currentAnswer": "group1Question2Choice1",
-        "custom": Object {
-          "title": "group1Question2",
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question1",
+          "type": "any",
+          "validatedAnswer": "group1Question1Answer",
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question2",
-        "type": "choice",
-        "validatedAnswer": "group1Question2Choice1",
-        "validating": false,
-      },
-      Object {
-        "choices": Array [
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice1",
+        Object {
+          "choices": Array [
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice1",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice1",
+              "value": "group1Question2Choice1",
             },
-            "disabled": false,
-            "id": "group1Question3Choice1",
-            "value": "group1Question3Choice1",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice2",
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice2",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice2",
+              "value": "group1Question2Choice2",
             },
-            "disabled": false,
-            "id": "group1Question3Choice2",
-            "value": "group1Question3Choice2",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice3",
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice3",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice3",
+              "value": "group1Question2Choice3",
             },
-            "disabled": false,
-            "id": "group1Question3Choice3",
-            "value": "group1Question3Choice3",
+          ],
+          "currentAnswer": "group1Question2Choice1",
+          "custom": Object {
+            "title": "group1Question2",
           },
-        ],
-        "currentAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
-        "custom": Object {
-          "title": "group1Question3",
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question2",
+          "type": "choice",
+          "validatedAnswer": "group1Question2Choice1",
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question3",
-        "type": "choices",
-        "validatedAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
-        "validating": false,
-      },
-    ],
-  },
-]
+        Object {
+          "choices": Array [
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice1",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice1",
+              "value": "group1Question3Choice1",
+            },
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice2",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice2",
+              "value": "group1Question3Choice2",
+            },
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice3",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice3",
+              "value": "group1Question3Choice3",
+            },
+          ],
+          "currentAnswer": Array [
+            "group1Question3Choice1",
+            "group1Question3Choice2",
+          ],
+          "custom": Object {
+            "title": "group1Question3",
+          },
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question3",
+          "type": "choices",
+          "validatedAnswer": Array [
+            "group1Question3Choice1",
+            "group1Question3Choice2",
+          ],
+          "validating": false,
+        },
+      ],
+      "validating": false,
+    },
+  ],
+  "questions": Array [],
+  "validating": false,
+}
 `;
 
 exports[`Default Answers resetAnswer 2`] = `Object {}`;
@@ -601,259 +613,265 @@ Object {
 `;
 
 exports[`Default Answers resetGroup 1`] = `
-Array [
-  Object {
-    "custom": undefined,
-    "disabled": false,
-    "groups": Array [
-      Object {
-        "custom": undefined,
-        "disabled": false,
-        "groups": Array [],
-        "id": "subGroup1",
-        "questions": Array [
-          Object {
-            "choices": Array [],
-            "currentAnswer": "subGroup1Question1Answer",
-            "custom": Object {
-              "title": "subGroup1Questions",
+Object {
+  "groups": Array [
+    Object {
+      "custom": undefined,
+      "disabled": false,
+      "groups": Array [
+        Object {
+          "custom": undefined,
+          "disabled": false,
+          "groups": Array [],
+          "id": "subGroup1",
+          "questions": Array [
+            Object {
+              "choices": Array [],
+              "currentAnswer": "subGroup1Question1Answer",
+              "custom": Object {
+                "title": "subGroup1Questions",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question1",
+              "type": "any",
+              "validatedAnswer": "subGroup1Question1Answer",
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question1",
-            "type": "any",
-            "validatedAnswer": "subGroup1Question1Answer",
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice1",
+                  "value": "subGroup1Question2Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice1",
-                "value": "subGroup1Question2Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice2",
+                  "value": "subGroup1Question2Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice2",
-                "value": "subGroup1Question2Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question2Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question2Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question2Choice3",
+                  "value": "subGroup1Question2Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question2Choice3",
-                "value": "subGroup1Question2Choice3",
+              ],
+              "currentAnswer": "subGroup1Question2Choice1",
+              "custom": Object {
+                "title": "subGroup1Question2",
               },
-            ],
-            "currentAnswer": "subGroup1Question2Choice1",
-            "custom": Object {
-              "title": "subGroup1Question2",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question2",
+              "type": "choice",
+              "validatedAnswer": "subGroup1Question2Choice1",
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question2",
-            "type": "choice",
-            "validatedAnswer": "subGroup1Question2Choice1",
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice1",
+                  "value": "subGroup1Question3Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice1",
-                "value": "subGroup1Question3Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice2",
+                  "value": "subGroup1Question3Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice2",
-                "value": "subGroup1Question3Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question3Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question3Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question3Choice3",
+                  "value": "subGroup1Question3Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question3Choice3",
-                "value": "subGroup1Question3Choice3",
+              ],
+              "currentAnswer": Array [
+                "subGroup1Question3Choice1",
+                "subGroup1Question3Choice2",
+              ],
+              "custom": Object {
+                "title": "subGroup1Question3",
               },
-            ],
-            "currentAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
-            "custom": Object {
-              "title": "subGroup1Question3",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question3",
+              "type": "choices",
+              "validatedAnswer": Array [
+                "subGroup1Question3Choice1",
+                "subGroup1Question3Choice2",
+              ],
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question3",
-            "type": "choices",
-            "validatedAnswer": Array [
-              "subGroup1Question3Choice1",
-              "subGroup1Question3Choice2",
-            ],
-            "validating": false,
-          },
-          Object {
-            "choices": Array [
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice1",
+            Object {
+              "choices": Array [
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice1",
+                  "value": "subGroup1Question4Choice1",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice1",
-                "value": "subGroup1Question4Choice1",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice2",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice2",
+                  "value": "subGroup1Question4Choice2",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice2",
-                "value": "subGroup1Question4Choice2",
-              },
-              Object {
-                "custom": Object {
-                  "title": "subGroup1Question4Choice3",
+                Object {
+                  "custom": Object {
+                    "title": "subGroup1Question4Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question4Choice3",
+                  "value": "subGroup1Question4Choice3",
                 },
-                "disabled": false,
-                "id": "subGroup1Question4Choice3",
-                "value": "subGroup1Question4Choice3",
+              ],
+              "currentAnswer": Array [
+                "subGroup1Question4Choice1",
+                "subGroup1Question4Choice2",
+              ],
+              "custom": Object {
+                "title": "subGroup1Question3",
               },
-            ],
-            "currentAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
-            "custom": Object {
-              "title": "subGroup1Question3",
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question4",
+              "type": "choices",
+              "validatedAnswer": Array [
+                "subGroup1Question4Choice1",
+                "subGroup1Question4Choice2",
+              ],
+              "validating": false,
             },
-            "disabled": false,
-            "error": undefined,
-            "id": "subGroup1Question4",
-            "type": "choices",
-            "validatedAnswer": Array [
-              "subGroup1Question4Choice1",
-              "subGroup1Question4Choice2",
-            ],
-            "validating": false,
-          },
-        ],
-      },
-    ],
-    "id": "group1",
-    "questions": Array [
-      Object {
-        "choices": Array [],
-        "currentAnswer": "group1Question1Answer",
-        "custom": Object {
-          "title": "group1Questions",
+          ],
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question1",
-        "type": "any",
-        "validatedAnswer": "group1Question1Answer",
-        "validating": false,
-      },
-      Object {
-        "choices": Array [
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice1",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice1",
-            "value": "group1Question2Choice1",
+      ],
+      "id": "group1",
+      "questions": Array [
+        Object {
+          "choices": Array [],
+          "currentAnswer": "group1Question1Answer",
+          "custom": Object {
+            "title": "group1Questions",
           },
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice2",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice2",
-            "value": "group1Question2Choice2",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question2Choice3",
-            },
-            "disabled": false,
-            "id": "group1Question2Choice3",
-            "value": "group1Question2Choice3",
-          },
-        ],
-        "currentAnswer": "group1Question2Choice1",
-        "custom": Object {
-          "title": "group1Question2",
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question1",
+          "type": "any",
+          "validatedAnswer": "group1Question1Answer",
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question2",
-        "type": "choice",
-        "validatedAnswer": "group1Question2Choice1",
-        "validating": false,
-      },
-      Object {
-        "choices": Array [
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice1",
+        Object {
+          "choices": Array [
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice1",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice1",
+              "value": "group1Question2Choice1",
             },
-            "disabled": false,
-            "id": "group1Question3Choice1",
-            "value": "group1Question3Choice1",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice2",
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice2",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice2",
+              "value": "group1Question2Choice2",
             },
-            "disabled": false,
-            "id": "group1Question3Choice2",
-            "value": "group1Question3Choice2",
-          },
-          Object {
-            "custom": Object {
-              "title": "group1Question3Choice3",
+            Object {
+              "custom": Object {
+                "title": "group1Question2Choice3",
+              },
+              "disabled": false,
+              "id": "group1Question2Choice3",
+              "value": "group1Question2Choice3",
             },
-            "disabled": false,
-            "id": "group1Question3Choice3",
-            "value": "group1Question3Choice3",
+          ],
+          "currentAnswer": "group1Question2Choice1",
+          "custom": Object {
+            "title": "group1Question2",
           },
-        ],
-        "currentAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
-        "custom": Object {
-          "title": "group1Question3",
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question2",
+          "type": "choice",
+          "validatedAnswer": "group1Question2Choice1",
+          "validating": false,
         },
-        "disabled": false,
-        "error": undefined,
-        "id": "group1Question3",
-        "type": "choices",
-        "validatedAnswer": Array [
-          "group1Question3Choice1",
-          "group1Question3Choice2",
-        ],
-        "validating": false,
-      },
-    ],
-  },
-]
+        Object {
+          "choices": Array [
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice1",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice1",
+              "value": "group1Question3Choice1",
+            },
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice2",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice2",
+              "value": "group1Question3Choice2",
+            },
+            Object {
+              "custom": Object {
+                "title": "group1Question3Choice3",
+              },
+              "disabled": false,
+              "id": "group1Question3Choice3",
+              "value": "group1Question3Choice3",
+            },
+          ],
+          "currentAnswer": Array [
+            "group1Question3Choice1",
+            "group1Question3Choice2",
+          ],
+          "custom": Object {
+            "title": "group1Question3",
+          },
+          "disabled": false,
+          "error": undefined,
+          "id": "group1Question3",
+          "type": "choices",
+          "validatedAnswer": Array [
+            "group1Question3Choice1",
+            "group1Question3Choice2",
+          ],
+          "validating": false,
+        },
+      ],
+      "validating": false,
+    },
+  ],
+  "questions": Array [],
+  "validating": false,
+}
 `;
 
 exports[`Default Answers resetGroup 2`] = `Object {}`;

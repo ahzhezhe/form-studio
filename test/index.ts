@@ -99,7 +99,9 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     questions: group1Questions
   };
 
-  return [group1];
+  return {
+    groups: [group1]
+  };
 };
 
 export const answers: Answers = {
@@ -140,7 +142,7 @@ export const validators: Record<string, Validator> = {
 };
 
 export const findQuestion = (renderInstructions: RenderInstructions, questionId: string) => {
-  for (const group of renderInstructions) {
+  for (const group of renderInstructions.groups) {
     for (const subGroup of group.groups) {
       for (const question of subGroup.questions) {
         if (question.id === questionId) {

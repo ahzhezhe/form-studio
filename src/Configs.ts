@@ -100,4 +100,13 @@ export interface ChoiceConfigs extends ItemConfigs {
  *
  * @category Configs
  */
-export type Configs = GroupConfigs[];
+export type Configs = {
+  /**
+   * Groups.
+   */
+  groups?: GroupConfigs[];
+  /**
+   * Questions directly under the form, without grouping.
+   */
+  questions?: QuestionConfigs[];
+};
