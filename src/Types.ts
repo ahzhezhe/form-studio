@@ -21,7 +21,7 @@ export type ChoiceOnSelected = {
 /**
  * Validation function.
  */
-export type Validator = (answer: any, question: Question) => void | Promise<void>;
+export type Validator = (answer: any, question: Question, previousAnswer: any, form: Form) => void | Promise<void>;
 
 /**
  * Keys are validator name, values are [[Validator]] function.

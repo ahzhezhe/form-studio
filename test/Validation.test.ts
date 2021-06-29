@@ -15,8 +15,8 @@ describe('Validation', () => {
     expect(Object.keys(form.getErrors()).length).toBe(0);
   });
 
-  test('construct skip validations', () => {
-    const form = new Form(getConfigs(), { validators, skipValidations: true });
+  test('construct without validation', () => {
+    const form = new Form(getConfigs(), { validators, validate: false });
 
     expect(form.isClean()).toBeTruthy();
 
@@ -32,43 +32,43 @@ describe('Validation', () => {
   });
 
   test('setAnswer with validation', () => {
-    const form = new Form(getConfigs(), { validators, skipValidations: true });
+    const form = new Form(getConfigs(), { validators, validate: false });
 
-    expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
+    expect(form.getValidatedAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getCurrentAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getError('subGroup1Question1')).toBeFalsy();
 
     form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer');
 
-    expect(form.getValidatedAnswers()['subGroup1Question1']).toBeTruthy();
-    expect(form.getCurrentAnswers()['subGroup1Question1']).toBeTruthy();
-    expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
+    expect(form.getValidatedAnswer('subGroup1Question1')).toBeTruthy();
+    expect(form.getCurrentAnswer('subGroup1Question1')).toBeTruthy();
+    expect(form.getError('subGroup1Question1')).toBeFalsy();
 
     form.setAnswer('subGroup1Question1', undefined);
 
-    expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getErrors()['subGroup1Question1']).toBeTruthy();
+    expect(form.getValidatedAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getCurrentAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getError('subGroup1Question1')).toBeTruthy();
   });
 
-  test('setAnswer skip validation', () => {
-    const form = new Form(getConfigs(), { validators, skipValidations: true });
+  test('setAnswer without validation', () => {
+    const form = new Form(getConfigs(), { validators, validate: false });
 
-    expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
+    expect(form.getValidatedAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getCurrentAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getError('subGroup1Question1')).toBeFalsy();
 
-    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer', true);
+    form.setAnswer('subGroup1Question1', 'subGroup1Question1Answer', { validate: false });
 
-    expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getCurrentAnswers()['subGroup1Question1']).toBeTruthy();
-    expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
+    expect(form.getValidatedAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getCurrentAnswer('subGroup1Question1')).toBeTruthy();
+    expect(form.getError('subGroup1Question1')).toBeFalsy();
 
-    form.setAnswer('subGroup1Question1', undefined, true);
+    form.setAnswer('subGroup1Question1', undefined, { validate: false });
 
-    expect(form.getValidatedAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getCurrentAnswers()['subGroup1Question1']).toBeFalsy();
-    expect(form.getErrors()['subGroup1Question1']).toBeFalsy();
+    expect(form.getValidatedAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getCurrentAnswer('subGroup1Question1')).toBeFalsy();
+    expect(form.getError('subGroup1Question1')).toBeFalsy();
   });
 
 });
