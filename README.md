@@ -20,7 +20,7 @@ It does not provide:
 - Any UI components, define your own UI configurations that suit your project needs and render the UI according to your own design system.
 - Validators, define your own validators that suit your project needs.
 
-[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.4/index.html)
+[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.5/index.html)
 
 [Demo](https://github.com/ahzhezhe/form-studio-demo)
 
@@ -339,7 +339,7 @@ You can then store the answers to database or send it to backend via API.
 
 ### **Example (Frontend)**
 ```javascript
-const valid = form.validate();
+const valid = await form.validate();
 
 if (!valid) {
   alert('There are some invalid answers.');
@@ -355,7 +355,7 @@ If you are sending the answers from frontend to backend, backend can construct t
 ```javascript
 const answers = req.body;
 form.importAnswers(answers);
-const valid = form.validate();
+const valid = await form.validate();
 
 if (!valid) {
   res.status(400);

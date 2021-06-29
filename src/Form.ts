@@ -309,6 +309,25 @@ export class Form {
     this.#internalSetAnswer(question.id, defaultAnswer, options);
   }
 
+  /**
+   * Import answers to the form.
+   *
+   * @param answers answers
+   * @param options options
+   */
+  importAnswers(answers: Answers, options?: UpdateAnswerOptions) {
+    this.#endByInformFormUpdate(() => {
+      this.#internalImportAnswers(answers, options);
+    });
+  }
+
+  #internalImportAnswers(answers: Answers, options?: UpdateAnswerOptions) {
+    for (const questionId of this.#questionById.keys()) {
+      const answer = answers[questionId];
+      this.#internalSetAnswer(questionId, answer, options);
+    }
+  }
+
   #getValidators(names: string[]) {
     const validators: Validator[] = [];
 
@@ -709,7 +728,12 @@ export class Form {
    *
    * @returns whether form is clean
    */
-  isClean() {
+  async isClean(): Promise<boolean> {
+    if (this.#isValidating()) {
+      await new Promise(resolve => setTimeout(resolve, 10));
+      return this.isClean();
+    }
+
     for (const [questionId, error] of this.#errorByQuestionId.entries()) {
       const question = this.#findQuestion(questionId);
       if (this.#isQuestionDisabled(question)) {
@@ -722,23 +746,13 @@ export class Form {
     return true;
   }
 
-  /**
-   * Import answers to the form.
-   *
-   * @param answers answers
-   * @param options options
-   */
-  importAnswers(answers: Answers, options?: UpdateAnswerOptions) {
-    this.#endByInformFormUpdate(() => {
-      this.#internalImportAnswers(answers, options);
-    });
-  }
-
-  #internalImportAnswers(answers: Answers, options?: UpdateAnswerOptions) {
-    for (const questionId of this.#questionById.keys()) {
-      const answer = answers[questionId];
-      this.#internalSetAnswer(questionId, answer, options);
+  #isValidating() {
+    for (const validating of this.#validatingByQuestionId.values()) {
+      if (validating) {
+        return true;
+      }
     }
+    return false;
   }
 
   /**
@@ -746,7 +760,7 @@ export class Form {
    *
    * @returns whether form is clean
    */
-  validate() {
+  async validate() {
     return this.#endByInformFormUpdate(() => {
       const answers = this.getCurrentAnswers();
       this.#internalImportAnswers(answers);
