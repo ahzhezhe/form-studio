@@ -123,6 +123,9 @@ const getAnswer = (questionId: string, withDefaultAnswers?: boolean) => {
 
 export const validators: Record<string, Validator> = {
   atLeast1: answer => {
+    if (!Array.isArray(answer)) {
+      throw 'Answer must be an array.';
+    }
     if (answer.length < 1) {
       throw 'Please select at least 1 option.';
     }
