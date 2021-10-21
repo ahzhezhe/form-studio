@@ -792,7 +792,7 @@ export class Form {
    * Validate configs.
    *
    * The following validations will be conducted:
-   * - Form is not without any groups
+   * - Form is not without any groups or questions
    * - No duplicated ids within the form
    * - No groups without questions
    * - No questions with `choice` or `choices` as type without choices
