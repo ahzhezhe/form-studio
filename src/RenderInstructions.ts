@@ -70,7 +70,7 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    *
    * For questions with `choices` as [[type]], it should be a list of values of the selected choices.
    */
-  currentAnswer: unknown;
+  currentAnswer: any;
   /**
    * Validated answer of the question.
    *
@@ -82,7 +82,7 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
    *
    * If the question is disabled or the answer is not valid, the answer will be set to `undefined`.
    */
-  validatedAnswer: unknown;
+  validatedAnswer: any;
   /**
    * Whether or not the question is currently being validated.
    *
@@ -92,7 +92,7 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
   /**
    * Error thrown by validator.
    */
-  error: unknown;
+  error: any;
 }
 
 /**

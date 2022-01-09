@@ -21,7 +21,7 @@ export type ChoiceOnSelected = {
 /**
  * Validation function.
  */
-export type Validator = (answer: unknown, question: Question, previousAnswer: unknown, form: Form) => void | Promise<void>;
+export type Validator = (answer: any, question: Question, previousAnswer: any, form: Form) => void | Promise<void>;
 
 /**
  * Keys are validator name, values are [[Validator]] function.
@@ -31,12 +31,12 @@ export type Validators = Record<string, Validator>;
 /**
  * Keys are question id, values are answers.
  */
-export type Answers = Record<string, unknown>;
+export type Answers = Record<string, any>;
 
 /**
  * Keys are question id, values are error thrown by validator.
  */
-export type Errors = Record<string, unknown>;
+export type Errors = Record<string, any>;
 
 /**
  * Function to be called when form is updated.

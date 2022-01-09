@@ -393,7 +393,7 @@ export class Form {
       this.#errorByQuestionId.delete(question.id);
     };
 
-    const onError = (err: unknown) => {
+    const onError = (err: any) => {
       this.#validatedAnswerByQuestionId.delete(question.id);
       this.#errorByQuestionId.set(question.id, err);
     };
