@@ -3,34 +3,34 @@ import { validators, getConfigs, answers } from '.';
 
 describe('Validation', () => {
 
-  test('construct with validations', async () => {
+  test('construct with validations', () => {
     const form = new Form(getConfigs(), { validators });
 
-    let isClean = await form.isClean();
+    let isClean = form.isClean();
 
     expect(isClean).toBeFalsy();
 
     form.importAnswers(answers);
-    isClean = await form.isClean();
+    isClean = form.isClean();
 
     expect(isClean).toBeTruthy();
     expect(Object.keys(form.getErrors()).length).toBe(0);
   });
 
-  test('construct without validation', async () => {
+  test('construct without validation', () => {
     const form = new Form(getConfigs(), { validators, validate: false });
 
-    let isClean = await form.isClean();
+    let isClean = form.isClean();
 
     expect(isClean).toBeTruthy();
 
     form.validate();
-    isClean = await form.isClean();
+    isClean = form.isClean();
 
     expect(isClean).toBeFalsy();
 
     form.importAnswers(answers);
-    isClean = await form.isClean();
+    isClean = form.isClean();
 
     expect(isClean).toBeTruthy();
     expect(Object.keys(form.getErrors()).length).toBe(0);

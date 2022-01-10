@@ -28,6 +28,7 @@ describe('Aysnc Validation', () => {
     expect(question.currentAnswer).toBe('subGroup1Question1Answer');
     expect(question.validatedAnswer).toBeUndefined();
     expect(question.error).toBeUndefined();
+    expect(form.isValidating()).toBe(true);
 
     await sleep(200);
     question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
@@ -36,6 +37,7 @@ describe('Aysnc Validation', () => {
     expect(question.currentAnswer).toBe('subGroup1Question1Answer');
     expect(question.validatedAnswer).toBe('subGroup1Question1Answer');
     expect(question.error).toBeUndefined();
+    expect(form.isValidating()).toBe(false);
 
   });
 
@@ -50,6 +52,7 @@ describe('Aysnc Validation', () => {
     expect(question.currentAnswer).toBeUndefined();
     expect(question.validatedAnswer).toBeUndefined();
     expect(question.error).toBeUndefined();
+    expect(form.isValidating()).toBe(true);
 
     await sleep(200);
     question = findQuestion(form.getRenderInstructions(), 'subGroup1Question1');
@@ -58,6 +61,7 @@ describe('Aysnc Validation', () => {
     expect(question.currentAnswer).toBeUndefined();
     expect(question.validatedAnswer).toBeUndefined();
     expect(question.error).toBeDefined();
+    expect(form.isValidating()).toBe(false);
 
   });
 

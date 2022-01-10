@@ -730,6 +730,22 @@ export class Form {
   }
 
   /**
+   * Check whether form is currently being validated.
+   *
+   * The result might be `true` if you have async validator and the validation is not completed yet.
+   *
+   * @returns whether form is current being validated
+   */
+  isValidating() {
+    for (const validating of this.#validatingByQuestionId.values()) {
+      if (validating) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Check whether form is clean.
    *
    * Form will always be clean if it didn't go through any validation, even if there are invalid answers in the form.
@@ -738,12 +754,7 @@ export class Form {
    *
    * @returns whether form is clean
    */
-  async isClean(): Promise<boolean> {
-    if (this.#isValidating()) {
-      await new Promise(resolve => setTimeout(resolve, 10));
-      return this.isClean();
-    }
-
+  isClean(): boolean {
     for (const [questionId, error] of this.#errorByQuestionId.entries()) {
       const question = this.#findQuestion(questionId);
       if (this.#isQuestionDisabled(question)) {
@@ -756,11 +767,29 @@ export class Form {
     return true;
   }
 
-  #isValidating() {
-    for (const validating of this.#validatingByQuestionId.values()) {
-      if (validating) {
-        return true;
+  /**
+   * Do a final round of validation and get the validated answers.
+   *
+   * This method will not update render instructions.
+   * It is more for when you need to make sure that the form is really clean and get the final validated answers for further usage,
+   * e.g. calling API, store into database, etc.
+   *
+   * @returns whether validated answer or `false` if form is not clean
+   */
+  async validateAndGetAnswers(): Promise<Answers | false> {
+    const form = new Form(this.getConfigs(), { validators: this.#validators });
+    form.importAnswers(this.getCurrentAnswers());
+
+    while (true) {
+      if (form.isValidating()) {
+        await new Promise(resolve => setTimeout(resolve, 10));
+      } else {
+        break;
       }
+    }
+
+    if (form.isClean()) {
+      return form.getValidatedAnswers();
     }
     return false;
   }
@@ -770,11 +799,10 @@ export class Form {
    *
    * @returns whether form is clean
    */
-  async validate() {
+  validate() {
     return this.#endByInformFormUpdate(() => {
       const answers = this.getCurrentAnswers();
       this.#internalImportAnswers(answers);
-      return this.isClean();
     });
   }
 

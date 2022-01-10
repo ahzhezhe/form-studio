@@ -20,7 +20,7 @@ It does not provide:
 - Any UI components, define your own UI configurations that suit your project needs and render the UI according to your own design system.
 - Validators, define your own validators that suit your project needs.
 
-[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.9/index.html)
+[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.10/index.html)
 
 [Demo](https://github.com/ahzhezhe/form-studio-demo)
 
@@ -149,7 +149,7 @@ Form.validateConfigs(configs);
 
 A validator is a function that will be called when the answer of a question is updated, it throws error when validation fails.
 
-Each question can be assigned with a name of the validator to be used and a set of validation configs to be used by the validator.
+Each question can be assigned with one or more validators to be used.
 
 ### **Example**
 ```javascript
@@ -185,7 +185,7 @@ A listener function that will be called when form is updated.
 
 Form will be updated when answer is set, validation is triggered, etc.
 
-Usually form updated listener is only needed when the form is being used in frontend, so that you can trigger an UI rerender when form is updated.
+Form updated listener is needed when the form is being used in frontend, so that you can trigger an UI rerender when form is updated.
 
 ### **Example (React)**
 ```javascript
@@ -196,7 +196,7 @@ const onFormUpdate = form => setRenderInstructions(form.getRenderInstructions())
 
 <br />
 
-# **Construct a Form with Configs & Validators**
+# **Construct a Form**
 ```javascript
 const form = new Form(configs, { validators, onFormUpdate });
 ```
@@ -332,18 +332,33 @@ onChange={e => form.setAny(id, e.target.value)}
 
 <br />
 
-# **Validate and Persist the Answers**
-Use `validate` method to make sure that all the answers are validated.
+# **Validate in Frontend**
+Use `validate` method to trigger validation for the entire form.
 
-Once the form is clean, use `getValidatedAnswers` method to get all answers from the form.
+Use `isValidating` & `isClean` methods to get the state of form validation.
+E.g. you can disable a button if `isValidating` is `true` or `isClean` is `false`.
+
+### **Example (React)**
+```javascript
+const save = () => {
+  if (form.isValidating() || !form.isClean()) {
+    alert('Please try again.')
+  }
+}
+
+<Button onClick={save}>Save</Button>
+```
+
+# **Persist the Answers**
+Use `validateAndGetAnswers` method to get the final validated answers.
 
 You can then store the answers to database or send it to backend via API.
 
 ### **Example (Frontend)**
 ```javascript
-const valid = await form.validate();
+const answers = await form.validateAndGetAnswers();
 
-if (!valid) {
+if (!answers) {
   alert('There are some invalid answers.');
   return;
 }
@@ -351,13 +366,13 @@ if (!valid) {
 await ... // Call API to send the answers to backend
 ```
 
-If you are sending the answers from frontend to backend, backend can construct the form using the same configs, import the answers, and call `validate` method again to revalidate the answers from frontend before you save them into database.
+If you are sending the answers from frontend to backend, backend can construct the form using the same configs, import the answers, and call `validateAndGetAnswers` method again to revalidate the answers from frontend before you save them into database.
 
 ### **Example (Backend API)**
 ```javascript
 const answers = req.body;
 form.importAnswers(answers);
-const valid = await form.validate();
+const valid = await form.validateAndGetAnswers();
 
 if (!valid) {
   res.status(400);
