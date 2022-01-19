@@ -3,7 +3,7 @@ import { QuestionType } from './Types';
 /**
  * @category Render Instructions
  */
-export interface ItemRenderInstructions {
+export interface ItemRenderInstructions<Custom = any> {
   /**
    * Item id.
    */
@@ -15,13 +15,13 @@ export interface ItemRenderInstructions {
   /**
    * Any values that help you determine how to render the frontend UI.
    */
-  custom: any;
+  custom: Custom;
 }
 
 /**
  * @category Render Instructions
  */
-export interface GroupRenderInstructions extends ItemRenderInstructions {
+export interface GroupRenderInstructions<Custom = any> extends ItemRenderInstructions<Custom> {
   /**
    * Whether or not there are questions in this group that are currently being validated.
    *
@@ -31,17 +31,17 @@ export interface GroupRenderInstructions extends ItemRenderInstructions {
   /**
    * Sub-groups.
    */
-  groups: GroupRenderInstructions[];
+  groups: GroupRenderInstructions<Custom>[];
   /**
    * Questions under this group.
    */
-  questions: QuestionRenderInstructions[];
+  questions: QuestionRenderInstructions<Custom>[];
 }
 
 /**
  * @category Render Instructions
  */
-export interface QuestionRenderInstructions extends ItemRenderInstructions {
+export interface QuestionRenderInstructions<Custom = any> extends ItemRenderInstructions<Custom> {
   /**
    * Question type.
    *
@@ -60,7 +60,7 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
   /**
    * Choices for questions with `choice` or `choices` as [[type]].
    */
-  choices: ChoiceRenderInstructions[];
+  choices: ChoiceRenderInstructions<Custom>[];
   /**
    * Current answer of the question. The answer is unvalidated.
    *
@@ -98,7 +98,7 @@ export interface QuestionRenderInstructions extends ItemRenderInstructions {
 /**
  * @category Render Instructions
  */
-export interface ChoiceRenderInstructions extends ItemRenderInstructions {
+export interface ChoiceRenderInstructions<Custom = any> extends ItemRenderInstructions<Custom> {
   /**
    * Value of this choice. It will be used as answer of the question.
    */
@@ -110,7 +110,7 @@ export interface ChoiceRenderInstructions extends ItemRenderInstructions {
  *
  * @category Render Instructions
  */
-export interface RenderInstructions {
+export interface RenderInstructions<Custom = any> {
   /**
    * Whether or not there are questions in the form that are currently being validated.
    *
@@ -120,9 +120,9 @@ export interface RenderInstructions {
   /**
    * Groups.
    */
-  groups: GroupRenderInstructions[];
+  groups: GroupRenderInstructions<Custom>[];
   /**
    * Questions directly under the form, without grouping.
    */
-  questions: QuestionRenderInstructions[];
+  questions: QuestionRenderInstructions<Custom>[];
 }

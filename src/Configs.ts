@@ -3,7 +3,7 @@ import { ChoiceOnSelected, QuestionType } from './Types';
 /**
  * @category Configs
  */
-export interface ItemConfigs {
+export interface ItemConfigs<Custom = any> {
   /**
    * Item id.
    *
@@ -19,27 +19,27 @@ export interface ItemConfigs {
   /**
    * Any values that help you determine on how to render the frontend UI or how to perform validation.
    */
-  custom?: any;
+  custom?: Custom;
 }
 
 /**
  * @category Configs
  */
-export interface GroupConfigs extends ItemConfigs {
+export interface GroupConfigs<Custom = any> extends ItemConfigs<Custom> {
   /**
    * Sub-groups.
    */
-  groups?: GroupConfigs[];
+  groups?: GroupConfigs<Custom>[];
   /**
    * Questions under this group.
    */
-  questions?: QuestionConfigs[];
+  questions?: QuestionConfigs<Custom>[];
 }
 
 /**
  * @category Configs
  */
-export interface QuestionConfigs extends ItemConfigs {
+export interface QuestionConfigs<Custom = any> extends ItemConfigs<Custom> {
   /**
    * Question type.
    *
@@ -58,7 +58,7 @@ export interface QuestionConfigs extends ItemConfigs {
   /**
    * Choices for questions with `choice` or `choices` as [[type]].
    */
-  choices?: ChoiceConfigs[];
+  choices?: ChoiceConfigs<Custom>[];
   /**
    * Names of the validators to be used for validation when answer of this question is changed.
    *
@@ -80,7 +80,7 @@ export interface QuestionConfigs extends ItemConfigs {
 /**
  * @category Configs
  */
-export interface ChoiceConfigs extends ItemConfigs {
+export interface ChoiceConfigs<Custom = any> extends ItemConfigs<Custom> {
   /**
    * Value of this choice. It will be used as answer of the question.
    *
@@ -100,13 +100,13 @@ export interface ChoiceConfigs extends ItemConfigs {
  *
  * @category Configs
  */
-export type Configs = {
+export type Configs<Custom = any> = {
   /**
    * Groups.
    */
-  groups?: GroupConfigs[];
+  groups?: GroupConfigs<Custom>[];
   /**
    * Questions directly under the form, without grouping.
    */
-  questions?: QuestionConfigs[];
+  questions?: QuestionConfigs<Custom>[];
 };

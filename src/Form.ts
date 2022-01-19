@@ -26,10 +26,10 @@ export interface FormOptions extends UpdateAnswerOptions {
 /**
  * @category Form
  */
-export class Form {
+export class Form<Custom = any> {
 
   readonly #onFormUpdate?: FormUpdateListener;
-  readonly #configs: ExportedConfigs;
+  readonly #configs: ExportedConfigs<Custom>;
   readonly #validators: Validators;
   readonly #defaultAnswers: Answers = {};
 
@@ -53,7 +53,7 @@ export class Form {
    * @param options options
    * @throws if configs is invalid
    */
-  constructor(configs: Configs, options?: FormOptions) {
+  constructor(configs: Configs<Custom>, options?: FormOptions) {
     let validators: Validators = {};
     let onFormUpdate: FormUpdateListener | undefined;
 
@@ -77,7 +77,7 @@ export class Form {
     });
   }
 
-  #processGroups(parentGroup: Group | undefined, groups: Group[]) {
+  #processGroups(parentGroup: Group<Custom> | undefined, groups: Group<Custom>[]) {
     groups.forEach(group => {
       this.#groupById.set(group.id, group);
       this.#processGroups(group, group.groups || []);
@@ -88,7 +88,7 @@ export class Form {
     });
   }
 
-  #processQuestions(group: Group | undefined, questions: Question[]) {
+  #processQuestions(group: Group<Custom> | undefined, questions: Question<Custom>[]) {
     questions.forEach(question => {
       this.#questionById.set(question.id, question);
       if (group) {
@@ -103,7 +103,7 @@ export class Form {
     });
   }
 
-  #processChoices(question: Question, choices: Choice[]) {
+  #processChoices(question: Question<Custom>, choices: Choice<Custom>[]) {
     choices.forEach(choice => {
       this.#choiceById.set(choice.id, choice);
       this.#questionByChoiceId.set(choice.id, question);
@@ -135,7 +135,7 @@ export class Form {
    *
    * @returns configs
    */
-  getConfigs(): ExportedConfigs {
+  getConfigs(): ExportedConfigs<Custom> {
     return this.#configs;
   }
 
@@ -144,15 +144,15 @@ export class Form {
    *
    * @returns render instructions
    */
-  getRenderInstructions(): RenderInstructions {
+  getRenderInstructions(): RenderInstructions<Custom> {
     const groups = this.#toGroupRenderInstructions(this.#configs.groups);
     const questions = this.#toQuestionRenderInstructions(this.#configs.questions);
     const validating = groups.some(group => group.validating) || questions.some(question => question.validating);
     return { validating, groups, questions };
   }
 
-  #toGroupRenderInstructions(groups: Group[]): GroupRenderInstructions[] {
-    return groups.map((group): GroupRenderInstructions => {
+  #toGroupRenderInstructions(groups: Group<Custom>[]): GroupRenderInstructions<Custom>[] {
+    return groups.map((group): GroupRenderInstructions<Custom> => {
       const groups = this.#toGroupRenderInstructions(group.groups);
       const questions = this.#toQuestionRenderInstructions(group.questions);
       const validating = groups.some(group => group.validating) || questions.some(question => question.validating);
@@ -168,8 +168,8 @@ export class Form {
     });
   }
 
-  #toQuestionRenderInstructions(questions: Question[]): QuestionRenderInstructions[] {
-    return questions.map((question): QuestionRenderInstructions => ({
+  #toQuestionRenderInstructions(questions: Question<Custom>[]): QuestionRenderInstructions<Custom>[] {
+    return questions.map((question): QuestionRenderInstructions<Custom> => ({
       id: question.id,
       disabled: this.#isQuestionDisabled(question),
       custom: question.custom,
@@ -182,8 +182,8 @@ export class Form {
     }));
   }
 
-  #toChoiceRenderInstructions(choices: Choice[]): ChoiceRenderInstructions[] {
-    return choices.map((choice): ChoiceRenderInstructions => ({
+  #toChoiceRenderInstructions(choices: Choice<Custom>[]): ChoiceRenderInstructions<Custom>[] {
+    return choices.map((choice): ChoiceRenderInstructions<Custom> => ({
       id: choice.id,
       disabled: this.#isChoiceDisabled(choice),
       custom: choice.custom,
@@ -354,7 +354,7 @@ export class Form {
     return validators;
   }
 
-  #executeValidators(validators: Validator[], question: Question, answer: any, previousAnswer: any): void | Promise<void> {
+  #executeValidators(validators: Validator[], question: Question<Custom>, answer: any, previousAnswer: any): void | Promise<void> {
     const validator = validators.shift();
 
     if (!validator) {
@@ -370,7 +370,7 @@ export class Form {
     return this.#executeValidators(validators, question, answer, previousAnswer);
   }
 
-  #setCurrentAnswerAndValidate(question: Question, answer: any, options?: UpdateAnswerOptions) {
+  #setCurrentAnswerAndValidate(question: Question<Custom>, answer: any, options?: UpdateAnswerOptions) {
     const previousAnswer = this.#currentAnswerByQuestionId.get(question.id);
 
     this.#currentAnswerByQuestionId.set(question.id, answer);
@@ -565,7 +565,7 @@ export class Form {
     }
   }
 
-  #isChoiceSelected(choice: Choice) {
+  #isChoiceSelected(choice: Choice<Custom>) {
     if (this.#isChoiceDisabled(choice)) {
       return false;
     }
@@ -583,7 +583,7 @@ export class Form {
     return false;
   }
 
-  #isItemDisabled(item: Item) {
+  #isItemDisabled(item: Item<Custom>) {
     const disabledByChoices = this.#disabledByChoicesById.get(item.id) || [];
 
     for (const choice of disabledByChoices) {
@@ -603,7 +603,7 @@ export class Form {
     return item.defaultDisabled;
   }
 
-  #isGroupDisabled(group: Group): boolean {
+  #isGroupDisabled(group: Group<Custom>): boolean {
     const parentGroup = this.#parentGroupByGroupId.get(group.id);
     if (parentGroup && this.#isGroupDisabled(parentGroup)) {
       return true;
@@ -611,7 +611,7 @@ export class Form {
     return this.#isItemDisabled(group);
   }
 
-  #isQuestionDisabled(question: Question) {
+  #isQuestionDisabled(question: Question<Custom>) {
     const group = this.#groupByQuestionId.get(question.id);
     if (group && this.#isGroupDisabled(group)) {
       return true;
@@ -619,7 +619,7 @@ export class Form {
     return this.#isItemDisabled(question);
   }
 
-  #isChoiceDisabled(choice: Choice) {
+  #isChoiceDisabled(choice: Choice<Custom>) {
     const question = this.#questionByChoiceId.get(choice.id)!;
     if (this.#isQuestionDisabled(question)) {
       return true;

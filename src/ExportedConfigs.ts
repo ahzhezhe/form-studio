@@ -3,26 +3,26 @@ import { ChoiceOnSelected, QuestionType } from './Types';
 /**
  * @category Exported Configs
  */
-export interface Item {
+export interface Item<Custom = any> {
   id: string;
   defaultDisabled: boolean;
-  custom: any;
+  custom: Custom;
 }
 
 /**
  * @category Exported Configs
  */
-export interface Group extends Item {
-  groups: Group[];
-  questions: Question[];
+export interface Group<Custom = any> extends Item<Custom> {
+  groups: Group<Custom>[];
+  questions: Question<Custom>[];
 }
 
 /**
  * @category Exported Configs
  */
-export interface Question extends Item {
+export interface Question<Custom = any> extends Item<Custom> {
   type: QuestionType;
-  choices: Choice[];
+  choices: Choice<Custom>[];
   validators: string[];
   defaultAnswer: any;
 }
@@ -30,7 +30,7 @@ export interface Question extends Item {
 /**
  * @category Exported Configs
  */
-export interface Choice extends Item {
+export interface Choice<Custom = any> extends Item<Custom> {
   value: any;
   onSelected: ChoiceOnSelected;
 }
@@ -42,7 +42,7 @@ export interface Choice extends Item {
  *
  * @category Exported Configs
  */
-export type ExportedConfigs = {
-  groups: Group[];
-  questions: Question[];
+export type ExportedConfigs<Custom = any> = {
+  groups: Group<Custom>[];
+  questions: Question<Custom>[];
 };
