@@ -28,7 +28,7 @@ describe('Validate And Get Answers', () => {
     form.setChoices('subGroup1Question3', ['subGroup1Question3Choice1']);
     form.setChoices('subGroup1Question4', ['subGroup1Question4Choice1']);
 
-    const clean = await form.validateAndGetAnswers();
+    const clean = await form.asyncValidate();
     expect(clean).toBeTruthy();
 
   });
@@ -37,7 +37,7 @@ describe('Validate And Get Answers', () => {
 
     const form = new Form(getConfigs(), { validators });
 
-    const clean = await form.validateAndGetAnswers();
+    const clean = await form.asyncValidate();
     expect(clean).toBe(false);
 
   });
@@ -53,7 +53,7 @@ describe('Validate And Get Answers', () => {
     form.setChoices('subGroup1Question3', ['subGroup1Question3Choice1']);
     form.setChoices('subGroup1Question4', ['subGroup1Question4Choice1']);
 
-    const clean = await form.validateAndGetAnswers();
+    const clean = await form.asyncValidate();
     expect(clean).toBeTruthy();
 
   });
@@ -62,7 +62,7 @@ describe('Validate And Get Answers', () => {
 
     const form = new Form(getConfigs(), { validators: asyncValidators });
 
-    const clean = await form.validateAndGetAnswers();
+    const clean = await form.asyncValidate();
     expect(clean).toBe(false);
 
   });

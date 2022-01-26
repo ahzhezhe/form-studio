@@ -774,9 +774,9 @@ export class Form<Custom = any> {
    * It is more for when you need to make sure that the form is really clean and get the final validated answers for further usage,
    * e.g. calling API, store into database, etc.
    *
-   * @returns whether validated answer or `false` if form is not clean
+   * @returns validated answer or `false` if form is not clean
    */
-  async validateAndGetAnswers(): Promise<Answers | false> {
+  async asyncValidate(): Promise<Answers | false> {
     const form = new Form(this.getConfigs(), { validators: this.#validators });
     form.importAnswers(this.getCurrentAnswers());
 

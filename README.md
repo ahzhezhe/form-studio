@@ -20,7 +20,7 @@ It does not provide:
 - Any UI components, define your own UI configurations that suit your project needs and render the UI according to your own design system.
 - Validators, define your own validators that suit your project needs.
 
-[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.11/index.html)
+[API Documentation](https://ahzhezhe.github.io/docs/form-studio-v0.12/index.html)
 
 [Demo](https://github.com/ahzhezhe/form-studio-demo)
 
@@ -350,13 +350,13 @@ const save = () => {
 ```
 
 # **Persist the Answers**
-Use `validateAndGetAnswers` method to get the final validated answers.
+Use `asyncValidate` method to get the final validated answers.
 
 You can then store the answers to database or send it to backend via API.
 
 ### **Example (Frontend)**
 ```javascript
-const answers = await form.validateAndGetAnswers();
+const answers = await form.asyncValidate();
 
 if (!answers) {
   alert('There are some invalid answers.');
@@ -366,13 +366,13 @@ if (!answers) {
 await ... // Call API to send the answers to backend
 ```
 
-If you are sending the answers from frontend to backend, backend can construct the form using the same configs, import the answers, and call `validateAndGetAnswers` method again to revalidate the answers from frontend before you save them into database.
+If you are sending the answers from frontend to backend, backend can construct the form using the same configs, import the answers, and call `asyncValidate` method again to revalidate the answers from frontend before you save them into database.
 
 ### **Example (Backend API)**
 ```javascript
 const answers = req.body;
 form.importAnswers(answers);
-const valid = await form.validateAndGetAnswers();
+const valid = await form.asyncValidate();
 
 if (!valid) {
   res.status(400);
