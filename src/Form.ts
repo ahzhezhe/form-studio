@@ -28,9 +28,9 @@ export interface FormOptions extends UpdateAnswerOptions {
  */
 export class Form<Custom = any> {
 
-  readonly #onFormUpdate?: FormUpdateListener;
+  #onFormUpdate?: FormUpdateListener;
+  #validators: Validators = {};
   readonly #configs: ExportedConfigs<Custom>;
-  readonly #validators: Validators;
   readonly #defaultAnswers: Answers = {};
 
   readonly #groupById = new Map<string, Group>();
@@ -54,27 +54,29 @@ export class Form<Custom = any> {
    * @throws if configs is invalid
    */
   constructor(configs: Configs<Custom>, options?: FormOptions) {
-    let validators: Validators = {};
-    let onFormUpdate: FormUpdateListener | undefined;
-
-    if (options) {
-      validators = options.validators || {};
-      onFormUpdate = options.onFormUpdate;
-    }
-
     this.#configs = sanitizeConfigs(configs);
+
     const result = new ConfigsValidator().validate(this.#configs, false);
     if (!result.pass) {
       throw new Error('Invalid configs. You may use validateConfigs method to see what is wrong.');
     }
 
-    this.#validators = validators;
-    this.#onFormUpdate = onFormUpdate;
+    this.setValidators(options?.validators);
+    this.setUpdateListener(options?.onFormUpdate);
+
     this.#processGroups(undefined, this.#configs.groups);
     this.#processQuestions(undefined, this.#configs.questions);
     this.#endByInformFormUpdate(() => {
       this.#internalImportAnswers(this.#defaultAnswers, options);
     });
+  }
+
+  setValidators(validators: Validators | undefined) {
+    this.#validators = validators || {};
+  }
+
+  setUpdateListener(onFormUpdate?: FormUpdateListener | undefined) {
+    this.#onFormUpdate = onFormUpdate;
   }
 
   #processGroups(parentGroup: Group<Custom> | undefined, groups: Group<Custom>[]) {
