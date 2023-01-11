@@ -24,17 +24,17 @@ export type ChoiceOnSelected = {
 export type Validator = (answer: any, question: Question, previousAnswer: any, form: Form) => void | Promise<void>;
 
 /**
- * Keys are validator name, values are [[Validator]] function.
+ * Keys are validator names, values are [[Validator]] functions.
  */
 export type Validators = Record<string, Validator>;
 
 /**
- * Keys are question id, values are answers.
+ * Keys are question ids, values are answers.
  */
 export type Answers = Record<string, any>;
 
 /**
- * Keys are question id, values are error thrown by validator.
+ * Keys are question ids, values are errors thrown by validators.
  */
 export type Errors = Record<string, any>;
 
@@ -47,7 +47,7 @@ export type ConfigsValidationResult = {
   /**
    * Whether or not the configs is valid.
    */
-  pass: boolean;
+  valid: boolean;
   /**
    * Errors of invalid configs.
    *

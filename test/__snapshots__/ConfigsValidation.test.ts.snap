@@ -7,7 +7,7 @@ Object {
       "Circular relationship with 'c2'",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -18,7 +18,7 @@ Object {
       "Circular relationship with 'c2'",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -29,13 +29,13 @@ Object {
       "Circular relationship with 'q1'",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
 exports[`ConfigsValidation Circular relationship 4`] = `
 Object {
-  "pass": true,
+  "valid": true,
 }
 `;
 
@@ -46,7 +46,7 @@ Object {
       "There are choices with same values",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -60,7 +60,7 @@ Object {
       "Id is not unique",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -71,13 +71,13 @@ Object {
       "There are choices with same values",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
 exports[`ConfigsValidation Duplicated choice values 4`] = `
 Object {
-  "pass": true,
+  "valid": true,
 }
 `;
 
@@ -88,7 +88,7 @@ Object {
       "There are choices with same values",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -102,7 +102,7 @@ Object {
       "Id is not unique",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -113,13 +113,13 @@ Object {
       "There are choices with same values",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
 exports[`ConfigsValidation Duplicated choice values 8`] = `
 Object {
-  "pass": true,
+  "valid": true,
 }
 `;
 
@@ -133,7 +133,7 @@ Object {
       "Id is not unique",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -144,7 +144,7 @@ Object {
       "Id is not unique",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -158,7 +158,7 @@ Object {
       "Id is not unique",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -169,7 +169,7 @@ Object {
       "There are no choices",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -180,7 +180,7 @@ Object {
       "There are no choices",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -191,7 +191,7 @@ Object {
       "There are no choices",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -202,13 +202,13 @@ Object {
       "There are no choices",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
 exports[`ConfigsValidation No choices 5`] = `
 Object {
-  "pass": true,
+  "valid": true,
 }
 `;
 
@@ -219,7 +219,7 @@ Object {
       "There are no groups or questions",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -230,7 +230,7 @@ Object {
       "There are no groups or questions",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -241,7 +241,7 @@ Object {
       "There are no questions",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -252,7 +252,7 @@ Object {
       "There are no questions",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -266,7 +266,7 @@ Object {
       "There are no questions",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -277,7 +277,7 @@ Object {
       "There are unrecognized id(s) in onSelected configs",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
@@ -288,12 +288,12 @@ Object {
       "There are unrecognized id(s) in onSelected configs",
     ],
   },
-  "pass": false,
+  "valid": false,
 }
 `;
 
 exports[`ConfigsValidation Unrecognized ids in choices onSelected 3`] = `
 Object {
-  "pass": true,
+  "valid": true,
 }
 `;

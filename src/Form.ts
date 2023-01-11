@@ -57,7 +57,7 @@ export class Form<Custom = any> {
     this.#configs = sanitizeConfigs(configs);
 
     const result = new ConfigsValidator().validate(this.#configs, false);
-    if (!result.pass) {
+    if (!result.valid) {
       throw new Error('Invalid configs. You may use validateConfigs method to see what is wrong.');
     }
 

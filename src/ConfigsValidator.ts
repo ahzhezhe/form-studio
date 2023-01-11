@@ -160,9 +160,9 @@ export class ConfigsValidator {
       this.#errorsById.forEach((values, key) => {
         errors[key] = values;
       });
-      return { pass: false, errors };
+      return { valid: false, errors };
     }
-    return { pass: true };
+    return { valid: true };
   }
 
 }
