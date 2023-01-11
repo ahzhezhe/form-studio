@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ConfigsValidation Circular relationship 1`] = `
-Object {
-  "errors": Object {
-    "c1": Array [
+{
+  "errors": {
+    "c1": [
       "Circular relationship with 'c2'",
     ],
   },
@@ -12,9 +12,9 @@ Object {
 `;
 
 exports[`ConfigsValidation Circular relationship 2`] = `
-Object {
-  "errors": Object {
-    "q1": Array [
+{
+  "errors": {
+    "q1": [
       "Circular relationship with 'c2'",
     ],
   },
@@ -23,9 +23,9 @@ Object {
 `;
 
 exports[`ConfigsValidation Circular relationship 3`] = `
-Object {
-  "errors": Object {
-    "g1": Array [
+{
+  "errors": {
+    "g1": [
       "Circular relationship with 'q1'",
     ],
   },
@@ -34,15 +34,15 @@ Object {
 `;
 
 exports[`ConfigsValidation Circular relationship 4`] = `
-Object {
+{
   "valid": true,
 }
 `;
 
 exports[`ConfigsValidation Duplicated choice values 1`] = `
-Object {
-  "errors": Object {
-    "g0_q0": Array [
+{
+  "errors": {
+    "g0_q0": [
       "There are choices with same values",
     ],
   },
@@ -51,12 +51,12 @@ Object {
 `;
 
 exports[`ConfigsValidation Duplicated choice values 2`] = `
-Object {
-  "errors": Object {
-    "g0_q0": Array [
+{
+  "errors": {
+    "g0_q0": [
       "There are choices with same values",
     ],
-    "id": Array [
+    "id": [
       "Id is not unique",
     ],
   },
@@ -65,9 +65,9 @@ Object {
 `;
 
 exports[`ConfigsValidation Duplicated choice values 3`] = `
-Object {
-  "errors": Object {
-    "g0_q0": Array [
+{
+  "errors": {
+    "g0_q0": [
       "There are choices with same values",
     ],
   },
@@ -76,15 +76,15 @@ Object {
 `;
 
 exports[`ConfigsValidation Duplicated choice values 4`] = `
-Object {
+{
   "valid": true,
 }
 `;
 
 exports[`ConfigsValidation Duplicated choice values 5`] = `
-Object {
-  "errors": Object {
-    "g0_q0": Array [
+{
+  "errors": {
+    "g0_q0": [
       "There are choices with same values",
     ],
   },
@@ -93,12 +93,12 @@ Object {
 `;
 
 exports[`ConfigsValidation Duplicated choice values 6`] = `
-Object {
-  "errors": Object {
-    "g0_q0": Array [
+{
+  "errors": {
+    "g0_q0": [
       "There are choices with same values",
     ],
-    "id": Array [
+    "id": [
       "Id is not unique",
     ],
   },
@@ -107,9 +107,9 @@ Object {
 `;
 
 exports[`ConfigsValidation Duplicated choice values 7`] = `
-Object {
-  "errors": Object {
-    "g0_q0": Array [
+{
+  "errors": {
+    "g0_q0": [
       "There are choices with same values",
     ],
   },
@@ -118,18 +118,18 @@ Object {
 `;
 
 exports[`ConfigsValidation Duplicated choice values 8`] = `
-Object {
+{
   "valid": true,
 }
 `;
 
 exports[`ConfigsValidation Duplicated ids 1`] = `
-Object {
-  "errors": Object {
-    "g0_q0": Array [
+{
+  "errors": {
+    "g0_q0": [
       "There are choices with same values",
     ],
-    "id": Array [
+    "id": [
       "Id is not unique",
     ],
   },
@@ -138,9 +138,9 @@ Object {
 `;
 
 exports[`ConfigsValidation Duplicated ids 2`] = `
-Object {
-  "errors": Object {
-    "id": Array [
+{
+  "errors": {
+    "id": [
       "Id is not unique",
     ],
   },
@@ -149,12 +149,12 @@ Object {
 `;
 
 exports[`ConfigsValidation Duplicated ids 3`] = `
-Object {
-  "errors": Object {
-    "id": Array [
+{
+  "errors": {
+    "id": [
       "Id is not unique",
     ],
-    "id_q0": Array [
+    "id_q0": [
       "Id is not unique",
     ],
   },
@@ -163,9 +163,9 @@ Object {
 `;
 
 exports[`ConfigsValidation No choices 1`] = `
-Object {
-  "errors": Object {
-    "g0": Array [
+{
+  "errors": {
+    "g0": [
       "There are no choices",
     ],
   },
@@ -174,9 +174,9 @@ Object {
 `;
 
 exports[`ConfigsValidation No choices 2`] = `
-Object {
-  "errors": Object {
-    "g0": Array [
+{
+  "errors": {
+    "g0": [
       "There are no choices",
     ],
   },
@@ -185,9 +185,9 @@ Object {
 `;
 
 exports[`ConfigsValidation No choices 3`] = `
-Object {
-  "errors": Object {
-    "g0": Array [
+{
+  "errors": {
+    "g0": [
       "There are no choices",
     ],
   },
@@ -196,9 +196,9 @@ Object {
 `;
 
 exports[`ConfigsValidation No choices 4`] = `
-Object {
-  "errors": Object {
-    "g0": Array [
+{
+  "errors": {
+    "g0": [
       "There are no choices",
     ],
   },
@@ -207,15 +207,15 @@ Object {
 `;
 
 exports[`ConfigsValidation No choices 5`] = `
-Object {
+{
   "valid": true,
 }
 `;
 
 exports[`ConfigsValidation No groups or questions 1`] = `
-Object {
-  "errors": Object {
-    "": Array [
+{
+  "errors": {
+    "": [
       "There are no groups or questions",
     ],
   },
@@ -224,9 +224,9 @@ Object {
 `;
 
 exports[`ConfigsValidation No groups or questions 2`] = `
-Object {
-  "errors": Object {
-    "": Array [
+{
+  "errors": {
+    "": [
       "There are no groups or questions",
     ],
   },
@@ -235,9 +235,9 @@ Object {
 `;
 
 exports[`ConfigsValidation No questions 1`] = `
-Object {
-  "errors": Object {
-    "g0": Array [
+{
+  "errors": {
+    "g0": [
       "There are no questions",
     ],
   },
@@ -246,9 +246,9 @@ Object {
 `;
 
 exports[`ConfigsValidation No questions 2`] = `
-Object {
-  "errors": Object {
-    "g0": Array [
+{
+  "errors": {
+    "g0": [
       "There are no questions",
     ],
   },
@@ -257,12 +257,12 @@ Object {
 `;
 
 exports[`ConfigsValidation No questions 3`] = `
-Object {
-  "errors": Object {
-    "g0": Array [
+{
+  "errors": {
+    "g0": [
       "There are no questions",
     ],
-    "g0_g0": Array [
+    "g0_g0": [
       "There are no questions",
     ],
   },
@@ -271,9 +271,9 @@ Object {
 `;
 
 exports[`ConfigsValidation Unrecognized ids in choices onSelected 1`] = `
-Object {
-  "errors": Object {
-    "c2": Array [
+{
+  "errors": {
+    "c2": [
       "There are unrecognized id(s) in onSelected configs",
     ],
   },
@@ -282,9 +282,9 @@ Object {
 `;
 
 exports[`ConfigsValidation Unrecognized ids in choices onSelected 2`] = `
-Object {
-  "errors": Object {
-    "c2": Array [
+{
+  "errors": {
+    "c2": [
       "There are unrecognized id(s) in onSelected configs",
     ],
   },
@@ -293,7 +293,7 @@ Object {
 `;
 
 exports[`ConfigsValidation Unrecognized ids in choices onSelected 3`] = `
-Object {
+{
   "valid": true,
 }
 `;
