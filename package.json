@@ -29,10 +29,10 @@
   "scripts": {
     "lint": "eslint src/*.ts src/**/*.ts test/**/*.ts",
     "test": "jest",
-    "build": "rm -rf --force dist && tsc",
+    "build": "rm -rf dist && tsc",
     "build:watch": "tsc -w",
     "prepublishOnly": "npm run build",
-    "postpublish": "rm -rf --force dist",
+    "postpublish": "rm -rf dist",
     "postversion": "git push",
     "postinstall": "github-sponsors"
   },
