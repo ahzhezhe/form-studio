@@ -34,11 +34,11 @@ npm install form-studio
 <br />
 
 ## **Import**
-```javascript
+```typescript
 import { Form } from 'form-studio';
 ```
 or
-```javascript
+```typescript
 const { Form } = require('form-studio');
 ```
 
@@ -152,7 +152,7 @@ A validator is a function that will be called when the answer of a question is u
 Each question can be assigned with one or more validators to be used.
 
 ### **Example**
-```javascript
+```typescript
 const validators = {
   atLeast1: answer => {
     if (answer.length < 1) {
@@ -188,7 +188,7 @@ Form will be updated when answer is set, validation is triggered, etc.
 Form updated listener is needed when the form is being used in frontend, so that you can trigger an UI rerender when form is updated.
 
 ### **Example (React)**
-```javascript
+```typescript
 const [renderInstructions, setRenderInstructions] = useState<RenderInstructions>();
 
 const onFormUpdate = form => setRenderInstructions(form.getRenderInstructions());
@@ -197,7 +197,7 @@ const onFormUpdate = form => setRenderInstructions(form.getRenderInstructions())
 <br />
 
 # **Construct a Form**
-```javascript
+```typescript
 const form = new Form(configs, { validators, onFormUpdate });
 ```
 
@@ -224,7 +224,7 @@ Questions also come with the following important properties that you will need t
 - `error`: error for question which failed validation
 
 ### **Example (React)**
-```javascript
+```typescript
 let form: Form;
 
 export const SurveyPage = () => {
@@ -319,13 +319,13 @@ export const SurveyPage = () => {
 `choices` questions use `setAnswer`, `setChoices` or `selectChoice` method to set answer.
 
 ### **Example (General)**
-```javascript
+```typescript
 form.setChoice('proceed', 'yes');
 form.setAny('name', 'Jason');
 ```
 
 ### **Example (Frontend)**
-```javascript
+```typescript
 onChange={e => form.setChoice(id, e.target.value)}
 onChange={e => form.setAny(id, e.target.value)}
 ```
@@ -339,7 +339,7 @@ Use `isValidating` & `isClean` methods to get the state of form validation.
 E.g. you can disable a button if `isValidating` is `true` or `isClean` is `false`.
 
 ### **Example (React)**
-```javascript
+```typescript
 const save = () => {
   if (form.isValidating() || !form.isClean()) {
     alert('Please try again.')
@@ -355,7 +355,7 @@ Use `asyncValidate` method to get the final validated answers.
 You can then store the answers to database or send it to backend via API.
 
 ### **Example (Frontend)**
-```javascript
+```typescript
 const answers = await form.asyncValidate();
 
 if (!answers) {
@@ -369,7 +369,7 @@ await ... // Call API to send the answers to backend
 If you are sending the answers from frontend to backend, backend can construct the form using the same configs, import the answers, and call `asyncValidate` method again to revalidate the answers from frontend before you save them into database.
 
 ### **Example (Backend API)**
-```javascript
+```typescript
 const answers = req.body;
 form.importAnswers(answers);
 const valid = await form.asyncValidate();
@@ -393,13 +393,13 @@ res.end();
 Use `importAnswers` method to import answers to the entire form.
 
 ### **Example (Frontend)**
-```javascript
+```typescript
 const answers = await ... // retrieve from API
 form.importAnswers(answers);
 ```
 
 ### **Example (Backend)**
-```javascript
+```typescript
 const answers = await ... // retrieve from database
 form.importAnswers(answers);
 ```
