@@ -72,7 +72,7 @@ export class Form<Custom = any> {
   }
 
   setValidators(validators: Validators | undefined) {
-    this.#validators = validators || {};
+    this.#validators = validators ?? {};
   }
 
   setUpdateListener(onFormUpdate?: FormUpdateListener | undefined) {
@@ -82,8 +82,8 @@ export class Form<Custom = any> {
   #processGroups(parentGroup: Group<Custom> | undefined, groups: Group<Custom>[]) {
     groups.forEach(group => {
       this.#groupById.set(group.id, group);
-      this.#processGroups(group, group.groups || []);
-      this.#processQuestions(group, group.questions || []);
+      this.#processGroups(group, group.groups ?? []);
+      this.#processQuestions(group, group.questions ?? []);
       if (parentGroup) {
         this.#parentGroupByGroupId.set(group.id, parentGroup);
       }
@@ -458,7 +458,7 @@ export class Form<Custom = any> {
     } else if (question.type === 'choice') {
       this.#internalSetChoice(question.id, answer, options);
     } else if (question.type === 'choices') {
-      this.#internalSetChoices(question.id, answer || [], options);
+      this.#internalSetChoices(question.id, answer ?? [], options);
     }
   }
 
@@ -558,7 +558,7 @@ export class Form<Custom = any> {
         this.#internalSetChoice(question.id, undefined, options);
       }
     } else if (question.type === 'choices') {
-      currentAnswer = currentAnswer || [];
+      currentAnswer = currentAnswer ?? [];
       currentAnswer = currentAnswer.filter(value => value !== choice.value);
       if (selected) {
         currentAnswer.push(choice.value);
@@ -586,7 +586,7 @@ export class Form<Custom = any> {
   }
 
   #isItemDisabled(item: Item<Custom>) {
-    const disabledByChoices = this.#disabledByChoicesById.get(item.id) || [];
+    const disabledByChoices = this.#disabledByChoicesById.get(item.id) ?? [];
 
     for (const choice of disabledByChoices) {
       if (this.#isChoiceSelected(choice)) {
@@ -594,7 +594,7 @@ export class Form<Custom = any> {
       }
     }
 
-    const enabledByChoices = this.#enabledByChoicesById.get(item.id) || [];
+    const enabledByChoices = this.#enabledByChoicesById.get(item.id) ?? [];
 
     for (const choice of enabledByChoices) {
       if (this.#isChoiceSelected(choice)) {

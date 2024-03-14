@@ -7,7 +7,7 @@ export const sanitizeConfigs = (configs: Configs): ExportedConfigs => ({
 });
 
 const sanitizeGroupConfigs = (parentGroupId: string | undefined, groups: GroupConfigs[]): Group[] => groups.map((group, i) => {
-  const id = group.id || (parentGroupId ? `${parentGroupId}_g${i}` : `g${i}`);
+  const id = group.id ?? (parentGroupId ? `${parentGroupId}_g${i}` : `g${i}`);
   return {
     id,
     defaultDisabled: !!group.defaultDisabled,
@@ -18,25 +18,25 @@ const sanitizeGroupConfigs = (parentGroupId: string | undefined, groups: GroupCo
 });
 
 const sanitizeQuestionConfigs = (groupId: string | undefined, questions: QuestionConfigs[]): Question[] => questions.map((question, i) => {
-  const id = question.id || (groupId ? `${groupId}_q${i}` : `q${i}`);
+  const id = question.id ?? (groupId ? `${groupId}_q${i}` : `q${i}`);
   return {
     id,
     defaultDisabled: !!question.defaultDisabled,
     custom: question.custom,
     type: question.type,
-    choices: question.type !== 'any' ? sanitizeChoiceConfigs(id, question.choices || []) : [],
-    validators: question.validators || [],
+    choices: question.type !== 'any' ? sanitizeChoiceConfigs(id, question.choices ?? []) : [],
+    validators: question.validators ?? [],
     defaultAnswer: question.defaultAnswer
   };
 });
 
 const sanitizeChoiceConfigs = (questionId: string, choices: ChoiceConfigs[]): Choice[] => choices.map((choice, i) => {
-  const id = choice.id || `${questionId}_c${i}`;
+  const id = choice.id ?? `${questionId}_c${i}`;
   return {
     id,
     defaultDisabled: !!choice.defaultDisabled,
     custom: choice.custom,
-    value: choice.value === undefined || choice.value === null ? id : choice.value,
-    onSelected: choice.onSelected || {}
+    value: choice.value ?? id,
+    onSelected: choice.onSelected ?? {}
   };
 });

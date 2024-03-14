@@ -117,14 +117,14 @@ export class ConfigsValidator {
       // No questions with `choice` or `choices` as type without choices
       if (question.type !== 'any') {
         if (question.choices.length === 0) {
-          this.#addError(groupId || '', 'There are no choices');
+          this.#addError(groupId ?? '', 'There are no choices');
           continue;
         }
 
         for (const choice of question.choices) {
           this.#allIds.push(choice.id);
           this.#parentIdsById.set(choice.id, [question.id]);
-          const onSelectedIds = [...(choice.onSelected.enable || []), ...(choice.onSelected.disable || [])];
+          const onSelectedIds = [...(choice.onSelected.enable ?? []), ...(choice.onSelected.disable ?? [])];
           if (onSelectedIds.length) {
             this.#onSelectedIdsByChoiceId.set(choice.id, onSelectedIds);
           }
