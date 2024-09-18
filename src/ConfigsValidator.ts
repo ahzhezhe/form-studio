@@ -1,10 +1,11 @@
-import { ExportedConfigs, Group, Question } from './ExportedConfigs';
+import { ExportedConfigs, Group, Item, Question } from './ExportedConfigs';
 import { ConfigsValidationResult } from './Types';
 
 export class ConfigsValidator {
 
   readonly #errorsById = new Map<string, string[]>();
   readonly #allIds: string[] = [];
+  readonly #abledWhenIdsById = new Map<string, string[]>();
   readonly #choiceValuesByQuestionId = new Map<string, any[]>();
   readonly #onSelectedIdsByChoiceId = new Map<string, string[]>();
   readonly #parentIdsById = new Map<string, string[]>();
@@ -85,14 +86,23 @@ export class ConfigsValidator {
     }
   }
 
+  #collectItemData(parentId: string | undefined, item: Item) {
+    this.#allIds.push(item.id);
+
+    const abledWhenIds = this.#abledWhenIdsById.get(item.id) ?? [];
+    abledWhenIds.push(...(item.disabledWhen?.flatMap(id => id) ?? []));
+    abledWhenIds.push(...(item.enabledWhen?.flatMap(id => id) ?? []));
+
+    if (parentId) {
+      this.#parentIdsById.set(item.id, [parentId]);
+    } else {
+      this.#parentIdsById.set(item.id, []);
+    }
+  }
+
   #collectGroupData(parentGroupId: string | undefined, groups: Group[]) {
     for (const group of groups) {
-      this.#allIds.push(group.id);
-      if (parentGroupId) {
-        this.#parentIdsById.set(group.id, [parentGroupId]);
-      } else {
-        this.#parentIdsById.set(group.id, []);
-      }
+      this.#collectItemData(parentGroupId, group);
       this.#collectGroupData(group.id, group.groups);
 
       // No groups without questions
@@ -107,12 +117,7 @@ export class ConfigsValidator {
 
   #collectQuestionData(groupId: string | undefined, questions: Question[]) {
     for (const question of questions) {
-      this.#allIds.push(question.id);
-      if (groupId) {
-        this.#parentIdsById.set(question.id, [groupId]);
-      } else {
-        this.#parentIdsById.set(question.id, []);
-      }
+      this.#collectItemData(groupId, question);
 
       // No questions with `choice` or `choices` as type without choices
       if (question.type !== 'any') {
@@ -122,13 +127,14 @@ export class ConfigsValidator {
         }
 
         for (const choice of question.choices) {
-          this.#allIds.push(choice.id);
-          this.#parentIdsById.set(choice.id, [question.id]);
+          this.#collectItemData(question.id, choice);
+
           const onSelectedIds = [...(choice.onSelected.enable ?? []), ...(choice.onSelected.disable ?? [])];
           if (onSelectedIds.length) {
             this.#onSelectedIdsByChoiceId.set(choice.id, onSelectedIds);
           }
         }
+
         this.#choiceValuesByQuestionId.set(question.id, question.choices.map(choice => choice.value));
       }
     }

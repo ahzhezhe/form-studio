@@ -53,6 +53,64 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     defaultAnswer: getAnswer('subGroup1Question4', withDefaultAnswers)
   });
 
+  subGroup1Questions.push({
+    id: 'subGroup1Question5',
+    type: 'choices',
+    custom: { title: 'subGroup1Question5' },
+    validators: ['atLeast1'],
+    disabledWhen: [['subGroup1Question4Choice2'], ['subGroup1Question4Choice3']],
+    choices: [
+      { id: 'subGroup1Question5Choice1', custom: { title: 'subGroup1Question5Choice1' } },
+      { id: 'subGroup1Question5Choice2', custom: { title: 'subGroup1Question5Choice2' } },
+      { id: 'subGroup1Question5Choice3', custom: { title: 'subGroup1Question5Choice3' } }
+    ],
+    defaultAnswer: getAnswer('subGroup1Question5', withDefaultAnswers)
+  });
+
+  subGroup1Questions.push({
+    id: 'subGroup1Question6',
+    type: 'choices',
+    custom: { title: 'subGroup1Question6' },
+    validators: ['atLeast1'],
+    disabledWhen: [['subGroup1Question4Choice2', 'subGroup1Question4Choice3']],
+    choices: [
+      { id: 'subGroup1Question6Choice1', custom: { title: 'subGroup1Question6Choice1' } },
+      { id: 'subGroup1Question6Choice2', custom: { title: 'subGroup1Question6Choice2' } },
+      { id: 'subGroup1Question6Choice3', custom: { title: 'subGroup1Question6Choice3' } }
+    ],
+    defaultAnswer: getAnswer('subGroup1Question6', withDefaultAnswers)
+  });
+
+  subGroup1Questions.push({
+    id: 'subGroup1Question7',
+    type: 'choices',
+    custom: { title: 'subGroup1Question7' },
+    validators: ['atLeast1'],
+    defaultDisabled: true,
+    enabledWhen: [['subGroup1Question4Choice2'], ['subGroup1Question4Choice3']],
+    choices: [
+      { id: 'subGroup1Question7Choice1', custom: { title: 'subGroup1Question7Choice1' } },
+      { id: 'subGroup1Question7Choice2', custom: { title: 'subGroup1Question7Choice2' } },
+      { id: 'subGroup1Question7Choice3', custom: { title: 'subGroup1Question7Choice3' } }
+    ],
+    defaultAnswer: getAnswer('subGroup1Question7', withDefaultAnswers)
+  });
+
+  subGroup1Questions.push({
+    id: 'subGroup1Question8',
+    type: 'choices',
+    custom: { title: 'subGroup1Question8' },
+    validators: ['atLeast1'],
+    defaultDisabled: true,
+    enabledWhen: [['subGroup1Question4Choice2', 'subGroup1Question4Choice3']],
+    choices: [
+      { id: 'subGroup1Question8Choice1', custom: { title: 'subGroup1Question8Choice1' } },
+      { id: 'subGroup1Question8Choice2', custom: { title: 'subGroup1Question8Choice2' } },
+      { id: 'subGroup1Question8Choice3', custom: { title: 'subGroup1Question8Choice3' } }
+    ],
+    defaultAnswer: getAnswer('subGroup1Question8', withDefaultAnswers)
+  });
+
   const subGroup1: GroupConfigs = {
     id: 'subGroup1',
     questions: subGroup1Questions
@@ -109,6 +167,10 @@ export const answers: Answers = {
   subGroup1Question2: 'subGroup1Question2Choice1',
   subGroup1Question3: ['subGroup1Question3Choice1', 'subGroup1Question3Choice2'],
   subGroup1Question4: ['subGroup1Question4Choice1', 'subGroup1Question4Choice2'],
+  subGroup1Question5: ['subGroup1Question5Choice1', 'subGroup1Question5Choice2'],
+  subGroup1Question6: ['subGroup1Question6Choice1', 'subGroup1Question6Choice2'],
+  subGroup1Question7: ['subGroup1Question7Choice1', 'subGroup1Question7Choice2'],
+  subGroup1Question8: ['subGroup1Question8Choice1', 'subGroup1Question8Choice2'],
   group1Question1: 'group1Question1Answer',
   group1Question2: 'group1Question2Choice1',
   group1Question3: ['group1Question3Choice1', 'group1Question3Choice2']

@@ -27,6 +27,8 @@ describe('Validate And Get Answers', () => {
     form.setChoice('subGroup1Question2', 'subGroup1Question2Choice1');
     form.setChoices('subGroup1Question3', ['subGroup1Question3Choice1']);
     form.setChoices('subGroup1Question4', ['subGroup1Question4Choice1']);
+    form.setChoices('subGroup1Question5', ['subGroup1Question5Choice1']);
+    form.setChoices('subGroup1Question6', ['subGroup1Question6Choice1']);
 
     const clean = await form.asyncValidate();
     expect(clean).toBeTruthy();
@@ -52,6 +54,8 @@ describe('Validate And Get Answers', () => {
     form.setChoice('subGroup1Question2', 'subGroup1Question2Choice1');
     form.setChoices('subGroup1Question3', ['subGroup1Question3Choice1']);
     form.setChoices('subGroup1Question4', ['subGroup1Question4Choice1']);
+    form.setChoices('subGroup1Question5', ['subGroup1Question5Choice1']);
+    form.setChoices('subGroup1Question6', ['subGroup1Question6Choice1']);
 
     const clean = await form.asyncValidate();
     expect(clean).toBeTruthy();

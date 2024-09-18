@@ -1,4 +1,4 @@
-import { ChoiceOnSelected, QuestionType } from './Types';
+import { ChoiceOnSelected, ItemAbledWhen, QuestionType } from './Types';
 
 /**
  * @category Exported Configs
@@ -6,6 +6,8 @@ import { ChoiceOnSelected, QuestionType } from './Types';
 export interface Item<Custom = any> {
   id: string;
   defaultDisabled: boolean;
+  disabledWhen?: ItemAbledWhen;
+  enabledWhen?: ItemAbledWhen;
   custom: Custom;
 }
 

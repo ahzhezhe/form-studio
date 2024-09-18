@@ -11,6 +11,8 @@ const sanitizeGroupConfigs = (parentGroupId: string | undefined, groups: GroupCo
   return {
     id,
     defaultDisabled: !!group.defaultDisabled,
+    disabledWhen: group.disabledWhen,
+    enabledWhen: group.enabledWhen,
     custom: group.custom,
     groups: group.groups ? sanitizeGroupConfigs(id, group.groups) : [],
     questions: group.questions ? sanitizeQuestionConfigs(id, group.questions) : []
@@ -22,6 +24,8 @@ const sanitizeQuestionConfigs = (groupId: string | undefined, questions: Questio
   return {
     id,
     defaultDisabled: !!question.defaultDisabled,
+    disabledWhen: question.disabledWhen,
+    enabledWhen: question.enabledWhen,
     custom: question.custom,
     type: question.type,
     choices: question.type !== 'any' ? sanitizeChoiceConfigs(id, question.choices ?? []) : [],
@@ -35,6 +39,8 @@ const sanitizeChoiceConfigs = (questionId: string, choices: ChoiceConfigs[]): Ch
   return {
     id,
     defaultDisabled: !!choice.defaultDisabled,
+    disabledWhen: choice.disabledWhen,
+    enabledWhen: choice.enabledWhen,
     custom: choice.custom,
     value: choice.value ?? id,
     onSelected: choice.onSelected ?? {}

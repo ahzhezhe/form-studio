@@ -23,13 +23,13 @@ describe('ConfigsValidation', () => {
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
 
     configs = {
-      groups: [{ }]
+      groups: [{}]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
 
     configs = {
       groups: [{
-        groups: [{ }]
+        groups: [{}]
       }]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
@@ -38,47 +38,45 @@ describe('ConfigsValidation', () => {
   test('No choices', () => {
     let configs: Configs = {
       groups: [{
-        questions: [{
-          type: 'choice'
-        }]
+        questions: [
+          { type: 'choice' }
+        ]
       }]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
 
     configs = {
       groups: [{
-        questions: [{
-          type: 'choice',
-          choices: []
-        }]
+        questions: [
+          { type: 'choice', choices: [] }
+        ]
       }]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
 
     configs = {
       groups: [{
-        questions: [{
-          type: 'choices'
-        }]
+        questions: [
+          { type: 'choices' }
+        ]
       }]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
 
     configs = {
       groups: [{
-        questions: [{
-          type: 'choices',
-          choices: []
-        }]
+        questions: [
+          { type: 'choices', choices: [] }
+        ]
       }]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
 
     configs = {
       groups: [{
-        questions: [{
-          type: 'any'
-        }]
+        questions: [
+          { type: 'any' }
+        ]
       }]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
@@ -97,13 +95,10 @@ describe('ConfigsValidation', () => {
 
     configs = {
       groups: [{
-        questions: [{
-          id: 'id',
-          type: 'any'
-        }, {
-          id: 'id',
-          type: 'any'
-        }]
+        questions: [
+          { id: 'id', type: 'any' },
+          { id: 'id', type: 'any' }
+        ]
       }]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
@@ -111,14 +106,10 @@ describe('ConfigsValidation', () => {
     configs = {
       groups: [{
         id: 'id',
-        questions: [{
-          type: 'any'
-        }]
+        questions: [{ type: 'any' }]
       }, {
         id: 'id',
-        questions: [{
-          type: 'any'
-        }]
+        questions: [{ type: 'any' }]
       }]
     };
     expect(Form.validateConfigs(configs)).toMatchSnapshot();
@@ -178,9 +169,10 @@ describe('ConfigsValidation', () => {
         questions: [{
           id: 'q1',
           type: 'choice',
-          choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
-            enable: ['xx']
-          } }]
+          choices: [
+            { id: 'c1' },
+            { id: 'c2', onSelected: { enable: ['xx'] } }
+          ]
         }]
       }]
     };
@@ -192,9 +184,10 @@ describe('ConfigsValidation', () => {
         questions: [{
           id: 'q1',
           type: 'choice',
-          choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
-            disable: ['xx']
-          } }]
+          choices: [
+            { id: 'c1' },
+            { id: 'c2', onSelected: { disable: ['xx'] } }
+          ]
         }]
       }]
     };
@@ -206,9 +199,10 @@ describe('ConfigsValidation', () => {
         questions: [{
           id: 'q1',
           type: 'choice',
-          choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
-            disable: ['c1']
-          } }]
+          choices: [
+            { id: 'c1' },
+            { id: 'c2', onSelected: { disable: ['c1'] } }
+          ]
         }]
       }]
     };
@@ -269,15 +263,10 @@ describe('ConfigsValidation', () => {
         questions: [{
           id: 'q1',
           type: 'choice',
-          choices: [{
-            id: 'c1', onSelected: {
-              enable: ['c2']
-            }
-          }, {
-            id: 'c2', onSelected: {
-              enable: ['c1']
-            }
-          }]
+          choices: [
+            { id: 'c1', onSelected: { enable: ['c2'] } },
+            { id: 'c2', onSelected: { enable: ['c1'] } }
+          ]
         }]
       }]
     };
@@ -289,9 +278,10 @@ describe('ConfigsValidation', () => {
         questions: [{
           id: 'q1',
           type: 'choice',
-          choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
-            enable: ['q1']
-          } }]
+          choices: [
+            { id: 'c1' },
+            { id: 'c2', onSelected: { enable: ['q1'] } }
+          ]
         }]
       }]
     };
@@ -303,9 +293,10 @@ describe('ConfigsValidation', () => {
         questions: [{
           id: 'q1',
           type: 'choice',
-          choices: [{ id: 'c1' }, { id: 'c2', onSelected: {
-            enable: ['g1']
-          } }]
+          choices: [
+            { id: 'c1' },
+            { id: 'c2', onSelected: { enable: ['g1'] } }
+          ]
         }]
       }]
     };
@@ -317,9 +308,10 @@ describe('ConfigsValidation', () => {
         questions: [{
           id: 'q1',
           type: 'choice',
-          choices: [{ id: 'c1', onSelected: {
-            enable: ['c2']
-          } }, { id: 'c2' }]
+          choices: [
+            { id: 'c1', onSelected: { enable: ['c2'] } },
+            { id: 'c2' }
+          ]
         }]
       }]
     };

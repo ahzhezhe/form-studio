@@ -587,7 +587,6 @@ export class Form<Custom = any> {
 
   #isItemDisabled(item: Item<Custom>) {
     const disabledByChoices = this.#disabledByChoicesById.get(item.id) ?? [];
-
     for (const choice of disabledByChoices) {
       if (this.#isChoiceSelected(choice)) {
         return true;
@@ -595,10 +594,41 @@ export class Form<Custom = any> {
     }
 
     const enabledByChoices = this.#enabledByChoicesById.get(item.id) ?? [];
-
     for (const choice of enabledByChoices) {
       if (this.#isChoiceSelected(choice)) {
         return false;
+      }
+    }
+
+    for (const condition of item.disabledWhen ?? []) {
+      if (Array.isArray(condition)) {
+        if (condition.every(choiceId => {
+          const choice = this.#findChoice(choiceId);
+          return this.#isChoiceSelected(choice);
+        })) {
+          return true;
+        }
+      } else {
+        const choice = this.#findChoice(condition);
+        if (this.#isChoiceSelected(choice)) {
+          return true;
+        }
+      }
+    }
+
+    for (const condition of item.enabledWhen ?? []) {
+      if (Array.isArray(condition)) {
+        if (condition.every(choiceId => {
+          const choice = this.#findChoice(choiceId);
+          return this.#isChoiceSelected(choice);
+        })) {
+          return false;
+        }
+      } else {
+        const choice = this.#findChoice(condition);
+        if (this.#isChoiceSelected(choice)) {
+          return false;
+        }
       }
     }
 

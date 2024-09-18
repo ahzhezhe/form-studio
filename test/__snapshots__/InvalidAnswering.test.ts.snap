@@ -140,6 +140,158 @@ exports[`Invalid Answering setAnswer invalid choice 1`] = `
               "validatedAnswer": undefined,
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -251,6 +403,8 @@ exports[`Invalid Answering setAnswer invalid choice 2`] = `
   "subGroup1Question1": "This field is required.",
   "subGroup1Question2": "Please select an option.",
   "subGroup1Question4": "Please select at least 1 option.",
+  "subGroup1Question5": "Please select at least 1 option.",
+  "subGroup1Question6": "Please select at least 1 option.",
 }
 `;
 
@@ -259,6 +413,10 @@ exports[`Invalid Answering setAnswer invalid choice 3`] = `
   "group1Question3": [],
   "subGroup1Question3": [],
   "subGroup1Question4": [],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [],
+  "subGroup1Question7": [],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -408,6 +566,158 @@ exports[`Invalid Answering setAnswer invalid choice 5`] = `
               "validatedAnswer": undefined,
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -519,6 +829,8 @@ exports[`Invalid Answering setAnswer invalid choice 6`] = `
   "subGroup1Question1": "This field is required.",
   "subGroup1Question2": "Please select an option.",
   "subGroup1Question4": "Please select at least 1 option.",
+  "subGroup1Question5": "Please select at least 1 option.",
+  "subGroup1Question6": "Please select at least 1 option.",
 }
 `;
 
@@ -527,6 +839,10 @@ exports[`Invalid Answering setAnswer invalid choice 7`] = `
   "group1Question3": [],
   "subGroup1Question3": [],
   "subGroup1Question4": [],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [],
+  "subGroup1Question7": [],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -676,6 +992,158 @@ exports[`Invalid Answering setAnswer undefined answer 1`] = `
               "validatedAnswer": undefined,
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -787,6 +1255,8 @@ exports[`Invalid Answering setAnswer undefined answer 2`] = `
   "subGroup1Question1": "This field is required.",
   "subGroup1Question2": "Please select an option.",
   "subGroup1Question4": "Please select at least 1 option.",
+  "subGroup1Question5": "Please select at least 1 option.",
+  "subGroup1Question6": "Please select at least 1 option.",
 }
 `;
 
@@ -795,6 +1265,10 @@ exports[`Invalid Answering setAnswer undefined answer 3`] = `
   "group1Question3": [],
   "subGroup1Question3": [],
   "subGroup1Question4": [],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [],
+  "subGroup1Question7": [],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -944,6 +1418,158 @@ exports[`Invalid Answering setAny undefined answer 1`] = `
               "validatedAnswer": undefined,
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -1055,6 +1681,8 @@ exports[`Invalid Answering setAny undefined answer 2`] = `
   "subGroup1Question1": "This field is required.",
   "subGroup1Question2": "Please select an option.",
   "subGroup1Question4": "Please select at least 1 option.",
+  "subGroup1Question5": "Please select at least 1 option.",
+  "subGroup1Question6": "Please select at least 1 option.",
 }
 `;
 
@@ -1063,6 +1691,10 @@ exports[`Invalid Answering setAny undefined answer 3`] = `
   "group1Question3": [],
   "subGroup1Question3": [],
   "subGroup1Question4": [],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [],
+  "subGroup1Question7": [],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -1212,6 +1844,158 @@ exports[`Invalid Answering setChoice invalid choice 1`] = `
               "validatedAnswer": undefined,
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -1323,6 +2107,8 @@ exports[`Invalid Answering setChoice invalid choice 2`] = `
   "subGroup1Question1": "This field is required.",
   "subGroup1Question2": "Please select an option.",
   "subGroup1Question4": "Please select at least 1 option.",
+  "subGroup1Question5": "Please select at least 1 option.",
+  "subGroup1Question6": "Please select at least 1 option.",
 }
 `;
 
@@ -1331,6 +2117,10 @@ exports[`Invalid Answering setChoice invalid choice 3`] = `
   "group1Question3": [],
   "subGroup1Question3": [],
   "subGroup1Question4": [],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [],
+  "subGroup1Question7": [],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -1480,6 +2270,158 @@ exports[`Invalid Answering setChoice undefined answer 1`] = `
               "validatedAnswer": undefined,
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -1591,6 +2533,8 @@ exports[`Invalid Answering setChoice undefined answer 2`] = `
   "subGroup1Question1": "This field is required.",
   "subGroup1Question2": "Please select an option.",
   "subGroup1Question4": "Please select at least 1 option.",
+  "subGroup1Question5": "Please select at least 1 option.",
+  "subGroup1Question6": "Please select at least 1 option.",
 }
 `;
 
@@ -1599,6 +2543,10 @@ exports[`Invalid Answering setChoice undefined answer 3`] = `
   "group1Question3": [],
   "subGroup1Question3": [],
   "subGroup1Question4": [],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [],
+  "subGroup1Question7": [],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -1748,6 +2696,158 @@ exports[`Invalid Answering setChoices empty answer 1`] = `
               "validatedAnswer": undefined,
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -1859,6 +2959,8 @@ exports[`Invalid Answering setChoices empty answer 2`] = `
   "subGroup1Question1": "This field is required.",
   "subGroup1Question2": "Please select an option.",
   "subGroup1Question4": "Please select at least 1 option.",
+  "subGroup1Question5": "Please select at least 1 option.",
+  "subGroup1Question6": "Please select at least 1 option.",
 }
 `;
 
@@ -1867,6 +2969,10 @@ exports[`Invalid Answering setChoices empty answer 3`] = `
   "group1Question3": [],
   "subGroup1Question3": [],
   "subGroup1Question4": [],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [],
+  "subGroup1Question7": [],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -2016,6 +3122,158 @@ exports[`Invalid Answering setChoices invalid choice 1`] = `
               "validatedAnswer": undefined,
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -2127,6 +3385,8 @@ exports[`Invalid Answering setChoices invalid choice 2`] = `
   "subGroup1Question1": "This field is required.",
   "subGroup1Question2": "Please select an option.",
   "subGroup1Question4": "Please select at least 1 option.",
+  "subGroup1Question5": "Please select at least 1 option.",
+  "subGroup1Question6": "Please select at least 1 option.",
 }
 `;
 
@@ -2135,6 +3395,10 @@ exports[`Invalid Answering setChoices invalid choice 3`] = `
   "group1Question3": [],
   "subGroup1Question3": [],
   "subGroup1Question4": [],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [],
+  "subGroup1Question7": [],
+  "subGroup1Question8": [],
 }
 `;
 

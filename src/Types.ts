@@ -3,6 +3,19 @@ import { Form } from './Form';
 
 export type QuestionType = 'any' | 'choice' | 'choices';
 
+/**
+ * A list of choice id.
+ *
+ * - []               - Always
+ * - [[]]             - Always
+ * - [A]              - When A is selected
+ * - [A, B]           - When A OR B is selected
+ * - [[A, B]]         - When A AND B are selected
+ * - [[A, B], C]      - When (A AND B) OR just C is selected
+ * - [[A, B], [C, D]] - When (A AND B) OR (C AND D) are selected
+ */
+export type ItemAbledWhen = string[][];
+
 export type ChoiceOnSelected = {
   /**
    * A list of group id, question id or choice id.

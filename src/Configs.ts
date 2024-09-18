@@ -1,4 +1,4 @@
-import { ChoiceOnSelected, QuestionType } from './Types';
+import { ChoiceOnSelected, ItemAbledWhen, QuestionType } from './Types';
 
 /**
  * @category Configs
@@ -16,6 +16,18 @@ export interface ItemConfigs<Custom = any> {
    * Whether or not this item is disabled by default.
    */
   defaultDisabled?: boolean;
+  /**
+   * A list of choice id.
+   *
+   * This item will be disabled if the requirement is fulfilled.
+   */
+  disabledWhen?: ItemAbledWhen;
+  /**
+   * A list of choice id.
+   *
+   * This item will be enabled if the requirement is fulfilled.
+   */
+  enabledWhen?: ItemAbledWhen;
   /**
    * Any values that help you determine on how to render the frontend UI or how to perform validation.
    */

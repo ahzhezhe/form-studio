@@ -152,6 +152,170 @@ exports[`Default Answers reset 1`] = `
               ],
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [
+                "subGroup1Question6Choice1",
+                "subGroup1Question6Choice2",
+              ],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": [
+                "subGroup1Question6Choice1",
+                "subGroup1Question6Choice2",
+              ],
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [
+                "subGroup1Question7Choice1",
+                "subGroup1Question7Choice2",
+              ],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": [
+                "subGroup1Question7Choice1",
+                "subGroup1Question7Choice2",
+              ],
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -282,6 +446,16 @@ exports[`Default Answers reset 3`] = `
     "subGroup1Question4Choice1",
     "subGroup1Question4Choice2",
   ],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [
+    "subGroup1Question6Choice1",
+    "subGroup1Question6Choice2",
+  ],
+  "subGroup1Question7": [
+    "subGroup1Question7Choice1",
+    "subGroup1Question7Choice2",
+  ],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -302,6 +476,14 @@ exports[`Default Answers reset 4`] = `
   "subGroup1Question4": [
     "subGroup1Question4Choice1",
     "subGroup1Question4Choice2",
+  ],
+  "subGroup1Question6": [
+    "subGroup1Question6Choice1",
+    "subGroup1Question6Choice2",
+  ],
+  "subGroup1Question7": [
+    "subGroup1Question7Choice1",
+    "subGroup1Question7Choice2",
   ],
 }
 `;
@@ -458,6 +640,170 @@ exports[`Default Answers resetAnswer 1`] = `
               ],
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [
+                "subGroup1Question6Choice1",
+                "subGroup1Question6Choice2",
+              ],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": [
+                "subGroup1Question6Choice1",
+                "subGroup1Question6Choice2",
+              ],
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [
+                "subGroup1Question7Choice1",
+                "subGroup1Question7Choice2",
+              ],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": [
+                "subGroup1Question7Choice1",
+                "subGroup1Question7Choice2",
+              ],
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -588,6 +934,16 @@ exports[`Default Answers resetAnswer 3`] = `
     "subGroup1Question4Choice1",
     "subGroup1Question4Choice2",
   ],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [
+    "subGroup1Question6Choice1",
+    "subGroup1Question6Choice2",
+  ],
+  "subGroup1Question7": [
+    "subGroup1Question7Choice1",
+    "subGroup1Question7Choice2",
+  ],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -608,6 +964,14 @@ exports[`Default Answers resetAnswer 4`] = `
   "subGroup1Question4": [
     "subGroup1Question4Choice1",
     "subGroup1Question4Choice2",
+  ],
+  "subGroup1Question6": [
+    "subGroup1Question6Choice1",
+    "subGroup1Question6Choice2",
+  ],
+  "subGroup1Question7": [
+    "subGroup1Question7Choice1",
+    "subGroup1Question7Choice2",
   ],
 }
 `;
@@ -764,6 +1128,170 @@ exports[`Default Answers resetGroup 1`] = `
               ],
               "validating": false,
             },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice1",
+                  "value": "subGroup1Question5Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice2",
+                  "value": "subGroup1Question5Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question5Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question5Choice3",
+                  "value": "subGroup1Question5Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question5",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question5",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice1",
+                  "value": "subGroup1Question6Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice2",
+                  "value": "subGroup1Question6Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question6Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question6Choice3",
+                  "value": "subGroup1Question6Choice3",
+                },
+              ],
+              "currentAnswer": [
+                "subGroup1Question6Choice1",
+                "subGroup1Question6Choice2",
+              ],
+              "custom": {
+                "title": "subGroup1Question6",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question6",
+              "type": "choices",
+              "validatedAnswer": [
+                "subGroup1Question6Choice1",
+                "subGroup1Question6Choice2",
+              ],
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice1",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice1",
+                  "value": "subGroup1Question7Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice2",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice2",
+                  "value": "subGroup1Question7Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question7Choice3",
+                  },
+                  "disabled": false,
+                  "id": "subGroup1Question7Choice3",
+                  "value": "subGroup1Question7Choice3",
+                },
+              ],
+              "currentAnswer": [
+                "subGroup1Question7Choice1",
+                "subGroup1Question7Choice2",
+              ],
+              "custom": {
+                "title": "subGroup1Question7",
+              },
+              "disabled": false,
+              "error": undefined,
+              "id": "subGroup1Question7",
+              "type": "choices",
+              "validatedAnswer": [
+                "subGroup1Question7Choice1",
+                "subGroup1Question7Choice2",
+              ],
+              "validating": false,
+            },
+            {
+              "choices": [
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice1",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice1",
+                  "value": "subGroup1Question8Choice1",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice2",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice2",
+                  "value": "subGroup1Question8Choice2",
+                },
+                {
+                  "custom": {
+                    "title": "subGroup1Question8Choice3",
+                  },
+                  "disabled": true,
+                  "id": "subGroup1Question8Choice3",
+                  "value": "subGroup1Question8Choice3",
+                },
+              ],
+              "currentAnswer": [],
+              "custom": {
+                "title": "subGroup1Question8",
+              },
+              "disabled": true,
+              "error": "Please select at least 1 option.",
+              "id": "subGroup1Question8",
+              "type": "choices",
+              "validatedAnswer": undefined,
+              "validating": false,
+            },
           ],
           "validating": false,
         },
@@ -894,6 +1422,16 @@ exports[`Default Answers resetGroup 3`] = `
     "subGroup1Question4Choice1",
     "subGroup1Question4Choice2",
   ],
+  "subGroup1Question5": [],
+  "subGroup1Question6": [
+    "subGroup1Question6Choice1",
+    "subGroup1Question6Choice2",
+  ],
+  "subGroup1Question7": [
+    "subGroup1Question7Choice1",
+    "subGroup1Question7Choice2",
+  ],
+  "subGroup1Question8": [],
 }
 `;
 
@@ -914,6 +1452,14 @@ exports[`Default Answers resetGroup 4`] = `
   "subGroup1Question4": [
     "subGroup1Question4Choice1",
     "subGroup1Question4Choice2",
+  ],
+  "subGroup1Question6": [
+    "subGroup1Question6Choice1",
+    "subGroup1Question6Choice2",
+  ],
+  "subGroup1Question7": [
+    "subGroup1Question7Choice1",
+    "subGroup1Question7Choice2",
   ],
 }
 `;
