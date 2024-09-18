@@ -6,7 +6,6 @@ export class ConfigsValidator {
   readonly #errorsById = new Map<string, string[]>();
   readonly #warningsById = new Map<string, string[]>();
   readonly #allIds: string[] = [];
-  readonly #abledWhenIdsById = new Map<string, string[]>();
   readonly #choiceValuesByQuestionId = new Map<string, any[]>();
   readonly #onSelectedIdsByChoiceId = new Map<string, string[]>();
   readonly #parentIdsById = new Map<string, string[]>();
@@ -89,10 +88,6 @@ export class ConfigsValidator {
 
   #collectItemData(parentId: string | undefined, item: Item) {
     this.#allIds.push(item.id);
-
-    const abledWhenIds = this.#abledWhenIdsById.get(item.id) ?? [];
-    abledWhenIds.push(...(item.enabledOnSelected?.flatMap(id => id) ?? []));
-    abledWhenIds.push(...(item.disabledOnSelected?.flatMap(id => id) ?? []));
 
     if (parentId) {
       this.#parentIdsById.set(item.id, [parentId]);
