@@ -1,4 +1,4 @@
-import { ChoiceOnSelected, ItemAbledWhen, QuestionType } from './Types';
+import { ChoiceOnSelected, ItemAbledOnSelected, QuestionType } from './Types';
 
 /**
  * @category Exported Configs
@@ -6,8 +6,8 @@ import { ChoiceOnSelected, ItemAbledWhen, QuestionType } from './Types';
 export interface Item<Custom = any> {
   id: string;
   defaultDisabled: boolean;
-  disabledWhen?: ItemAbledWhen;
-  enabledWhen?: ItemAbledWhen;
+  enabledOnSelected?: ItemAbledOnSelected;
+  disabledOnSelected?: ItemAbledOnSelected;
   custom: Custom;
 }
 
@@ -34,7 +34,10 @@ export interface Question<Custom = any> extends Item<Custom> {
  */
 export interface Choice<Custom = any> extends Item<Custom> {
   value: any;
-  onSelected: ChoiceOnSelected;
+  /**
+   * @deprecated
+   */
+  onSelected?: ChoiceOnSelected;
 }
 
 /**

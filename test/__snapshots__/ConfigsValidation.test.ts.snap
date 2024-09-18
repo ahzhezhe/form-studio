@@ -165,7 +165,7 @@ exports[`ConfigsValidation Duplicated ids 3`] = `
 exports[`ConfigsValidation No choices 1`] = `
 {
   "errors": {
-    "g0": [
+    "g0_q0": [
       "There are no choices",
     ],
   },
@@ -176,7 +176,7 @@ exports[`ConfigsValidation No choices 1`] = `
 exports[`ConfigsValidation No choices 2`] = `
 {
   "errors": {
-    "g0": [
+    "g0_q0": [
       "There are no choices",
     ],
   },
@@ -187,7 +187,7 @@ exports[`ConfigsValidation No choices 2`] = `
 exports[`ConfigsValidation No choices 3`] = `
 {
   "errors": {
-    "g0": [
+    "g0_q0": [
       "There are no choices",
     ],
   },
@@ -198,7 +198,7 @@ exports[`ConfigsValidation No choices 3`] = `
 exports[`ConfigsValidation No choices 4`] = `
 {
   "errors": {
-    "g0": [
+    "g0_q0": [
       "There are no choices",
     ],
   },

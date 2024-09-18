@@ -58,7 +58,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     type: 'choices',
     custom: { title: 'subGroup1Question5' },
     validators: ['atLeast1'],
-    disabledWhen: [['subGroup1Question4Choice2'], ['subGroup1Question4Choice3']],
+    disabledOnSelected: [['subGroup1Question4Choice2'], ['subGroup1Question4Choice3']],
     choices: [
       { id: 'subGroup1Question5Choice1', custom: { title: 'subGroup1Question5Choice1' } },
       { id: 'subGroup1Question5Choice2', custom: { title: 'subGroup1Question5Choice2' } },
@@ -72,7 +72,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     type: 'choices',
     custom: { title: 'subGroup1Question6' },
     validators: ['atLeast1'],
-    disabledWhen: [['subGroup1Question4Choice2', 'subGroup1Question4Choice3']],
+    disabledOnSelected: [['subGroup1Question4Choice2', 'subGroup1Question4Choice3']],
     choices: [
       { id: 'subGroup1Question6Choice1', custom: { title: 'subGroup1Question6Choice1' } },
       { id: 'subGroup1Question6Choice2', custom: { title: 'subGroup1Question6Choice2' } },
@@ -87,7 +87,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     custom: { title: 'subGroup1Question7' },
     validators: ['atLeast1'],
     defaultDisabled: true,
-    enabledWhen: [['subGroup1Question4Choice2'], ['subGroup1Question4Choice3']],
+    enabledOnSelected: [['subGroup1Question4Choice2'], ['subGroup1Question4Choice3']],
     choices: [
       { id: 'subGroup1Question7Choice1', custom: { title: 'subGroup1Question7Choice1' } },
       { id: 'subGroup1Question7Choice2', custom: { title: 'subGroup1Question7Choice2' } },
@@ -102,7 +102,7 @@ export const getConfigs = (withDefaultAnswers?: boolean): Configs => {
     custom: { title: 'subGroup1Question8' },
     validators: ['atLeast1'],
     defaultDisabled: true,
-    enabledWhen: [['subGroup1Question4Choice2', 'subGroup1Question4Choice3']],
+    enabledOnSelected: [['subGroup1Question4Choice2', 'subGroup1Question4Choice3']],
     choices: [
       { id: 'subGroup1Question8Choice1', custom: { title: 'subGroup1Question8Choice1' } },
       { id: 'subGroup1Question8Choice2', custom: { title: 'subGroup1Question8Choice2' } },

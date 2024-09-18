@@ -14,16 +14,23 @@ export type QuestionType = 'any' | 'choice' | 'choices';
  * - [[A, B], C]      - When (A AND B) OR just C is selected
  * - [[A, B], [C, D]] - When (A AND B) OR (C AND D) are selected
  */
-export type ItemAbledWhen = string[][];
+export type ItemAbledOnSelected = string[][];
 
+/**
+ * @deprecated use `enabledOnSelected` and `disabledOnSelected` on the target items instead.
+ */
 export type ChoiceOnSelected = {
   /**
+   * @deprecated use `disabledOnSelected` on the target items instead.
+   *
    * A list of group id, question id or choice id.
    *
    * They will be disabled when this choice is selected and enabled when this choice is unselected.
    */
   disable?: string[];
   /**
+   * @deprecated use `enabledOnSelected` on the target items instead.
+   *
    * A list of group id, question id or choice id.
    *
    * They will be enabled when this choice is selected and disabled when this choice is unselected.
@@ -69,4 +76,12 @@ export type ConfigsValidationResult = {
    * If key is an empty string, that means the error is related to the form itself.
    */
   errors?: Record<string, string[]>;
+  /**
+   * Warnings. This does not affect `valid` status.
+   *
+   * Keys are group / question / choice ids, values are warning messages.
+   *
+   * If key is an empty string, that means the warning is related to the form itself.
+   */
+  warnings?: Record<string, string[]>;
 }

@@ -6,26 +6,26 @@ export const sanitizeConfigs = (configs: Configs): ExportedConfigs => ({
   questions: configs.questions ? sanitizeQuestionConfigs(undefined, configs.questions) : []
 });
 
-const sanitizeGroupConfigs = (parentGroupId: string | undefined, groups: GroupConfigs[]): Group[] => groups.map((group, i) => {
+const sanitizeGroupConfigs = (parentGroupId: string | undefined, groups: GroupConfigs[]): Group[] => groups.map((group, i): Group => {
   const id = group.id ?? (parentGroupId ? `${parentGroupId}_g${i}` : `g${i}`);
   return {
     id,
     defaultDisabled: !!group.defaultDisabled,
-    disabledWhen: group.disabledWhen,
-    enabledWhen: group.enabledWhen,
+    enabledOnSelected: group.enabledOnSelected,
+    disabledOnSelected: group.disabledOnSelected,
     custom: group.custom,
     groups: group.groups ? sanitizeGroupConfigs(id, group.groups) : [],
     questions: group.questions ? sanitizeQuestionConfigs(id, group.questions) : []
   };
 });
 
-const sanitizeQuestionConfigs = (groupId: string | undefined, questions: QuestionConfigs[]): Question[] => questions.map((question, i) => {
+const sanitizeQuestionConfigs = (groupId: string | undefined, questions: QuestionConfigs[]): Question[] => questions.map((question, i): Question => {
   const id = question.id ?? (groupId ? `${groupId}_q${i}` : `q${i}`);
   return {
     id,
     defaultDisabled: !!question.defaultDisabled,
-    disabledWhen: question.disabledWhen,
-    enabledWhen: question.enabledWhen,
+    enabledOnSelected: question.enabledOnSelected,
+    disabledOnSelected: question.disabledOnSelected,
     custom: question.custom,
     type: question.type,
     choices: question.type !== 'any' ? sanitizeChoiceConfigs(id, question.choices ?? []) : [],
@@ -34,15 +34,15 @@ const sanitizeQuestionConfigs = (groupId: string | undefined, questions: Questio
   };
 });
 
-const sanitizeChoiceConfigs = (questionId: string, choices: ChoiceConfigs[]): Choice[] => choices.map((choice, i) => {
+const sanitizeChoiceConfigs = (questionId: string, choices: ChoiceConfigs[]): Choice[] => choices.map((choice, i): Choice => {
   const id = choice.id ?? `${questionId}_c${i}`;
   return {
     id,
     defaultDisabled: !!choice.defaultDisabled,
-    disabledWhen: choice.disabledWhen,
-    enabledWhen: choice.enabledWhen,
+    enabledOnSelected: choice.enabledOnSelected,
+    disabledOnSelected: choice.disabledOnSelected,
     custom: choice.custom,
     value: choice.value ?? id,
-    onSelected: choice.onSelected ?? {}
+    onSelected: choice.onSelected
   };
 });

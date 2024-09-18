@@ -110,7 +110,7 @@ export class Form<Custom = any> {
       this.#choiceById.set(choice.id, choice);
       this.#questionByChoiceId.set(choice.id, question);
 
-      choice.onSelected.disable?.forEach(id => {
+      choice.onSelected?.disable?.forEach(id => {
         let disabledByChoices = this.#disabledByChoicesById.get(id);
         if (!disabledByChoices) {
           disabledByChoices = [];
@@ -119,7 +119,7 @@ export class Form<Custom = any> {
         this.#disabledByChoicesById.set(id, disabledByChoices);
       });
 
-      choice.onSelected.enable?.forEach(id => {
+      choice.onSelected?.enable?.forEach(id => {
         let enabledByChoices = this.#enabledByChoicesById.get(id);
         if (!enabledByChoices) {
           enabledByChoices = [];
@@ -586,6 +586,42 @@ export class Form<Custom = any> {
   }
 
   #isItemDisabled(item: Item<Custom>) {
+    if (item.disabledOnSelected) {
+      for (const condition of item.disabledOnSelected) {
+        if (Array.isArray(condition)) {
+          if (condition.every(choiceId => {
+            const choice = this.#findChoice(choiceId);
+            return this.#isChoiceSelected(choice);
+          })) {
+            return true;
+          }
+        } else {
+          const choice = this.#findChoice(condition);
+          if (this.#isChoiceSelected(choice)) {
+            return true;
+          }
+        }
+      }
+    }
+
+    if (item.enabledOnSelected) {
+      for (const condition of item.enabledOnSelected) {
+        if (Array.isArray(condition)) {
+          if (condition.every(choiceId => {
+            const choice = this.#findChoice(choiceId);
+            return this.#isChoiceSelected(choice);
+          })) {
+            return false;
+          }
+        } else {
+          const choice = this.#findChoice(condition);
+          if (this.#isChoiceSelected(choice)) {
+            return false;
+          }
+        }
+      }
+    }
+
     const disabledByChoices = this.#disabledByChoicesById.get(item.id) ?? [];
     for (const choice of disabledByChoices) {
       if (this.#isChoiceSelected(choice)) {
@@ -597,38 +633,6 @@ export class Form<Custom = any> {
     for (const choice of enabledByChoices) {
       if (this.#isChoiceSelected(choice)) {
         return false;
-      }
-    }
-
-    for (const condition of item.disabledWhen ?? []) {
-      if (Array.isArray(condition)) {
-        if (condition.every(choiceId => {
-          const choice = this.#findChoice(choiceId);
-          return this.#isChoiceSelected(choice);
-        })) {
-          return true;
-        }
-      } else {
-        const choice = this.#findChoice(condition);
-        if (this.#isChoiceSelected(choice)) {
-          return true;
-        }
-      }
-    }
-
-    for (const condition of item.enabledWhen ?? []) {
-      if (Array.isArray(condition)) {
-        if (condition.every(choiceId => {
-          const choice = this.#findChoice(choiceId);
-          return this.#isChoiceSelected(choice);
-        })) {
-          return false;
-        }
-      } else {
-        const choice = this.#findChoice(condition);
-        if (this.#isChoiceSelected(choice)) {
-          return false;
-        }
       }
     }
 

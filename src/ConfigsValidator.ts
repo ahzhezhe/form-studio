@@ -1,9 +1,10 @@
-import { ExportedConfigs, Group, Item, Question } from './ExportedConfigs';
+import { Choice, ExportedConfigs, Group, Item, Question } from './ExportedConfigs';
 import { ConfigsValidationResult } from './Types';
 
 export class ConfigsValidator {
 
   readonly #errorsById = new Map<string, string[]>();
+  readonly #warningsById = new Map<string, string[]>();
   readonly #allIds: string[] = [];
   readonly #abledWhenIdsById = new Map<string, string[]>();
   readonly #choiceValuesByQuestionId = new Map<string, any[]>();
@@ -90,8 +91,8 @@ export class ConfigsValidator {
     this.#allIds.push(item.id);
 
     const abledWhenIds = this.#abledWhenIdsById.get(item.id) ?? [];
-    abledWhenIds.push(...(item.disabledWhen?.flatMap(id => id) ?? []));
-    abledWhenIds.push(...(item.enabledWhen?.flatMap(id => id) ?? []));
+    abledWhenIds.push(...(item.enabledOnSelected?.flatMap(id => id) ?? []));
+    abledWhenIds.push(...(item.disabledOnSelected?.flatMap(id => id) ?? []));
 
     if (parentId) {
       this.#parentIdsById.set(item.id, [parentId]);
@@ -122,20 +123,28 @@ export class ConfigsValidator {
       // No questions with `choice` or `choices` as type without choices
       if (question.type !== 'any') {
         if (question.choices.length === 0) {
-          this.#addError(groupId ?? '', 'There are no choices');
+          this.#addError(question.id, 'There are no choices');
           continue;
         }
 
-        for (const choice of question.choices) {
-          this.#collectItemData(question.id, choice);
-
-          const onSelectedIds = [...(choice.onSelected.enable ?? []), ...(choice.onSelected.disable ?? [])];
-          if (onSelectedIds.length) {
-            this.#onSelectedIdsByChoiceId.set(choice.id, onSelectedIds);
-          }
-        }
+        this.#collectChoiceData(question.id, question.choices);
 
         this.#choiceValuesByQuestionId.set(question.id, question.choices.map(choice => choice.value));
+      }
+    }
+  }
+
+  #collectChoiceData(questionId: string, choices: Choice[]) {
+    for (const choice of choices) {
+      this.#collectItemData(questionId, choice);
+
+      const onSelectedIds = [...(choice.onSelected?.enable ?? []), ...(choice.onSelected?.disable ?? [])];
+      if (onSelectedIds.length) {
+        this.#onSelectedIdsByChoiceId.set(choice.id, onSelectedIds);
+      }
+
+      if (choice.onSelected) {
+        this.#addWarning(choice.id, 'onSelected is deprecated');
       }
     }
   }
@@ -158,6 +167,15 @@ export class ConfigsValidator {
     }
     errors.push(error);
     this.#errorsById.set(id, errors);
+  }
+
+  #addWarning(id: string, warning: string) {
+    let warnings = this.#warningsById.get(id);
+    if (!warnings) {
+      warnings = [];
+    }
+    warnings.push(warning);
+    this.#warningsById.set(id, warnings);
   }
 
   #getResult(): ConfigsValidationResult {
