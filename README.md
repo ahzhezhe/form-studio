@@ -102,18 +102,13 @@ The second question is disabled by default. If 'yes' is selected for the first q
           },
           "choices": [
             {
-              "value": "yes",
+              "id": "yes",
               "custom": {
                 "title": "Yes"
-              },
-              "onSelected": {
-                "enable": [
-                  "name"
-                ]
               }
             },
             {
-              "value": "no",
+              "id": "no",
               "custom": {
                 "title": "No"
               }
@@ -123,6 +118,7 @@ The second question is disabled by default. If 'yes' is selected for the first q
         {
           "id": "name",
           "defaultDisabled": true,
+          "enabledOnSelected": ["yes"],
           "type": "any",
           "custom": {
             "type": "string",
