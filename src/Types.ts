@@ -9,12 +9,14 @@ export type QuestionType = 'any' | 'choice' | 'choices';
  * - []               - Always
  * - [[]]             - Always
  * - [A]              - When A is selected
+ * - [[A]]            - When A is selected
  * - [A, B]           - When A OR B is selected
+ * - [[A], [B]]       - When A OR B is selected
  * - [[A, B]]         - When A AND B are selected
- * - [[A, B], C]      - When (A AND B) OR just C is selected
+ * - [[A, B], C]      - When (A AND B) OR C is selected
  * - [[A, B], [C, D]] - When (A AND B) OR (C AND D) are selected
  */
-export type ItemAbledOnSelected = string[][];
+export type ItemAbledOnSelected = (string | string[])[];
 
 /**
  * @deprecated use `enabledOnSelected` and `disabledOnSelected` on the target items instead.

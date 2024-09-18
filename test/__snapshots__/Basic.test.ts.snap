@@ -229,12 +229,8 @@ exports[`Basic No Default Answers getConfigs 1`] = `
               "defaultAnswer": undefined,
               "defaultDisabled": false,
               "disabledOnSelected": [
-                [
-                  "subGroup1Question4Choice2",
-                ],
-                [
-                  "subGroup1Question4Choice3",
-                ],
+                "subGroup1Question4Choice2",
+                "subGroup1Question4Choice3",
               ],
               "enabledOnSelected": undefined,
               "id": "subGroup1Question5",
@@ -1194,12 +1190,8 @@ exports[`Basic With Default Answers getConfigs 1`] = `
               ],
               "defaultDisabled": false,
               "disabledOnSelected": [
-                [
-                  "subGroup1Question4Choice2",
-                ],
-                [
-                  "subGroup1Question4Choice3",
-                ],
+                "subGroup1Question4Choice2",
+                "subGroup1Question4Choice3",
               ],
               "enabledOnSelected": undefined,
               "id": "subGroup1Question5",
