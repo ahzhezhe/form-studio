@@ -209,14 +209,14 @@ Each item in the instructions comes with the following properties:
 - `disabled`: Whether or not this item is disabled, you should handle it in the UI, e.g. hide or grey out disabled item
 - `custom`: The exact same values that you specified in the form configs
 
-Questions also come with the following important properties that you will need to determine the UI:
+Questions also come with the following important properties that you will need to use to determine the UI:
 - `type`:
-  - `any`: render whatever UI that is required based on your `custom` configs, e.g. if `custom.inputType` is `string`, then a simple text input is rendered
+  - `any`: render whatever UI that is required based on your `custom` configs, e.g. if `custom.inputType` is `string`, then a text input is rendered
   - `choice`: render UI that allows user to select 1 option from a list of options, e.g. select, radio button group
   - `choices`: render UI that allows user to select multiple options from a list of options, e.g. check box group
 - `currentAnswer`: current answer of the question, it is unvalidated and might not be valid, but you will still need to show them on UI
 - `validatedAnswer`: validated answer
-- `validating`: whether or not the question is currently being validating, it could happen if the validator used is an aysnc function, you might want to show a spinner or some other indicator on UI
+- `validating`: whether or not the question is currently being validated, it could happen if the validator used is an aysnc function, you might want to show a spinner or some other indicator on UI
 - `error`: error for question which failed validation
 
 ### **Example (React)**
