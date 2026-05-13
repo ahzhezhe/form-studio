@@ -144,15 +144,17 @@ export class ConfigsValidator {
     }
   }
 
-  #findDuplicates <T>(arr: T[]) {
-    const sorted = arr.slice().sort();
-    const duplicatedIds = new Set<T>();
-    for (let i = 0; i < sorted.length - 1; i++) {
-      if (sorted[i + 1] === sorted[i]) {
-        duplicatedIds.add(sorted[i]);
+  #findDuplicates<T>(arr: T[]): T[] {
+    const seen = new Set<T>();
+    const duplicates = new Set<T>();
+    for (const item of arr) {
+      if (seen.has(item)) {
+        duplicates.add(item);
+      } else {
+        seen.add(item);
       }
     }
-    return Array.from(duplicatedIds);
+    return Array.from(duplicates);
   }
 
   #addError(id: string, error: string) {
@@ -174,14 +176,24 @@ export class ConfigsValidator {
   }
 
   #getResult(): ConfigsValidationResult {
+    const result: ConfigsValidationResult = { valid: !this.#errorsById.size };
+
     if (this.#errorsById.size) {
-      const errors: Record<string, string[]> = {};
-      this.#errorsById.forEach((values, key) => {
-        errors[key] = values;
-      });
-      return { valid: false, errors };
+      result.errors = this.#mapToRecord(this.#errorsById);
     }
-    return { valid: true };
+    if (this.#warningsById.size) {
+      result.warnings = this.#mapToRecord(this.#warningsById);
+    }
+
+    return result;
+  }
+
+  #mapToRecord(map: Map<string, string[]>): Record<string, string[]> {
+    const record: Record<string, string[]> = {};
+    map.forEach((values, key) => {
+      record[key] = values;
+    });
+    return record;
   }
 
 }

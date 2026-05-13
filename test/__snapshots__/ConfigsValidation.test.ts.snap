@@ -8,6 +8,14 @@ exports[`ConfigsValidation Circular relationship 1`] = `
     ],
   },
   "valid": false,
+  "warnings": {
+    "c1": [
+      "onSelected is deprecated",
+    ],
+    "c2": [
+      "onSelected is deprecated",
+    ],
+  },
 }
 `;
 
@@ -19,6 +27,11 @@ exports[`ConfigsValidation Circular relationship 2`] = `
     ],
   },
   "valid": false,
+  "warnings": {
+    "c2": [
+      "onSelected is deprecated",
+    ],
+  },
 }
 `;
 
@@ -30,12 +43,22 @@ exports[`ConfigsValidation Circular relationship 3`] = `
     ],
   },
   "valid": false,
+  "warnings": {
+    "c2": [
+      "onSelected is deprecated",
+    ],
+  },
 }
 `;
 
 exports[`ConfigsValidation Circular relationship 4`] = `
 {
   "valid": true,
+  "warnings": {
+    "c1": [
+      "onSelected is deprecated",
+    ],
+  },
 }
 `;
 
@@ -278,6 +301,11 @@ exports[`ConfigsValidation Unrecognized ids in choices onSelected 1`] = `
     ],
   },
   "valid": false,
+  "warnings": {
+    "c2": [
+      "onSelected is deprecated",
+    ],
+  },
 }
 `;
 
@@ -289,11 +317,21 @@ exports[`ConfigsValidation Unrecognized ids in choices onSelected 2`] = `
     ],
   },
   "valid": false,
+  "warnings": {
+    "c2": [
+      "onSelected is deprecated",
+    ],
+  },
 }
 `;
 
 exports[`ConfigsValidation Unrecognized ids in choices onSelected 3`] = `
 {
   "valid": true,
+  "warnings": {
+    "c2": [
+      "onSelected is deprecated",
+    ],
+  },
 }
 `;
