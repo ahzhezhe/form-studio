@@ -42,6 +42,7 @@ export class Form<Custom = any> {
   readonly #currentAnswerByQuestionId = new Map<string, any>();
   readonly #validatedAnswerByQuestionId = new Map<string, any>();
   readonly #validatingByQuestionId = new Map<string, boolean>();
+  readonly #validationPromiseByQuestionId = new Map<string, Promise<void>>();
   readonly #errorByQuestionId = new Map<string, any>();
   readonly #disabledByChoicesById = new Map<string, Choice[]>();
   readonly #enabledByChoicesById = new Map<string, Choice[]>();
@@ -423,13 +424,16 @@ export class Form<Custom = any> {
     if (validationResult instanceof Promise) {
       this.#validatingByQuestionId.set(question.id, true);
 
-      validationResult
+      const trackedPromise = validationResult
         .then(onSuccess)
         .catch(onError)
         .finally(() => {
           this.#validatingByQuestionId.delete(question.id);
+          this.#validationPromiseByQuestionId.delete(question.id);
           this.#informFormUpdate();
         });
+
+      this.#validationPromiseByQuestionId.set(question.id, trackedPromise);
 
       return;
     }
@@ -816,18 +820,20 @@ export class Form<Custom = any> {
     const form = new Form(this.getConfigs(), { validators: this.#validators });
     form.importAnswers(this.getCurrentAnswers());
 
-    while (true) {
-      if (form.isValidating()) {
-        await new Promise(resolve => setTimeout(resolve, 10));
-      } else {
-        break;
-      }
-    }
+    await form.#awaitAllValidations();
 
     if (form.isClean()) {
       return form.getValidatedAnswers();
     }
     return false;
+  }
+
+  async #awaitAllValidations(): Promise<void> {
+    const promises = Array.from(this.#validationPromiseByQuestionId.values());
+    if (promises.length === 0) {
+      return Promise.resolve();
+    }
+    return Promise.all(promises).then(() => undefined);
   }
 
   /**
