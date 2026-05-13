@@ -29,8 +29,8 @@
   "scripts": {
     "lint": "eslint src/*.ts src/**/*.ts test/**/*.ts",
     "test": "jest",
-    "build": "rm -rf dist && tsc",
-    "build:watch": "tsc -w",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "build:watch": "tsc -w -p tsconfig.build.json",
     "prepublishOnly": "npm run build",
     "postpublish": "rm -rf dist",
     "postversion": "git push"

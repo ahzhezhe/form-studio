@@ -3,7 +3,9 @@
     "target": "es2021",
     "module": "node16",
     "moduleResolution": "node16",
-    "rootDir": "src",
+    "types": [
+      "jest"
+    ],
     "outDir": "dist",
     "isolatedModules": true,
     "declaration": true,
@@ -15,6 +17,7 @@
     "emitDecoratorMetadata": true
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ]
 }
